@@ -15,10 +15,23 @@ enum Role{
   User
   Admin
 }
-model User { 
-  id    String     @id @default(cuid()) 
+model User {
+  id    String     @id @default(cuid())
   email String  @unique
   username  String @unique
-  password String 
+  password String
   role Role @default(User)
-} 
+  categories Category[]
+  createdAt       DateTime @default(now())
+  updatedAt DateTime?
+}
+model Category {
+  id    String     @id @default(cuid())
+  name  String
+  shortName String
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime ?
+
+}

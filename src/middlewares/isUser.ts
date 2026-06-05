@@ -12,6 +12,7 @@ export const isUser = async (
     // Get the token from cookie or authorization header
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
     const refreshToken = req.cookies.refreshToken;
+    console.log(token);
 
     // Validate Tokens
     const decoded = token ? AuthService.verifyToken(token) : null;

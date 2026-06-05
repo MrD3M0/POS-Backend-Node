@@ -19,7 +19,9 @@ export const AuthService = {
   },
   verifyToken: (token: string) => {
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET || " ");
+      const secret = process.env.JWT_SECRET;
+      if (!secret) throw new Error("JWT_SECRET is not defined");
+      const decoded = jwt.verify(token, secret);
       return decoded;
     } catch (error) {
       return null;
