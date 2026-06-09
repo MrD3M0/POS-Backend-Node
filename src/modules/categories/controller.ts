@@ -3,12 +3,11 @@ import { ErrorHandler } from "@/utils/error";
 import { calculateSkipAndTake, queryFilters } from "@/utils/queryFilters";
 import { ResponseHandler } from "@/utils/response";
 import { Request, Response } from "express";
-import { create } from "node_modules/axios/index.cjs";
 import { validateCategoryCreate } from "./validator";
-import { ValidationError } from "@/errors/CustomError";
+import { CategoryService } from "./service";
 
 const CategoryController = {
-  retrieve: async (req: Request, res: Response) => {
+  index: async (req: Request, res: Response) => {
     try {
       // Get the user info from the response locals
       const context = res.locals.context;
@@ -16,38 +15,24 @@ const CategoryController = {
       // Get the user id from the context
       const userId = context.userId;
 
-      // Get the request body for pagination and search
-      const { limit, page, search } = req.body;
+      // Get the request query for pagination and search
+      const { limit, page, search } = queryFilters(req);
 
-      // Get the Data from the database
-      const { skip, take } = calculateSkipAndTake(page, limit);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
 
-      // Fetch categories from the database
-      const categories = await prismaMain.category.findMany({
-        where: {
-          name: search ? { contains: search } : undefined,
-          userId,
-        },
-        skip,
-        take,
-      });
+      const searchTerm = typeof search === "string" ? search : "";
 
-      // Get the total count of the category without pagination
-      const totalCategory = await prismaMain.category.count({
-        where: { name: search ? { contains: search } : undefined, userId },
-      });
+      // Call the service
+      const result = await CategoryService.index(pageNumber, limitNumber, searchTerm, userId);
 
       return ResponseHandler.success({
         res,
         code: 200,
         message: "Categories fetched successfully!",
         data: {
-          data: categories,
-          pagination: {
-            page: page || 1,
-            limit: limit || 15,
-            total: totalCategory,
-          },
+          data: result.categories,
+          pagination: result.pagination,
         },
       });
     } catch (error) {
@@ -57,7 +42,6 @@ const CategoryController = {
   },
   create: async (req: Request, res: Response) => {
     try {
-      console.log(" I am inside create");
       // Get the user info from the response locals
       const context = res.locals.context;
 
@@ -67,32 +51,9 @@ const CategoryController = {
       // Validated the data from the User
       const { name, shortName } = validateCategoryCreate(req.body);
 
-      // Validating whether the Category Name Exists or Not
-      const existingCategoryByName = await prismaMain.category.findFirst({
-        where: { name },
-      });
-      if (existingCategoryByName)
-        throw new ValidationError({
-          name: "Category with the same name already exists",
-        });
+      // Call the service
+      const category = await CategoryService.create({ name, shortName }, userId);
 
-      // Validating whether the Category ShortName Exists or Not
-      const existingCategoryByShortName = await prismaMain.category.findFirst({
-        where: { shortName },
-      });
-      if (existingCategoryByShortName)
-        throw new ValidationError({
-          name: "Category with the same short name already exists",
-        });
-
-      //Create the Category
-      const category = await prismaMain.category.create({
-        data: {
-          name,
-          shortName,
-          userId,
-        },
-      });
       // Return the response
       return ResponseHandler.success({
         res,
@@ -101,7 +62,48 @@ const CategoryController = {
         data: category,
       });
     } catch (error) {
-      // If error occus, handle the error
+      // If error occurs, handle the error
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      // Get the parameter from the Url
+      const categoryId = req.params.id as string;
+
+      // Call the service
+      const category = await CategoryService.getById(categoryId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Category fetched successfully",
+        data: category,
+      });
+    } catch (error) {
+      // If error occurs, handle the error
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+  update: async (req: Request, res: Response) => {
+    try {
+      // Get parameter from the URL
+      const categoryId = req.params.id as string;
+
+      // Validate the data from the request body
+      const data = validateCategoryCreate(req.body);
+
+      // Call the service
+      const category = await CategoryService.update(categoryId, data);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Category updated successfully",
+        data: category,
+      });
+    } catch (error) {
+      // If error occurs, handle the error
       return ErrorHandler.handleError(res, error);
     }
   },

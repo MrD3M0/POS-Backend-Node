@@ -1,12 +1,14 @@
+import type { Request } from "express";
+
 type Query = {
-  limit?: number;
-  page?: number;
+  limit?: string | number;
+  page?: string | number;
   search?: string;
 };
 
 export function queryFilters(req: Request) {
-  const query = req.body;
-  const { limit, page, search } = query as Query;
+  const source = (req.query ?? req.body ?? {}) as Query;
+  const { limit, page, search } = source;
   return { limit, page, search };
 }
 

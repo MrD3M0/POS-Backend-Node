@@ -1,11 +1,14 @@
 import express, { Router } from "express";
 import authRouter from "./modules/auth/routes";
 import categoryRouter from "./modules/categories/routes";
-import { isUser } from "./middlewares/isUser";
+import productRouter from "./modules/product/routes";
+import billRouter from "./modules/bill/routes";
 
 const router: Router = express.Router();
 
 router.use("/auth", authRouter);
-router.use("/category",isUser, categoryRouter);
+router.use("/category", categoryRouter);
+router.use("/product", productRouter);
+router.use("/bill", billRouter);
 
 export default router;

@@ -11,10 +11,17 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
 enum Role{
   User
   Admin
 }
+
+enum DiscountType {
+  Exact
+  Percentage
+}
+
 model User {
   id    String     @id @default(cuid())
   email String  @unique
@@ -22,16 +29,61 @@ model User {
   password String
   role Role @default(User)
   categories Category[]
+  products Product[]
+  bills Bill[]
   createdAt       DateTime @default(now())
-  updatedAt DateTime?
+  updatedAt       DateTime? @updatedAt
 }
+
 model Category {
   id    String     @id @default(cuid())
   name  String
   shortName String
   userId String
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  products Product[]
   createdAt       DateTime @default(now())
-  updatedAt       DateTime ?
+  updatedAt       DateTime @updatedAt 
+}
 
+model Product {
+  id         String   @id @default(cuid())
+  name       String
+  shortName  String
+  price      Float
+  quantity   Int @default(0)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  billItems  BillItem[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Bill {
+  id              String        @id @default(cuid())
+  billNumber      Int           @unique @default(autoincrement())
+  userId          String
+  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  billItems       BillItem[]
+  total           Float         @default(0)
+  discountType    DiscountType
+  discount        Float         @default(0)
+  finalBillAmount Float         @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
+
+model BillItem {
+  id              String        @id @default(cuid())
+  billId          String
+  bill            Bill          @relation(fields: [billId], references: [id], onDelete: Cascade)
+  productId       String
+  product         Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity        Int
+  unitPrice       Float
+  total           Float
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
 }

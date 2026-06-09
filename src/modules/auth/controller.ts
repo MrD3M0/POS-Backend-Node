@@ -40,10 +40,10 @@ export const AuthController = {
         });
 
       // Generate JWT token
-      const token = AuthService.generateToken(user.id);
+      const token = AuthService.generateToken(user.id,user.role);
 
       // Generate refresh token
-      const refreshToken = AuthService.generateRefershToken(user.id);
+      const refreshToken = AuthService.generateRefershToken(user.id,user.role);
 
       // Set the token in cookies
       res.cookie("token", token, CookieManager.accessToken());
