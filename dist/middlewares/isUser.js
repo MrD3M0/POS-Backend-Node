@@ -9,7 +9,6 @@ const isUser = async (req, res, next) => {
     // Get the token from cookie or authorization header
     const token = req.cookies.token || req.headers.authorization?.split(" ")[1];
     const refreshToken = req.cookies.refreshToken;
-    console.log("Request received");
     // Validate Tokens
     const decoded = token ? service_1.AuthService.verifyToken(token) : null;
     const decodedRefresh = refreshToken

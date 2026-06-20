@@ -40,10 +40,10 @@ export const AuthController = {
         });
 
       // Generate JWT token
-      const token = AuthService.generateToken(user.id,user.role);
+      const token = AuthService.generateToken(user.id, user.role);
 
       // Generate refresh token
-      const refreshToken = AuthService.generateRefershToken(user.id,user.role);
+      const refreshToken = AuthService.generateRefershToken(user.id, user.role);
 
       // Set the token in cookies
       res.cookie("token", token, CookieManager.accessToken());
@@ -125,6 +125,19 @@ export const AuthController = {
         code: 200,
         message: "User fetched successfully!",
         data: user,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+  logout: async (req: Request, res: Response) => {
+    try {
+      console.log("Hello ma ya xu");
+      // Clear the cookie
+      res.clearCookie("token");
+      res.clearCookie("refreshToken");
+      return res.status(200).json({
+        message: "Logged out successfully!",
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);

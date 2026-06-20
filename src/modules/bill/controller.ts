@@ -41,8 +41,6 @@ const BillController = {
 
       const bill = await BillService.create(data, userId);
 
-      
-
       return ResponseHandler.success({
         res,
         code: 201,

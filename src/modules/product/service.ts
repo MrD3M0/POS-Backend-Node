@@ -17,8 +17,15 @@ export const ProductService = {
     // Fetch products from the database
     const products = await prismaMain.product.findMany({
       where: {
-        name: searchTerm ? { contains: searchTerm } : undefined,
         userId,
+        ...(searchTerm && {
+          OR: [
+            { name: { contains: searchTerm, mode: "insensitive" } },
+            {
+              category: { name: { contains: searchTerm, mode: "insensitive" } },
+            },
+          ],
+        }),
       },
       include: {
         category: true,

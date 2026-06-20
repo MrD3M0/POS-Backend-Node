@@ -1,16 +1,23 @@
 import { prismaMain } from "@/lib/prismaClient";
-import { CustomError, ValidationError } from '@/errors/CustomError';
-import { T_CategoryCreateInput } from './validator';
+import { CustomError, ValidationError } from "@/errors/CustomError";
+import { T_CategoryCreateInput } from "./validator";
 
 export const CategoryService = {
-  index: async (page: number, limit: number, search: string, userId: string) => {
+  index: async (
+    page: number,
+    limit: number,
+    search: string,
+    userId: string,
+  ) => {
     const skip = (page - 1) * limit;
     const searchTerm = typeof search === "string" ? search : "";
 
     // Get all categories from the database
     const categories = await prismaMain.category.findMany({
       where: {
-        name: searchTerm ? { contains: searchTerm } : undefined,
+        name: searchTerm
+          ? { contains: searchTerm, mode: "insensitive" }
+          : undefined,
         userId,
       },
       skip,
@@ -20,7 +27,9 @@ export const CategoryService = {
     // Get the total count of categories without pagination
     const totalCategories = await prismaMain.category.count({
       where: {
-        name: searchTerm ? { contains: searchTerm } : undefined,
+        name: searchTerm
+          ? { contains: searchTerm, mode: "insensitive" }
+          : undefined,
         userId,
       },
     });
