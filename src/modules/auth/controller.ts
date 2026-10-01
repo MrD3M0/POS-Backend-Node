@@ -8,6 +8,45 @@ import { AuthService } from "./service";
 import { CookieManager } from "@/utils/cookies";
 
 export const AuthController = {
+  test: async (req: Request, res: Response) => {
+    try {
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Auth API is working!",
+        data: {
+          timestamp: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+  dbTest: async (req: Request, res: Response) => {
+    const startedAt = Date.now();
+    try {
+      // Simple query to check PostgreSQL is reachable and ready
+      await prismaMain.$queryRaw`SELECT 1`;
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "PostgreSQL is ready for queries!",
+        data: {
+          status: "connected",
+          responseTimeMs: Date.now() - startedAt,
+          timestamp: new Date().toISOString(),
+        },
+      });
+    } catch (error) {
+      return ResponseHandler.error({
+        res,
+        code: 503,
+        message: "PostgreSQL is not ready.",
+        error: error instanceof Error ? error.message : String(error),
+      });
+    }
+  },
   login: async (req: Request, res: Response) => {
     try {
       // Validate the Login Input

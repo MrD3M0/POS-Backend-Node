@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -12,78 +7,1438 @@ datasource db {
   provider = "postgresql"
 }
 
-enum Role{
-  User
-  Admin
+enum Gender {
+  MALE
+  FEMALE
+  OTHERS
 }
 
-enum DiscountType {
-  Exact
-  Percentage
+// =====================================================================
+// College Management System - Prisma schema (PostgreSQL, single college)
+// ---------------------------------------------------------------------
+// Conventions
+//  - ids: uuid | models: PascalCase | fields: camelCase | tables: snake_case (@@map)
+//  - Audit fields on every table: createdAt, updatedAt, createdBy, updatedBy, deletedAt
+//    (createdBy / updatedBy = User.id stored as plain uuid, no FK, so no relation noise)
+//  - Finance tables (journal, payments) are APPEND-ONLY: no deletedAt, corrections by reversal
+//  - Business dates are stored in BS as "YYYY-MM-DD" strings (zero padded, so they sort correctly)
+//  - Money = Decimal(14,2)
+//  - Only Role is a Prisma enum, everything else is a lookup table
+//  - "Class" (BATCH-YEAR-COURSE) = Batch + BatchTerm + Course, label built in app:
+//      `${batch.name}-${term.name}-${course.code}`   e.g. 2080-Semester 3-BIT
+//  - Model order: User + people first (easy to start CRUD), then lookups, then modules
+// =====================================================================
+
+enum Role {
+  ADMIN
+  PRINCIPAL
+  ACCOUNTANT
+  TEACHER
+  STAFF
+  STUDENT
 }
+
+// =====================================================================
+// 1. USERS AND PEOPLE
+// =====================================================================
 
 model User {
-  id    String     @id @default(cuid())
-  email String  @unique
-  username  String @unique
-  password String
-  role Role @default(User)
-  categories Category[]
-  products Product[]
-  bills Bill[]
+  id               String    @id @default(uuid()) @db.Uuid
+  email            String    @unique
+  username         String?   @unique
+  passwordHash     String
+  role             Role
+  isAdmin          Boolean   @default(false)
+  isActive         Boolean   @default(true)
+  otps             Otp[]
+  isEmailVerified  Boolean   @default(false)
+  lastLoginAt      DateTime?
+  failedLoginCount Int       @default(0)
+  lockedUntil      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+
+  employee Employee?
+  student  Student?
+
+  @@index([id])
+  @@map("users")
+}
+
+model Otp {
+  id        String   @id @default(uuid()) @db.Uuid
+  userId    String   @db.Uuid
+  code      String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@map("otps")
+}
+
+// Common HR data for Principal / Teacher / Staff / Accountant.
+// Attendance, salary and payroll all point here (one FK instead of four).
+model Employee {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String?   @unique @db.Uuid
+  employeeCode     String    @unique
+  firstName        String
+  middleName       String?
+  lastName         String
+  dobBs            String?   @db.VarChar(10)
+  phone            String?
+  email            String?
+  permanentAddress String?
+  temporaryAddress String?
+  photoUrl         String?
+  designation      String
+  joinDateBs       String    @db.VarChar(10)
+  leaveDateBs      String?   @db.VarChar(10)
+  panNo            String?
+  ssfNo            String?
+  bankName         String?
+  bankAccountNo    String?
+  isActive         Boolean   @default(true)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+  user             User?     @relation(fields: [userId], references: [id])
+  gender           Gender
+
+  principal  Principal?
+  teacher    Teacher?
+  accountant Accountant?
+  staff      Staff?
+
+  attendances      EmployeeAttendance[]
+  salaryStructures SalaryStructure[]
+  payslips         Payslip[]
+  journalLines     JournalLine[]
+
+  @@map("employees")
+}
+
+model Principal {
+  id         String    @id @default(uuid()) @db.Uuid
+  employeeId String    @unique @db.Uuid
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  createdBy  String?   @db.Uuid
+  updatedBy  String?   @db.Uuid
+  deletedAt  DateTime?
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("principals")
+}
+
+model Accountant {
+  id         String    @id @default(uuid()) @db.Uuid
+  employeeId String    @unique @db.Uuid
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  createdBy  String?   @db.Uuid
+  updatedBy  String?   @db.Uuid
+  deletedAt  DateTime?
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("accountants")
+}
+
+model Staff {
+  id         String    @id @default(uuid()) @db.Uuid
+  employeeId String    @unique @db.Uuid
+  department String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  createdBy  String?   @db.Uuid
+  updatedBy  String?   @db.Uuid
+  deletedAt  DateTime?
+
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@map("staffs")
+}
+
+model Teacher {
+  id             String    @id @default(uuid()) @db.Uuid
+  employeeId     String    @unique @db.Uuid
+  qualification  String?
+  specialization String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  createdBy      String?   @db.Uuid
+  updatedBy      String?   @db.Uuid
+  deletedAt      DateTime?
+
+  employee    Employee             @relation(fields: [employeeId], references: [id])
+  assignments TeachingAssignment[]
+  sessions    AttendanceSession[]
+
+  @@map("teachers")
+}
+
+model Student {
+  id               String    @id @default(uuid()) @db.Uuid
+  userId           String?   @unique @db.Uuid // students do not log in, so optional
+  universityRegNo  String    @unique
+  firstName        String
+  middleName       String?
+  lastName         String
+  dobBs            String?   @db.VarChar(10)
+  phone            String?
+  email            String?
+  permanentAddress String?
+  temporaryAddress String?
+  photoUrl         String?
+  batchId          String    @db.Uuid
+  admissionDateBs  String    @db.VarChar(10)
+  studentStatusId  String    @db.Uuid
+  // admin approval: student is only "real" after APPROVED
+  approvalStatusId String    @db.Uuid
+  approvedBy       String?   @db.Uuid
+  approvedAt       DateTime?
+  rejectionReason  String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid // teacher who added the student
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+
+  user           User?          @relation(fields: [userId], references: [id])
+  gender         Gender
+  batch          Batch          @relation(fields: [batchId], references: [id])
+  studentStatus  StudentStatus  @relation(fields: [studentStatusId], references: [id])
+  approvalStatus WorkflowStatus @relation(fields: [approvalStatusId], references: [id])
+
+  guardians    Guardian[]
+  attendances  StudentAttendance[]
+  marks        ExamMark[]
+  results      Result[]
+  fees         StudentFee[]
+  payments     FeePayment[]
+  journalLines JournalLine[]
+
+  @@index([batchId])
+  @@index([approvalStatusId])
+  @@index([studentStatusId])
+  @@map("students")
+}
+
+model Guardian {
+  id         String    @id @default(uuid()) @db.Uuid
+  studentId  String    @db.Uuid
+  relationId String    @db.Uuid
+  fullName   String
+  phone      String?
+  email      String?
+  occupation String?
+  address    String?
+  isPrimary  Boolean   @default(false)
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  createdBy  String?   @db.Uuid
+  updatedBy  String?   @db.Uuid
+  deletedAt  DateTime?
+
+  student  Student          @relation(fields: [studentId], references: [id])
+  relation GuardianRelation @relation(fields: [relationId], references: [id])
+
+  @@index([studentId])
+  @@index([relationId])
+  @@map("guardians")
+}
+
+// =====================================================================
+// 2. LOOKUP TABLES (seed these)
+// =====================================================================
+
+model GuardianRelation {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique // FATHER, MOTHER, GUARDIAN, ...
+  name      String
+  sortOrder Int       @default(0)
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  guardians Guardian[]
+
+  @@map("guardian_relations")
+}
+
+model CourseSystem {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique // SEMESTER, YEARLY
+  name      String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  courses Course[]
+
+  @@map("course_systems")
+}
+
+model StudentStatus {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique // ACTIVE, GRADUATED, DROPPED, SUSPENDED
+  name      String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  students Student[]
+
+  @@map("student_statuses")
+}
+
+// Generic approval flow: DRAFT, PENDING, APPROVED, REJECTED, PUBLISHED, PAID
+model WorkflowStatus {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique
+  name      String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  students Student[]
+  results  Result[]
+  payrolls Payroll[]
+
+  @@map("workflow_statuses")
+}
+
+model AttendanceStatus {
+  id           String    @id @default(uuid()) @db.Uuid
+  code         String    @unique // PRESENT, ABSENT, LEAVE, HALF_DAY
+  name         String
+  salaryFactor Decimal   @default(1) @db.Decimal(3, 2) // PRESENT=1, HALF_DAY=0.5, ABSENT=0, LEAVE=depends on LeaveType
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  createdBy    String?   @db.Uuid
+  updatedBy    String?   @db.Uuid
+  deletedAt    DateTime?
+
+  studentAttendances  StudentAttendance[]
+  employeeAttendances EmployeeAttendance[]
+
+  @@map("attendance_statuses")
+}
+
+model LeaveType {
+  id            String    @id @default(uuid()) @db.Uuid
+  code          String    @unique // SICK, CASUAL, HOME, UNPAID, ...
+  name          String
+  isPaid        Boolean   @default(true)
+  yearlyAllowed Int? // days per year, null = unlimited
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     String?   @db.Uuid
+  updatedBy     String?   @db.Uuid
+  deletedAt     DateTime?
+
+  employeeAttendances EmployeeAttendance[]
+
+  @@map("leave_types")
+}
+
+model Period {
+  id           String    @id @default(uuid()) @db.Uuid
+  periodNumber Int       @unique
+  name         String // "Period 1"
+  startTime    String    @db.VarChar(5) // "10:00"
+  endTime      String    @db.VarChar(5)
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  createdBy    String?   @db.Uuid
+  updatedBy    String?   @db.Uuid
+  deletedAt    DateTime?
+
+  sessions AttendanceSession[]
+
+  @@map("periods")
+}
+
+// Admin CRUD. Only terminal exams, but kept as lookup as requested
+model ExamType {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique // FIRST_TERMINAL, SECOND_TERMINAL, ...
+  name      String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  exams Exam[]
+
+  @@map("exam_types")
+}
+
+// 4.0 scale: A=4.0, A-=3.7, ... F=0 (seed according to university rule)
+model GradeScale {
+  id          String    @id @default(uuid()) @db.Uuid
+  grade       String    @unique // "A", "A-", "B+", ...
+  minPercent  Decimal   @db.Decimal(5, 2)
+  maxPercent  Decimal   @db.Decimal(5, 2)
+  gradePoint  Decimal   @db.Decimal(3, 2)
+  description String?
+  isPassGrade Boolean   @default(true)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  resultSubjects ResultSubject[]
+
+  @@map("grade_scales")
+}
+
+model FeeHead {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique // ADMISSION, TUITION, EXAM, LAB, LIBRARY, ...
+  name      String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  structureItems FeeStructureItem[]
+  studentItems   StudentFeeItem[]
+
+  @@map("fee_heads")
+}
+
+// CASH, BANK, CHEQUE, ESEWA, KHALTI (manual record only, no gateway)
+// accountId = ledger account that gets debited when money comes in through this method
+model PaymentMethod {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique
+  name      String
+  accountId String?   @db.Uuid
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  account      Account?               @relation(fields: [accountId], references: [id])
+  paymentLines FeePaymentMethodLine[]
+  payslips     Payslip[]
+
+  @@index([accountId])
+  @@map("payment_methods")
+}
+
+model AccountType {
+  id            String    @id @default(uuid()) @db.Uuid
+  code          String    @unique // ASSET, LIABILITY, EQUITY, INCOME, EXPENSE
+  name          String
+  isDebitNormal Boolean // ASSET, EXPENSE = true
+  sortOrder     Int       @default(0)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     String?   @db.Uuid
+  updatedBy     String?   @db.Uuid
+  deletedAt     DateTime?
+
+  accounts Account[]
+
+  @@map("account_types")
+}
+
+// MANUAL, FEE_PAYMENT, FEE_PAYMENT_CANCEL, PAYROLL, OPENING, REVERSAL, CLOSING
+model JournalSource {
+  id        String    @id @default(uuid()) @db.Uuid
+  code      String    @unique
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  entries JournalEntry[]
+
+  @@map("journal_sources")
+}
+
+// BASIC, HRA, DEARNESS, SSF_EMPLOYEE, SSF_EMPLOYER, PF, CIT, TDS, ADVANCE, ...
+model SalaryComponent {
+  id                     String    @id @default(uuid()) @db.Uuid
+  code                   String    @unique
+  name                   String
+  isDeduction            Boolean   @default(false)
+  isEmployerContribution Boolean   @default(false) // e.g. employer SSF, not deducted from net pay
+  isTaxable              Boolean   @default(true)
+  isActive               Boolean   @default(true)
+  createdAt              DateTime  @default(now())
+  updatedAt              DateTime  @updatedAt
+  createdBy              String?   @db.Uuid
+  updatedBy              String?   @db.Uuid
+  deletedAt              DateTime?
+
+  structureItems SalaryStructureItem[]
+  payslipItems   PayslipItem[]
+
+  @@map("salary_components")
+}
+
+// =====================================================================
+// 3. ACADEMIC STRUCTURE (Course -> Batch -> BatchTerm -> BatchTermSubject)
+// =====================================================================
+
+model Course {
+  id             String    @id @default(uuid()) @db.Uuid
+  code           String    @unique // BIT, BBA, ...
+  name           String
+  courseSystemId String    @db.Uuid
+  totalTerms     Int // semester system: 8, yearly system: 4
+  description    String?
+  isActive       Boolean   @default(true)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  createdBy      String?   @db.Uuid
+  updatedBy      String?   @db.Uuid
+  deletedAt      DateTime?
+
+  courseSystem  CourseSystem   @relation(fields: [courseSystemId], references: [id])
+  batches       Batch[]
+  feeStructures FeeStructure[]
+
+  @@index([courseSystemId])
+  @@map("courses")
+}
+
+model Batch {
+  id                String    @id @default(uuid()) @db.Uuid
+  courseId          String    @db.Uuid
+  name              String // "2080"
+  startDateBs       String?   @db.VarChar(10)
+  currentTermNumber Int       @default(1) // which semester / year this batch is in now
+  isActive          Boolean   @default(true)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String?   @db.Uuid
+  updatedBy         String?   @db.Uuid
+  deletedAt         DateTime?
+
+  course        Course         @relation(fields: [courseId], references: [id])
+  terms         BatchTerm[]
+  students      Student[]
+  feeStructures FeeStructure[]
+  noticeTargets NoticeTarget[]
+
+  @@unique([courseId, name])
+  @@map("batches")
+}
+
+// One row per semester/year of a batch: Batch 2080 -> Semester 1..8
+model BatchTerm {
+  id          String    @id @default(uuid()) @db.Uuid
+  batchId     String    @db.Uuid
+  termNumber  Int
+  name        String // "Semester 1" / "Year 1"
+  startDateBs String?   @db.VarChar(10)
+  endDateBs   String?   @db.VarChar(10)
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  batch    Batch              @relation(fields: [batchId], references: [id])
+  subjects BatchTermSubject[]
+  exams    Exam[]
+
+  @@unique([batchId, termNumber])
+  @@map("batch_terms")
+}
+
+model Subject {
+  id          String    @id @default(uuid()) @db.Uuid
+  code        String    @unique
+  name        String
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  batchTermSubjects BatchTermSubject[]
+
+  @@map("subjects")
+}
+
+// Subject list + credit hour of a batch's semester/year.
+// Syllabus changes only affect the batch you edit, old batches stay untouched.
+model BatchTermSubject {
+  id          String    @id @default(uuid()) @db.Uuid
+  batchTermId String    @db.Uuid
+  subjectId   String    @db.Uuid
+  creditHour  Decimal   @db.Decimal(4, 1)
+  isElective  Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  batchTerm    BatchTerm            @relation(fields: [batchTermId], references: [id])
+  subject      Subject              @relation(fields: [subjectId], references: [id])
+  assignments  TeachingAssignment[]
+  examSubjects ExamSubject[]
+
+  @@unique([batchTermId, subjectId])
+  @@index([subjectId])
+  @@map("batch_term_subjects")
+}
+
+// Teacher <-> (batch + term + subject). One teacher can have many.
+model TeachingAssignment {
+  id                 String    @id @default(uuid()) @db.Uuid
+  teacherId          String    @db.Uuid
+  batchTermSubjectId String    @db.Uuid
+  assignedDateBs     String    @db.VarChar(10)
+  endDateBs          String?   @db.VarChar(10)
+  isActive           Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  createdBy          String?   @db.Uuid
+  updatedBy          String?   @db.Uuid
+  deletedAt          DateTime?
+
+  teacher          Teacher             @relation(fields: [teacherId], references: [id])
+  batchTermSubject BatchTermSubject    @relation(fields: [batchTermSubjectId], references: [id])
+  sessions         AttendanceSession[]
+  pays             TeacherBatchPay[]
+
+  @@unique([teacherId, batchTermSubjectId])
+  @@index([batchTermSubjectId])
+  @@map("teaching_assignments")
+}
+
+// Batch-wise pay for a teacher (payroll adds this on top of base salary).
+// Use ratePerCreditHour OR fixedMonthlyAmount. History kept by effective dates.
+model TeacherBatchPay {
+  id                   String    @id @default(uuid()) @db.Uuid
+  teachingAssignmentId String    @db.Uuid
+  ratePerCreditHour    Decimal?  @db.Decimal(14, 2)
+  fixedMonthlyAmount   Decimal?  @db.Decimal(14, 2)
+  effectiveFromBs      String    @db.VarChar(10)
+  effectiveToBs        String?   @db.VarChar(10)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  createdBy            String?   @db.Uuid
+  updatedBy            String?   @db.Uuid
+  deletedAt            DateTime?
+
+  teachingAssignment TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])
+
+  @@index([teachingAssignmentId])
+  @@map("teacher_batch_pays")
+}
+
+// =====================================================================
+// 4. ATTENDANCE
+// =====================================================================
+
+// One class of one period on one day, taken by a teacher.
+model AttendanceSession {
+  id                   String    @id @default(uuid()) @db.Uuid
+  teachingAssignmentId String    @db.Uuid
+  teacherId            String    @db.Uuid // who actually took it (can differ from assignment teacher)
+  periodId             String    @db.Uuid
+  dateBs               String    @db.VarChar(10)
+  isLocked             Boolean   @default(false) // set after edit time limit (see Setting ATTENDANCE_EDIT_HOURS)
+  lockedAt             DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  createdBy            String?   @db.Uuid
+  updatedBy            String?   @db.Uuid
+  deletedAt            DateTime?
+
+  teachingAssignment TeachingAssignment  @relation(fields: [teachingAssignmentId], references: [id])
+  teacher            Teacher             @relation(fields: [teacherId], references: [id])
+  period             Period              @relation(fields: [periodId], references: [id])
+  records            StudentAttendance[]
+
+  @@unique([teachingAssignmentId, periodId, dateBs])
+  @@index([dateBs])
+  @@index([teacherId])
+  @@index([periodId])
+  @@map("attendance_sessions")
+}
+
+model StudentAttendance {
+  id        String    @id @default(uuid()) @db.Uuid
+  sessionId String    @db.Uuid
+  studentId String    @db.Uuid
+  statusId  String    @db.Uuid
+  remarks   String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  session AttendanceSession @relation(fields: [sessionId], references: [id])
+  student Student           @relation(fields: [studentId], references: [id])
+  status  AttendanceStatus  @relation(fields: [statusId], references: [id])
+
+  @@unique([sessionId, studentId])
+  @@index([studentId])
+  @@index([statusId])
+  @@map("student_attendances")
+}
+
+// Teacher / Staff / Accountant attendance, marked by Principal.
+// createdBy = the Principal's userId. Payroll reads this table.
+model EmployeeAttendance {
+  id          String    @id @default(uuid()) @db.Uuid
+  employeeId  String    @db.Uuid
+  dateBs      String    @db.VarChar(10)
+  statusId    String    @db.Uuid
+  leaveTypeId String?   @db.Uuid // only when status = LEAVE
+  remarks     String?
+  isLocked    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  employee  Employee         @relation(fields: [employeeId], references: [id])
+  status    AttendanceStatus @relation(fields: [statusId], references: [id])
+  leaveType LeaveType?       @relation(fields: [leaveTypeId], references: [id])
+
+  @@unique([employeeId, dateBs])
+  @@index([dateBs])
+  @@index([statusId])
+  @@index([leaveTypeId])
+  @@map("employee_attendances")
+}
+
+// =====================================================================
+// 5. EXAM AND RESULT (terminal exams only, no back paper)
+// =====================================================================
+
+model Exam {
+  id          String    @id @default(uuid()) @db.Uuid
+  batchTermId String    @db.Uuid
+  examTypeId  String    @db.Uuid
+  name        String
+  startDateBs String?   @db.VarChar(10)
+  endDateBs   String?   @db.VarChar(10)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid // teacher
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  batchTerm BatchTerm     @relation(fields: [batchTermId], references: [id])
+  examType  ExamType      @relation(fields: [examTypeId], references: [id])
+  subjects  ExamSubject[]
+  results   Result[]
+
+  @@index([batchTermId])
+  @@index([examTypeId])
+  @@map("exams")
+}
+
+model ExamSubject {
+  id                 String    @id @default(uuid()) @db.Uuid
+  examId             String    @db.Uuid
+  batchTermSubjectId String    @db.Uuid
+  fullMarks          Decimal   @default(100) @db.Decimal(6, 2)
+  passMarks          Decimal   @default(40) @db.Decimal(6, 2)
+  examDateBs         String?   @db.VarChar(10)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  createdBy          String?   @db.Uuid
+  updatedBy          String?   @db.Uuid
+  deletedAt          DateTime?
+
+  exam             Exam             @relation(fields: [examId], references: [id])
+  batchTermSubject BatchTermSubject @relation(fields: [batchTermSubjectId], references: [id])
+  marks            ExamMark[]
+  resultSubjects   ResultSubject[]
+
+  @@unique([examId, batchTermSubjectId])
+  @@index([batchTermSubjectId])
+  @@map("exam_subjects")
+}
+
+model ExamMark {
+  id            String    @id @default(uuid()) @db.Uuid
+  examSubjectId String    @db.Uuid
+  studentId     String    @db.Uuid
+  marksObtained Decimal?  @db.Decimal(6, 2)
+  isAbsent      Boolean   @default(false)
+  remarks       String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     String?   @db.Uuid
+  updatedBy     String?   @db.Uuid
+  deletedAt     DateTime?
+
+  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])
+  student     Student     @relation(fields: [studentId], references: [id])
+
+  @@unique([examSubjectId, studentId])
+  @@index([studentId])
+  @@map("exam_marks")
+}
+
+// Per-student result of one exam. Teacher creates (PENDING), Principal approves.
+// GPA = sum(gradePoint * creditHour) / sum(creditHour)  (credit-weighted, 4.0 scale)
+model Result {
+  id               String    @id @default(uuid()) @db.Uuid
+  studentId        String    @db.Uuid
+  examId           String    @db.Uuid
+  totalMarks       Decimal   @db.Decimal(8, 2)
+  fullMarks        Decimal   @db.Decimal(8, 2)
+  percentage       Decimal   @db.Decimal(5, 2)
+  totalCreditHour  Decimal   @db.Decimal(5, 1)
+  gpa              Decimal   @db.Decimal(3, 2)
+  cgpa             Decimal?  @db.Decimal(3, 2)
+  isPassed         Boolean
+  workflowStatusId String    @db.Uuid
+  submittedAt      DateTime?
+  approvedBy       String?   @db.Uuid // Principal userId
+  approvedAt       DateTime?
+  publishedAt      DateTime?
+  remarks          String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+
+  student        Student         @relation(fields: [studentId], references: [id])
+  exam           Exam            @relation(fields: [examId], references: [id])
+  workflowStatus WorkflowStatus  @relation(fields: [workflowStatusId], references: [id])
+  subjects       ResultSubject[]
+
+  @@unique([studentId, examId])
+  @@index([examId])
+  @@index([workflowStatusId])
+  @@map("results")
+}
+
+// Snapshot per subject (creditHour copied so later syllabus edits never change old results)
+model ResultSubject {
+  id            String    @id @default(uuid()) @db.Uuid
+  resultId      String    @db.Uuid
+  examSubjectId String    @db.Uuid
+  marksObtained Decimal   @db.Decimal(6, 2)
+  fullMarks     Decimal   @db.Decimal(6, 2)
+  creditHour    Decimal   @db.Decimal(4, 1)
+  gradeScaleId  String    @db.Uuid
+  gradePoint    Decimal   @db.Decimal(3, 2)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     String?   @db.Uuid
+  updatedBy     String?   @db.Uuid
+  deletedAt     DateTime?
+
+  result      Result      @relation(fields: [resultId], references: [id])
+  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])
+  gradeScale  GradeScale  @relation(fields: [gradeScaleId], references: [id])
+
+  @@unique([resultId, examSubjectId])
+  @@index([examSubjectId])
+  @@index([gradeScaleId])
+  @@map("result_subjects")
+}
+
+// =====================================================================
+// 6. FEE MANAGEMENT
+// =====================================================================
+
+// Accountant creates per course (optionally per batch, null batch = default for course)
+model FeeStructure {
+  id        String    @id @default(uuid()) @db.Uuid
+  courseId  String    @db.Uuid
+  batchId   String?   @db.Uuid
+  name      String
+  isActive  Boolean   @default(true)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  course      Course             @relation(fields: [courseId], references: [id])
+  batch       Batch?             @relation(fields: [batchId], references: [id])
+  items       FeeStructureItem[]
+  studentFees StudentFee[]
+
+  @@index([courseId])
+  @@index([batchId])
+  @@map("fee_structures")
+}
+
+model FeeStructureItem {
+  id             String    @id @default(uuid()) @db.Uuid
+  feeStructureId String    @db.Uuid
+  feeHeadId      String    @db.Uuid
+  termNumber     Int? // null = one time (e.g. admission)
+  amount         Decimal   @db.Decimal(14, 2)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  createdBy      String?   @db.Uuid
+  updatedBy      String?   @db.Uuid
+  deletedAt      DateTime?
+
+  feeStructure FeeStructure     @relation(fields: [feeStructureId], references: [id])
+  feeHead      FeeHead          @relation(fields: [feeHeadId], references: [id])
+  studentItems StudentFeeItem[]
+
+  @@index([feeStructureId])
+  @@index([feeHeadId])
+  @@map("fee_structure_items")
+}
+
+// Fee assigned to one student (copied from structure at admission by Accountant).
+// Discount / skip / custom item all live in StudentFeeItem, so fee can differ per student.
+model StudentFee {
+  id             String    @id @default(uuid()) @db.Uuid
+  studentId      String    @db.Uuid
+  feeStructureId String?   @db.Uuid
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  createdBy      String?   @db.Uuid
+  updatedBy      String?   @db.Uuid
+  deletedAt      DateTime?
+
+  student      Student          @relation(fields: [studentId], references: [id])
+  feeStructure FeeStructure?    @relation(fields: [feeStructureId], references: [id])
+  items        StudentFeeItem[]
+
+  @@index([studentId])
+  @@index([feeStructureId])
+  @@map("student_fees")
+}
+
+model StudentFeeItem {
+  id                 String    @id @default(uuid()) @db.Uuid
+  studentFeeId       String    @db.Uuid
+  feeHeadId          String    @db.Uuid
+  feeStructureItemId String?   @db.Uuid // null = custom item added for this student
+  termNumber         Int?
+  description        String?
+  amount             Decimal   @db.Decimal(14, 2)
+  discountAmount     Decimal   @default(0) @db.Decimal(14, 2)
+  discountReason     String?
+  netAmount          Decimal   @db.Decimal(14, 2) // amount - discountAmount
+  isSkipped          Boolean   @default(false) // Accountant can skip a fee for a student
+  skipReason         String?
+  dueDateBs          String?   @db.VarChar(10)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+  createdBy          String?   @db.Uuid
+  updatedBy          String?   @db.Uuid
+  deletedAt          DateTime?
+
+  studentFee       StudentFee             @relation(fields: [studentFeeId], references: [id])
+  feeHead          FeeHead                @relation(fields: [feeHeadId], references: [id])
+  feeStructureItem FeeStructureItem?      @relation(fields: [feeStructureItemId], references: [id])
+  installments     FeeInstallment[]
+  allocations      FeePaymentAllocation[]
+
+  @@index([studentFeeId])
+  @@index([feeHeadId])
+  @@index([feeStructureItemId])
+  @@index([dueDateBs])
+  @@map("student_fee_items")
+}
+
+// Payment schedule if the student pays in installments
+model FeeInstallment {
+  id               String    @id @default(uuid()) @db.Uuid
+  studentFeeItemId String    @db.Uuid
+  installmentNo    Int
+  dueDateBs        String    @db.VarChar(10)
+  amount           Decimal   @db.Decimal(14, 2)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+
+  studentFeeItem StudentFeeItem         @relation(fields: [studentFeeItemId], references: [id])
+  allocations    FeePaymentAllocation[]
+
+  @@unique([studentFeeItemId, installmentNo])
+  @@map("fee_installments")
+}
+
+// Money received = one receipt. Append-only: cancel by reversal, never delete.
+model FeePayment {
+  id             String    @id @default(uuid()) @db.Uuid
+  receiptNo      String    @unique
+  studentId      String    @db.Uuid
+  fiscalYearId   String    @db.Uuid
+  paymentDateBs  String    @db.VarChar(10)
+  totalAmount    Decimal   @db.Decimal(14, 2)
+  remarks        String?
+  isCancelled    Boolean   @default(false)
+  cancelledAt    DateTime?
+  cancelReason   String?
+  journalEntryId String?   @unique @db.Uuid
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  createdBy      String?   @db.Uuid // accountant
+  updatedBy      String?   @db.Uuid
+
+  student      Student                @relation(fields: [studentId], references: [id])
+  fiscalYear   FiscalYear             @relation(fields: [fiscalYearId], references: [id])
+  journalEntry JournalEntry?          @relation(fields: [journalEntryId], references: [id])
+  methodLines  FeePaymentMethodLine[]
+  allocations  FeePaymentAllocation[]
+
+  @@index([studentId])
+  @@index([fiscalYearId])
+  @@index([paymentDateBs])
+  @@map("fee_payments")
+}
+
+// Split payment: e.g. 5000 cash + 5000 bank in one receipt
+// sum(methodLines.amount) must equal FeePayment.totalAmount
+model FeePaymentMethodLine {
+  id              String   @id @default(uuid()) @db.Uuid
+  feePaymentId    String   @db.Uuid
+  paymentMethodId String   @db.Uuid
+  amount          Decimal  @db.Decimal(14, 2)
+  referenceNo     String? // cheque no / transaction id
+  bankName        String?
   createdAt       DateTime @default(now())
-  updatedAt       DateTime? @updatedAt
+  updatedAt       DateTime @updatedAt
+  createdBy       String?  @db.Uuid
+  updatedBy       String?  @db.Uuid
+
+  feePayment    FeePayment    @relation(fields: [feePaymentId], references: [id])
+  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])
+
+  @@index([feePaymentId])
+  @@index([paymentMethodId])
+  @@map("fee_payment_method_lines")
 }
 
-model Category {
-  id    String     @id @default(cuid())
-  name  String
-  shortName String
-  userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  products Product[]
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt 
+// Which fee item / installment this payment pays (supports partial payment)
+model FeePaymentAllocation {
+  id               String   @id @default(uuid()) @db.Uuid
+  feePaymentId     String   @db.Uuid
+  studentFeeItemId String   @db.Uuid
+  feeInstallmentId String?  @db.Uuid
+  amount           Decimal  @db.Decimal(14, 2)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  createdBy        String?  @db.Uuid
+  updatedBy        String?  @db.Uuid
+
+  feePayment     FeePayment      @relation(fields: [feePaymentId], references: [id])
+  studentFeeItem StudentFeeItem  @relation(fields: [studentFeeItemId], references: [id])
+  feeInstallment FeeInstallment? @relation(fields: [feeInstallmentId], references: [id])
+
+  @@index([feePaymentId])
+  @@index([studentFeeItemId])
+  @@index([feeInstallmentId])
+  @@map("fee_payment_allocations")
 }
 
-model Product {
-  id         String   @id @default(cuid())
-  name       String
-  shortName  String
-  price      Float
-  quantity   Int @default(0)
-  userId     String
-  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  billItems  BillItem[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+// =====================================================================
+// 7. ACCOUNTING (double entry)
+// =====================================================================
+
+model FiscalYear {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String    @unique // "2081/82"
+  startDateBs String    @db.VarChar(10) // 2081-04-01 (Shrawan 1)
+  endDateBs   String    @db.VarChar(10)
+  isCurrent   Boolean   @default(false)
+  isClosed    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  journalEntries JournalEntry[]
+  payments       FeePayment[]
+  payrolls       Payroll[]
+  taxSlabs       TaxSlab[]
+
+  @@map("fiscal_years")
 }
 
-model Bill {
-  id              String        @id @default(cuid())
-  billNumber      Int           @unique @default(autoincrement())
-  userId          String
-  user            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  billItems       BillItem[]
-  total           Float         @default(0)
-  discountType    DiscountType
-  discount        Float         @default(0)
-  finalBillAmount Float         @default(0)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+// Chart of accounts (tree). isGroup = heading only, cannot receive postings.
+model Account {
+  id            String    @id @default(uuid()) @db.Uuid
+  code          String    @unique
+  name          String
+  accountTypeId String    @db.Uuid
+  parentId      String?   @db.Uuid
+  isGroup       Boolean   @default(false)
+  isSystem      Boolean   @default(false) // seeded accounts that must not be removed
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     String?   @db.Uuid
+  updatedBy     String?   @db.Uuid
+  deletedAt     DateTime?
+
+  accountType    AccountType     @relation(fields: [accountTypeId], references: [id])
+  parent         Account?        @relation("AccountTree", fields: [parentId], references: [id])
+  children       Account[]       @relation("AccountTree")
+  journalLines   JournalLine[]
+  paymentMethods PaymentMethod[]
+
+  @@index([accountTypeId])
+  @@index([parentId])
+  @@map("accounts")
 }
 
-model BillItem {
-  id              String        @id @default(cuid())
-  billId          String
-  bill            Bill          @relation(fields: [billId], references: [id], onDelete: Cascade)
-  productId       String
-  product         Product       @relation(fields: [productId], references: [id], onDelete: Cascade)
-  quantity        Int
-  unitPrice       Float
-  total           Float
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
+// Append-only. No deletedAt on purpose. Correct mistakes with a reversal entry.
+// Manual / backdated entries: dateBs can be in the past (isBackdated = true).
+model JournalEntry {
+  id           String   @id @default(uuid()) @db.Uuid
+  entryNo      String   @unique // JV-2081/82-000123
+  fiscalYearId String   @db.Uuid
+  dateBs       String   @db.VarChar(10)
+  description  String
+  sourceId     String   @db.Uuid // JournalSource
+  sourceRefId  String?  @db.Uuid // id of FeePayment / Payroll / ... that created it
+  isManual     Boolean  @default(false)
+  isBackdated  Boolean  @default(false)
+  isReversed   Boolean  @default(false)
+  reversalOfId String?  @unique @db.Uuid
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  createdBy    String?  @db.Uuid
+  updatedBy    String?  @db.Uuid
+
+  fiscalYear FiscalYear    @relation(fields: [fiscalYearId], references: [id])
+  source     JournalSource @relation(fields: [sourceId], references: [id])
+  reversalOf JournalEntry? @relation("Reversal", fields: [reversalOfId], references: [id])
+  reversedBy JournalEntry? @relation("Reversal")
+  lines      JournalLine[]
+  feePayment FeePayment?
+  payroll    Payroll?
+
+  @@index([fiscalYearId, dateBs])
+  @@index([sourceId])
+  @@index([sourceRefId])
+  @@map("journal_entries")
 }
+
+// Each entry: sum(debit) = sum(credit) and each line has debit XOR credit.
+// Prisma cannot express CHECK constraints, add them in the migration SQL (see bottom).
+model JournalLine {
+  id             String   @id @default(uuid()) @db.Uuid
+  journalEntryId String   @db.Uuid
+  accountId      String   @db.Uuid
+  debit          Decimal  @default(0) @db.Decimal(14, 2)
+  credit         Decimal  @default(0) @db.Decimal(14, 2)
+  description    String?
+  studentId      String?  @db.Uuid // optional party, gives student ledger
+  employeeId     String?  @db.Uuid // optional party, gives employee ledger
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  createdBy      String?  @db.Uuid
+  updatedBy      String?  @db.Uuid
+
+  journalEntry JournalEntry @relation(fields: [journalEntryId], references: [id])
+  account      Account      @relation(fields: [accountId], references: [id])
+  student      Student?     @relation(fields: [studentId], references: [id])
+  employee     Employee?    @relation(fields: [employeeId], references: [id])
+
+  @@index([journalEntryId])
+  @@index([accountId])
+  @@index([studentId])
+  @@index([employeeId])
+  @@map("journal_lines")
+}
+
+// =====================================================================
+// 8. PAYROLL (Nepal rules: SSF / PF / CIT / TDS as SalaryComponent + TaxSlab)
+// =====================================================================
+
+// Salary is versioned: when salary changes, close the old row (effectiveToBs)
+// and create a new one. Old payslips keep their own snapshot.
+model SalaryStructure {
+  id              String    @id @default(uuid()) @db.Uuid
+  employeeId      String    @db.Uuid
+  basicSalary     Decimal   @db.Decimal(14, 2)
+  effectiveFromBs String    @db.VarChar(10)
+  effectiveToBs   String?   @db.VarChar(10)
+  remarks         String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  createdBy       String?   @db.Uuid
+  updatedBy       String?   @db.Uuid
+  deletedAt       DateTime?
+
+  employee Employee              @relation(fields: [employeeId], references: [id])
+  items    SalaryStructureItem[]
+
+  @@index([employeeId, effectiveFromBs])
+  @@map("salary_structures")
+}
+
+model SalaryStructureItem {
+  id                String    @id @default(uuid()) @db.Uuid
+  salaryStructureId String    @db.Uuid
+  componentId       String    @db.Uuid
+  amount            Decimal   @db.Decimal(14, 2)
+  isPercentOfBasic  Boolean   @default(false) // amount = percent when true
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+  createdBy         String?   @db.Uuid
+  updatedBy         String?   @db.Uuid
+  deletedAt         DateTime?
+
+  salaryStructure SalaryStructure @relation(fields: [salaryStructureId], references: [id])
+  component       SalaryComponent @relation(fields: [componentId], references: [id])
+
+  @@unique([salaryStructureId, componentId])
+  @@index([componentId])
+  @@map("salary_structure_items")
+}
+
+// Income tax slabs per fiscal year (fill from that year's budget)
+model TaxSlab {
+  id           String    @id @default(uuid()) @db.Uuid
+  fiscalYearId String    @db.Uuid
+  isCouple     Boolean   @default(false)
+  fromAmount   Decimal   @db.Decimal(14, 2)
+  toAmount     Decimal?  @db.Decimal(14, 2)
+  ratePercent  Decimal   @db.Decimal(5, 2)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  createdBy    String?   @db.Uuid
+  updatedBy    String?   @db.Uuid
+  deletedAt    DateTime?
+
+  fiscalYear FiscalYear @relation(fields: [fiscalYearId], references: [id])
+
+  @@index([fiscalYearId])
+  @@map("tax_slabs")
+}
+
+// Monthly payroll run: Accountant prepares (PENDING), Principal approves, then PAID
+model Payroll {
+  id               String    @id @default(uuid()) @db.Uuid
+  fiscalYearId     String    @db.Uuid
+  yearBs           Int
+  monthBs          Int // 1 = Baisakh ... 12 = Chaitra
+  totalDays        Int
+  workflowStatusId String    @db.Uuid
+  submittedAt      DateTime?
+  approvedBy       String?   @db.Uuid // Principal userId
+  approvedAt       DateTime?
+  paidDateBs       String?   @db.VarChar(10)
+  journalEntryId   String?   @unique @db.Uuid
+  remarks          String?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid // accountant
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+
+  fiscalYear     FiscalYear     @relation(fields: [fiscalYearId], references: [id])
+  workflowStatus WorkflowStatus @relation(fields: [workflowStatusId], references: [id])
+  journalEntry   JournalEntry?  @relation(fields: [journalEntryId], references: [id])
+  payslips       Payslip[]
+
+  @@unique([yearBs, monthBs])
+  @@index([fiscalYearId])
+  @@index([workflowStatusId])
+  @@map("payrolls")
+}
+
+// Stored payslip (snapshot). Attendance summary is copied so it never changes later.
+model Payslip {
+  id                  String   @id @default(uuid()) @db.Uuid
+  payslipNo           String   @unique
+  payrollId           String   @db.Uuid
+  employeeId          String   @db.Uuid
+  presentDays         Decimal  @db.Decimal(5, 2)
+  halfDays            Int      @default(0)
+  paidLeaveDays       Int      @default(0)
+  unpaidLeaveDays     Int      @default(0)
+  absentDays          Int      @default(0)
+  basicSalary         Decimal  @db.Decimal(14, 2)
+  attendanceDeduction Decimal  @default(0) @db.Decimal(14, 2) // salary cut for absent / unpaid leave
+  totalAllowance      Decimal  @default(0) @db.Decimal(14, 2)
+  teachingPay         Decimal  @default(0) @db.Decimal(14, 2) // from TeacherBatchPay
+  grossPay            Decimal  @db.Decimal(14, 2)
+  totalDeduction      Decimal  @default(0) @db.Decimal(14, 2)
+  taxAmount           Decimal  @default(0) @db.Decimal(14, 2)
+  netPay              Decimal  @db.Decimal(14, 2)
+  paymentMethodId     String?  @db.Uuid
+  paidDateBs          String?  @db.VarChar(10)
+  pdfUrl              String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+  createdBy           String?  @db.Uuid
+  updatedBy           String?  @db.Uuid
+
+  payroll       Payroll        @relation(fields: [payrollId], references: [id])
+  employee      Employee       @relation(fields: [employeeId], references: [id])
+  paymentMethod PaymentMethod? @relation(fields: [paymentMethodId], references: [id])
+  items         PayslipItem[]
+
+  @@unique([payrollId, employeeId])
+  @@index([employeeId])
+  @@index([paymentMethodId])
+  @@map("payslips")
+}
+
+model PayslipItem {
+  id                     String   @id @default(uuid()) @db.Uuid
+  payslipId              String   @db.Uuid
+  componentId            String?  @db.Uuid
+  description            String
+  amount                 Decimal  @db.Decimal(14, 2)
+  isDeduction            Boolean  @default(false)
+  isEmployerContribution Boolean  @default(false)
+  createdAt              DateTime @default(now())
+  updatedAt              DateTime @updatedAt
+  createdBy              String?  @db.Uuid
+  updatedBy              String?  @db.Uuid
+
+  payslip   Payslip          @relation(fields: [payslipId], references: [id])
+  component SalaryComponent? @relation(fields: [componentId], references: [id])
+
+  @@index([payslipId])
+  @@index([componentId])
+  @@map("payslip_items")
+}
+
+// =====================================================================
+// 9. NOTICE + SETTINGS
+// =====================================================================
+
+model Notice {
+  id            String    @id @default(uuid()) @db.Uuid
+  title         String
+  body          String
+  attachmentUrl String?
+  isPinned      Boolean   @default(false)
+  isPublished   Boolean   @default(false)
+  publishedAt   DateTime?
+  expiresOnBs   String?   @db.VarChar(10)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  createdBy     String?   @db.Uuid
+  updatedBy     String?   @db.Uuid
+  deletedAt     DateTime?
+
+  targets NoticeTarget[]
+
+  @@map("notices")
+}
+
+// Who sees the notice: a role, a batch, or both. No targets = everyone.
+model NoticeTarget {
+  id        String    @id @default(uuid()) @db.Uuid
+  noticeId  String    @db.Uuid
+  role      Role?
+  batchId   String?   @db.Uuid
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String?   @db.Uuid
+  updatedBy String?   @db.Uuid
+  deletedAt DateTime?
+
+  notice Notice @relation(fields: [noticeId], references: [id])
+  batch  Batch? @relation(fields: [batchId], references: [id])
+
+  @@index([noticeId])
+  @@index([batchId])
+  @@map("notice_targets")
+}
+
+// Key/value config, e.g. ATTENDANCE_EDIT_HOURS = 24, WORKING_DAYS_MODE = CALENDAR
+model Setting {
+  id          String    @id @default(uuid()) @db.Uuid
+  key         String    @unique
+  value       String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  @@map("settings")
+}
+
+// =====================================================================
+// RAW SQL to add in the first migration (Prisma cannot model these)
+// Run `npx prisma migrate dev --create-only`, paste this in the generated
+// migration.sql, then `npx prisma migrate dev`.
+// =====================================================================
+//
+// -- journal lines: either debit or credit, never both, never negative
+// ALTER TABLE journal_lines ADD CONSTRAINT chk_journal_line_side
+//   CHECK (debit >= 0 AND credit >= 0 AND (debit = 0 OR credit = 0) AND (debit + credit) > 0);
+//
+// -- payroll month must be 1..12
+// ALTER TABLE payrolls ADD CONSTRAINT chk_payroll_month CHECK ("monthBs" BETWEEN 1 AND 12);
+//
+// -- only one current fiscal year
+// CREATE UNIQUE INDEX uq_fiscal_year_current ON fiscal_years ("isCurrent") WHERE "isCurrent" = true AND "deletedAt" IS NULL;
+//
+// -- no update / delete on journal tables (append-only, reversal only)
+// CREATE OR REPLACE FUNCTION forbid_journal_change() RETURNS trigger AS $$
+// BEGIN RAISE EXCEPTION 'Journal is append-only. Create a reversal entry instead.'; END;
+// $$ LANGUAGE plpgsql;
+// CREATE TRIGGER trg_journal_lines_no_change BEFORE UPDATE OR DELETE ON journal_lines
+//   FOR EACH ROW EXECUTE FUNCTION forbid_journal_change();
+// (journal_entries: allow UPDATE only of isReversed, so write a narrower trigger there)
+//
+// -- unique keys that must ignore soft-deleted rows.
+//    Every "code String @unique" on lookup tables and Subject/Course/Account, Student.universityRegNo,
+//    Employee.employeeCode, User.email/username will BLOCK re-creating a soft-deleted value.
+//    For each one: remove @unique in the schema, then add a partial index, e.g.
+// CREATE UNIQUE INDEX uq_students_regno_active ON students ("universityRegNo") WHERE "deletedAt" IS NULL;
+// CREATE UNIQUE INDEX uq_users_email_active    ON users ("email")             WHERE "deletedAt" IS NULL;
+//
+// -- debit total = credit total per entry: enforce in service layer inside one $transaction,
+//    or add a DEFERRABLE constraint trigger on journal_lines.

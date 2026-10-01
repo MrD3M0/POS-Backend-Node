@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import { trimBody } from "./middlewares/trimBody";
 import appRoutes from "./router";
 import cors from "cors";
+import { prismaMain } from "./lib/prismaClient";
 
 const app = express();
 // =================================================
@@ -21,6 +22,18 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use("/api", [trimBody], appRoutes);
-app.listen(process.env.PORT || 8000, () => {
-  console.log(`Server is running at PORT:${process.env.PORT || 8000}`);
-});
+async function main() {
+  try {
+    await prismaMain.$connect();
+    console.log("Database connected");
+
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(`Server is running at PORT:${process.env.PORT || 8000}`);
+    });
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    process.exit(1);
+  }
+}
+
+main();
