@@ -3,8 +3,8 @@
 ## 📊 Project Information
 
 - **Project Name**: `POS-Backend-Node`
-- **Generated On**: 2026-10-01 08:52:42 (Asia/Katmandu / GMT+06:45)
-- **Total Files Processed**: 99
+- **Generated On**: 2026-10-09 17:54:13 (Asia/Katmandu / GMT+06:45)
+- **Total Files Processed**: 102
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
 
@@ -21,16 +21,20 @@
 
 ```
 ├── 📁 prisma/
-│   └── 📄 schema.prisma (49.07 KB)
+│   ├── 📁 migrations/
+│   │   ├── 📁 20261001000000_init/
+│   │   │   └── 📄 migration.sql (56.11 KB)
+│   │   └── 📄 migration_lock.toml (66 B)
+│   └── 📄 schema.prisma (47.98 KB)
 ├── 📁 src/
 │   ├── 📁 @types/
-│   │   └── 📄 type.ts (77 B)
+│   │   └── 📄 type.ts (128 B)
 │   ├── 📁 errors/
 │   │   └── 📄 CustomError.ts (1.5 KB)
 │   ├── 📁 generated/
 │   │   └── 📁 prisma/
 │   │       ├── 📁 internal/
-│   │       │   ├── 📄 class.ts (465.8 KB)
+│   │       │   ├── 📄 class.ts (465.79 KB)
 │   │       │   ├── 📄 prismaNamespace.ts (220.81 KB)
 │   │       │   └── 📄 prismaNamespaceBrowser.ts (31.53 KB)
 │   │       ├── 📁 models/
@@ -101,13 +105,14 @@
 │   ├── 📁 lib/
 │   │   └── 📄 prismaClient.ts (404 B)
 │   ├── 📁 middlewares/
+│   │   ├── 📄 authorized.ts (1.73 KB)
 │   │   ├── 📄 isUser.ts (3.89 KB)
 │   │   └── 📄 trimBody.ts (610 B)
 │   ├── 📁 modules/
 │   │   ├── 📁 auth/
-│   │   │   ├── 📄 controller.ts (5.48 KB)
-│   │   │   ├── 📄 routes.ts (576 B)
-│   │   │   ├── 📄 service.ts (995 B)
+│   │   │   ├── 📄 controller.ts (9.04 KB)
+│   │   │   ├── 📄 routes.ts (692 B)
+│   │   │   ├── 📄 service.ts (1.38 KB)
 │   │   │   └── 📄 validator.ts (990 B)
 │   │   ├── 📁 bill/
 │   │   │   ├── 📄 controller.ts (5.27 KB)
@@ -142,6 +147,8 @@
 
 **Project Files:**
 
+- [📄 prisma/migrations/20261001000000_init/migration.sql](#📄-prisma-migrations-20261001000000-init-migration-sql)
+- [📄 prisma/migrations/migration_lock.toml](#📄-prisma-migrations-migration-lock-toml)
 - [📄 src/@types/type.ts](#📄-src-types-type-ts)
 - [📄 src/errors/CustomError.ts](#📄-src-errors-customerror-ts)
 - [📄 src/generated/prisma/internal/class.ts](#📄-src-generated-prisma-internal-class-ts)
@@ -212,6 +219,7 @@
 - [📄 src/generated/prisma/enums.ts](#📄-src-generated-prisma-enums-ts)
 - [📄 src/generated/prisma/models.ts](#📄-src-generated-prisma-models-ts)
 - [📄 src/lib/prismaClient.ts](#📄-src-lib-prismaclient-ts)
+- [📄 src/middlewares/authorized.ts](#📄-src-middlewares-authorized-ts)
 - [📄 src/middlewares/isUser.ts](#📄-src-middlewares-isuser-ts)
 - [📄 src/middlewares/trimBody.ts](#📄-src-middlewares-trimbody-ts)
 - [📄 src/modules/auth/controller.ts](#📄-src-modules-auth-controller-ts)
@@ -247,22 +255,1721 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Files | 99 |
-| Total Directories | 17 |
-| Text Files | 98 |
+| Total Files | 102 |
+| Total Directories | 19 |
+| Text Files | 101 |
 | Binary Files | 1 |
-| Total Size | 5.38 MB |
+| Total Size | 5.44 MB |
 
 ### 📄 File Types Distribution
 
 | Extension | Count |
 |-----------|-------|
-| `.ts` | 95 |
+| `.ts` | 96 |
 | `.json` | 2 |
+| `.sql` | 1 |
+| `.toml` | 1 |
 | `.prisma` | 1 |
 | `.yaml` | 1 |
 
 ## 💻 File Code Contents
+
+### <a id="📄-prisma-migrations-20261001000000-init-migration-sql"></a>📄 `prisma/migrations/20261001000000_init/migration.sql`
+
+**File Info:**
+- **Size**: 56.11 KB
+- **Extension**: `.sql`
+- **Language**: `sql`
+- **Location**: `prisma/migrations/20261001000000_init/migration.sql`
+- **Relative Path**: `prisma/migrations/20261001000000_init`
+- **Created**: 2026-10-01 08:59:22 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 08:59:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c06f5f764be54bee2ad87aaae94429ad`
+- **SHA256**: `a6c9e91f6b36ab35f51db94542893a8455ae388b2de3a5a2a67e1a9c51dc65e1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```sql
+-- CreateSchema
+CREATE SCHEMA IF NOT EXISTS "public";
+
+-- CreateEnum
+CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE', 'OTHERS');
+
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'PRINCIPAL', 'ACCOUNTANT', 'TEACHER', 'STAFF', 'STUDENT');
+
+-- CreateTable
+CREATE TABLE "users" (
+    "id" UUID NOT NULL,
+    "email" TEXT NOT NULL,
+    "username" TEXT,
+    "passwordHash" TEXT NOT NULL,
+    "role" "Role" NOT NULL,
+    "isAdmin" BOOLEAN NOT NULL DEFAULT false,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "isEmailVerified" BOOLEAN NOT NULL DEFAULT false,
+    "lastLoginAt" TIMESTAMP(3),
+    "failedLoginCount" INTEGER NOT NULL DEFAULT 0,
+    "lockedUntil" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "otps" (
+    "id" UUID NOT NULL,
+    "userId" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "expiresAt" TIMESTAMP(3) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "otps_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "employees" (
+    "id" UUID NOT NULL,
+    "userId" UUID,
+    "employeeCode" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "middleName" TEXT,
+    "lastName" TEXT NOT NULL,
+    "dobBs" VARCHAR(10),
+    "phone" TEXT,
+    "email" TEXT,
+    "permanentAddress" TEXT,
+    "temporaryAddress" TEXT,
+    "photoUrl" TEXT,
+    "designation" TEXT NOT NULL,
+    "joinDateBs" VARCHAR(10) NOT NULL,
+    "leaveDateBs" VARCHAR(10),
+    "panNo" TEXT,
+    "ssfNo" TEXT,
+    "bankName" TEXT,
+    "bankAccountNo" TEXT,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+    "gender" "Gender" NOT NULL,
+
+    CONSTRAINT "employees_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "principals" (
+    "id" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "principals_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "accountants" (
+    "id" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "accountants_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "staffs" (
+    "id" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "department" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "staffs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "teachers" (
+    "id" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "qualification" TEXT,
+    "specialization" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "teachers_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "students" (
+    "id" UUID NOT NULL,
+    "userId" UUID,
+    "universityRegNo" TEXT NOT NULL,
+    "firstName" TEXT NOT NULL,
+    "middleName" TEXT,
+    "lastName" TEXT NOT NULL,
+    "dobBs" VARCHAR(10),
+    "phone" TEXT,
+    "email" TEXT,
+    "permanentAddress" TEXT,
+    "temporaryAddress" TEXT,
+    "photoUrl" TEXT,
+    "batchId" UUID NOT NULL,
+    "admissionDateBs" VARCHAR(10) NOT NULL,
+    "studentStatusId" UUID NOT NULL,
+    "approvalStatusId" UUID NOT NULL,
+    "approvedBy" UUID,
+    "approvedAt" TIMESTAMP(3),
+    "rejectionReason" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+    "gender" "Gender" NOT NULL,
+
+    CONSTRAINT "students_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "guardians" (
+    "id" UUID NOT NULL,
+    "studentId" UUID NOT NULL,
+    "relationId" UUID NOT NULL,
+    "fullName" TEXT NOT NULL,
+    "phone" TEXT,
+    "email" TEXT,
+    "occupation" TEXT,
+    "address" TEXT,
+    "isPrimary" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "guardians_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "guardian_relations" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "sortOrder" INTEGER NOT NULL DEFAULT 0,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "guardian_relations_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "course_systems" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "course_systems_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "student_statuses" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "student_statuses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "workflow_statuses" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "workflow_statuses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "attendance_statuses" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "salaryFactor" DECIMAL(3,2) NOT NULL DEFAULT 1,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "attendance_statuses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "leave_types" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isPaid" BOOLEAN NOT NULL DEFAULT true,
+    "yearlyAllowed" INTEGER,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "leave_types_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "periods" (
+    "id" UUID NOT NULL,
+    "periodNumber" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "startTime" VARCHAR(5) NOT NULL,
+    "endTime" VARCHAR(5) NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "periods_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "exam_types" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "exam_types_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "grade_scales" (
+    "id" UUID NOT NULL,
+    "grade" TEXT NOT NULL,
+    "minPercent" DECIMAL(5,2) NOT NULL,
+    "maxPercent" DECIMAL(5,2) NOT NULL,
+    "gradePoint" DECIMAL(3,2) NOT NULL,
+    "description" TEXT,
+    "isPassGrade" BOOLEAN NOT NULL DEFAULT true,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "grade_scales_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_heads" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "fee_heads_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "payment_methods" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "accountId" UUID,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "payment_methods_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "account_types" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isDebitNormal" BOOLEAN NOT NULL,
+    "sortOrder" INTEGER NOT NULL DEFAULT 0,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "account_types_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "journal_sources" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "journal_sources_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "salary_components" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "isDeduction" BOOLEAN NOT NULL DEFAULT false,
+    "isEmployerContribution" BOOLEAN NOT NULL DEFAULT false,
+    "isTaxable" BOOLEAN NOT NULL DEFAULT true,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "salary_components_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "courses" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "courseSystemId" UUID NOT NULL,
+    "totalTerms" INTEGER NOT NULL,
+    "description" TEXT,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "courses_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "batches" (
+    "id" UUID NOT NULL,
+    "courseId" UUID NOT NULL,
+    "name" TEXT NOT NULL,
+    "startDateBs" VARCHAR(10),
+    "currentTermNumber" INTEGER NOT NULL DEFAULT 1,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "batches_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "batch_terms" (
+    "id" UUID NOT NULL,
+    "batchId" UUID NOT NULL,
+    "termNumber" INTEGER NOT NULL,
+    "name" TEXT NOT NULL,
+    "startDateBs" VARCHAR(10),
+    "endDateBs" VARCHAR(10),
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "batch_terms_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "subjects" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "description" TEXT,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "subjects_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "batch_term_subjects" (
+    "id" UUID NOT NULL,
+    "batchTermId" UUID NOT NULL,
+    "subjectId" UUID NOT NULL,
+    "creditHour" DECIMAL(4,1) NOT NULL,
+    "isElective" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "batch_term_subjects_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "teaching_assignments" (
+    "id" UUID NOT NULL,
+    "teacherId" UUID NOT NULL,
+    "batchTermSubjectId" UUID NOT NULL,
+    "assignedDateBs" VARCHAR(10) NOT NULL,
+    "endDateBs" VARCHAR(10),
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "teaching_assignments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "teacher_batch_pays" (
+    "id" UUID NOT NULL,
+    "teachingAssignmentId" UUID NOT NULL,
+    "ratePerCreditHour" DECIMAL(14,2),
+    "fixedMonthlyAmount" DECIMAL(14,2),
+    "effectiveFromBs" VARCHAR(10) NOT NULL,
+    "effectiveToBs" VARCHAR(10),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "teacher_batch_pays_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "attendance_sessions" (
+    "id" UUID NOT NULL,
+    "teachingAssignmentId" UUID NOT NULL,
+    "teacherId" UUID NOT NULL,
+    "periodId" UUID NOT NULL,
+    "dateBs" VARCHAR(10) NOT NULL,
+    "isLocked" BOOLEAN NOT NULL DEFAULT false,
+    "lockedAt" TIMESTAMP(3),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "attendance_sessions_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "student_attendances" (
+    "id" UUID NOT NULL,
+    "sessionId" UUID NOT NULL,
+    "studentId" UUID NOT NULL,
+    "statusId" UUID NOT NULL,
+    "remarks" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "student_attendances_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "employee_attendances" (
+    "id" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "dateBs" VARCHAR(10) NOT NULL,
+    "statusId" UUID NOT NULL,
+    "leaveTypeId" UUID,
+    "remarks" TEXT,
+    "isLocked" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "employee_attendances_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "exams" (
+    "id" UUID NOT NULL,
+    "batchTermId" UUID NOT NULL,
+    "examTypeId" UUID NOT NULL,
+    "name" TEXT NOT NULL,
+    "startDateBs" VARCHAR(10),
+    "endDateBs" VARCHAR(10),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "exams_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "exam_subjects" (
+    "id" UUID NOT NULL,
+    "examId" UUID NOT NULL,
+    "batchTermSubjectId" UUID NOT NULL,
+    "fullMarks" DECIMAL(6,2) NOT NULL DEFAULT 100,
+    "passMarks" DECIMAL(6,2) NOT NULL DEFAULT 40,
+    "examDateBs" VARCHAR(10),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "exam_subjects_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "exam_marks" (
+    "id" UUID NOT NULL,
+    "examSubjectId" UUID NOT NULL,
+    "studentId" UUID NOT NULL,
+    "marksObtained" DECIMAL(6,2),
+    "isAbsent" BOOLEAN NOT NULL DEFAULT false,
+    "remarks" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "exam_marks_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "results" (
+    "id" UUID NOT NULL,
+    "studentId" UUID NOT NULL,
+    "examId" UUID NOT NULL,
+    "totalMarks" DECIMAL(8,2) NOT NULL,
+    "fullMarks" DECIMAL(8,2) NOT NULL,
+    "percentage" DECIMAL(5,2) NOT NULL,
+    "totalCreditHour" DECIMAL(5,1) NOT NULL,
+    "gpa" DECIMAL(3,2) NOT NULL,
+    "cgpa" DECIMAL(3,2),
+    "isPassed" BOOLEAN NOT NULL,
+    "workflowStatusId" UUID NOT NULL,
+    "submittedAt" TIMESTAMP(3),
+    "approvedBy" UUID,
+    "approvedAt" TIMESTAMP(3),
+    "publishedAt" TIMESTAMP(3),
+    "remarks" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "results_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "result_subjects" (
+    "id" UUID NOT NULL,
+    "resultId" UUID NOT NULL,
+    "examSubjectId" UUID NOT NULL,
+    "marksObtained" DECIMAL(6,2) NOT NULL,
+    "fullMarks" DECIMAL(6,2) NOT NULL,
+    "creditHour" DECIMAL(4,1) NOT NULL,
+    "gradeScaleId" UUID NOT NULL,
+    "gradePoint" DECIMAL(3,2) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "result_subjects_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_structures" (
+    "id" UUID NOT NULL,
+    "courseId" UUID NOT NULL,
+    "batchId" UUID,
+    "name" TEXT NOT NULL,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "fee_structures_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_structure_items" (
+    "id" UUID NOT NULL,
+    "feeStructureId" UUID NOT NULL,
+    "feeHeadId" UUID NOT NULL,
+    "termNumber" INTEGER,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "fee_structure_items_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "student_fees" (
+    "id" UUID NOT NULL,
+    "studentId" UUID NOT NULL,
+    "feeStructureId" UUID,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "student_fees_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "student_fee_items" (
+    "id" UUID NOT NULL,
+    "studentFeeId" UUID NOT NULL,
+    "feeHeadId" UUID NOT NULL,
+    "feeStructureItemId" UUID,
+    "termNumber" INTEGER,
+    "description" TEXT,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "discountAmount" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "discountReason" TEXT,
+    "netAmount" DECIMAL(14,2) NOT NULL,
+    "isSkipped" BOOLEAN NOT NULL DEFAULT false,
+    "skipReason" TEXT,
+    "dueDateBs" VARCHAR(10),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "student_fee_items_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_installments" (
+    "id" UUID NOT NULL,
+    "studentFeeItemId" UUID NOT NULL,
+    "installmentNo" INTEGER NOT NULL,
+    "dueDateBs" VARCHAR(10) NOT NULL,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "fee_installments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_payments" (
+    "id" UUID NOT NULL,
+    "receiptNo" TEXT NOT NULL,
+    "studentId" UUID NOT NULL,
+    "fiscalYearId" UUID NOT NULL,
+    "paymentDateBs" VARCHAR(10) NOT NULL,
+    "totalAmount" DECIMAL(14,2) NOT NULL,
+    "remarks" TEXT,
+    "isCancelled" BOOLEAN NOT NULL DEFAULT false,
+    "cancelledAt" TIMESTAMP(3),
+    "cancelReason" TEXT,
+    "journalEntryId" UUID,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "fee_payments_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_payment_method_lines" (
+    "id" UUID NOT NULL,
+    "feePaymentId" UUID NOT NULL,
+    "paymentMethodId" UUID NOT NULL,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "referenceNo" TEXT,
+    "bankName" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "fee_payment_method_lines_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fee_payment_allocations" (
+    "id" UUID NOT NULL,
+    "feePaymentId" UUID NOT NULL,
+    "studentFeeItemId" UUID NOT NULL,
+    "feeInstallmentId" UUID,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "fee_payment_allocations_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "fiscal_years" (
+    "id" UUID NOT NULL,
+    "name" TEXT NOT NULL,
+    "startDateBs" VARCHAR(10) NOT NULL,
+    "endDateBs" VARCHAR(10) NOT NULL,
+    "isCurrent" BOOLEAN NOT NULL DEFAULT false,
+    "isClosed" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "fiscal_years_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "accounts" (
+    "id" UUID NOT NULL,
+    "code" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "accountTypeId" UUID NOT NULL,
+    "parentId" UUID,
+    "isGroup" BOOLEAN NOT NULL DEFAULT false,
+    "isSystem" BOOLEAN NOT NULL DEFAULT false,
+    "isActive" BOOLEAN NOT NULL DEFAULT true,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "accounts_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "journal_entries" (
+    "id" UUID NOT NULL,
+    "entryNo" TEXT NOT NULL,
+    "fiscalYearId" UUID NOT NULL,
+    "dateBs" VARCHAR(10) NOT NULL,
+    "description" TEXT NOT NULL,
+    "sourceId" UUID NOT NULL,
+    "sourceRefId" UUID,
+    "isManual" BOOLEAN NOT NULL DEFAULT false,
+    "isBackdated" BOOLEAN NOT NULL DEFAULT false,
+    "isReversed" BOOLEAN NOT NULL DEFAULT false,
+    "reversalOfId" UUID,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "journal_entries_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "journal_lines" (
+    "id" UUID NOT NULL,
+    "journalEntryId" UUID NOT NULL,
+    "accountId" UUID NOT NULL,
+    "debit" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "credit" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "description" TEXT,
+    "studentId" UUID,
+    "employeeId" UUID,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "journal_lines_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "salary_structures" (
+    "id" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "basicSalary" DECIMAL(14,2) NOT NULL,
+    "effectiveFromBs" VARCHAR(10) NOT NULL,
+    "effectiveToBs" VARCHAR(10),
+    "remarks" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "salary_structures_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "salary_structure_items" (
+    "id" UUID NOT NULL,
+    "salaryStructureId" UUID NOT NULL,
+    "componentId" UUID NOT NULL,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "isPercentOfBasic" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "salary_structure_items_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "tax_slabs" (
+    "id" UUID NOT NULL,
+    "fiscalYearId" UUID NOT NULL,
+    "isCouple" BOOLEAN NOT NULL DEFAULT false,
+    "fromAmount" DECIMAL(14,2) NOT NULL,
+    "toAmount" DECIMAL(14,2),
+    "ratePercent" DECIMAL(5,2) NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "tax_slabs_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "payrolls" (
+    "id" UUID NOT NULL,
+    "fiscalYearId" UUID NOT NULL,
+    "yearBs" INTEGER NOT NULL,
+    "monthBs" INTEGER NOT NULL,
+    "totalDays" INTEGER NOT NULL,
+    "workflowStatusId" UUID NOT NULL,
+    "submittedAt" TIMESTAMP(3),
+    "approvedBy" UUID,
+    "approvedAt" TIMESTAMP(3),
+    "paidDateBs" VARCHAR(10),
+    "journalEntryId" UUID,
+    "remarks" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "payrolls_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "payslips" (
+    "id" UUID NOT NULL,
+    "payslipNo" TEXT NOT NULL,
+    "payrollId" UUID NOT NULL,
+    "employeeId" UUID NOT NULL,
+    "presentDays" DECIMAL(5,2) NOT NULL,
+    "halfDays" INTEGER NOT NULL DEFAULT 0,
+    "paidLeaveDays" INTEGER NOT NULL DEFAULT 0,
+    "unpaidLeaveDays" INTEGER NOT NULL DEFAULT 0,
+    "absentDays" INTEGER NOT NULL DEFAULT 0,
+    "basicSalary" DECIMAL(14,2) NOT NULL,
+    "attendanceDeduction" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "totalAllowance" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "teachingPay" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "grossPay" DECIMAL(14,2) NOT NULL,
+    "totalDeduction" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "taxAmount" DECIMAL(14,2) NOT NULL DEFAULT 0,
+    "netPay" DECIMAL(14,2) NOT NULL,
+    "paymentMethodId" UUID,
+    "paidDateBs" VARCHAR(10),
+    "pdfUrl" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "payslips_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "payslip_items" (
+    "id" UUID NOT NULL,
+    "payslipId" UUID NOT NULL,
+    "componentId" UUID,
+    "description" TEXT NOT NULL,
+    "amount" DECIMAL(14,2) NOT NULL,
+    "isDeduction" BOOLEAN NOT NULL DEFAULT false,
+    "isEmployerContribution" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+
+    CONSTRAINT "payslip_items_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "notices" (
+    "id" UUID NOT NULL,
+    "title" TEXT NOT NULL,
+    "body" TEXT NOT NULL,
+    "attachmentUrl" TEXT,
+    "isPinned" BOOLEAN NOT NULL DEFAULT false,
+    "isPublished" BOOLEAN NOT NULL DEFAULT false,
+    "publishedAt" TIMESTAMP(3),
+    "expiresOnBs" VARCHAR(10),
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "notices_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "notice_targets" (
+    "id" UUID NOT NULL,
+    "noticeId" UUID NOT NULL,
+    "role" "Role",
+    "batchId" UUID,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "notice_targets_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "settings" (
+    "id" UUID NOT NULL,
+    "key" TEXT NOT NULL,
+    "value" TEXT NOT NULL,
+    "description" TEXT,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+    "createdBy" UUID,
+    "updatedBy" UUID,
+    "deletedAt" TIMESTAMP(3),
+
+    CONSTRAINT "settings_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_username_key" ON "users"("username");
+
+-- CreateIndex
+CREATE INDEX "users_id_idx" ON "users"("id");
+
+-- CreateIndex
+CREATE INDEX "otps_userId_idx" ON "otps"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "employees_userId_key" ON "employees"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "employees_employeeCode_key" ON "employees"("employeeCode");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "principals_employeeId_key" ON "principals"("employeeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "accountants_employeeId_key" ON "accountants"("employeeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "staffs_employeeId_key" ON "staffs"("employeeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "teachers_employeeId_key" ON "teachers"("employeeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "students_userId_key" ON "students"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "students_universityRegNo_key" ON "students"("universityRegNo");
+
+-- CreateIndex
+CREATE INDEX "students_batchId_idx" ON "students"("batchId");
+
+-- CreateIndex
+CREATE INDEX "students_approvalStatusId_idx" ON "students"("approvalStatusId");
+
+-- CreateIndex
+CREATE INDEX "students_studentStatusId_idx" ON "students"("studentStatusId");
+
+-- CreateIndex
+CREATE INDEX "guardians_studentId_idx" ON "guardians"("studentId");
+
+-- CreateIndex
+CREATE INDEX "guardians_relationId_idx" ON "guardians"("relationId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "guardian_relations_code_key" ON "guardian_relations"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "course_systems_code_key" ON "course_systems"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "student_statuses_code_key" ON "student_statuses"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "workflow_statuses_code_key" ON "workflow_statuses"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "attendance_statuses_code_key" ON "attendance_statuses"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "leave_types_code_key" ON "leave_types"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "periods_periodNumber_key" ON "periods"("periodNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "exam_types_code_key" ON "exam_types"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "grade_scales_grade_key" ON "grade_scales"("grade");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "fee_heads_code_key" ON "fee_heads"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payment_methods_code_key" ON "payment_methods"("code");
+
+-- CreateIndex
+CREATE INDEX "payment_methods_accountId_idx" ON "payment_methods"("accountId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "account_types_code_key" ON "account_types"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "journal_sources_code_key" ON "journal_sources"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "salary_components_code_key" ON "salary_components"("code");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "courses_code_key" ON "courses"("code");
+
+-- CreateIndex
+CREATE INDEX "courses_courseSystemId_idx" ON "courses"("courseSystemId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "batches_courseId_name_key" ON "batches"("courseId", "name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "batch_terms_batchId_termNumber_key" ON "batch_terms"("batchId", "termNumber");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "subjects_code_key" ON "subjects"("code");
+
+-- CreateIndex
+CREATE INDEX "batch_term_subjects_subjectId_idx" ON "batch_term_subjects"("subjectId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "batch_term_subjects_batchTermId_subjectId_key" ON "batch_term_subjects"("batchTermId", "subjectId");
+
+-- CreateIndex
+CREATE INDEX "teaching_assignments_batchTermSubjectId_idx" ON "teaching_assignments"("batchTermSubjectId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "teaching_assignments_teacherId_batchTermSubjectId_key" ON "teaching_assignments"("teacherId", "batchTermSubjectId");
+
+-- CreateIndex
+CREATE INDEX "teacher_batch_pays_teachingAssignmentId_idx" ON "teacher_batch_pays"("teachingAssignmentId");
+
+-- CreateIndex
+CREATE INDEX "attendance_sessions_dateBs_idx" ON "attendance_sessions"("dateBs");
+
+-- CreateIndex
+CREATE INDEX "attendance_sessions_teacherId_idx" ON "attendance_sessions"("teacherId");
+
+-- CreateIndex
+CREATE INDEX "attendance_sessions_periodId_idx" ON "attendance_sessions"("periodId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "attendance_sessions_teachingAssignmentId_periodId_dateBs_key" ON "attendance_sessions"("teachingAssignmentId", "periodId", "dateBs");
+
+-- CreateIndex
+CREATE INDEX "student_attendances_studentId_idx" ON "student_attendances"("studentId");
+
+-- CreateIndex
+CREATE INDEX "student_attendances_statusId_idx" ON "student_attendances"("statusId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "student_attendances_sessionId_studentId_key" ON "student_attendances"("sessionId", "studentId");
+
+-- CreateIndex
+CREATE INDEX "employee_attendances_dateBs_idx" ON "employee_attendances"("dateBs");
+
+-- CreateIndex
+CREATE INDEX "employee_attendances_statusId_idx" ON "employee_attendances"("statusId");
+
+-- CreateIndex
+CREATE INDEX "employee_attendances_leaveTypeId_idx" ON "employee_attendances"("leaveTypeId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "employee_attendances_employeeId_dateBs_key" ON "employee_attendances"("employeeId", "dateBs");
+
+-- CreateIndex
+CREATE INDEX "exams_batchTermId_idx" ON "exams"("batchTermId");
+
+-- CreateIndex
+CREATE INDEX "exams_examTypeId_idx" ON "exams"("examTypeId");
+
+-- CreateIndex
+CREATE INDEX "exam_subjects_batchTermSubjectId_idx" ON "exam_subjects"("batchTermSubjectId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "exam_subjects_examId_batchTermSubjectId_key" ON "exam_subjects"("examId", "batchTermSubjectId");
+
+-- CreateIndex
+CREATE INDEX "exam_marks_studentId_idx" ON "exam_marks"("studentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "exam_marks_examSubjectId_studentId_key" ON "exam_marks"("examSubjectId", "studentId");
+
+-- CreateIndex
+CREATE INDEX "results_examId_idx" ON "results"("examId");
+
+-- CreateIndex
+CREATE INDEX "results_workflowStatusId_idx" ON "results"("workflowStatusId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "results_studentId_examId_key" ON "results"("studentId", "examId");
+
+-- CreateIndex
+CREATE INDEX "result_subjects_examSubjectId_idx" ON "result_subjects"("examSubjectId");
+
+-- CreateIndex
+CREATE INDEX "result_subjects_gradeScaleId_idx" ON "result_subjects"("gradeScaleId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "result_subjects_resultId_examSubjectId_key" ON "result_subjects"("resultId", "examSubjectId");
+
+-- CreateIndex
+CREATE INDEX "fee_structures_courseId_idx" ON "fee_structures"("courseId");
+
+-- CreateIndex
+CREATE INDEX "fee_structures_batchId_idx" ON "fee_structures"("batchId");
+
+-- CreateIndex
+CREATE INDEX "fee_structure_items_feeStructureId_idx" ON "fee_structure_items"("feeStructureId");
+
+-- CreateIndex
+CREATE INDEX "fee_structure_items_feeHeadId_idx" ON "fee_structure_items"("feeHeadId");
+
+-- CreateIndex
+CREATE INDEX "student_fees_studentId_idx" ON "student_fees"("studentId");
+
+-- CreateIndex
+CREATE INDEX "student_fees_feeStructureId_idx" ON "student_fees"("feeStructureId");
+
+-- CreateIndex
+CREATE INDEX "student_fee_items_studentFeeId_idx" ON "student_fee_items"("studentFeeId");
+
+-- CreateIndex
+CREATE INDEX "student_fee_items_feeHeadId_idx" ON "student_fee_items"("feeHeadId");
+
+-- CreateIndex
+CREATE INDEX "student_fee_items_feeStructureItemId_idx" ON "student_fee_items"("feeStructureItemId");
+
+-- CreateIndex
+CREATE INDEX "student_fee_items_dueDateBs_idx" ON "student_fee_items"("dueDateBs");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "fee_installments_studentFeeItemId_installmentNo_key" ON "fee_installments"("studentFeeItemId", "installmentNo");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "fee_payments_receiptNo_key" ON "fee_payments"("receiptNo");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "fee_payments_journalEntryId_key" ON "fee_payments"("journalEntryId");
+
+-- CreateIndex
+CREATE INDEX "fee_payments_studentId_idx" ON "fee_payments"("studentId");
+
+-- CreateIndex
+CREATE INDEX "fee_payments_fiscalYearId_idx" ON "fee_payments"("fiscalYearId");
+
+-- CreateIndex
+CREATE INDEX "fee_payments_paymentDateBs_idx" ON "fee_payments"("paymentDateBs");
+
+-- CreateIndex
+CREATE INDEX "fee_payment_method_lines_feePaymentId_idx" ON "fee_payment_method_lines"("feePaymentId");
+
+-- CreateIndex
+CREATE INDEX "fee_payment_method_lines_paymentMethodId_idx" ON "fee_payment_method_lines"("paymentMethodId");
+
+-- CreateIndex
+CREATE INDEX "fee_payment_allocations_feePaymentId_idx" ON "fee_payment_allocations"("feePaymentId");
+
+-- CreateIndex
+CREATE INDEX "fee_payment_allocations_studentFeeItemId_idx" ON "fee_payment_allocations"("studentFeeItemId");
+
+-- CreateIndex
+CREATE INDEX "fee_payment_allocations_feeInstallmentId_idx" ON "fee_payment_allocations"("feeInstallmentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "fiscal_years_name_key" ON "fiscal_years"("name");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "accounts_code_key" ON "accounts"("code");
+
+-- CreateIndex
+CREATE INDEX "accounts_accountTypeId_idx" ON "accounts"("accountTypeId");
+
+-- CreateIndex
+CREATE INDEX "accounts_parentId_idx" ON "accounts"("parentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "journal_entries_entryNo_key" ON "journal_entries"("entryNo");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "journal_entries_reversalOfId_key" ON "journal_entries"("reversalOfId");
+
+-- CreateIndex
+CREATE INDEX "journal_entries_fiscalYearId_dateBs_idx" ON "journal_entries"("fiscalYearId", "dateBs");
+
+-- CreateIndex
+CREATE INDEX "journal_entries_sourceId_idx" ON "journal_entries"("sourceId");
+
+-- CreateIndex
+CREATE INDEX "journal_entries_sourceRefId_idx" ON "journal_entries"("sourceRefId");
+
+-- CreateIndex
+CREATE INDEX "journal_lines_journalEntryId_idx" ON "journal_lines"("journalEntryId");
+
+-- CreateIndex
+CREATE INDEX "journal_lines_accountId_idx" ON "journal_lines"("accountId");
+
+-- CreateIndex
+CREATE INDEX "journal_lines_studentId_idx" ON "journal_lines"("studentId");
+
+-- CreateIndex
+CREATE INDEX "journal_lines_employeeId_idx" ON "journal_lines"("employeeId");
+
+-- CreateIndex
+CREATE INDEX "salary_structures_employeeId_effectiveFromBs_idx" ON "salary_structures"("employeeId", "effectiveFromBs");
+
+-- CreateIndex
+CREATE INDEX "salary_structure_items_componentId_idx" ON "salary_structure_items"("componentId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "salary_structure_items_salaryStructureId_componentId_key" ON "salary_structure_items"("salaryStructureId", "componentId");
+
+-- CreateIndex
+CREATE INDEX "tax_slabs_fiscalYearId_idx" ON "tax_slabs"("fiscalYearId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payrolls_journalEntryId_key" ON "payrolls"("journalEntryId");
+
+-- CreateIndex
+CREATE INDEX "payrolls_fiscalYearId_idx" ON "payrolls"("fiscalYearId");
+
+-- CreateIndex
+CREATE INDEX "payrolls_workflowStatusId_idx" ON "payrolls"("workflowStatusId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payrolls_yearBs_monthBs_key" ON "payrolls"("yearBs", "monthBs");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payslips_payslipNo_key" ON "payslips"("payslipNo");
+
+-- CreateIndex
+CREATE INDEX "payslips_employeeId_idx" ON "payslips"("employeeId");
+
+-- CreateIndex
+CREATE INDEX "payslips_paymentMethodId_idx" ON "payslips"("paymentMethodId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "payslips_payrollId_employeeId_key" ON "payslips"("payrollId", "employeeId");
+
+-- CreateIndex
+CREATE INDEX "payslip_items_payslipId_idx" ON "payslip_items"("payslipId");
+
+-- CreateIndex
+CREATE INDEX "payslip_items_componentId_idx" ON "payslip_items"("componentId");
+
+-- CreateIndex
+CREATE INDEX "notice_targets_noticeId_idx" ON "notice_targets"("noticeId");
+
+-- CreateIndex
+CREATE INDEX "notice_targets_batchId_idx" ON "notice_targets"("batchId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "settings_key_key" ON "settings"("key");
+
+-- AddForeignKey
+ALTER TABLE "otps" ADD CONSTRAINT "otps_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "employees" ADD CONSTRAINT "employees_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "principals" ADD CONSTRAINT "principals_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "accountants" ADD CONSTRAINT "accountants_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "staffs" ADD CONSTRAINT "staffs_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "teachers" ADD CONSTRAINT "teachers_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "students" ADD CONSTRAINT "students_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "students" ADD CONSTRAINT "students_batchId_fkey" FOREIGN KEY ("batchId") REFERENCES "batches"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "students" ADD CONSTRAINT "students_studentStatusId_fkey" FOREIGN KEY ("studentStatusId") REFERENCES "student_statuses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "students" ADD CONSTRAINT "students_approvalStatusId_fkey" FOREIGN KEY ("approvalStatusId") REFERENCES "workflow_statuses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "guardians" ADD CONSTRAINT "guardians_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "guardians" ADD CONSTRAINT "guardians_relationId_fkey" FOREIGN KEY ("relationId") REFERENCES "guardian_relations"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payment_methods" ADD CONSTRAINT "payment_methods_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "courses" ADD CONSTRAINT "courses_courseSystemId_fkey" FOREIGN KEY ("courseSystemId") REFERENCES "course_systems"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "batches" ADD CONSTRAINT "batches_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "batch_terms" ADD CONSTRAINT "batch_terms_batchId_fkey" FOREIGN KEY ("batchId") REFERENCES "batches"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "batch_term_subjects" ADD CONSTRAINT "batch_term_subjects_batchTermId_fkey" FOREIGN KEY ("batchTermId") REFERENCES "batch_terms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "batch_term_subjects" ADD CONSTRAINT "batch_term_subjects_subjectId_fkey" FOREIGN KEY ("subjectId") REFERENCES "subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "teaching_assignments" ADD CONSTRAINT "teaching_assignments_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "teachers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "teaching_assignments" ADD CONSTRAINT "teaching_assignments_batchTermSubjectId_fkey" FOREIGN KEY ("batchTermSubjectId") REFERENCES "batch_term_subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "teacher_batch_pays" ADD CONSTRAINT "teacher_batch_pays_teachingAssignmentId_fkey" FOREIGN KEY ("teachingAssignmentId") REFERENCES "teaching_assignments"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "attendance_sessions" ADD CONSTRAINT "attendance_sessions_teachingAssignmentId_fkey" FOREIGN KEY ("teachingAssignmentId") REFERENCES "teaching_assignments"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "attendance_sessions" ADD CONSTRAINT "attendance_sessions_teacherId_fkey" FOREIGN KEY ("teacherId") REFERENCES "teachers"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "attendance_sessions" ADD CONSTRAINT "attendance_sessions_periodId_fkey" FOREIGN KEY ("periodId") REFERENCES "periods"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_attendances" ADD CONSTRAINT "student_attendances_sessionId_fkey" FOREIGN KEY ("sessionId") REFERENCES "attendance_sessions"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_attendances" ADD CONSTRAINT "student_attendances_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_attendances" ADD CONSTRAINT "student_attendances_statusId_fkey" FOREIGN KEY ("statusId") REFERENCES "attendance_statuses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "employee_attendances" ADD CONSTRAINT "employee_attendances_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "employee_attendances" ADD CONSTRAINT "employee_attendances_statusId_fkey" FOREIGN KEY ("statusId") REFERENCES "attendance_statuses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "employee_attendances" ADD CONSTRAINT "employee_attendances_leaveTypeId_fkey" FOREIGN KEY ("leaveTypeId") REFERENCES "leave_types"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exams" ADD CONSTRAINT "exams_batchTermId_fkey" FOREIGN KEY ("batchTermId") REFERENCES "batch_terms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exams" ADD CONSTRAINT "exams_examTypeId_fkey" FOREIGN KEY ("examTypeId") REFERENCES "exam_types"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exam_subjects" ADD CONSTRAINT "exam_subjects_examId_fkey" FOREIGN KEY ("examId") REFERENCES "exams"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exam_subjects" ADD CONSTRAINT "exam_subjects_batchTermSubjectId_fkey" FOREIGN KEY ("batchTermSubjectId") REFERENCES "batch_term_subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exam_marks" ADD CONSTRAINT "exam_marks_examSubjectId_fkey" FOREIGN KEY ("examSubjectId") REFERENCES "exam_subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "exam_marks" ADD CONSTRAINT "exam_marks_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "results" ADD CONSTRAINT "results_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "results" ADD CONSTRAINT "results_examId_fkey" FOREIGN KEY ("examId") REFERENCES "exams"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "results" ADD CONSTRAINT "results_workflowStatusId_fkey" FOREIGN KEY ("workflowStatusId") REFERENCES "workflow_statuses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "result_subjects" ADD CONSTRAINT "result_subjects_resultId_fkey" FOREIGN KEY ("resultId") REFERENCES "results"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "result_subjects" ADD CONSTRAINT "result_subjects_examSubjectId_fkey" FOREIGN KEY ("examSubjectId") REFERENCES "exam_subjects"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "result_subjects" ADD CONSTRAINT "result_subjects_gradeScaleId_fkey" FOREIGN KEY ("gradeScaleId") REFERENCES "grade_scales"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_structures" ADD CONSTRAINT "fee_structures_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_structures" ADD CONSTRAINT "fee_structures_batchId_fkey" FOREIGN KEY ("batchId") REFERENCES "batches"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_structure_items" ADD CONSTRAINT "fee_structure_items_feeStructureId_fkey" FOREIGN KEY ("feeStructureId") REFERENCES "fee_structures"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_structure_items" ADD CONSTRAINT "fee_structure_items_feeHeadId_fkey" FOREIGN KEY ("feeHeadId") REFERENCES "fee_heads"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_fees" ADD CONSTRAINT "student_fees_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_fees" ADD CONSTRAINT "student_fees_feeStructureId_fkey" FOREIGN KEY ("feeStructureId") REFERENCES "fee_structures"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_fee_items" ADD CONSTRAINT "student_fee_items_studentFeeId_fkey" FOREIGN KEY ("studentFeeId") REFERENCES "student_fees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_fee_items" ADD CONSTRAINT "student_fee_items_feeHeadId_fkey" FOREIGN KEY ("feeHeadId") REFERENCES "fee_heads"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "student_fee_items" ADD CONSTRAINT "student_fee_items_feeStructureItemId_fkey" FOREIGN KEY ("feeStructureItemId") REFERENCES "fee_structure_items"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_installments" ADD CONSTRAINT "fee_installments_studentFeeItemId_fkey" FOREIGN KEY ("studentFeeItemId") REFERENCES "student_fee_items"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payments" ADD CONSTRAINT "fee_payments_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payments" ADD CONSTRAINT "fee_payments_fiscalYearId_fkey" FOREIGN KEY ("fiscalYearId") REFERENCES "fiscal_years"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payments" ADD CONSTRAINT "fee_payments_journalEntryId_fkey" FOREIGN KEY ("journalEntryId") REFERENCES "journal_entries"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payment_method_lines" ADD CONSTRAINT "fee_payment_method_lines_feePaymentId_fkey" FOREIGN KEY ("feePaymentId") REFERENCES "fee_payments"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payment_method_lines" ADD CONSTRAINT "fee_payment_method_lines_paymentMethodId_fkey" FOREIGN KEY ("paymentMethodId") REFERENCES "payment_methods"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payment_allocations" ADD CONSTRAINT "fee_payment_allocations_feePaymentId_fkey" FOREIGN KEY ("feePaymentId") REFERENCES "fee_payments"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payment_allocations" ADD CONSTRAINT "fee_payment_allocations_studentFeeItemId_fkey" FOREIGN KEY ("studentFeeItemId") REFERENCES "student_fee_items"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "fee_payment_allocations" ADD CONSTRAINT "fee_payment_allocations_feeInstallmentId_fkey" FOREIGN KEY ("feeInstallmentId") REFERENCES "fee_installments"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "accounts" ADD CONSTRAINT "accounts_accountTypeId_fkey" FOREIGN KEY ("accountTypeId") REFERENCES "account_types"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "accounts" ADD CONSTRAINT "accounts_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "accounts"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_entries" ADD CONSTRAINT "journal_entries_fiscalYearId_fkey" FOREIGN KEY ("fiscalYearId") REFERENCES "fiscal_years"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_entries" ADD CONSTRAINT "journal_entries_sourceId_fkey" FOREIGN KEY ("sourceId") REFERENCES "journal_sources"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_entries" ADD CONSTRAINT "journal_entries_reversalOfId_fkey" FOREIGN KEY ("reversalOfId") REFERENCES "journal_entries"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_lines" ADD CONSTRAINT "journal_lines_journalEntryId_fkey" FOREIGN KEY ("journalEntryId") REFERENCES "journal_entries"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_lines" ADD CONSTRAINT "journal_lines_accountId_fkey" FOREIGN KEY ("accountId") REFERENCES "accounts"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_lines" ADD CONSTRAINT "journal_lines_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "students"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "journal_lines" ADD CONSTRAINT "journal_lines_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "salary_structures" ADD CONSTRAINT "salary_structures_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "salary_structure_items" ADD CONSTRAINT "salary_structure_items_salaryStructureId_fkey" FOREIGN KEY ("salaryStructureId") REFERENCES "salary_structures"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "salary_structure_items" ADD CONSTRAINT "salary_structure_items_componentId_fkey" FOREIGN KEY ("componentId") REFERENCES "salary_components"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "tax_slabs" ADD CONSTRAINT "tax_slabs_fiscalYearId_fkey" FOREIGN KEY ("fiscalYearId") REFERENCES "fiscal_years"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payrolls" ADD CONSTRAINT "payrolls_fiscalYearId_fkey" FOREIGN KEY ("fiscalYearId") REFERENCES "fiscal_years"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payrolls" ADD CONSTRAINT "payrolls_workflowStatusId_fkey" FOREIGN KEY ("workflowStatusId") REFERENCES "workflow_statuses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payrolls" ADD CONSTRAINT "payrolls_journalEntryId_fkey" FOREIGN KEY ("journalEntryId") REFERENCES "journal_entries"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payslips" ADD CONSTRAINT "payslips_payrollId_fkey" FOREIGN KEY ("payrollId") REFERENCES "payrolls"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payslips" ADD CONSTRAINT "payslips_employeeId_fkey" FOREIGN KEY ("employeeId") REFERENCES "employees"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payslips" ADD CONSTRAINT "payslips_paymentMethodId_fkey" FOREIGN KEY ("paymentMethodId") REFERENCES "payment_methods"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payslip_items" ADD CONSTRAINT "payslip_items_payslipId_fkey" FOREIGN KEY ("payslipId") REFERENCES "payslips"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "payslip_items" ADD CONSTRAINT "payslip_items_componentId_fkey" FOREIGN KEY ("componentId") REFERENCES "salary_components"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "notice_targets" ADD CONSTRAINT "notice_targets_noticeId_fkey" FOREIGN KEY ("noticeId") REFERENCES "notices"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "notice_targets" ADD CONSTRAINT "notice_targets_batchId_fkey" FOREIGN KEY ("batchId") REFERENCES "batches"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+
+```
+
+---
+
+### <a id="📄-prisma-migrations-migration-lock-toml"></a>📄 `prisma/migrations/migration_lock.toml`
+
+**File Info:**
+- **Size**: 66 B
+- **Extension**: `.toml`
+- **Language**: `text`
+- **Location**: `prisma/migrations/migration_lock.toml`
+- **Relative Path**: `prisma/migrations`
+- **Created**: 2026-10-01 08:59:14 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 08:59:14 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `30a5397c3f45b2bd24b58c5f0fb5e364`
+- **SHA256**: `82205d7850c48b930e3107be7f86e3c0176cc9f683adfb56af7d625f417c8592`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```text
+# Please do not edit this file manually
+provider = "postgresql"
+
+```
+
+---
 
 ## 🚫 Binary/Excluded Files
 
@@ -273,15 +1980,15 @@ The following files were not included in the text content:
 ### <a id="📄-src-types-type-ts"></a>📄 `src/@types/type.ts`
 
 **File Info:**
-- **Size**: 77 B
+- **Size**: 128 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/@types/type.ts`
 - **Relative Path**: `src/@types`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `cf9157ce5bf990d4cd334dee32da68f8`
-- **SHA256**: `c85fab23a656f085cac0e3739f5e998c9de34c078ae271f0d87a07fb75fef43a`
+- **Modified**: 2026-10-09 17:53:37 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5253a65cc90870820278467a77f51d48`
+- **SHA256**: `e919f51c4c6fc744c08222bdecd9328d99b52559db13c1e401758b974e391fc2`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -289,7 +1996,7 @@ The following files were not included in the text content:
 ```typescript
 export type T_Context = {
   userId: string;
-  role: "User" | "Admin";
+  role: "USER" | "ADMIN" | "PRINCIPAL" | "ACCOUNTANT" | "TEACHER" | "STAFF";
 };
 
 ```
@@ -382,15 +2089,15 @@ export class ValidationError extends Error {
 ### <a id="📄-src-generated-prisma-internal-class-ts"></a>📄 `src/generated/prisma/internal/class.ts`
 
 **File Info:**
-- **Size**: 465.8 KB
+- **Size**: 465.79 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/internal/class.ts`
 - **Relative Path**: `src/generated/prisma/internal`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `0464a52f0e55708a8b292c78b55780e2`
-- **SHA256**: `22074632903fd6380e9958663072b98ebee264c924144bd91991cecb6fe74ad2`
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `10f8ecc259206ab0c28f067b557dcb5b`
+- **SHA256**: `7ac1fa95e8154e46631ec183e4e1d8099a019585dc47b9fe717542da6a38b440`
 - **Encoding**: UTF-8
 
 **File code content:**
@@ -418,7 +2125,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.8.0",
   "engineVersion": "3c6e192761c0362d496ed980de936e2f3cebcd3a",
   "activeProvider": "postgresql",
-  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum Gender {\n  MALE\n  FEMALE\n  OTHERS\n}\n\n// =====================================================================\n// College Management System - Prisma schema (PostgreSQL, single college)\n// ---------------------------------------------------------------------\n// Conventions\n//  - ids: uuid | models: PascalCase | fields: camelCase | tables: snake_case (@@map)\n//  - Audit fields on every table: createdAt, updatedAt, createdBy, updatedBy, deletedAt\n//    (createdBy / updatedBy = User.id stored as plain uuid, no FK, so no relation noise)\n//  - Finance tables (journal, payments) are APPEND-ONLY: no deletedAt, corrections by reversal\n//  - Business dates are stored in BS as \"YYYY-MM-DD\" strings (zero padded, so they sort correctly)\n//  - Money = Decimal(14,2)\n//  - Only Role is a Prisma enum, everything else is a lookup table\n//  - \"Class\" (BATCH-YEAR-COURSE) = Batch + BatchTerm + Course, label built in app:\n//      `${batch.name}-${term.name}-${course.code}`   e.g. 2080-Semester 3-BIT\n//  - Model order: User + people first (easy to start CRUD), then lookups, then modules\n// =====================================================================\n\nenum Role {\n  ADMIN\n  PRINCIPAL\n  ACCOUNTANT\n  TEACHER\n  STAFF\n  STUDENT\n}\n\n// =====================================================================\n// 1. USERS AND PEOPLE\n// =====================================================================\n\nmodel User {\n  id               String    @id @default(uuid()) @db.Uuid\n  email            String    @unique\n  username         String?   @unique\n  passwordHash     String\n  role             Role\n  isAdmin          Boolean   @default(false)\n  isActive         Boolean   @default(true)\n  otps             Otp[]\n  isEmailVerified  Boolean   @default(false)\n  lastLoginAt      DateTime?\n  failedLoginCount Int       @default(0)\n  lockedUntil      DateTime?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  employee Employee?\n  student  Student?\n\n  @@index([role])\n  @@map(\"users\")\n}\n\nmodel Otp {\n  id        String   @id @default(uuid()) @db.Uuid\n  userId    String   @db.Uuid\n  code      String\n  expiresAt DateTime\n  createdAt DateTime @default(now())\n\n  user User @relation(fields: [userId], references: [id])\n\n  @@index([userId])\n  @@map(\"otps\")\n}\n\n// Common HR data for Principal / Teacher / Staff / Accountant.\n// Attendance, salary and payroll all point here (one FK instead of four).\nmodel Employee {\n  id               String    @id @default(uuid()) @db.Uuid\n  userId           String?   @unique @db.Uuid\n  employeeCode     String    @unique\n  firstName        String\n  middleName       String?\n  lastName         String\n  dobBs            String?   @db.VarChar(10)\n  phone            String?\n  email            String?\n  permanentAddress String?\n  temporaryAddress String?\n  photoUrl         String?\n  designation      String\n  joinDateBs       String    @db.VarChar(10)\n  leaveDateBs      String?   @db.VarChar(10)\n  panNo            String?\n  ssfNo            String?\n  bankName         String?\n  bankAccountNo    String?\n  isActive         Boolean   @default(true)\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n  user             User?     @relation(fields: [userId], references: [id])\n  gender           Gender\n\n  principal  Principal?\n  teacher    Teacher?\n  accountant Accountant?\n  staff      Staff?\n\n  attendances      EmployeeAttendance[]\n  salaryStructures SalaryStructure[]\n  payslips         Payslip[]\n  journalLines     JournalLine[]\n\n  @@map(\"employees\")\n}\n\nmodel Principal {\n  id         String    @id @default(uuid()) @db.Uuid\n  employeeId String    @unique @db.Uuid\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  employee Employee @relation(fields: [employeeId], references: [id])\n\n  @@map(\"principals\")\n}\n\nmodel Accountant {\n  id         String    @id @default(uuid()) @db.Uuid\n  employeeId String    @unique @db.Uuid\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  employee Employee @relation(fields: [employeeId], references: [id])\n\n  @@map(\"accountants\")\n}\n\nmodel Staff {\n  id         String    @id @default(uuid()) @db.Uuid\n  employeeId String    @unique @db.Uuid\n  department String?\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  employee Employee @relation(fields: [employeeId], references: [id])\n\n  @@map(\"staffs\")\n}\n\nmodel Teacher {\n  id             String    @id @default(uuid()) @db.Uuid\n  employeeId     String    @unique @db.Uuid\n  qualification  String?\n  specialization String?\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  employee    Employee             @relation(fields: [employeeId], references: [id])\n  assignments TeachingAssignment[]\n  sessions    AttendanceSession[]\n\n  @@map(\"teachers\")\n}\n\nmodel Student {\n  id               String    @id @default(uuid()) @db.Uuid\n  userId           String?   @unique @db.Uuid // students do not log in, so optional\n  universityRegNo  String    @unique\n  firstName        String\n  middleName       String?\n  lastName         String\n  dobBs            String?   @db.VarChar(10)\n  phone            String?\n  email            String?\n  permanentAddress String?\n  temporaryAddress String?\n  photoUrl         String?\n  batchId          String    @db.Uuid\n  admissionDateBs  String    @db.VarChar(10)\n  studentStatusId  String    @db.Uuid\n  // admin approval: student is only \"real\" after APPROVED\n  approvalStatusId String    @db.Uuid\n  approvedBy       String?   @db.Uuid\n  approvedAt       DateTime?\n  rejectionReason  String?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid // teacher who added the student\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  user           User?          @relation(fields: [userId], references: [id])\n  gender         Gender\n  batch          Batch          @relation(fields: [batchId], references: [id])\n  studentStatus  StudentStatus  @relation(fields: [studentStatusId], references: [id])\n  approvalStatus WorkflowStatus @relation(fields: [approvalStatusId], references: [id])\n\n  guardians    Guardian[]\n  attendances  StudentAttendance[]\n  marks        ExamMark[]\n  results      Result[]\n  fees         StudentFee[]\n  payments     FeePayment[]\n  journalLines JournalLine[]\n\n  @@index([batchId])\n  @@index([approvalStatusId])\n  @@index([studentStatusId])\n  @@map(\"students\")\n}\n\nmodel Guardian {\n  id         String    @id @default(uuid()) @db.Uuid\n  studentId  String    @db.Uuid\n  relationId String    @db.Uuid\n  fullName   String\n  phone      String?\n  email      String?\n  occupation String?\n  address    String?\n  isPrimary  Boolean   @default(false)\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  student  Student          @relation(fields: [studentId], references: [id])\n  relation GuardianRelation @relation(fields: [relationId], references: [id])\n\n  @@index([studentId])\n  @@index([relationId])\n  @@map(\"guardians\")\n}\n\n// =====================================================================\n// 2. LOOKUP TABLES (seed these)\n// =====================================================================\n\nmodel GuardianRelation {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // FATHER, MOTHER, GUARDIAN, ...\n  name      String\n  sortOrder Int       @default(0)\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  guardians Guardian[]\n\n  @@map(\"guardian_relations\")\n}\n\nmodel CourseSystem {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // SEMESTER, YEARLY\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  courses Course[]\n\n  @@map(\"course_systems\")\n}\n\nmodel StudentStatus {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // ACTIVE, GRADUATED, DROPPED, SUSPENDED\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  students Student[]\n\n  @@map(\"student_statuses\")\n}\n\n// Generic approval flow: DRAFT, PENDING, APPROVED, REJECTED, PUBLISHED, PAID\nmodel WorkflowStatus {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  students Student[]\n  results  Result[]\n  payrolls Payroll[]\n\n  @@map(\"workflow_statuses\")\n}\n\nmodel AttendanceStatus {\n  id           String    @id @default(uuid()) @db.Uuid\n  code         String    @unique // PRESENT, ABSENT, LEAVE, HALF_DAY\n  name         String\n  salaryFactor Decimal   @default(1) @db.Decimal(3, 2) // PRESENT=1, HALF_DAY=0.5, ABSENT=0, LEAVE=depends on LeaveType\n  isActive     Boolean   @default(true)\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n  createdBy    String?   @db.Uuid\n  updatedBy    String?   @db.Uuid\n  deletedAt    DateTime?\n\n  studentAttendances  StudentAttendance[]\n  employeeAttendances EmployeeAttendance[]\n\n  @@map(\"attendance_statuses\")\n}\n\nmodel LeaveType {\n  id            String    @id @default(uuid()) @db.Uuid\n  code          String    @unique // SICK, CASUAL, HOME, UNPAID, ...\n  name          String\n  isPaid        Boolean   @default(true)\n  yearlyAllowed Int? // days per year, null = unlimited\n  isActive      Boolean   @default(true)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  employeeAttendances EmployeeAttendance[]\n\n  @@map(\"leave_types\")\n}\n\nmodel Period {\n  id           String    @id @default(uuid()) @db.Uuid\n  periodNumber Int       @unique\n  name         String // \"Period 1\"\n  startTime    String    @db.VarChar(5) // \"10:00\"\n  endTime      String    @db.VarChar(5)\n  isActive     Boolean   @default(true)\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n  createdBy    String?   @db.Uuid\n  updatedBy    String?   @db.Uuid\n  deletedAt    DateTime?\n\n  sessions AttendanceSession[]\n\n  @@map(\"periods\")\n}\n\n// Admin CRUD. Only terminal exams, but kept as lookup as requested\nmodel ExamType {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // FIRST_TERMINAL, SECOND_TERMINAL, ...\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  exams Exam[]\n\n  @@map(\"exam_types\")\n}\n\n// 4.0 scale: A=4.0, A-=3.7, ... F=0 (seed according to university rule)\nmodel GradeScale {\n  id          String    @id @default(uuid()) @db.Uuid\n  grade       String    @unique // \"A\", \"A-\", \"B+\", ...\n  minPercent  Decimal   @db.Decimal(5, 2)\n  maxPercent  Decimal   @db.Decimal(5, 2)\n  gradePoint  Decimal   @db.Decimal(3, 2)\n  description String?\n  isPassGrade Boolean   @default(true)\n  isActive    Boolean   @default(true)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  resultSubjects ResultSubject[]\n\n  @@map(\"grade_scales\")\n}\n\nmodel FeeHead {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // ADMISSION, TUITION, EXAM, LAB, LIBRARY, ...\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  structureItems FeeStructureItem[]\n  studentItems   StudentFeeItem[]\n\n  @@map(\"fee_heads\")\n}\n\n// CASH, BANK, CHEQUE, ESEWA, KHALTI (manual record only, no gateway)\n// accountId = ledger account that gets debited when money comes in through this method\nmodel PaymentMethod {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique\n  name      String\n  accountId String?   @db.Uuid\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  account      Account?               @relation(fields: [accountId], references: [id])\n  paymentLines FeePaymentMethodLine[]\n  payslips     Payslip[]\n\n  @@index([accountId])\n  @@map(\"payment_methods\")\n}\n\nmodel AccountType {\n  id            String    @id @default(uuid()) @db.Uuid\n  code          String    @unique // ASSET, LIABILITY, EQUITY, INCOME, EXPENSE\n  name          String\n  isDebitNormal Boolean // ASSET, EXPENSE = true\n  sortOrder     Int       @default(0)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  accounts Account[]\n\n  @@map(\"account_types\")\n}\n\n// MANUAL, FEE_PAYMENT, FEE_PAYMENT_CANCEL, PAYROLL, OPENING, REVERSAL, CLOSING\nmodel JournalSource {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique\n  name      String\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  entries JournalEntry[]\n\n  @@map(\"journal_sources\")\n}\n\n// BASIC, HRA, DEARNESS, SSF_EMPLOYEE, SSF_EMPLOYER, PF, CIT, TDS, ADVANCE, ...\nmodel SalaryComponent {\n  id                     String    @id @default(uuid()) @db.Uuid\n  code                   String    @unique\n  name                   String\n  isDeduction            Boolean   @default(false)\n  isEmployerContribution Boolean   @default(false) // e.g. employer SSF, not deducted from net pay\n  isTaxable              Boolean   @default(true)\n  isActive               Boolean   @default(true)\n  createdAt              DateTime  @default(now())\n  updatedAt              DateTime  @updatedAt\n  createdBy              String?   @db.Uuid\n  updatedBy              String?   @db.Uuid\n  deletedAt              DateTime?\n\n  structureItems SalaryStructureItem[]\n  payslipItems   PayslipItem[]\n\n  @@map(\"salary_components\")\n}\n\n// =====================================================================\n// 3. ACADEMIC STRUCTURE (Course -> Batch -> BatchTerm -> BatchTermSubject)\n// =====================================================================\n\nmodel Course {\n  id             String    @id @default(uuid()) @db.Uuid\n  code           String    @unique // BIT, BBA, ...\n  name           String\n  courseSystemId String    @db.Uuid\n  totalTerms     Int // semester system: 8, yearly system: 4\n  description    String?\n  isActive       Boolean   @default(true)\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  courseSystem  CourseSystem   @relation(fields: [courseSystemId], references: [id])\n  batches       Batch[]\n  feeStructures FeeStructure[]\n\n  @@index([courseSystemId])\n  @@map(\"courses\")\n}\n\nmodel Batch {\n  id                String    @id @default(uuid()) @db.Uuid\n  courseId          String    @db.Uuid\n  name              String // \"2080\"\n  startDateBs       String?   @db.VarChar(10)\n  currentTermNumber Int       @default(1) // which semester / year this batch is in now\n  isActive          Boolean   @default(true)\n  createdAt         DateTime  @default(now())\n  updatedAt         DateTime  @updatedAt\n  createdBy         String?   @db.Uuid\n  updatedBy         String?   @db.Uuid\n  deletedAt         DateTime?\n\n  course        Course         @relation(fields: [courseId], references: [id])\n  terms         BatchTerm[]\n  students      Student[]\n  feeStructures FeeStructure[]\n  noticeTargets NoticeTarget[]\n\n  @@unique([courseId, name])\n  @@map(\"batches\")\n}\n\n// One row per semester/year of a batch: Batch 2080 -> Semester 1..8\nmodel BatchTerm {\n  id          String    @id @default(uuid()) @db.Uuid\n  batchId     String    @db.Uuid\n  termNumber  Int\n  name        String // \"Semester 1\" / \"Year 1\"\n  startDateBs String?   @db.VarChar(10)\n  endDateBs   String?   @db.VarChar(10)\n  isActive    Boolean   @default(true)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batch    Batch              @relation(fields: [batchId], references: [id])\n  subjects BatchTermSubject[]\n  exams    Exam[]\n\n  @@unique([batchId, termNumber])\n  @@map(\"batch_terms\")\n}\n\nmodel Subject {\n  id          String    @id @default(uuid()) @db.Uuid\n  code        String    @unique\n  name        String\n  description String?\n  isActive    Boolean   @default(true)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batchTermSubjects BatchTermSubject[]\n\n  @@map(\"subjects\")\n}\n\n// Subject list + credit hour of a batch's semester/year.\n// Syllabus changes only affect the batch you edit, old batches stay untouched.\nmodel BatchTermSubject {\n  id          String    @id @default(uuid()) @db.Uuid\n  batchTermId String    @db.Uuid\n  subjectId   String    @db.Uuid\n  creditHour  Decimal   @db.Decimal(4, 1)\n  isElective  Boolean   @default(false)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batchTerm    BatchTerm            @relation(fields: [batchTermId], references: [id])\n  subject      Subject              @relation(fields: [subjectId], references: [id])\n  assignments  TeachingAssignment[]\n  examSubjects ExamSubject[]\n\n  @@unique([batchTermId, subjectId])\n  @@index([subjectId])\n  @@map(\"batch_term_subjects\")\n}\n\n// Teacher <-> (batch + term + subject). One teacher can have many.\nmodel TeachingAssignment {\n  id                 String    @id @default(uuid()) @db.Uuid\n  teacherId          String    @db.Uuid\n  batchTermSubjectId String    @db.Uuid\n  assignedDateBs     String    @db.VarChar(10)\n  endDateBs          String?   @db.VarChar(10)\n  isActive           Boolean   @default(true)\n  createdAt          DateTime  @default(now())\n  updatedAt          DateTime  @updatedAt\n  createdBy          String?   @db.Uuid\n  updatedBy          String?   @db.Uuid\n  deletedAt          DateTime?\n\n  teacher          Teacher             @relation(fields: [teacherId], references: [id])\n  batchTermSubject BatchTermSubject    @relation(fields: [batchTermSubjectId], references: [id])\n  sessions         AttendanceSession[]\n  pays             TeacherBatchPay[]\n\n  @@unique([teacherId, batchTermSubjectId])\n  @@index([batchTermSubjectId])\n  @@map(\"teaching_assignments\")\n}\n\n// Batch-wise pay for a teacher (payroll adds this on top of base salary).\n// Use ratePerCreditHour OR fixedMonthlyAmount. History kept by effective dates.\nmodel TeacherBatchPay {\n  id                   String    @id @default(uuid()) @db.Uuid\n  teachingAssignmentId String    @db.Uuid\n  ratePerCreditHour    Decimal?  @db.Decimal(14, 2)\n  fixedMonthlyAmount   Decimal?  @db.Decimal(14, 2)\n  effectiveFromBs      String    @db.VarChar(10)\n  effectiveToBs        String?   @db.VarChar(10)\n  createdAt            DateTime  @default(now())\n  updatedAt            DateTime  @updatedAt\n  createdBy            String?   @db.Uuid\n  updatedBy            String?   @db.Uuid\n  deletedAt            DateTime?\n\n  teachingAssignment TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])\n\n  @@index([teachingAssignmentId])\n  @@map(\"teacher_batch_pays\")\n}\n\n// =====================================================================\n// 4. ATTENDANCE\n// =====================================================================\n\n// One class of one period on one day, taken by a teacher.\nmodel AttendanceSession {\n  id                   String    @id @default(uuid()) @db.Uuid\n  teachingAssignmentId String    @db.Uuid\n  teacherId            String    @db.Uuid // who actually took it (can differ from assignment teacher)\n  periodId             String    @db.Uuid\n  dateBs               String    @db.VarChar(10)\n  isLocked             Boolean   @default(false) // set after edit time limit (see Setting ATTENDANCE_EDIT_HOURS)\n  lockedAt             DateTime?\n  createdAt            DateTime  @default(now())\n  updatedAt            DateTime  @updatedAt\n  createdBy            String?   @db.Uuid\n  updatedBy            String?   @db.Uuid\n  deletedAt            DateTime?\n\n  teachingAssignment TeachingAssignment  @relation(fields: [teachingAssignmentId], references: [id])\n  teacher            Teacher             @relation(fields: [teacherId], references: [id])\n  period             Period              @relation(fields: [periodId], references: [id])\n  records            StudentAttendance[]\n\n  @@unique([teachingAssignmentId, periodId, dateBs])\n  @@index([dateBs])\n  @@index([teacherId])\n  @@index([periodId])\n  @@map(\"attendance_sessions\")\n}\n\nmodel StudentAttendance {\n  id        String    @id @default(uuid()) @db.Uuid\n  sessionId String    @db.Uuid\n  studentId String    @db.Uuid\n  statusId  String    @db.Uuid\n  remarks   String?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  session AttendanceSession @relation(fields: [sessionId], references: [id])\n  student Student           @relation(fields: [studentId], references: [id])\n  status  AttendanceStatus  @relation(fields: [statusId], references: [id])\n\n  @@unique([sessionId, studentId])\n  @@index([studentId])\n  @@index([statusId])\n  @@map(\"student_attendances\")\n}\n\n// Teacher / Staff / Accountant attendance, marked by Principal.\n// createdBy = the Principal's userId. Payroll reads this table.\nmodel EmployeeAttendance {\n  id          String    @id @default(uuid()) @db.Uuid\n  employeeId  String    @db.Uuid\n  dateBs      String    @db.VarChar(10)\n  statusId    String    @db.Uuid\n  leaveTypeId String?   @db.Uuid // only when status = LEAVE\n  remarks     String?\n  isLocked    Boolean   @default(false)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  employee  Employee         @relation(fields: [employeeId], references: [id])\n  status    AttendanceStatus @relation(fields: [statusId], references: [id])\n  leaveType LeaveType?       @relation(fields: [leaveTypeId], references: [id])\n\n  @@unique([employeeId, dateBs])\n  @@index([dateBs])\n  @@index([statusId])\n  @@index([leaveTypeId])\n  @@map(\"employee_attendances\")\n}\n\n// =====================================================================\n// 5. EXAM AND RESULT (terminal exams only, no back paper)\n// =====================================================================\n\nmodel Exam {\n  id          String    @id @default(uuid()) @db.Uuid\n  batchTermId String    @db.Uuid\n  examTypeId  String    @db.Uuid\n  name        String\n  startDateBs String?   @db.VarChar(10)\n  endDateBs   String?   @db.VarChar(10)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid // teacher\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batchTerm BatchTerm     @relation(fields: [batchTermId], references: [id])\n  examType  ExamType      @relation(fields: [examTypeId], references: [id])\n  subjects  ExamSubject[]\n  results   Result[]\n\n  @@index([batchTermId])\n  @@index([examTypeId])\n  @@map(\"exams\")\n}\n\nmodel ExamSubject {\n  id                 String    @id @default(uuid()) @db.Uuid\n  examId             String    @db.Uuid\n  batchTermSubjectId String    @db.Uuid\n  fullMarks          Decimal   @default(100) @db.Decimal(6, 2)\n  passMarks          Decimal   @default(40) @db.Decimal(6, 2)\n  examDateBs         String?   @db.VarChar(10)\n  createdAt          DateTime  @default(now())\n  updatedAt          DateTime  @updatedAt\n  createdBy          String?   @db.Uuid\n  updatedBy          String?   @db.Uuid\n  deletedAt          DateTime?\n\n  exam             Exam             @relation(fields: [examId], references: [id])\n  batchTermSubject BatchTermSubject @relation(fields: [batchTermSubjectId], references: [id])\n  marks            ExamMark[]\n  resultSubjects   ResultSubject[]\n\n  @@unique([examId, batchTermSubjectId])\n  @@index([batchTermSubjectId])\n  @@map(\"exam_subjects\")\n}\n\nmodel ExamMark {\n  id            String    @id @default(uuid()) @db.Uuid\n  examSubjectId String    @db.Uuid\n  studentId     String    @db.Uuid\n  marksObtained Decimal?  @db.Decimal(6, 2)\n  isAbsent      Boolean   @default(false)\n  remarks       String?\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])\n  student     Student     @relation(fields: [studentId], references: [id])\n\n  @@unique([examSubjectId, studentId])\n  @@index([studentId])\n  @@map(\"exam_marks\")\n}\n\n// Per-student result of one exam. Teacher creates (PENDING), Principal approves.\n// GPA = sum(gradePoint * creditHour) / sum(creditHour)  (credit-weighted, 4.0 scale)\nmodel Result {\n  id               String    @id @default(uuid()) @db.Uuid\n  studentId        String    @db.Uuid\n  examId           String    @db.Uuid\n  totalMarks       Decimal   @db.Decimal(8, 2)\n  fullMarks        Decimal   @db.Decimal(8, 2)\n  percentage       Decimal   @db.Decimal(5, 2)\n  totalCreditHour  Decimal   @db.Decimal(5, 1)\n  gpa              Decimal   @db.Decimal(3, 2)\n  cgpa             Decimal?  @db.Decimal(3, 2)\n  isPassed         Boolean\n  workflowStatusId String    @db.Uuid\n  submittedAt      DateTime?\n  approvedBy       String?   @db.Uuid // Principal userId\n  approvedAt       DateTime?\n  publishedAt      DateTime?\n  remarks          String?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  student        Student         @relation(fields: [studentId], references: [id])\n  exam           Exam            @relation(fields: [examId], references: [id])\n  workflowStatus WorkflowStatus  @relation(fields: [workflowStatusId], references: [id])\n  subjects       ResultSubject[]\n\n  @@unique([studentId, examId])\n  @@index([examId])\n  @@index([workflowStatusId])\n  @@map(\"results\")\n}\n\n// Snapshot per subject (creditHour copied so later syllabus edits never change old results)\nmodel ResultSubject {\n  id            String    @id @default(uuid()) @db.Uuid\n  resultId      String    @db.Uuid\n  examSubjectId String    @db.Uuid\n  marksObtained Decimal   @db.Decimal(6, 2)\n  fullMarks     Decimal   @db.Decimal(6, 2)\n  creditHour    Decimal   @db.Decimal(4, 1)\n  gradeScaleId  String    @db.Uuid\n  gradePoint    Decimal   @db.Decimal(3, 2)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  result      Result      @relation(fields: [resultId], references: [id])\n  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])\n  gradeScale  GradeScale  @relation(fields: [gradeScaleId], references: [id])\n\n  @@unique([resultId, examSubjectId])\n  @@index([examSubjectId])\n  @@index([gradeScaleId])\n  @@map(\"result_subjects\")\n}\n\n// =====================================================================\n// 6. FEE MANAGEMENT\n// =====================================================================\n\n// Accountant creates per course (optionally per batch, null batch = default for course)\nmodel FeeStructure {\n  id        String    @id @default(uuid()) @db.Uuid\n  courseId  String    @db.Uuid\n  batchId   String?   @db.Uuid\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  course      Course             @relation(fields: [courseId], references: [id])\n  batch       Batch?             @relation(fields: [batchId], references: [id])\n  items       FeeStructureItem[]\n  studentFees StudentFee[]\n\n  @@index([courseId])\n  @@index([batchId])\n  @@map(\"fee_structures\")\n}\n\nmodel FeeStructureItem {\n  id             String    @id @default(uuid()) @db.Uuid\n  feeStructureId String    @db.Uuid\n  feeHeadId      String    @db.Uuid\n  termNumber     Int? // null = one time (e.g. admission)\n  amount         Decimal   @db.Decimal(14, 2)\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  feeStructure FeeStructure     @relation(fields: [feeStructureId], references: [id])\n  feeHead      FeeHead          @relation(fields: [feeHeadId], references: [id])\n  studentItems StudentFeeItem[]\n\n  @@index([feeStructureId])\n  @@index([feeHeadId])\n  @@map(\"fee_structure_items\")\n}\n\n// Fee assigned to one student (copied from structure at admission by Accountant).\n// Discount / skip / custom item all live in StudentFeeItem, so fee can differ per student.\nmodel StudentFee {\n  id             String    @id @default(uuid()) @db.Uuid\n  studentId      String    @db.Uuid\n  feeStructureId String?   @db.Uuid\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  student      Student          @relation(fields: [studentId], references: [id])\n  feeStructure FeeStructure?    @relation(fields: [feeStructureId], references: [id])\n  items        StudentFeeItem[]\n\n  @@index([studentId])\n  @@index([feeStructureId])\n  @@map(\"student_fees\")\n}\n\nmodel StudentFeeItem {\n  id                 String    @id @default(uuid()) @db.Uuid\n  studentFeeId       String    @db.Uuid\n  feeHeadId          String    @db.Uuid\n  feeStructureItemId String?   @db.Uuid // null = custom item added for this student\n  termNumber         Int?\n  description        String?\n  amount             Decimal   @db.Decimal(14, 2)\n  discountAmount     Decimal   @default(0) @db.Decimal(14, 2)\n  discountReason     String?\n  netAmount          Decimal   @db.Decimal(14, 2) // amount - discountAmount\n  isSkipped          Boolean   @default(false) // Accountant can skip a fee for a student\n  skipReason         String?\n  dueDateBs          String?   @db.VarChar(10)\n  createdAt          DateTime  @default(now())\n  updatedAt          DateTime  @updatedAt\n  createdBy          String?   @db.Uuid\n  updatedBy          String?   @db.Uuid\n  deletedAt          DateTime?\n\n  studentFee       StudentFee             @relation(fields: [studentFeeId], references: [id])\n  feeHead          FeeHead                @relation(fields: [feeHeadId], references: [id])\n  feeStructureItem FeeStructureItem?      @relation(fields: [feeStructureItemId], references: [id])\n  installments     FeeInstallment[]\n  allocations      FeePaymentAllocation[]\n\n  @@index([studentFeeId])\n  @@index([feeHeadId])\n  @@index([feeStructureItemId])\n  @@index([dueDateBs])\n  @@map(\"student_fee_items\")\n}\n\n// Payment schedule if the student pays in installments\nmodel FeeInstallment {\n  id               String    @id @default(uuid()) @db.Uuid\n  studentFeeItemId String    @db.Uuid\n  installmentNo    Int\n  dueDateBs        String    @db.VarChar(10)\n  amount           Decimal   @db.Decimal(14, 2)\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  studentFeeItem StudentFeeItem         @relation(fields: [studentFeeItemId], references: [id])\n  allocations    FeePaymentAllocation[]\n\n  @@unique([studentFeeItemId, installmentNo])\n  @@map(\"fee_installments\")\n}\n\n// Money received = one receipt. Append-only: cancel by reversal, never delete.\nmodel FeePayment {\n  id             String    @id @default(uuid()) @db.Uuid\n  receiptNo      String    @unique\n  studentId      String    @db.Uuid\n  fiscalYearId   String    @db.Uuid\n  paymentDateBs  String    @db.VarChar(10)\n  totalAmount    Decimal   @db.Decimal(14, 2)\n  remarks        String?\n  isCancelled    Boolean   @default(false)\n  cancelledAt    DateTime?\n  cancelReason   String?\n  journalEntryId String?   @unique @db.Uuid\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid // accountant\n  updatedBy      String?   @db.Uuid\n\n  student      Student                @relation(fields: [studentId], references: [id])\n  fiscalYear   FiscalYear             @relation(fields: [fiscalYearId], references: [id])\n  journalEntry JournalEntry?          @relation(fields: [journalEntryId], references: [id])\n  methodLines  FeePaymentMethodLine[]\n  allocations  FeePaymentAllocation[]\n\n  @@index([studentId])\n  @@index([fiscalYearId])\n  @@index([paymentDateBs])\n  @@map(\"fee_payments\")\n}\n\n// Split payment: e.g. 5000 cash + 5000 bank in one receipt\n// sum(methodLines.amount) must equal FeePayment.totalAmount\nmodel FeePaymentMethodLine {\n  id              String   @id @default(uuid()) @db.Uuid\n  feePaymentId    String   @db.Uuid\n  paymentMethodId String   @db.Uuid\n  amount          Decimal  @db.Decimal(14, 2)\n  referenceNo     String? // cheque no / transaction id\n  bankName        String?\n  createdAt       DateTime @default(now())\n  updatedAt       DateTime @updatedAt\n  createdBy       String?  @db.Uuid\n  updatedBy       String?  @db.Uuid\n\n  feePayment    FeePayment    @relation(fields: [feePaymentId], references: [id])\n  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])\n\n  @@index([feePaymentId])\n  @@index([paymentMethodId])\n  @@map(\"fee_payment_method_lines\")\n}\n\n// Which fee item / installment this payment pays (supports partial payment)\nmodel FeePaymentAllocation {\n  id               String   @id @default(uuid()) @db.Uuid\n  feePaymentId     String   @db.Uuid\n  studentFeeItemId String   @db.Uuid\n  feeInstallmentId String?  @db.Uuid\n  amount           Decimal  @db.Decimal(14, 2)\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n  createdBy        String?  @db.Uuid\n  updatedBy        String?  @db.Uuid\n\n  feePayment     FeePayment      @relation(fields: [feePaymentId], references: [id])\n  studentFeeItem StudentFeeItem  @relation(fields: [studentFeeItemId], references: [id])\n  feeInstallment FeeInstallment? @relation(fields: [feeInstallmentId], references: [id])\n\n  @@index([feePaymentId])\n  @@index([studentFeeItemId])\n  @@index([feeInstallmentId])\n  @@map(\"fee_payment_allocations\")\n}\n\n// =====================================================================\n// 7. ACCOUNTING (double entry)\n// =====================================================================\n\nmodel FiscalYear {\n  id          String    @id @default(uuid()) @db.Uuid\n  name        String    @unique // \"2081/82\"\n  startDateBs String    @db.VarChar(10) // 2081-04-01 (Shrawan 1)\n  endDateBs   String    @db.VarChar(10)\n  isCurrent   Boolean   @default(false)\n  isClosed    Boolean   @default(false)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  journalEntries JournalEntry[]\n  payments       FeePayment[]\n  payrolls       Payroll[]\n  taxSlabs       TaxSlab[]\n\n  @@map(\"fiscal_years\")\n}\n\n// Chart of accounts (tree). isGroup = heading only, cannot receive postings.\nmodel Account {\n  id            String    @id @default(uuid()) @db.Uuid\n  code          String    @unique\n  name          String\n  accountTypeId String    @db.Uuid\n  parentId      String?   @db.Uuid\n  isGroup       Boolean   @default(false)\n  isSystem      Boolean   @default(false) // seeded accounts that must not be removed\n  isActive      Boolean   @default(true)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  accountType    AccountType     @relation(fields: [accountTypeId], references: [id])\n  parent         Account?        @relation(\"AccountTree\", fields: [parentId], references: [id])\n  children       Account[]       @relation(\"AccountTree\")\n  journalLines   JournalLine[]\n  paymentMethods PaymentMethod[]\n\n  @@index([accountTypeId])\n  @@index([parentId])\n  @@map(\"accounts\")\n}\n\n// Append-only. No deletedAt on purpose. Correct mistakes with a reversal entry.\n// Manual / backdated entries: dateBs can be in the past (isBackdated = true).\nmodel JournalEntry {\n  id           String   @id @default(uuid()) @db.Uuid\n  entryNo      String   @unique // JV-2081/82-000123\n  fiscalYearId String   @db.Uuid\n  dateBs       String   @db.VarChar(10)\n  description  String\n  sourceId     String   @db.Uuid // JournalSource\n  sourceRefId  String?  @db.Uuid // id of FeePayment / Payroll / ... that created it\n  isManual     Boolean  @default(false)\n  isBackdated  Boolean  @default(false)\n  isReversed   Boolean  @default(false)\n  reversalOfId String?  @unique @db.Uuid\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n  createdBy    String?  @db.Uuid\n  updatedBy    String?  @db.Uuid\n\n  fiscalYear FiscalYear    @relation(fields: [fiscalYearId], references: [id])\n  source     JournalSource @relation(fields: [sourceId], references: [id])\n  reversalOf JournalEntry? @relation(\"Reversal\", fields: [reversalOfId], references: [id])\n  reversedBy JournalEntry? @relation(\"Reversal\")\n  lines      JournalLine[]\n  feePayment FeePayment?\n  payroll    Payroll?\n\n  @@index([fiscalYearId, dateBs])\n  @@index([sourceId])\n  @@index([sourceRefId])\n  @@map(\"journal_entries\")\n}\n\n// Each entry: sum(debit) = sum(credit) and each line has debit XOR credit.\n// Prisma cannot express CHECK constraints, add them in the migration SQL (see bottom).\nmodel JournalLine {\n  id             String   @id @default(uuid()) @db.Uuid\n  journalEntryId String   @db.Uuid\n  accountId      String   @db.Uuid\n  debit          Decimal  @default(0) @db.Decimal(14, 2)\n  credit         Decimal  @default(0) @db.Decimal(14, 2)\n  description    String?\n  studentId      String?  @db.Uuid // optional party, gives student ledger\n  employeeId     String?  @db.Uuid // optional party, gives employee ledger\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n  createdBy      String?  @db.Uuid\n  updatedBy      String?  @db.Uuid\n\n  journalEntry JournalEntry @relation(fields: [journalEntryId], references: [id])\n  account      Account      @relation(fields: [accountId], references: [id])\n  student      Student?     @relation(fields: [studentId], references: [id])\n  employee     Employee?    @relation(fields: [employeeId], references: [id])\n\n  @@index([journalEntryId])\n  @@index([accountId])\n  @@index([studentId])\n  @@index([employeeId])\n  @@map(\"journal_lines\")\n}\n\n// =====================================================================\n// 8. PAYROLL (Nepal rules: SSF / PF / CIT / TDS as SalaryComponent + TaxSlab)\n// =====================================================================\n\n// Salary is versioned: when salary changes, close the old row (effectiveToBs)\n// and create a new one. Old payslips keep their own snapshot.\nmodel SalaryStructure {\n  id              String    @id @default(uuid()) @db.Uuid\n  employeeId      String    @db.Uuid\n  basicSalary     Decimal   @db.Decimal(14, 2)\n  effectiveFromBs String    @db.VarChar(10)\n  effectiveToBs   String?   @db.VarChar(10)\n  remarks         String?\n  createdAt       DateTime  @default(now())\n  updatedAt       DateTime  @updatedAt\n  createdBy       String?   @db.Uuid\n  updatedBy       String?   @db.Uuid\n  deletedAt       DateTime?\n\n  employee Employee              @relation(fields: [employeeId], references: [id])\n  items    SalaryStructureItem[]\n\n  @@index([employeeId, effectiveFromBs])\n  @@map(\"salary_structures\")\n}\n\nmodel SalaryStructureItem {\n  id                String    @id @default(uuid()) @db.Uuid\n  salaryStructureId String    @db.Uuid\n  componentId       String    @db.Uuid\n  amount            Decimal   @db.Decimal(14, 2)\n  isPercentOfBasic  Boolean   @default(false) // amount = percent when true\n  createdAt         DateTime  @default(now())\n  updatedAt         DateTime  @updatedAt\n  createdBy         String?   @db.Uuid\n  updatedBy         String?   @db.Uuid\n  deletedAt         DateTime?\n\n  salaryStructure SalaryStructure @relation(fields: [salaryStructureId], references: [id])\n  component       SalaryComponent @relation(fields: [componentId], references: [id])\n\n  @@unique([salaryStructureId, componentId])\n  @@index([componentId])\n  @@map(\"salary_structure_items\")\n}\n\n// Income tax slabs per fiscal year (fill from that year's budget)\nmodel TaxSlab {\n  id           String    @id @default(uuid()) @db.Uuid\n  fiscalYearId String    @db.Uuid\n  isCouple     Boolean   @default(false)\n  fromAmount   Decimal   @db.Decimal(14, 2)\n  toAmount     Decimal?  @db.Decimal(14, 2)\n  ratePercent  Decimal   @db.Decimal(5, 2)\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n  createdBy    String?   @db.Uuid\n  updatedBy    String?   @db.Uuid\n  deletedAt    DateTime?\n\n  fiscalYear FiscalYear @relation(fields: [fiscalYearId], references: [id])\n\n  @@index([fiscalYearId])\n  @@map(\"tax_slabs\")\n}\n\n// Monthly payroll run: Accountant prepares (PENDING), Principal approves, then PAID\nmodel Payroll {\n  id               String    @id @default(uuid()) @db.Uuid\n  fiscalYearId     String    @db.Uuid\n  yearBs           Int\n  monthBs          Int // 1 = Baisakh ... 12 = Chaitra\n  totalDays        Int\n  workflowStatusId String    @db.Uuid\n  submittedAt      DateTime?\n  approvedBy       String?   @db.Uuid // Principal userId\n  approvedAt       DateTime?\n  paidDateBs       String?   @db.VarChar(10)\n  journalEntryId   String?   @unique @db.Uuid\n  remarks          String?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid // accountant\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  fiscalYear     FiscalYear     @relation(fields: [fiscalYearId], references: [id])\n  workflowStatus WorkflowStatus @relation(fields: [workflowStatusId], references: [id])\n  journalEntry   JournalEntry?  @relation(fields: [journalEntryId], references: [id])\n  payslips       Payslip[]\n\n  @@unique([yearBs, monthBs])\n  @@index([fiscalYearId])\n  @@index([workflowStatusId])\n  @@map(\"payrolls\")\n}\n\n// Stored payslip (snapshot). Attendance summary is copied so it never changes later.\nmodel Payslip {\n  id                  String   @id @default(uuid()) @db.Uuid\n  payslipNo           String   @unique\n  payrollId           String   @db.Uuid\n  employeeId          String   @db.Uuid\n  presentDays         Decimal  @db.Decimal(5, 2)\n  halfDays            Int      @default(0)\n  paidLeaveDays       Int      @default(0)\n  unpaidLeaveDays     Int      @default(0)\n  absentDays          Int      @default(0)\n  basicSalary         Decimal  @db.Decimal(14, 2)\n  attendanceDeduction Decimal  @default(0) @db.Decimal(14, 2) // salary cut for absent / unpaid leave\n  totalAllowance      Decimal  @default(0) @db.Decimal(14, 2)\n  teachingPay         Decimal  @default(0) @db.Decimal(14, 2) // from TeacherBatchPay\n  grossPay            Decimal  @db.Decimal(14, 2)\n  totalDeduction      Decimal  @default(0) @db.Decimal(14, 2)\n  taxAmount           Decimal  @default(0) @db.Decimal(14, 2)\n  netPay              Decimal  @db.Decimal(14, 2)\n  paymentMethodId     String?  @db.Uuid\n  paidDateBs          String?  @db.VarChar(10)\n  pdfUrl              String?\n  createdAt           DateTime @default(now())\n  updatedAt           DateTime @updatedAt\n  createdBy           String?  @db.Uuid\n  updatedBy           String?  @db.Uuid\n\n  payroll       Payroll        @relation(fields: [payrollId], references: [id])\n  employee      Employee       @relation(fields: [employeeId], references: [id])\n  paymentMethod PaymentMethod? @relation(fields: [paymentMethodId], references: [id])\n  items         PayslipItem[]\n\n  @@unique([payrollId, employeeId])\n  @@index([employeeId])\n  @@index([paymentMethodId])\n  @@map(\"payslips\")\n}\n\nmodel PayslipItem {\n  id                     String   @id @default(uuid()) @db.Uuid\n  payslipId              String   @db.Uuid\n  componentId            String?  @db.Uuid\n  description            String\n  amount                 Decimal  @db.Decimal(14, 2)\n  isDeduction            Boolean  @default(false)\n  isEmployerContribution Boolean  @default(false)\n  createdAt              DateTime @default(now())\n  updatedAt              DateTime @updatedAt\n  createdBy              String?  @db.Uuid\n  updatedBy              String?  @db.Uuid\n\n  payslip   Payslip          @relation(fields: [payslipId], references: [id])\n  component SalaryComponent? @relation(fields: [componentId], references: [id])\n\n  @@index([payslipId])\n  @@index([componentId])\n  @@map(\"payslip_items\")\n}\n\n// =====================================================================\n// 9. NOTICE + SETTINGS\n// =====================================================================\n\nmodel Notice {\n  id            String    @id @default(uuid()) @db.Uuid\n  title         String\n  body          String\n  attachmentUrl String?\n  isPinned      Boolean   @default(false)\n  isPublished   Boolean   @default(false)\n  publishedAt   DateTime?\n  expiresOnBs   String?   @db.VarChar(10)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  targets NoticeTarget[]\n\n  @@map(\"notices\")\n}\n\n// Who sees the notice: a role, a batch, or both. No targets = everyone.\nmodel NoticeTarget {\n  id        String    @id @default(uuid()) @db.Uuid\n  noticeId  String    @db.Uuid\n  role      Role?\n  batchId   String?   @db.Uuid\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  notice Notice @relation(fields: [noticeId], references: [id])\n  batch  Batch? @relation(fields: [batchId], references: [id])\n\n  @@index([noticeId])\n  @@index([batchId])\n  @@map(\"notice_targets\")\n}\n\n// Key/value config, e.g. ATTENDANCE_EDIT_HOURS = 24, WORKING_DAYS_MODE = CALENDAR\nmodel Setting {\n  id          String    @id @default(uuid()) @db.Uuid\n  key         String    @unique\n  value       String\n  description String?\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  @@map(\"settings\")\n}\n\n// =====================================================================\n// RAW SQL to add in the first migration (Prisma cannot model these)\n// Run `npx prisma migrate dev --create-only`, paste this in the generated\n// migration.sql, then `npx prisma migrate dev`.\n// =====================================================================\n//\n// -- journal lines: either debit or credit, never both, never negative\n// ALTER TABLE journal_lines ADD CONSTRAINT chk_journal_line_side\n//   CHECK (debit >= 0 AND credit >= 0 AND (debit = 0 OR credit = 0) AND (debit + credit) > 0);\n//\n// -- payroll month must be 1..12\n// ALTER TABLE payrolls ADD CONSTRAINT chk_payroll_month CHECK (\"monthBs\" BETWEEN 1 AND 12);\n//\n// -- only one current fiscal year\n// CREATE UNIQUE INDEX uq_fiscal_year_current ON fiscal_years (\"isCurrent\") WHERE \"isCurrent\" = true AND \"deletedAt\" IS NULL;\n//\n// -- no update / delete on journal tables (append-only, reversal only)\n// CREATE OR REPLACE FUNCTION forbid_journal_change() RETURNS trigger AS $$\n// BEGIN RAISE EXCEPTION 'Journal is append-only. Create a reversal entry instead.'; END;\n// $$ LANGUAGE plpgsql;\n// CREATE TRIGGER trg_journal_lines_no_change BEFORE UPDATE OR DELETE ON journal_lines\n//   FOR EACH ROW EXECUTE FUNCTION forbid_journal_change();\n// (journal_entries: allow UPDATE only of isReversed, so write a narrower trigger there)\n//\n// -- unique keys that must ignore soft-deleted rows.\n//    Every \"code String @unique\" on lookup tables and Subject/Course/Account, Student.universityRegNo,\n//    Employee.employeeCode, User.email/username will BLOCK re-creating a soft-deleted value.\n//    For each one: remove @unique in the schema, then add a partial index, e.g.\n// CREATE UNIQUE INDEX uq_students_regno_active ON students (\"universityRegNo\") WHERE \"deletedAt\" IS NULL;\n// CREATE UNIQUE INDEX uq_users_email_active    ON users (\"email\")             WHERE \"deletedAt\" IS NULL;\n//\n// -- debit total = credit total per entry: enforce in service layer inside one $transaction,\n//    or add a DEFERRABLE constraint trigger on journal_lines.\n",
+  "inlineSchema": "generator client {\n  provider = \"prisma-client\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nenum Gender {\n  MALE\n  FEMALE\n  OTHERS\n}\n\n// =====================================================================\n// College Management System - Prisma schema (PostgreSQL, single college)\n// ---------------------------------------------------------------------\n// Conventions\n//  - ids: uuid | models: PascalCase | fields: camelCase | tables: snake_case (@@map)\n//  - Audit fields on every table: createdAt, updatedAt, createdBy, updatedBy, deletedAt\n//    (createdBy / updatedBy = User.id stored as plain uuid, no FK, so no relation noise)\n//  - Finance tables (journal, payments) are APPEND-ONLY: no deletedAt, corrections by reversal\n//  - Business dates are stored in BS as \"YYYY-MM-DD\" strings (zero padded, so they sort correctly)\n//  - Money = Decimal(14,2)\n//  - Only Role is a Prisma enum, everything else is a lookup table\n//  - \"Class\" (BATCH-YEAR-COURSE) = Batch + BatchTerm + Course, label built in app:\n//      `${batch.name}-${term.name}-${course.code}`   e.g. 2080-Semester 3-BIT\n//  - Model order: User + people first (easy to start CRUD), then lookups, then modules\n// =====================================================================\n\nenum Role {\n  ADMIN\n  PRINCIPAL\n  ACCOUNTANT\n  TEACHER\n  STAFF\n  STUDENT\n}\n\n// =====================================================================\n// 1. USERS AND PEOPLE\n// =====================================================================\n\nmodel User {\n  id               String    @id @default(uuid()) @db.Uuid\n  email            String    @unique\n  username         String?   @unique\n  passwordHash     String\n  role             Role\n  isAdmin          Boolean   @default(false)\n  isActive         Boolean   @default(true)\n  otps             Otp[]\n  isEmailVerified  Boolean   @default(false)\n  lastLoginAt      DateTime?\n  failedLoginCount Int       @default(0)\n  lockedUntil      DateTime?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  employee Employee?\n  student  Student?\n\n  @@index([id])\n  @@map(\"users\")\n}\n\nmodel Otp {\n  id        String   @id @default(uuid()) @db.Uuid\n  userId    String   @db.Uuid\n  code      String\n  expiresAt DateTime\n  createdAt DateTime @default(now())\n\n  user User @relation(fields: [userId], references: [id])\n\n  @@index([userId])\n  @@map(\"otps\")\n}\n\n// Common HR data for Principal / Teacher / Staff / Accountant.\n// Attendance, salary and payroll all point here (one FK instead of four).\nmodel Employee {\n  id               String    @id @default(uuid()) @db.Uuid\n  userId           String?   @unique @db.Uuid\n  employeeCode     String    @unique\n  firstName        String\n  middleName       String?\n  lastName         String\n  dobBs            String?   @db.VarChar(10)\n  phone            String?\n  email            String?\n  permanentAddress String?\n  temporaryAddress String?\n  photoUrl         String?\n  designation      String\n  joinDateBs       String    @db.VarChar(10)\n  leaveDateBs      String?   @db.VarChar(10)\n  panNo            String?\n  ssfNo            String?\n  bankName         String?\n  bankAccountNo    String?\n  isActive         Boolean   @default(true)\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n  user             User?     @relation(fields: [userId], references: [id])\n  gender           Gender\n\n  principal  Principal?\n  teacher    Teacher?\n  accountant Accountant?\n  staff      Staff?\n\n  attendances      EmployeeAttendance[]\n  salaryStructures SalaryStructure[]\n  payslips         Payslip[]\n  journalLines     JournalLine[]\n\n  @@map(\"employees\")\n}\n\nmodel Principal {\n  id         String    @id @default(uuid()) @db.Uuid\n  employeeId String    @unique @db.Uuid\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  employee Employee @relation(fields: [employeeId], references: [id])\n\n  @@map(\"principals\")\n}\n\nmodel Accountant {\n  id         String    @id @default(uuid()) @db.Uuid\n  employeeId String    @unique @db.Uuid\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  employee Employee @relation(fields: [employeeId], references: [id])\n\n  @@map(\"accountants\")\n}\n\nmodel Staff {\n  id         String    @id @default(uuid()) @db.Uuid\n  employeeId String    @unique @db.Uuid\n  department String?\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  employee Employee @relation(fields: [employeeId], references: [id])\n\n  @@map(\"staffs\")\n}\n\nmodel Teacher {\n  id             String    @id @default(uuid()) @db.Uuid\n  employeeId     String    @unique @db.Uuid\n  qualification  String?\n  specialization String?\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  employee    Employee             @relation(fields: [employeeId], references: [id])\n  assignments TeachingAssignment[]\n  sessions    AttendanceSession[]\n\n  @@map(\"teachers\")\n}\n\nmodel Student {\n  id               String    @id @default(uuid()) @db.Uuid\n  userId           String?   @unique @db.Uuid // students do not log in, so optional\n  universityRegNo  String    @unique\n  firstName        String\n  middleName       String?\n  lastName         String\n  dobBs            String?   @db.VarChar(10)\n  phone            String?\n  email            String?\n  permanentAddress String?\n  temporaryAddress String?\n  photoUrl         String?\n  batchId          String    @db.Uuid\n  admissionDateBs  String    @db.VarChar(10)\n  studentStatusId  String    @db.Uuid\n  // admin approval: student is only \"real\" after APPROVED\n  approvalStatusId String    @db.Uuid\n  approvedBy       String?   @db.Uuid\n  approvedAt       DateTime?\n  rejectionReason  String?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid // teacher who added the student\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  user           User?          @relation(fields: [userId], references: [id])\n  gender         Gender\n  batch          Batch          @relation(fields: [batchId], references: [id])\n  studentStatus  StudentStatus  @relation(fields: [studentStatusId], references: [id])\n  approvalStatus WorkflowStatus @relation(fields: [approvalStatusId], references: [id])\n\n  guardians    Guardian[]\n  attendances  StudentAttendance[]\n  marks        ExamMark[]\n  results      Result[]\n  fees         StudentFee[]\n  payments     FeePayment[]\n  journalLines JournalLine[]\n\n  @@index([batchId])\n  @@index([approvalStatusId])\n  @@index([studentStatusId])\n  @@map(\"students\")\n}\n\nmodel Guardian {\n  id         String    @id @default(uuid()) @db.Uuid\n  studentId  String    @db.Uuid\n  relationId String    @db.Uuid\n  fullName   String\n  phone      String?\n  email      String?\n  occupation String?\n  address    String?\n  isPrimary  Boolean   @default(false)\n  createdAt  DateTime  @default(now())\n  updatedAt  DateTime  @updatedAt\n  createdBy  String?   @db.Uuid\n  updatedBy  String?   @db.Uuid\n  deletedAt  DateTime?\n\n  student  Student          @relation(fields: [studentId], references: [id])\n  relation GuardianRelation @relation(fields: [relationId], references: [id])\n\n  @@index([studentId])\n  @@index([relationId])\n  @@map(\"guardians\")\n}\n\n// =====================================================================\n// 2. LOOKUP TABLES (seed these)\n// =====================================================================\n\nmodel GuardianRelation {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // FATHER, MOTHER, GUARDIAN, ...\n  name      String\n  sortOrder Int       @default(0)\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  guardians Guardian[]\n\n  @@map(\"guardian_relations\")\n}\n\nmodel CourseSystem {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // SEMESTER, YEARLY\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  courses Course[]\n\n  @@map(\"course_systems\")\n}\n\nmodel StudentStatus {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // ACTIVE, GRADUATED, DROPPED, SUSPENDED\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  students Student[]\n\n  @@map(\"student_statuses\")\n}\n\n// Generic approval flow: DRAFT, PENDING, APPROVED, REJECTED, PUBLISHED, PAID\nmodel WorkflowStatus {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  students Student[]\n  results  Result[]\n  payrolls Payroll[]\n\n  @@map(\"workflow_statuses\")\n}\n\nmodel AttendanceStatus {\n  id           String    @id @default(uuid()) @db.Uuid\n  code         String    @unique // PRESENT, ABSENT, LEAVE, HALF_DAY\n  name         String\n  salaryFactor Decimal   @default(1) @db.Decimal(3, 2) // PRESENT=1, HALF_DAY=0.5, ABSENT=0, LEAVE=depends on LeaveType\n  isActive     Boolean   @default(true)\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n  createdBy    String?   @db.Uuid\n  updatedBy    String?   @db.Uuid\n  deletedAt    DateTime?\n\n  studentAttendances  StudentAttendance[]\n  employeeAttendances EmployeeAttendance[]\n\n  @@map(\"attendance_statuses\")\n}\n\nmodel LeaveType {\n  id            String    @id @default(uuid()) @db.Uuid\n  code          String    @unique // SICK, CASUAL, HOME, UNPAID, ...\n  name          String\n  isPaid        Boolean   @default(true)\n  yearlyAllowed Int? // days per year, null = unlimited\n  isActive      Boolean   @default(true)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  employeeAttendances EmployeeAttendance[]\n\n  @@map(\"leave_types\")\n}\n\nmodel Period {\n  id           String    @id @default(uuid()) @db.Uuid\n  periodNumber Int       @unique\n  name         String // \"Period 1\"\n  startTime    String    @db.VarChar(5) // \"10:00\"\n  endTime      String    @db.VarChar(5)\n  isActive     Boolean   @default(true)\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n  createdBy    String?   @db.Uuid\n  updatedBy    String?   @db.Uuid\n  deletedAt    DateTime?\n\n  sessions AttendanceSession[]\n\n  @@map(\"periods\")\n}\n\n// Admin CRUD. Only terminal exams, but kept as lookup as requested\nmodel ExamType {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // FIRST_TERMINAL, SECOND_TERMINAL, ...\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  exams Exam[]\n\n  @@map(\"exam_types\")\n}\n\n// 4.0 scale: A=4.0, A-=3.7, ... F=0 (seed according to university rule)\nmodel GradeScale {\n  id          String    @id @default(uuid()) @db.Uuid\n  grade       String    @unique // \"A\", \"A-\", \"B+\", ...\n  minPercent  Decimal   @db.Decimal(5, 2)\n  maxPercent  Decimal   @db.Decimal(5, 2)\n  gradePoint  Decimal   @db.Decimal(3, 2)\n  description String?\n  isPassGrade Boolean   @default(true)\n  isActive    Boolean   @default(true)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  resultSubjects ResultSubject[]\n\n  @@map(\"grade_scales\")\n}\n\nmodel FeeHead {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique // ADMISSION, TUITION, EXAM, LAB, LIBRARY, ...\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  structureItems FeeStructureItem[]\n  studentItems   StudentFeeItem[]\n\n  @@map(\"fee_heads\")\n}\n\n// CASH, BANK, CHEQUE, ESEWA, KHALTI (manual record only, no gateway)\n// accountId = ledger account that gets debited when money comes in through this method\nmodel PaymentMethod {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique\n  name      String\n  accountId String?   @db.Uuid\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  account      Account?               @relation(fields: [accountId], references: [id])\n  paymentLines FeePaymentMethodLine[]\n  payslips     Payslip[]\n\n  @@index([accountId])\n  @@map(\"payment_methods\")\n}\n\nmodel AccountType {\n  id            String    @id @default(uuid()) @db.Uuid\n  code          String    @unique // ASSET, LIABILITY, EQUITY, INCOME, EXPENSE\n  name          String\n  isDebitNormal Boolean // ASSET, EXPENSE = true\n  sortOrder     Int       @default(0)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  accounts Account[]\n\n  @@map(\"account_types\")\n}\n\n// MANUAL, FEE_PAYMENT, FEE_PAYMENT_CANCEL, PAYROLL, OPENING, REVERSAL, CLOSING\nmodel JournalSource {\n  id        String    @id @default(uuid()) @db.Uuid\n  code      String    @unique\n  name      String\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  entries JournalEntry[]\n\n  @@map(\"journal_sources\")\n}\n\n// BASIC, HRA, DEARNESS, SSF_EMPLOYEE, SSF_EMPLOYER, PF, CIT, TDS, ADVANCE, ...\nmodel SalaryComponent {\n  id                     String    @id @default(uuid()) @db.Uuid\n  code                   String    @unique\n  name                   String\n  isDeduction            Boolean   @default(false)\n  isEmployerContribution Boolean   @default(false) // e.g. employer SSF, not deducted from net pay\n  isTaxable              Boolean   @default(true)\n  isActive               Boolean   @default(true)\n  createdAt              DateTime  @default(now())\n  updatedAt              DateTime  @updatedAt\n  createdBy              String?   @db.Uuid\n  updatedBy              String?   @db.Uuid\n  deletedAt              DateTime?\n\n  structureItems SalaryStructureItem[]\n  payslipItems   PayslipItem[]\n\n  @@map(\"salary_components\")\n}\n\n// =====================================================================\n// 3. ACADEMIC STRUCTURE (Course -> Batch -> BatchTerm -> BatchTermSubject)\n// =====================================================================\n\nmodel Course {\n  id             String    @id @default(uuid()) @db.Uuid\n  code           String    @unique // BIT, BBA, ...\n  name           String\n  courseSystemId String    @db.Uuid\n  totalTerms     Int // semester system: 8, yearly system: 4\n  description    String?\n  isActive       Boolean   @default(true)\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  courseSystem  CourseSystem   @relation(fields: [courseSystemId], references: [id])\n  batches       Batch[]\n  feeStructures FeeStructure[]\n\n  @@index([courseSystemId])\n  @@map(\"courses\")\n}\n\nmodel Batch {\n  id                String    @id @default(uuid()) @db.Uuid\n  courseId          String    @db.Uuid\n  name              String // \"2080\"\n  startDateBs       String?   @db.VarChar(10)\n  currentTermNumber Int       @default(1) // which semester / year this batch is in now\n  isActive          Boolean   @default(true)\n  createdAt         DateTime  @default(now())\n  updatedAt         DateTime  @updatedAt\n  createdBy         String?   @db.Uuid\n  updatedBy         String?   @db.Uuid\n  deletedAt         DateTime?\n\n  course        Course         @relation(fields: [courseId], references: [id])\n  terms         BatchTerm[]\n  students      Student[]\n  feeStructures FeeStructure[]\n  noticeTargets NoticeTarget[]\n\n  @@unique([courseId, name])\n  @@map(\"batches\")\n}\n\n// One row per semester/year of a batch: Batch 2080 -> Semester 1..8\nmodel BatchTerm {\n  id          String    @id @default(uuid()) @db.Uuid\n  batchId     String    @db.Uuid\n  termNumber  Int\n  name        String // \"Semester 1\" / \"Year 1\"\n  startDateBs String?   @db.VarChar(10)\n  endDateBs   String?   @db.VarChar(10)\n  isActive    Boolean   @default(true)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batch    Batch              @relation(fields: [batchId], references: [id])\n  subjects BatchTermSubject[]\n  exams    Exam[]\n\n  @@unique([batchId, termNumber])\n  @@map(\"batch_terms\")\n}\n\nmodel Subject {\n  id          String    @id @default(uuid()) @db.Uuid\n  code        String    @unique\n  name        String\n  description String?\n  isActive    Boolean   @default(true)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batchTermSubjects BatchTermSubject[]\n\n  @@map(\"subjects\")\n}\n\n// Subject list + credit hour of a batch's semester/year.\n// Syllabus changes only affect the batch you edit, old batches stay untouched.\nmodel BatchTermSubject {\n  id          String    @id @default(uuid()) @db.Uuid\n  batchTermId String    @db.Uuid\n  subjectId   String    @db.Uuid\n  creditHour  Decimal   @db.Decimal(4, 1)\n  isElective  Boolean   @default(false)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batchTerm    BatchTerm            @relation(fields: [batchTermId], references: [id])\n  subject      Subject              @relation(fields: [subjectId], references: [id])\n  assignments  TeachingAssignment[]\n  examSubjects ExamSubject[]\n\n  @@unique([batchTermId, subjectId])\n  @@index([subjectId])\n  @@map(\"batch_term_subjects\")\n}\n\n// Teacher <-> (batch + term + subject). One teacher can have many.\nmodel TeachingAssignment {\n  id                 String    @id @default(uuid()) @db.Uuid\n  teacherId          String    @db.Uuid\n  batchTermSubjectId String    @db.Uuid\n  assignedDateBs     String    @db.VarChar(10)\n  endDateBs          String?   @db.VarChar(10)\n  isActive           Boolean   @default(true)\n  createdAt          DateTime  @default(now())\n  updatedAt          DateTime  @updatedAt\n  createdBy          String?   @db.Uuid\n  updatedBy          String?   @db.Uuid\n  deletedAt          DateTime?\n\n  teacher          Teacher             @relation(fields: [teacherId], references: [id])\n  batchTermSubject BatchTermSubject    @relation(fields: [batchTermSubjectId], references: [id])\n  sessions         AttendanceSession[]\n  pays             TeacherBatchPay[]\n\n  @@unique([teacherId, batchTermSubjectId])\n  @@index([batchTermSubjectId])\n  @@map(\"teaching_assignments\")\n}\n\n// Batch-wise pay for a teacher (payroll adds this on top of base salary).\n// Use ratePerCreditHour OR fixedMonthlyAmount. History kept by effective dates.\nmodel TeacherBatchPay {\n  id                   String    @id @default(uuid()) @db.Uuid\n  teachingAssignmentId String    @db.Uuid\n  ratePerCreditHour    Decimal?  @db.Decimal(14, 2)\n  fixedMonthlyAmount   Decimal?  @db.Decimal(14, 2)\n  effectiveFromBs      String    @db.VarChar(10)\n  effectiveToBs        String?   @db.VarChar(10)\n  createdAt            DateTime  @default(now())\n  updatedAt            DateTime  @updatedAt\n  createdBy            String?   @db.Uuid\n  updatedBy            String?   @db.Uuid\n  deletedAt            DateTime?\n\n  teachingAssignment TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id])\n\n  @@index([teachingAssignmentId])\n  @@map(\"teacher_batch_pays\")\n}\n\n// =====================================================================\n// 4. ATTENDANCE\n// =====================================================================\n\n// One class of one period on one day, taken by a teacher.\nmodel AttendanceSession {\n  id                   String    @id @default(uuid()) @db.Uuid\n  teachingAssignmentId String    @db.Uuid\n  teacherId            String    @db.Uuid // who actually took it (can differ from assignment teacher)\n  periodId             String    @db.Uuid\n  dateBs               String    @db.VarChar(10)\n  isLocked             Boolean   @default(false) // set after edit time limit (see Setting ATTENDANCE_EDIT_HOURS)\n  lockedAt             DateTime?\n  createdAt            DateTime  @default(now())\n  updatedAt            DateTime  @updatedAt\n  createdBy            String?   @db.Uuid\n  updatedBy            String?   @db.Uuid\n  deletedAt            DateTime?\n\n  teachingAssignment TeachingAssignment  @relation(fields: [teachingAssignmentId], references: [id])\n  teacher            Teacher             @relation(fields: [teacherId], references: [id])\n  period             Period              @relation(fields: [periodId], references: [id])\n  records            StudentAttendance[]\n\n  @@unique([teachingAssignmentId, periodId, dateBs])\n  @@index([dateBs])\n  @@index([teacherId])\n  @@index([periodId])\n  @@map(\"attendance_sessions\")\n}\n\nmodel StudentAttendance {\n  id        String    @id @default(uuid()) @db.Uuid\n  sessionId String    @db.Uuid\n  studentId String    @db.Uuid\n  statusId  String    @db.Uuid\n  remarks   String?\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  session AttendanceSession @relation(fields: [sessionId], references: [id])\n  student Student           @relation(fields: [studentId], references: [id])\n  status  AttendanceStatus  @relation(fields: [statusId], references: [id])\n\n  @@unique([sessionId, studentId])\n  @@index([studentId])\n  @@index([statusId])\n  @@map(\"student_attendances\")\n}\n\n// Teacher / Staff / Accountant attendance, marked by Principal.\n// createdBy = the Principal's userId. Payroll reads this table.\nmodel EmployeeAttendance {\n  id          String    @id @default(uuid()) @db.Uuid\n  employeeId  String    @db.Uuid\n  dateBs      String    @db.VarChar(10)\n  statusId    String    @db.Uuid\n  leaveTypeId String?   @db.Uuid // only when status = LEAVE\n  remarks     String?\n  isLocked    Boolean   @default(false)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  employee  Employee         @relation(fields: [employeeId], references: [id])\n  status    AttendanceStatus @relation(fields: [statusId], references: [id])\n  leaveType LeaveType?       @relation(fields: [leaveTypeId], references: [id])\n\n  @@unique([employeeId, dateBs])\n  @@index([dateBs])\n  @@index([statusId])\n  @@index([leaveTypeId])\n  @@map(\"employee_attendances\")\n}\n\n// =====================================================================\n// 5. EXAM AND RESULT (terminal exams only, no back paper)\n// =====================================================================\n\nmodel Exam {\n  id          String    @id @default(uuid()) @db.Uuid\n  batchTermId String    @db.Uuid\n  examTypeId  String    @db.Uuid\n  name        String\n  startDateBs String?   @db.VarChar(10)\n  endDateBs   String?   @db.VarChar(10)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid // teacher\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  batchTerm BatchTerm     @relation(fields: [batchTermId], references: [id])\n  examType  ExamType      @relation(fields: [examTypeId], references: [id])\n  subjects  ExamSubject[]\n  results   Result[]\n\n  @@index([batchTermId])\n  @@index([examTypeId])\n  @@map(\"exams\")\n}\n\nmodel ExamSubject {\n  id                 String    @id @default(uuid()) @db.Uuid\n  examId             String    @db.Uuid\n  batchTermSubjectId String    @db.Uuid\n  fullMarks          Decimal   @default(100) @db.Decimal(6, 2)\n  passMarks          Decimal   @default(40) @db.Decimal(6, 2)\n  examDateBs         String?   @db.VarChar(10)\n  createdAt          DateTime  @default(now())\n  updatedAt          DateTime  @updatedAt\n  createdBy          String?   @db.Uuid\n  updatedBy          String?   @db.Uuid\n  deletedAt          DateTime?\n\n  exam             Exam             @relation(fields: [examId], references: [id])\n  batchTermSubject BatchTermSubject @relation(fields: [batchTermSubjectId], references: [id])\n  marks            ExamMark[]\n  resultSubjects   ResultSubject[]\n\n  @@unique([examId, batchTermSubjectId])\n  @@index([batchTermSubjectId])\n  @@map(\"exam_subjects\")\n}\n\nmodel ExamMark {\n  id            String    @id @default(uuid()) @db.Uuid\n  examSubjectId String    @db.Uuid\n  studentId     String    @db.Uuid\n  marksObtained Decimal?  @db.Decimal(6, 2)\n  isAbsent      Boolean   @default(false)\n  remarks       String?\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])\n  student     Student     @relation(fields: [studentId], references: [id])\n\n  @@unique([examSubjectId, studentId])\n  @@index([studentId])\n  @@map(\"exam_marks\")\n}\n\n// Per-student result of one exam. Teacher creates (PENDING), Principal approves.\n// GPA = sum(gradePoint * creditHour) / sum(creditHour)  (credit-weighted, 4.0 scale)\nmodel Result {\n  id               String    @id @default(uuid()) @db.Uuid\n  studentId        String    @db.Uuid\n  examId           String    @db.Uuid\n  totalMarks       Decimal   @db.Decimal(8, 2)\n  fullMarks        Decimal   @db.Decimal(8, 2)\n  percentage       Decimal   @db.Decimal(5, 2)\n  totalCreditHour  Decimal   @db.Decimal(5, 1)\n  gpa              Decimal   @db.Decimal(3, 2)\n  cgpa             Decimal?  @db.Decimal(3, 2)\n  isPassed         Boolean\n  workflowStatusId String    @db.Uuid\n  submittedAt      DateTime?\n  approvedBy       String?   @db.Uuid // Principal userId\n  approvedAt       DateTime?\n  publishedAt      DateTime?\n  remarks          String?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  student        Student         @relation(fields: [studentId], references: [id])\n  exam           Exam            @relation(fields: [examId], references: [id])\n  workflowStatus WorkflowStatus  @relation(fields: [workflowStatusId], references: [id])\n  subjects       ResultSubject[]\n\n  @@unique([studentId, examId])\n  @@index([examId])\n  @@index([workflowStatusId])\n  @@map(\"results\")\n}\n\n// Snapshot per subject (creditHour copied so later syllabus edits never change old results)\nmodel ResultSubject {\n  id            String    @id @default(uuid()) @db.Uuid\n  resultId      String    @db.Uuid\n  examSubjectId String    @db.Uuid\n  marksObtained Decimal   @db.Decimal(6, 2)\n  fullMarks     Decimal   @db.Decimal(6, 2)\n  creditHour    Decimal   @db.Decimal(4, 1)\n  gradeScaleId  String    @db.Uuid\n  gradePoint    Decimal   @db.Decimal(3, 2)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  result      Result      @relation(fields: [resultId], references: [id])\n  examSubject ExamSubject @relation(fields: [examSubjectId], references: [id])\n  gradeScale  GradeScale  @relation(fields: [gradeScaleId], references: [id])\n\n  @@unique([resultId, examSubjectId])\n  @@index([examSubjectId])\n  @@index([gradeScaleId])\n  @@map(\"result_subjects\")\n}\n\n// =====================================================================\n// 6. FEE MANAGEMENT\n// =====================================================================\n\n// Accountant creates per course (optionally per batch, null batch = default for course)\nmodel FeeStructure {\n  id        String    @id @default(uuid()) @db.Uuid\n  courseId  String    @db.Uuid\n  batchId   String?   @db.Uuid\n  name      String\n  isActive  Boolean   @default(true)\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  course      Course             @relation(fields: [courseId], references: [id])\n  batch       Batch?             @relation(fields: [batchId], references: [id])\n  items       FeeStructureItem[]\n  studentFees StudentFee[]\n\n  @@index([courseId])\n  @@index([batchId])\n  @@map(\"fee_structures\")\n}\n\nmodel FeeStructureItem {\n  id             String    @id @default(uuid()) @db.Uuid\n  feeStructureId String    @db.Uuid\n  feeHeadId      String    @db.Uuid\n  termNumber     Int? // null = one time (e.g. admission)\n  amount         Decimal   @db.Decimal(14, 2)\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  feeStructure FeeStructure     @relation(fields: [feeStructureId], references: [id])\n  feeHead      FeeHead          @relation(fields: [feeHeadId], references: [id])\n  studentItems StudentFeeItem[]\n\n  @@index([feeStructureId])\n  @@index([feeHeadId])\n  @@map(\"fee_structure_items\")\n}\n\n// Fee assigned to one student (copied from structure at admission by Accountant).\n// Discount / skip / custom item all live in StudentFeeItem, so fee can differ per student.\nmodel StudentFee {\n  id             String    @id @default(uuid()) @db.Uuid\n  studentId      String    @db.Uuid\n  feeStructureId String?   @db.Uuid\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid\n  updatedBy      String?   @db.Uuid\n  deletedAt      DateTime?\n\n  student      Student          @relation(fields: [studentId], references: [id])\n  feeStructure FeeStructure?    @relation(fields: [feeStructureId], references: [id])\n  items        StudentFeeItem[]\n\n  @@index([studentId])\n  @@index([feeStructureId])\n  @@map(\"student_fees\")\n}\n\nmodel StudentFeeItem {\n  id                 String    @id @default(uuid()) @db.Uuid\n  studentFeeId       String    @db.Uuid\n  feeHeadId          String    @db.Uuid\n  feeStructureItemId String?   @db.Uuid // null = custom item added for this student\n  termNumber         Int?\n  description        String?\n  amount             Decimal   @db.Decimal(14, 2)\n  discountAmount     Decimal   @default(0) @db.Decimal(14, 2)\n  discountReason     String?\n  netAmount          Decimal   @db.Decimal(14, 2) // amount - discountAmount\n  isSkipped          Boolean   @default(false) // Accountant can skip a fee for a student\n  skipReason         String?\n  dueDateBs          String?   @db.VarChar(10)\n  createdAt          DateTime  @default(now())\n  updatedAt          DateTime  @updatedAt\n  createdBy          String?   @db.Uuid\n  updatedBy          String?   @db.Uuid\n  deletedAt          DateTime?\n\n  studentFee       StudentFee             @relation(fields: [studentFeeId], references: [id])\n  feeHead          FeeHead                @relation(fields: [feeHeadId], references: [id])\n  feeStructureItem FeeStructureItem?      @relation(fields: [feeStructureItemId], references: [id])\n  installments     FeeInstallment[]\n  allocations      FeePaymentAllocation[]\n\n  @@index([studentFeeId])\n  @@index([feeHeadId])\n  @@index([feeStructureItemId])\n  @@index([dueDateBs])\n  @@map(\"student_fee_items\")\n}\n\n// Payment schedule if the student pays in installments\nmodel FeeInstallment {\n  id               String    @id @default(uuid()) @db.Uuid\n  studentFeeItemId String    @db.Uuid\n  installmentNo    Int\n  dueDateBs        String    @db.VarChar(10)\n  amount           Decimal   @db.Decimal(14, 2)\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  studentFeeItem StudentFeeItem         @relation(fields: [studentFeeItemId], references: [id])\n  allocations    FeePaymentAllocation[]\n\n  @@unique([studentFeeItemId, installmentNo])\n  @@map(\"fee_installments\")\n}\n\n// Money received = one receipt. Append-only: cancel by reversal, never delete.\nmodel FeePayment {\n  id             String    @id @default(uuid()) @db.Uuid\n  receiptNo      String    @unique\n  studentId      String    @db.Uuid\n  fiscalYearId   String    @db.Uuid\n  paymentDateBs  String    @db.VarChar(10)\n  totalAmount    Decimal   @db.Decimal(14, 2)\n  remarks        String?\n  isCancelled    Boolean   @default(false)\n  cancelledAt    DateTime?\n  cancelReason   String?\n  journalEntryId String?   @unique @db.Uuid\n  createdAt      DateTime  @default(now())\n  updatedAt      DateTime  @updatedAt\n  createdBy      String?   @db.Uuid // accountant\n  updatedBy      String?   @db.Uuid\n\n  student      Student                @relation(fields: [studentId], references: [id])\n  fiscalYear   FiscalYear             @relation(fields: [fiscalYearId], references: [id])\n  journalEntry JournalEntry?          @relation(fields: [journalEntryId], references: [id])\n  methodLines  FeePaymentMethodLine[]\n  allocations  FeePaymentAllocation[]\n\n  @@index([studentId])\n  @@index([fiscalYearId])\n  @@index([paymentDateBs])\n  @@map(\"fee_payments\")\n}\n\n// Split payment: e.g. 5000 cash + 5000 bank in one receipt\n// sum(methodLines.amount) must equal FeePayment.totalAmount\nmodel FeePaymentMethodLine {\n  id              String   @id @default(uuid()) @db.Uuid\n  feePaymentId    String   @db.Uuid\n  paymentMethodId String   @db.Uuid\n  amount          Decimal  @db.Decimal(14, 2)\n  referenceNo     String? // cheque no / transaction id\n  bankName        String?\n  createdAt       DateTime @default(now())\n  updatedAt       DateTime @updatedAt\n  createdBy       String?  @db.Uuid\n  updatedBy       String?  @db.Uuid\n\n  feePayment    FeePayment    @relation(fields: [feePaymentId], references: [id])\n  paymentMethod PaymentMethod @relation(fields: [paymentMethodId], references: [id])\n\n  @@index([feePaymentId])\n  @@index([paymentMethodId])\n  @@map(\"fee_payment_method_lines\")\n}\n\n// Which fee item / installment this payment pays (supports partial payment)\nmodel FeePaymentAllocation {\n  id               String   @id @default(uuid()) @db.Uuid\n  feePaymentId     String   @db.Uuid\n  studentFeeItemId String   @db.Uuid\n  feeInstallmentId String?  @db.Uuid\n  amount           Decimal  @db.Decimal(14, 2)\n  createdAt        DateTime @default(now())\n  updatedAt        DateTime @updatedAt\n  createdBy        String?  @db.Uuid\n  updatedBy        String?  @db.Uuid\n\n  feePayment     FeePayment      @relation(fields: [feePaymentId], references: [id])\n  studentFeeItem StudentFeeItem  @relation(fields: [studentFeeItemId], references: [id])\n  feeInstallment FeeInstallment? @relation(fields: [feeInstallmentId], references: [id])\n\n  @@index([feePaymentId])\n  @@index([studentFeeItemId])\n  @@index([feeInstallmentId])\n  @@map(\"fee_payment_allocations\")\n}\n\n// =====================================================================\n// 7. ACCOUNTING (double entry)\n// =====================================================================\n\nmodel FiscalYear {\n  id          String    @id @default(uuid()) @db.Uuid\n  name        String    @unique // \"2081/82\"\n  startDateBs String    @db.VarChar(10) // 2081-04-01 (Shrawan 1)\n  endDateBs   String    @db.VarChar(10)\n  isCurrent   Boolean   @default(false)\n  isClosed    Boolean   @default(false)\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  journalEntries JournalEntry[]\n  payments       FeePayment[]\n  payrolls       Payroll[]\n  taxSlabs       TaxSlab[]\n\n  @@map(\"fiscal_years\")\n}\n\n// Chart of accounts (tree). isGroup = heading only, cannot receive postings.\nmodel Account {\n  id            String    @id @default(uuid()) @db.Uuid\n  code          String    @unique\n  name          String\n  accountTypeId String    @db.Uuid\n  parentId      String?   @db.Uuid\n  isGroup       Boolean   @default(false)\n  isSystem      Boolean   @default(false) // seeded accounts that must not be removed\n  isActive      Boolean   @default(true)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  accountType    AccountType     @relation(fields: [accountTypeId], references: [id])\n  parent         Account?        @relation(\"AccountTree\", fields: [parentId], references: [id])\n  children       Account[]       @relation(\"AccountTree\")\n  journalLines   JournalLine[]\n  paymentMethods PaymentMethod[]\n\n  @@index([accountTypeId])\n  @@index([parentId])\n  @@map(\"accounts\")\n}\n\n// Append-only. No deletedAt on purpose. Correct mistakes with a reversal entry.\n// Manual / backdated entries: dateBs can be in the past (isBackdated = true).\nmodel JournalEntry {\n  id           String   @id @default(uuid()) @db.Uuid\n  entryNo      String   @unique // JV-2081/82-000123\n  fiscalYearId String   @db.Uuid\n  dateBs       String   @db.VarChar(10)\n  description  String\n  sourceId     String   @db.Uuid // JournalSource\n  sourceRefId  String?  @db.Uuid // id of FeePayment / Payroll / ... that created it\n  isManual     Boolean  @default(false)\n  isBackdated  Boolean  @default(false)\n  isReversed   Boolean  @default(false)\n  reversalOfId String?  @unique @db.Uuid\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n  createdBy    String?  @db.Uuid\n  updatedBy    String?  @db.Uuid\n\n  fiscalYear FiscalYear    @relation(fields: [fiscalYearId], references: [id])\n  source     JournalSource @relation(fields: [sourceId], references: [id])\n  reversalOf JournalEntry? @relation(\"Reversal\", fields: [reversalOfId], references: [id])\n  reversedBy JournalEntry? @relation(\"Reversal\")\n  lines      JournalLine[]\n  feePayment FeePayment?\n  payroll    Payroll?\n\n  @@index([fiscalYearId, dateBs])\n  @@index([sourceId])\n  @@index([sourceRefId])\n  @@map(\"journal_entries\")\n}\n\n// Each entry: sum(debit) = sum(credit) and each line has debit XOR credit.\n// Prisma cannot express CHECK constraints, add them in the migration SQL (see bottom).\nmodel JournalLine {\n  id             String   @id @default(uuid()) @db.Uuid\n  journalEntryId String   @db.Uuid\n  accountId      String   @db.Uuid\n  debit          Decimal  @default(0) @db.Decimal(14, 2)\n  credit         Decimal  @default(0) @db.Decimal(14, 2)\n  description    String?\n  studentId      String?  @db.Uuid // optional party, gives student ledger\n  employeeId     String?  @db.Uuid // optional party, gives employee ledger\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n  createdBy      String?  @db.Uuid\n  updatedBy      String?  @db.Uuid\n\n  journalEntry JournalEntry @relation(fields: [journalEntryId], references: [id])\n  account      Account      @relation(fields: [accountId], references: [id])\n  student      Student?     @relation(fields: [studentId], references: [id])\n  employee     Employee?    @relation(fields: [employeeId], references: [id])\n\n  @@index([journalEntryId])\n  @@index([accountId])\n  @@index([studentId])\n  @@index([employeeId])\n  @@map(\"journal_lines\")\n}\n\n// =====================================================================\n// 8. PAYROLL (Nepal rules: SSF / PF / CIT / TDS as SalaryComponent + TaxSlab)\n// =====================================================================\n\n// Salary is versioned: when salary changes, close the old row (effectiveToBs)\n// and create a new one. Old payslips keep their own snapshot.\nmodel SalaryStructure {\n  id              String    @id @default(uuid()) @db.Uuid\n  employeeId      String    @db.Uuid\n  basicSalary     Decimal   @db.Decimal(14, 2)\n  effectiveFromBs String    @db.VarChar(10)\n  effectiveToBs   String?   @db.VarChar(10)\n  remarks         String?\n  createdAt       DateTime  @default(now())\n  updatedAt       DateTime  @updatedAt\n  createdBy       String?   @db.Uuid\n  updatedBy       String?   @db.Uuid\n  deletedAt       DateTime?\n\n  employee Employee              @relation(fields: [employeeId], references: [id])\n  items    SalaryStructureItem[]\n\n  @@index([employeeId, effectiveFromBs])\n  @@map(\"salary_structures\")\n}\n\nmodel SalaryStructureItem {\n  id                String    @id @default(uuid()) @db.Uuid\n  salaryStructureId String    @db.Uuid\n  componentId       String    @db.Uuid\n  amount            Decimal   @db.Decimal(14, 2)\n  isPercentOfBasic  Boolean   @default(false) // amount = percent when true\n  createdAt         DateTime  @default(now())\n  updatedAt         DateTime  @updatedAt\n  createdBy         String?   @db.Uuid\n  updatedBy         String?   @db.Uuid\n  deletedAt         DateTime?\n\n  salaryStructure SalaryStructure @relation(fields: [salaryStructureId], references: [id])\n  component       SalaryComponent @relation(fields: [componentId], references: [id])\n\n  @@unique([salaryStructureId, componentId])\n  @@index([componentId])\n  @@map(\"salary_structure_items\")\n}\n\n// Income tax slabs per fiscal year (fill from that year's budget)\nmodel TaxSlab {\n  id           String    @id @default(uuid()) @db.Uuid\n  fiscalYearId String    @db.Uuid\n  isCouple     Boolean   @default(false)\n  fromAmount   Decimal   @db.Decimal(14, 2)\n  toAmount     Decimal?  @db.Decimal(14, 2)\n  ratePercent  Decimal   @db.Decimal(5, 2)\n  createdAt    DateTime  @default(now())\n  updatedAt    DateTime  @updatedAt\n  createdBy    String?   @db.Uuid\n  updatedBy    String?   @db.Uuid\n  deletedAt    DateTime?\n\n  fiscalYear FiscalYear @relation(fields: [fiscalYearId], references: [id])\n\n  @@index([fiscalYearId])\n  @@map(\"tax_slabs\")\n}\n\n// Monthly payroll run: Accountant prepares (PENDING), Principal approves, then PAID\nmodel Payroll {\n  id               String    @id @default(uuid()) @db.Uuid\n  fiscalYearId     String    @db.Uuid\n  yearBs           Int\n  monthBs          Int // 1 = Baisakh ... 12 = Chaitra\n  totalDays        Int\n  workflowStatusId String    @db.Uuid\n  submittedAt      DateTime?\n  approvedBy       String?   @db.Uuid // Principal userId\n  approvedAt       DateTime?\n  paidDateBs       String?   @db.VarChar(10)\n  journalEntryId   String?   @unique @db.Uuid\n  remarks          String?\n  createdAt        DateTime  @default(now())\n  updatedAt        DateTime  @updatedAt\n  createdBy        String?   @db.Uuid // accountant\n  updatedBy        String?   @db.Uuid\n  deletedAt        DateTime?\n\n  fiscalYear     FiscalYear     @relation(fields: [fiscalYearId], references: [id])\n  workflowStatus WorkflowStatus @relation(fields: [workflowStatusId], references: [id])\n  journalEntry   JournalEntry?  @relation(fields: [journalEntryId], references: [id])\n  payslips       Payslip[]\n\n  @@unique([yearBs, monthBs])\n  @@index([fiscalYearId])\n  @@index([workflowStatusId])\n  @@map(\"payrolls\")\n}\n\n// Stored payslip (snapshot). Attendance summary is copied so it never changes later.\nmodel Payslip {\n  id                  String   @id @default(uuid()) @db.Uuid\n  payslipNo           String   @unique\n  payrollId           String   @db.Uuid\n  employeeId          String   @db.Uuid\n  presentDays         Decimal  @db.Decimal(5, 2)\n  halfDays            Int      @default(0)\n  paidLeaveDays       Int      @default(0)\n  unpaidLeaveDays     Int      @default(0)\n  absentDays          Int      @default(0)\n  basicSalary         Decimal  @db.Decimal(14, 2)\n  attendanceDeduction Decimal  @default(0) @db.Decimal(14, 2) // salary cut for absent / unpaid leave\n  totalAllowance      Decimal  @default(0) @db.Decimal(14, 2)\n  teachingPay         Decimal  @default(0) @db.Decimal(14, 2) // from TeacherBatchPay\n  grossPay            Decimal  @db.Decimal(14, 2)\n  totalDeduction      Decimal  @default(0) @db.Decimal(14, 2)\n  taxAmount           Decimal  @default(0) @db.Decimal(14, 2)\n  netPay              Decimal  @db.Decimal(14, 2)\n  paymentMethodId     String?  @db.Uuid\n  paidDateBs          String?  @db.VarChar(10)\n  pdfUrl              String?\n  createdAt           DateTime @default(now())\n  updatedAt           DateTime @updatedAt\n  createdBy           String?  @db.Uuid\n  updatedBy           String?  @db.Uuid\n\n  payroll       Payroll        @relation(fields: [payrollId], references: [id])\n  employee      Employee       @relation(fields: [employeeId], references: [id])\n  paymentMethod PaymentMethod? @relation(fields: [paymentMethodId], references: [id])\n  items         PayslipItem[]\n\n  @@unique([payrollId, employeeId])\n  @@index([employeeId])\n  @@index([paymentMethodId])\n  @@map(\"payslips\")\n}\n\nmodel PayslipItem {\n  id                     String   @id @default(uuid()) @db.Uuid\n  payslipId              String   @db.Uuid\n  componentId            String?  @db.Uuid\n  description            String\n  amount                 Decimal  @db.Decimal(14, 2)\n  isDeduction            Boolean  @default(false)\n  isEmployerContribution Boolean  @default(false)\n  createdAt              DateTime @default(now())\n  updatedAt              DateTime @updatedAt\n  createdBy              String?  @db.Uuid\n  updatedBy              String?  @db.Uuid\n\n  payslip   Payslip          @relation(fields: [payslipId], references: [id])\n  component SalaryComponent? @relation(fields: [componentId], references: [id])\n\n  @@index([payslipId])\n  @@index([componentId])\n  @@map(\"payslip_items\")\n}\n\n// =====================================================================\n// 9. NOTICE + SETTINGS\n// =====================================================================\n\nmodel Notice {\n  id            String    @id @default(uuid()) @db.Uuid\n  title         String\n  body          String\n  attachmentUrl String?\n  isPinned      Boolean   @default(false)\n  isPublished   Boolean   @default(false)\n  publishedAt   DateTime?\n  expiresOnBs   String?   @db.VarChar(10)\n  createdAt     DateTime  @default(now())\n  updatedAt     DateTime  @updatedAt\n  createdBy     String?   @db.Uuid\n  updatedBy     String?   @db.Uuid\n  deletedAt     DateTime?\n\n  targets NoticeTarget[]\n\n  @@map(\"notices\")\n}\n\n// Who sees the notice: a role, a batch, or both. No targets = everyone.\nmodel NoticeTarget {\n  id        String    @id @default(uuid()) @db.Uuid\n  noticeId  String    @db.Uuid\n  role      Role?\n  batchId   String?   @db.Uuid\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  createdBy String?   @db.Uuid\n  updatedBy String?   @db.Uuid\n  deletedAt DateTime?\n\n  notice Notice @relation(fields: [noticeId], references: [id])\n  batch  Batch? @relation(fields: [batchId], references: [id])\n\n  @@index([noticeId])\n  @@index([batchId])\n  @@map(\"notice_targets\")\n}\n\n// Key/value config, e.g. ATTENDANCE_EDIT_HOURS = 24, WORKING_DAYS_MODE = CALENDAR\nmodel Setting {\n  id          String    @id @default(uuid()) @db.Uuid\n  key         String    @unique\n  value       String\n  description String?\n  createdAt   DateTime  @default(now())\n  updatedAt   DateTime  @updatedAt\n  createdBy   String?   @db.Uuid\n  updatedBy   String?   @db.Uuid\n  deletedAt   DateTime?\n\n  @@map(\"settings\")\n}\n\n// =====================================================================\n// RAW SQL to add in the first migration (Prisma cannot model these)\n// Run `npx prisma migrate dev --create-only`, paste this in the generated\n// migration.sql, then `npx prisma migrate dev`.\n// =====================================================================\n//\n// -- journal lines: either debit or credit, never both, never negative\n// ALTER TABLE journal_lines ADD CONSTRAINT chk_journal_line_side\n//   CHECK (debit >= 0 AND credit >= 0 AND (debit = 0 OR credit = 0) AND (debit + credit) > 0);\n//\n// -- payroll month must be 1..12\n// ALTER TABLE payrolls ADD CONSTRAINT chk_payroll_month CHECK (\"monthBs\" BETWEEN 1 AND 12);\n//\n// -- only one current fiscal year\n// CREATE UNIQUE INDEX uq_fiscal_year_current ON fiscal_years (\"isCurrent\") WHERE \"isCurrent\" = true AND \"deletedAt\" IS NULL;\n//\n// -- no update / delete on journal tables (append-only, reversal only)\n// CREATE OR REPLACE FUNCTION forbid_journal_change() RETURNS trigger AS $$\n// BEGIN RAISE EXCEPTION 'Journal is append-only. Create a reversal entry instead.'; END;\n// $$ LANGUAGE plpgsql;\n// CREATE TRIGGER trg_journal_lines_no_change BEFORE UPDATE OR DELETE ON journal_lines\n//   FOR EACH ROW EXECUTE FUNCTION forbid_journal_change();\n// (journal_entries: allow UPDATE only of isReversed, so write a narrower trigger there)\n//\n// -- unique keys that must ignore soft-deleted rows.\n//    Every \"code String @unique\" on lookup tables and Subject/Course/Account, Student.universityRegNo,\n//    Employee.employeeCode, User.email/username will BLOCK re-creating a soft-deleted value.\n//    For each one: remove @unique in the schema, then add a partial index, e.g.\n// CREATE UNIQUE INDEX uq_students_regno_active ON students (\"universityRegNo\") WHERE \"deletedAt\" IS NULL;\n// CREATE UNIQUE INDEX uq_users_email_active    ON users (\"email\")             WHERE \"deletedAt\" IS NULL;\n//\n// -- debit total = credit total per entry: enforce in service layer inside one $transaction,\n//    or add a DEFERRABLE constraint trigger on journal_lines.\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -1193,8 +2900,8 @@ export function getPrismaClientClass(): PrismaClientConstructor {
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/internal/prismaNamespace.ts`
 - **Relative Path**: `src/generated/prisma/internal`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `fa12d6adfcbf5fcc0792ca57ef0caa5f`
 - **SHA256**: `bbb60edbf6d63aa5450b0f9dcab8bbaa86a41da58280878737699af3f834267b`
 - **Encoding**: UTF-8
@@ -7495,8 +9202,8 @@ export type TransactionClient = Omit<DefaultPrismaClient, runtime.ITXClientDenyL
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/internal/prismaNamespaceBrowser.ts`
 - **Relative Path**: `src/generated/prisma/internal`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `14886951846665f689b631151f8fb118`
 - **SHA256**: `59b0a501ef3f0c4369e4fbfb15ec1296072d8b55a26f48255d75994bab44c3fa`
 - **Encoding**: UTF-8
@@ -8715,8 +10422,8 @@ export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Account.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `dc153b43dad4fcbdb993a2e6821add2f`
 - **SHA256**: `a08a931547094495220a9b9bca3b59bba224356d9555802d1db4ff11a4d4c1ae`
 - **Encoding**: UTF-8
@@ -11047,8 +12754,8 @@ export type AccountDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Accountant.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `c6429647f366035e52ceb73c368aa5c6`
 - **SHA256**: `cacb3c88cc90ff3b449a43db9817becfc305439b347f82c41d1896826c59f7dc`
 - **Encoding**: UTF-8
@@ -12428,8 +14135,8 @@ export type AccountantDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/AccountType.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8c2b37e3a765415dd62647153b0b2974`
 - **SHA256**: `b879b0a365beb3ea3cc4cdb805e00a40005e803c478e76d765558e8145b6a384`
 - **Encoding**: UTF-8
@@ -13981,8 +15688,8 @@ export type AccountTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/AttendanceSession.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `aa5383b0685047d551d60c2510d54d18`
 - **SHA256**: `b491cf041d69dd9ebbe79bf6dc1338bc14a5ff985e5c3d7f722d2848a14e923a`
 - **Encoding**: UTF-8
@@ -16097,8 +17804,8 @@ export type AttendanceSessionDefaultArgs<ExtArgs extends runtime.Types.Extension
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/AttendanceStatus.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `b5a0b908547507dca22532e3fa9ce89d`
 - **SHA256**: `6d3f867a852e09c37a284533392af7742359ebc8c3911e10e803d0ba704802a4`
 - **Encoding**: UTF-8
@@ -17792,8 +19499,8 @@ export type AttendanceStatusDefaultArgs<ExtArgs extends runtime.Types.Extensions
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Batch.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `e62bde45b22628ad21b2fd67cec285d1`
 - **SHA256**: `047f14b3d55d38ffd2bd8d828813ddfff0b260d27b5e7b86bbb0b966bca58a05`
 - **Encoding**: UTF-8
@@ -20039,8 +21746,8 @@ export type BatchDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/BatchTerm.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `7831ff4d18778b0fd8e9cfc303d64063`
 - **SHA256**: `c1dfdcb85d62f840038959a5b85fb61aa1fcf8f7bab00d01131592f07d7cbdfe`
 - **Encoding**: UTF-8
@@ -22012,8 +23719,8 @@ export type BatchTermDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/BatchTermSubject.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `3d1ff4b2b49874e669513eddb2ae2323`
 - **SHA256**: `4a81776007b8b29166af6e29931cfa10e2e9ea421f08aa5176e313e8f672a644`
 - **Encoding**: UTF-8
@@ -24057,8 +25764,8 @@ export type BatchTermSubjectDefaultArgs<ExtArgs extends runtime.Types.Extensions
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Course.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `2ccd725be1a285f83244339159588adf`
 - **SHA256**: `197879a53e009cf6de92bfdef0f726ebc27955576fe15557669897616090cb8a`
 - **Encoding**: UTF-8
@@ -26024,8 +27731,8 @@ export type CourseDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/CourseSystem.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `2ea2b57d19c795bc23aefd621ba11fec`
 - **SHA256**: `c34567e313964b82c2e50e056582772cf6efd9c86e66932fe3d00bad099a6f4b`
 - **Encoding**: UTF-8
@@ -27501,8 +29208,8 @@ export type CourseSystemDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Employee.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `a06496bfccd5c5fff8f51f1a7b44e498`
 - **SHA256**: `f817de8bf7eb97bbcfa2ece7f4ff376d249cc737ba4a85d3075c6bef60af9166`
 - **Encoding**: UTF-8
@@ -31262,8 +32969,8 @@ export type EmployeeDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/EmployeeAttendance.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `80351b830dc1aa9aa2117f7291c64464`
 - **SHA256**: `26bfc3ba99080c02bba53675daac9ab30e3d18fb1692a5efd70862e52b8b5b8a`
 - **Encoding**: UTF-8
@@ -33223,8 +34930,8 @@ export type EmployeeAttendanceDefaultArgs<ExtArgs extends runtime.Types.Extensio
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Exam.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `01d4f6215843a1b9d0cd6b0ec7964027`
 - **SHA256**: `78a42be4b904c31d1870e052e9e7425ab5f6965fc8dcbc600dcdfced300cde0d`
 - **Encoding**: UTF-8
@@ -35267,8 +36974,8 @@ export type ExamDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/ExamMark.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `cb8a26d1226db3b62f393be9f60f5d67`
 - **SHA256**: `eabe99a02a8e585bda6bfe2e5c092031904401989c698c91206d418a05fcb8b3`
 - **Encoding**: UTF-8
@@ -37050,8 +38757,8 @@ export type ExamMarkDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/ExamSubject.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `7ab641511c77d190ea83174bdf03bf47`
 - **SHA256**: `f7868f1cfaaccd18afb1a662ccb80e50393d466238caa3849d595402272ee906`
 - **Encoding**: UTF-8
@@ -39150,8 +40857,8 @@ export type ExamSubjectDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/ExamType.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `5c5f9e591a55cd04806fef84764f5148`
 - **SHA256**: `ba40638c35148da2a007e0aa6e4b8d9b842ce2406232c34c7868debeba2e30f8`
 - **Encoding**: UTF-8
@@ -40627,8 +42334,8 @@ export type ExamTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeeHead.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8f964d865445dce7c2bb5353d839a2dc`
 - **SHA256**: `6da0ad41b2535308c3a85ef0401279711886f4a6d45057a0e3b14e339d393738`
 - **Encoding**: UTF-8
@@ -42234,8 +43941,8 @@ export type FeeHeadDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeeInstallment.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `9d8ea7694b85d0048c152f28ea7540be`
 - **SHA256**: `0c890d10dcdc5acb1d650b6de370bf44d38d907b4fdc76b99b57cbf2ac47e567`
 - **Encoding**: UTF-8
@@ -43991,8 +45698,8 @@ export type FeeInstallmentDefaultArgs<ExtArgs extends runtime.Types.Extensions.I
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeePayment.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `11a5149bed51cbd4da7b4006263fa405`
 - **SHA256**: `e17f62a5b94dde467a18f02135633b3eae3ea8f406775b4511042830ce01bc5d`
 - **Encoding**: UTF-8
@@ -46433,8 +48140,8 @@ export type FeePaymentDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeePaymentAllocation.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `0952b5c5dbc7a3e6e48e31ad3d3a3dc6`
 - **SHA256**: `8df5c837d8d5338f191759a860c611701d6f7f61b6d5b04215530e7b0bf81dc7`
 - **Encoding**: UTF-8
@@ -48291,8 +49998,8 @@ export type FeePaymentAllocationDefaultArgs<ExtArgs extends runtime.Types.Extens
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeePaymentMethodLine.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `94b465516b0e122901cfd254294d21f6`
 - **SHA256**: `fd5c8e8f89baadc4e6e74b22e4a9449915f97178fceba13757246346d7ff5dd0`
 - **Encoding**: UTF-8
@@ -50027,8 +51734,8 @@ export type FeePaymentMethodLineDefaultArgs<ExtArgs extends runtime.Types.Extens
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeeStructure.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `e689fa46808d5c4258bf69ecb38bc940`
 - **SHA256**: `3f9b48d4668ffc98cba8c206dc5a7ebf4adef5d4c814ae02f3a4cb9689cc7f17`
 - **Encoding**: UTF-8
@@ -52048,8 +53755,8 @@ export type FeeStructureDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FeeStructureItem.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `b076a108b50b451332249613b6994974`
 - **SHA256**: `a84ceffe70a15ee26c59089534b3ed07d30be55322dc65e467edcd0cc3e74739`
 - **Encoding**: UTF-8
@@ -53953,8 +55660,8 @@ export type FeeStructureItemDefaultArgs<ExtArgs extends runtime.Types.Extensions
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/FiscalYear.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `9497465248d093d62a5c1faecd343c02`
 - **SHA256**: `edc0751fb0fd402fe76f5ad3549261e9c73ec9585796beb479d9ee03ccc3cd46`
 - **Encoding**: UTF-8
@@ -55932,8 +57639,8 @@ export type FiscalYearDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/GradeScale.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8c8766fa5669dd56eb04b0f8f3c444c1`
 - **SHA256**: `6fa3d3e04455f865ea3ca95fabdf23928858cf179c1ecf4f425034aa45770137`
 - **Encoding**: UTF-8
@@ -57593,8 +59300,8 @@ export type GradeScaleDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Guardian.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8ac741d1229f5ed1a1f393f3ae540256`
 - **SHA256**: `11c8e168b0aa7717d5546fd271aff303e7e38ecc5b136de90a5265ed4f1d0642`
 - **Encoding**: UTF-8
@@ -59449,8 +61156,8 @@ export type GuardianDefaultArgs<ExtArgs extends runtime.Types.Extensions.Interna
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/GuardianRelation.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `4ab4137648929e474a33d379ee0447b8`
 - **SHA256**: `68c8c74704f0d5f1c06224e0c29af8ff38a0a1bfd7ee7aee8e92a9dd16face21`
 - **Encoding**: UTF-8
@@ -61002,8 +62709,8 @@ export type GuardianRelationDefaultArgs<ExtArgs extends runtime.Types.Extensions
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/JournalEntry.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8b814d9c360de8ca406cbd65201f8bc5`
 - **SHA256**: `6c9e46285ab0b04e7f7c27dada20781d3cde2f73b9b2922f9a831cdfa9ca0b84`
 - **Encoding**: UTF-8
@@ -63720,8 +65427,8 @@ export type JournalEntryDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/JournalLine.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `4803893596f6e04a322e46b9afa5162e`
 - **SHA256**: `abeed5c2b2c8ae3d02d8d97d1d66cda779fdaf3c8a21bd2ffe1b856ad4b0557a`
 - **Encoding**: UTF-8
@@ -65906,8 +67613,8 @@ export type JournalLineDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/JournalSource.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `85c60cec4a358938b670b73ec9cd0247`
 - **SHA256**: `6efe8fd6f82f5c3d94df87df73ecd5135366a06e3dc15c96288ce662d2ccde48`
 - **Encoding**: UTF-8
@@ -67351,8 +69058,8 @@ export type JournalSourceDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/LeaveType.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `df1317f958a50cf23b170f5fcaac0028`
 - **SHA256**: `d2c589bc5690b49504cfa7b70329f42acbe8ec6500a91bc4bb00df071e3ea4d7`
 - **Encoding**: UTF-8
@@ -68946,8 +70653,8 @@ export type LeaveTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Notice.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `1499bbf8425bcf7e04048a650a4d44d9`
 - **SHA256**: `15b6cbf893a60fae7412d8960d07e1dd5f1f322a7b756baa8899855cf42dad30`
 - **Encoding**: UTF-8
@@ -70551,8 +72258,8 @@ export type NoticeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/NoticeTarget.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `07977ebaf4577068ff98025a670d6243`
 - **SHA256**: `a526ae3d7ff015b4a9bb40ee540147dc7824f21d7ee9bf8e1b671ff3b1906b3c`
 - **Encoding**: UTF-8
@@ -72225,8 +73932,8 @@ export type NoticeTargetDefaultArgs<ExtArgs extends runtime.Types.Extensions.Int
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Otp.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `fc927caa6b976a5af7fa84c1e2e73551`
 - **SHA256**: `d91b2f8a1a509db4b4376a1fb438667a687957494d34dbf5b7fc93321b56acf6`
 - **Encoding**: UTF-8
@@ -73592,8 +75299,8 @@ export type OtpDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/PaymentMethod.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `e1d8a24d7696de2666451071e9f82131`
 - **SHA256**: `157d89f177c580216155c9a421e3abd25ccc3510b9d0d5b235874d4b31a42067`
 - **Encoding**: UTF-8
@@ -75455,8 +77162,8 @@ export type PaymentMethodDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Payroll.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `98927c3afd368c0d21eefdd0f9b2a66b`
 - **SHA256**: `cc7e327b8774488f551cf0d8629b8304a98f0fe46b7e76a9063533341811658a`
 - **Encoding**: UTF-8
@@ -77847,8 +79554,8 @@ export type PayrollDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Payslip.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `2e53fc28668e5e18d596b9455a5434e4`
 - **SHA256**: `90c4a1863578aaceb30efbf9b099aee5708dc9bb6e95b389d58eb35515d176d3`
 - **Encoding**: UTF-8
@@ -80709,8 +82416,8 @@ export type PayslipDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/PayslipItem.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `fcd931de3179457877a4fb12c3cfeb6c`
 - **SHA256**: `36dfb7d17067600628b0dc91125e1e5f6711069d12e141a5e0b1b2d6080446ba`
 - **Encoding**: UTF-8
@@ -82505,8 +84212,8 @@ export type PayslipItemDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inte
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Period.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `bdec25dbc78b0aac403d38e0e656f74e`
 - **SHA256**: `e9fea210d030fd6ccb658a8318c67bec6e5e100ea5f55d867e4d99748f26d016`
 - **Encoding**: UTF-8
@@ -84090,8 +85797,8 @@ export type PeriodDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Principal.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `356e9091db3461d1068981ca9be26d5c`
 - **SHA256**: `54238c94249870531a18be507fcf28af4c75169f5d7bf319ffd5ce1280d4d573`
 - **Encoding**: UTF-8
@@ -85471,8 +87178,8 @@ export type PrincipalDefaultArgs<ExtArgs extends runtime.Types.Extensions.Intern
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Result.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `1ce9f1cfc8eab08f550c4381e0667629`
 - **SHA256**: `de389bcb3deca881f19c356faea8762a3eecb42b3345a3e613871f974fc11896`
 - **Encoding**: UTF-8
@@ -88119,8 +89826,8 @@ export type ResultDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/ResultSubject.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8f12fd62d8c630ed4957f7176800acc1`
 - **SHA256**: `74114d175232066c3964db1e1191ba990328fd8056f551648189b1036d348631`
 - **Encoding**: UTF-8
@@ -90170,8 +91877,8 @@ export type ResultSubjectDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/SalaryComponent.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `0f24dde6758a58dfc59de76e8c0238a1`
 - **SHA256**: `9576f84736073a3bd85ba461cef69e73af6a1a8ce55de74c62e7b6acd1392996`
 - **Encoding**: UTF-8
@@ -91892,8 +93599,8 @@ export type SalaryComponentDefaultArgs<ExtArgs extends runtime.Types.Extensions.
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/SalaryStructure.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `c966c87a34c7c8cce2a56e0ef561fb3a`
 - **SHA256**: `c603aa6c1c071f503a4c9ba09e0c3b788ff1ab8927cafb51eaafdb4ab1ae59a7`
 - **Encoding**: UTF-8
@@ -93674,8 +95381,8 @@ export type SalaryStructureDefaultArgs<ExtArgs extends runtime.Types.Extensions.
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/SalaryStructureItem.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `949d986cc10b3d700cca1110252cf89d`
 - **SHA256**: `afda6fd216e2785a0e15c5191fee18e9a324a4d16225e0ad5ff51d15eeceb986`
 - **Encoding**: UTF-8
@@ -95416,8 +97123,8 @@ export type SalaryStructureItemDefaultArgs<ExtArgs extends runtime.Types.Extensi
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Setting.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `028183dc168d7f01272b3514d02cb8b3`
 - **SHA256**: `657ef0df169fa355dbe0ccf8ba64538b39484ad1835a32fd96da28be1ad3ee2b`
 - **Encoding**: UTF-8
@@ -96699,8 +98406,8 @@ export type SettingDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Staff.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `f5a331639452c7847d10a4f5734bf2b8`
 - **SHA256**: `4048629f17e9af2cb30afd4d76fa6714f74b356d75f2e4aa7d6ef8e492e385eb`
 - **Encoding**: UTF-8
@@ -98112,8 +99819,8 @@ export type StaffDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Student.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `2339c9bb115715d5cb7622e41e999a40`
 - **SHA256**: `c4c541f1b93acbcfc1d9f7381d0147880f66e8afa87715d5d3525cd4eb53591d`
 - **Encoding**: UTF-8
@@ -102460,8 +104167,8 @@ export type StudentDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/StudentAttendance.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `1b2d30356e8d3e169eecd094685e8a29`
 - **SHA256**: `13624b313e5b0e91f07e0ff22ef3a5a99d85a3e02adcfebc870cdd1db492ef46`
 - **Encoding**: UTF-8
@@ -104308,8 +106015,8 @@ export type StudentAttendanceDefaultArgs<ExtArgs extends runtime.Types.Extension
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/StudentFee.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `2f53ecaaac54e20cd3bf46e5fbd5e950`
 - **SHA256**: `4ef23c822325da1755eb2564415d891741dda30d40aae4b9fb240e90eda6ae0e`
 - **Encoding**: UTF-8
@@ -106090,8 +107797,8 @@ export type StudentFeeDefaultArgs<ExtArgs extends runtime.Types.Extensions.Inter
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/StudentFeeItem.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `f47e1bf6e273aa6fcc0c7435a6de351d`
 - **SHA256**: `e03e4482b624edfd8c202c02fde3ee8652205e981ca087fa9d7017c278ab094f`
 - **Encoding**: UTF-8
@@ -108764,8 +110471,8 @@ export type StudentFeeItemDefaultArgs<ExtArgs extends runtime.Types.Extensions.I
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/StudentStatus.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `8d4893b0835fd090efafe763f7af2ddd`
 - **SHA256**: `e7a6440c782060c3a4c50794825b6bf91363f55f9c846a16bf122d5389052a93`
 - **Encoding**: UTF-8
@@ -110241,8 +111948,8 @@ export type StudentStatusDefaultArgs<ExtArgs extends runtime.Types.Extensions.In
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Subject.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `b33399a2258fbdbe6bb33e336c6ee7ab`
 - **SHA256**: `fe4cb705a28b37302a7a938ce2155718430dd3f253e9284ae3c3df3e3755f300`
 - **Encoding**: UTF-8
@@ -111750,8 +113457,8 @@ export type SubjectDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/TaxSlab.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `5b00c438932099bb1dcdd192f7023e76`
 - **SHA256**: `b7150da1a28ff83f1afa7758c895bdebb23bf5a620aa3335c515492dda280b13`
 - **Encoding**: UTF-8
@@ -113383,8 +115090,8 @@ export type TaxSlabDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/Teacher.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `04bc3505e29ada9d2f13eeb5ed39db60`
 - **SHA256**: `8635ffb8384a5e77856f926eb21c231acecff3592255b085d69c996d6b176fef`
 - **Encoding**: UTF-8
@@ -115115,8 +116822,8 @@ export type TeacherDefaultArgs<ExtArgs extends runtime.Types.Extensions.Internal
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/TeacherBatchPay.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `6b386b72ba41c7f13ae68af2b0482ffd`
 - **SHA256**: `bcc4cc216ac6fa567575a3494ebf539b63fdaff88e737cf82853f4cb67dd83b2`
 - **Encoding**: UTF-8
@@ -116750,8 +118457,8 @@ export type TeacherBatchPayDefaultArgs<ExtArgs extends runtime.Types.Extensions.
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/TeachingAssignment.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `485442ca87aa7a349369695ddedc7677`
 - **SHA256**: `42bf43d66ae0083bd63e957b2ef2e1b61606936ea276ed42ed9532094509049f`
 - **Encoding**: UTF-8
@@ -118800,8 +120507,8 @@ export type TeachingAssignmentDefaultArgs<ExtArgs extends runtime.Types.Extensio
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/User.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `c3ade5c6e09f99d030079a07aa3b100f`
 - **SHA256**: `383e08379550405e0a80a4450e47a354cfc8828d373730273ed1edc7a52bcb7b`
 - **Encoding**: UTF-8
@@ -120882,8 +122589,8 @@ export type UserDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
 - **Language**: `typescript`
 - **Location**: `src/generated/prisma/models/WorkflowStatus.ts`
 - **Relative Path**: `src/generated/prisma/models`
-- **Created**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Created**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `08b75bb4a33ed083053cd393a2307d8d`
 - **SHA256**: `0f5a90ba392e610401fb9c52d603432c4682154ac8db8d48d66f63435583aa62`
 - **Encoding**: UTF-8
@@ -122628,7 +124335,7 @@ export type WorkflowStatusDefaultArgs<ExtArgs extends runtime.Types.Extensions.I
 - **Location**: `src/generated/prisma/browser.ts`
 - **Relative Path**: `src/generated/prisma`
 - **Created**: 2026-09-27 13:47:20 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `2b1122e5a5628370c05037e8ba81d46b`
 - **SHA256**: `20381a2c15cbc70bb3acd635e8418029dfa6a4c37bb61541a90d6b72903c231d`
 - **Encoding**: UTF-8
@@ -122964,7 +124671,7 @@ export type Setting = Prisma.SettingModel
 - **Location**: `src/generated/prisma/client.ts`
 - **Relative Path**: `src/generated/prisma`
 - **Created**: 2026-09-27 13:47:20 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `5f89b20c3f448ce43d17b1f4d7ab1eab`
 - **SHA256**: `b2614f70624861d2efc0836b484ac3e980e1be5f92670bb472330df2e80c92a5`
 - **Encoding**: UTF-8
@@ -123322,7 +125029,7 @@ export type Setting = Prisma.SettingModel
 - **Location**: `src/generated/prisma/commonInputTypes.ts`
 - **Relative Path**: `src/generated/prisma`
 - **Created**: 2026-09-27 13:47:20 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `948497bfcf8f059ba330c783ae22db2a`
 - **SHA256**: `d23715372bb8311994aa1e063391c5bc2b54ce5a36aed726b6fe177d8cf32dbf`
 - **Encoding**: UTF-8
@@ -124064,7 +125771,7 @@ export type NestedEnumRoleNullableWithAggregatesFilter<$PrismaModel = never> = {
 - **Location**: `src/generated/prisma/enums.ts`
 - **Relative Path**: `src/generated/prisma`
 - **Created**: 2026-09-27 13:47:20 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `a519afc62e64805b8645376a4d6cb3b4`
 - **SHA256**: `900c9c7dc8a6e18612d5dca41fe70bfad9a43e691320e22d592679eb6f68b11b`
 - **Encoding**: UTF-8
@@ -124116,7 +125823,7 @@ export type Role = (typeof Role)[keyof typeof Role]
 - **Location**: `src/generated/prisma/models.ts`
 - **Relative Path**: `src/generated/prisma`
 - **Created**: 2026-09-27 13:47:20 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-01 08:51:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:00:07 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `913428ef7027dc1c342c70aabade335b`
 - **SHA256**: `ee1fab44a64cb10f9dcb51315ed5c658284b28262ab6e50fa13399af2cd9ab9f`
 - **Encoding**: UTF-8
@@ -124234,6 +125941,86 @@ export { prismaMain };
 
 ---
 
+### <a id="📄-src-middlewares-authorized-ts"></a>📄 `src/middlewares/authorized.ts`
+
+**File Info:**
+- **Size**: 1.73 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/middlewares/authorized.ts`
+- **Relative Path**: `src/middlewares`
+- **Created**: 2026-10-09 16:11:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-09 16:15:05 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `09c1f70c2b82b148efa90bf150914deb`
+- **SHA256**: `85c4fce1c8fd153602869650b23341fc7a805418928a7d91117be2f093a5f0de`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import type { NextFunction, Request, Response } from "express";
+import { prismaMain } from "@/lib/prismaClient";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+
+// Keep in sync with `enum Role` in schema.prisma
+export type T_Role =
+  | "ADMIN"
+  | "PRINCIPAL"
+  | "ACCOUNTANT"
+  | "TEACHER"
+  | "STAFF"
+  | "STUDENT";
+
+// Must be used AFTER isUser, because it reads res.locals.context.userId
+export const isAuthorizedTo = (...allowedRoles: T_Role[]) => {
+  // Fail at startup (not at request time) if someone passes no roles
+  if (allowedRoles.length === 0)
+    throw new Error("canBeAccessedBy needs at least one role");
+
+  return async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      // Get the user info set by the isUser middleware
+      const context = res.locals.context;
+
+      if (!context?.userId)
+        return ResponseHandler.error({
+          res,
+          code: 401,
+          message: "Unauthorized",
+          error: null,
+        });
+
+      // Check the role from the database, not only from the token
+      const user = await prismaMain.user.findFirst({
+        where: {
+          id: context.userId,
+          role: { in: allowedRoles },
+          isActive: true,
+          deletedAt: null,
+        },
+        select: { id: true },
+      });
+
+      // If the user's role is not in the allowed list, block the request
+      if (!user)
+        return ResponseHandler.error({
+          res,
+          code: 403,
+          message: "You do not have permission to perform this action",
+          error: null,
+        });
+
+      next();
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  };
+};
+```
+
+---
+
 ### <a id="📄-src-middlewares-isuser-ts"></a>📄 `src/middlewares/isUser.ts`
 
 **File Info:**
@@ -124243,9 +126030,9 @@ export { prismaMain };
 - **Location**: `src/middlewares/isUser.ts`
 - **Relative Path**: `src/middlewares`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `d547247a1dc60cd794c94907bdd46fc3`
-- **SHA256**: `9905c950523ee6976738a5057c77150989bd92ec7c82a7ad512a7b0691a4fdd5`
+- **Modified**: 2026-10-09 17:54:12 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `87bb767807c3ff481c8d05d2c94a09e1`
+- **SHA256**: `838dd6c837c0ef86b64181bb93bbee8c4bfefadb59b709cb4043aa0e91cbf734`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -124356,7 +126143,7 @@ export const isAdmin = async (
     }
 
     // Check if user is admin
-    if (userContext.role !== "Admin") {
+    if (userContext.role !== "ADMIN") {
       throw new CustomError("Forbidden: Admin access required", 403);
     }
 
@@ -124424,15 +126211,15 @@ export const trimBody = function (
 ### <a id="📄-src-modules-auth-controller-ts"></a>📄 `src/modules/auth/controller.ts`
 
 **File Info:**
-- **Size**: 5.48 KB
+- **Size**: 9.04 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/modules/auth/controller.ts`
 - **Relative Path**: `src/modules/auth`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-30 10:56:56 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `a0de230f9d4c1b8f8cce0d8574a93570`
-- **SHA256**: `beffd77fb7babeb98d80355ede240099e4d699b23863633bc901d686edad0c43`
+- **Modified**: 2026-10-09 15:51:12 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `bf0684f7ec1d0051cf95863d9a817557`
+- **SHA256**: `33ff42b0391ff679051a309b169ba166c1b022e15089c01815baf60fbfee0416`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -124446,6 +126233,14 @@ import bcrypt from "bcrypt";
 import { ErrorHandler } from "@/utils/error";
 import { AuthService } from "./service";
 import { CookieManager } from "@/utils/cookies";
+
+const SALT_ROUNDS = 10;
+const MAX_FAILED_LOGINS = 5;
+const LOCK_MINUTES = 15;
+
+// Public registration must never decide its own role (privilege escalation).
+// Change this to whatever role self-registered users should get.
+const DEFAULT_REGISTER_ROLE = "STUDENT" as const;
 
 export const AuthController = {
   test: async (req: Request, res: Response) => {
@@ -124492,9 +126287,9 @@ export const AuthController = {
       // Validate the Login Input
       const { email, password } = ValidateLogin(req.body);
 
-      // Find user in the DataBase
-      const user = await prismaMain.user.findUnique({
-        where: { email },
+      // Find user in the DataBase (ignore soft deleted users)
+      const user = await prismaMain.user.findFirst({
+        where: { email, deletedAt: null },
       });
 
       // If User is not found , Throw Error
@@ -124506,23 +126301,65 @@ export const AuthController = {
           error: null,
         });
 
-      // Verify Password
-      const isPasswordValid = await bcrypt.compare(password, user.password);
+      // If the account is temporarily locked, stop here
+      if (user.lockedUntil && user.lockedUntil > new Date())
+        return ResponseHandler.error({
+          res,
+          code: 423,
+          message: "Account is temporarily locked. Please try again later.",
+          error: null,
+        });
 
-      // If Password doesn't match Throw a Error
-      if (!isPasswordValid)
+      // Verify Password
+      const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+
+      // If Password doesn't match, count the failure and lock after too many
+      if (!isPasswordValid) {
+        const failedLoginCount = user.failedLoginCount + 1;
+        const shouldLock = failedLoginCount >= MAX_FAILED_LOGINS;
+
+        await prismaMain.user.update({
+          where: { id: user.id },
+          data: {
+            failedLoginCount: shouldLock ? 0 : failedLoginCount,
+            lockedUntil: shouldLock
+              ? new Date(Date.now() + LOCK_MINUTES * 60 * 1000)
+              : null,
+          },
+        });
+
         return ResponseHandler.error({
           res,
           code: 400,
           message: "Invalid Credentials",
           error: null,
         });
+      }
+
+      // Password is correct, but the account may be deactivated by admin
+      if (!user.isActive)
+        return ResponseHandler.error({
+          res,
+          code: 403,
+          message: "Your account is deactivated. Please contact the admin.",
+          error: null,
+        });
+
+      // Reset the failed attempts and save the last login time
+      await prismaMain.user.update({
+        where: { id: user.id },
+        data: {
+          failedLoginCount: 0,
+          lockedUntil: null,
+          lastLoginAt: new Date(),
+        },
+      });
 
       // Generate JWT token
       const token = AuthService.generateToken(user.id, user.role);
 
       // Generate refresh token
-      const refreshToken = AuthService.generateRefershToken(user.id, user.role);
+      const refreshToken = AuthService.generateRefreshToken(user.id);
 
       // Set the token in cookies
       res.cookie("token", token, CookieManager.accessToken());
@@ -124549,11 +126386,13 @@ export const AuthController = {
       const { username, email, password } = ValidateRegister(req.body);
 
       // Check Whether email is Taken or Not
-      const Email = await prismaMain.user.findFirst({
+      // (no deletedAt filter, because @unique on email also blocks soft deleted rows)
+      const existingEmail = await prismaMain.user.findFirst({
         where: { email },
       });
+
       // If Email is taken then send error message
-      if (!!Email)
+      if (existingEmail)
         return ResponseHandler.error({
           res,
           code: 400,
@@ -124567,21 +126406,77 @@ export const AuthController = {
       });
 
       // If Username is taken then send error message
-      if (!!existingUsername)
+      if (existingUsername)
         return ResponseHandler.error({
           res,
           code: 400,
           message: "Username is already taken",
           error: null,
         });
-      // Hash the password before
-      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Hash the password before saving
+      const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+
       // Creating User
-      const createdUser = await prismaMain.user.create({
-        data: { email: email, username: username, password: hashedPassword },
+      await prismaMain.user.create({
+        data: { email, username, passwordHash, role: DEFAULT_REGISTER_ROLE },
       });
-      return res.status(200).json({
+
+      return res.status(201).json({
         message: "Registered successful!",
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+  refresh: async (req: Request, res: Response) => {
+    try {
+      // Get the refresh token from cookie (or body as fallback)
+      const incomingToken = req.cookies?.refreshToken ?? req.body?.refreshToken;
+
+      if (!incomingToken)
+        return ResponseHandler.error({
+          res,
+          code: 401,
+          message: "Refresh token is required",
+          error: null,
+        });
+
+      // Verify that it is a valid refresh token
+      const payload = AuthService.verifyRefreshToken(incomingToken);
+
+      if (!payload)
+        return ResponseHandler.error({
+          res,
+          code: 401,
+          message: "Invalid or expired refresh token",
+          error: null,
+        });
+
+      // The user must still exist and be active
+      const user = await prismaMain.user.findFirst({
+        where: { id: payload.userId, deletedAt: null, isActive: true },
+      });
+
+      if (!user)
+        return ResponseHandler.error({
+          res,
+          code: 401,
+          message: "Invalid or expired refresh token",
+          error: null,
+        });
+
+      // Generate new tokens
+      const token = AuthService.generateToken(user.id, user.role);
+      const refreshToken = AuthService.generateRefreshToken(user.id);
+
+      res.cookie("token", token, CookieManager.accessToken());
+      res.cookie("refreshToken", refreshToken, CookieManager.refreshToken());
+
+      return res.status(200).json({
+        message: "Token refreshed successfully!",
+        token: token,
+        refreshToken: refreshToken,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
@@ -124593,10 +126488,19 @@ export const AuthController = {
       const context = res.locals.context;
 
       // Get the user by id
-      const user = await prismaMain.user.findUnique({
-        where: { id: context.userId },
+      const user = await prismaMain.user.findFirst({
+        where: { id: context.userId, deletedAt: null },
         select: { id: true, email: true, username: true, role: true },
       });
+
+      // If user no longer exists
+      if (!user)
+        return ResponseHandler.error({
+          res,
+          code: 404,
+          message: "User not found",
+          error: null,
+        });
 
       // Return the success response
       return ResponseHandler.success({
@@ -124611,8 +126515,7 @@ export const AuthController = {
   },
   logout: async (req: Request, res: Response) => {
     try {
-      console.log("Hello ma ya xu");
-      // Clear the cookie
+      // Clear the cookies
       res.clearCookie("token");
       res.clearCookie("refreshToken");
       return res.status(200).json({
@@ -124631,15 +126534,15 @@ export const AuthController = {
 ### <a id="📄-src-modules-auth-routes-ts"></a>📄 `src/modules/auth/routes.ts`
 
 **File Info:**
-- **Size**: 576 B
+- **Size**: 692 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/modules/auth/routes.ts`
 - **Relative Path**: `src/modules/auth`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-30 10:57:16 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `fa88554030d2d03131e85321d47e668a`
-- **SHA256**: `5224b40c7dba101c6a9ed72cf84c28c28818ef8bf75efba9d8f8c1fa6eb42c01`
+- **Modified**: 2026-10-09 16:14:51 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `26c6b23e7cac61dd4376ab19cf12ec33`
+- **SHA256**: `d670d709563a5d04fb10028ea2b23c2959285ba70836355528b3c62708194b3a`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -124647,13 +126550,19 @@ export const AuthController = {
 ```typescript
 import { Router } from "express";
 import { AuthController } from "./controller";
-import { isUser } from "@/middlewares/isUser";
-import CategoryController from "../categories/controller";
+import { isAdmin, isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "../../middlewares/authorized";
 
 const authRouter: Router = Router();
 
 authRouter.post("/login", AuthController.login);
-authRouter.post("/register", AuthController.register);
+authRouter.post(
+  "/register",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AuthController.register,
+);
+authRouter.post("/refresh", AuthController.refresh);
 authRouter.get("/me", isUser, AuthController.me);
 authRouter.get("/logout", isUser, AuthController.logout);
 authRouter.get("/test", AuthController.test);
@@ -124667,15 +126576,15 @@ export default authRouter;
 ### <a id="📄-src-modules-auth-service-ts"></a>📄 `src/modules/auth/service.ts`
 
 **File Info:**
-- **Size**: 995 B
+- **Size**: 1.38 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/modules/auth/service.ts`
 - **Relative Path**: `src/modules/auth`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `ad80f9816e6bffb0cd356a12e121ba2c`
-- **SHA256**: `5fb7ead4ef96f9c6e9be7b59502380b7f08ab055d8e034af8e0590a903ae34d8`
+- **Modified**: 2026-10-09 15:51:50 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `23f179e920e7dfa55ac101d81ae1e522`
+- **SHA256**: `b06db5389dca0fb52ae6aa09a3e10f8a9760298d5bf5786b994bd2cafe8caf18`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -124689,14 +126598,15 @@ export const AuthService = {
     const secret = process.env.JWT_SECRET;
     if (!secret) throw new Error("JWT_SECRET is not defined in .env");
 
-    return jwt.sign({ userId, role }, secret, {
+    return jwt.sign({ userId, role, type: "access" }, secret, {
       expiresIn: Number(process.env.JWT_EXPIRES_IN) || 3600,
     });
   },
-  generateRefershToken: (userId: string, role: string) => {
+  generateRefreshToken: (userId: string): string => {
     const secret = process.env.JWT_SECRET;
     if (!secret) throw new Error("JWT_SECRET is not defined in .env");
-    return jwt.sign({ userId }, secret, {
+
+    return jwt.sign({ userId, type: "refresh" }, secret, {
       expiresIn: Number(process.env.JWT_REFRESH_EXPIRES_IN) || 86400,
     });
   },
@@ -124709,6 +126619,14 @@ export const AuthService = {
     } catch (error) {
       return null;
     }
+  },
+  // Only accepts tokens that were created as refresh tokens
+  verifyRefreshToken: (token: string): { userId: string } | null => {
+    const decoded = AuthService.verifyToken(token);
+    if (!decoded || typeof decoded === "string") return null;
+    if (decoded.type !== "refresh" || typeof decoded.userId !== "string")
+      return null;
+    return { userId: decoded.userId };
   },
 };
 
@@ -126829,7 +128747,7 @@ export const ResponseHandler = {
 - **Location**: `src/index.ts`
 - **Relative Path**: `src`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-30 10:49:04 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-01 09:09:05 (Asia/Katmandu / GMT+06:45)
 - **MD5**: `aaab0cd32b8a31ffe940dc6cd22cbe04`
 - **SHA256**: `ac36c57a462c6aeb1e18afaf7bb04d1e6cf69c6a3dbb008d6b14170af2641331`
 - **Encoding**: ASCII

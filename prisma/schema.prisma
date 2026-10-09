@@ -13,21 +13,7 @@ enum Gender {
   OTHERS
 }
 
-// =====================================================================
-// College Management System - Prisma schema (PostgreSQL, single college)
-// ---------------------------------------------------------------------
-// Conventions
-//  - ids: uuid | models: PascalCase | fields: camelCase | tables: snake_case (@@map)
-//  - Audit fields on every table: createdAt, updatedAt, createdBy, updatedBy, deletedAt
-//    (createdBy / updatedBy = User.id stored as plain uuid, no FK, so no relation noise)
-//  - Finance tables (journal, payments) are APPEND-ONLY: no deletedAt, corrections by reversal
-//  - Business dates are stored in BS as "YYYY-MM-DD" strings (zero padded, so they sort correctly)
-//  - Money = Decimal(14,2)
-//  - Only Role is a Prisma enum, everything else is a lookup table
-//  - "Class" (BATCH-YEAR-COURSE) = Batch + BatchTerm + Course, label built in app:
-//      `${batch.name}-${term.name}-${course.code}`   e.g. 2080-Semester 3-BIT
-//  - Model order: User + people first (easy to start CRUD), then lookups, then modules
-// =====================================================================
+
 
 enum Role {
   ADMIN

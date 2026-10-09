@@ -21,6 +21,7 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@sbmdkl/nepali-date-converter": "^2.0.5",
     "@types/cors": "^2.8.19",
     "axios": "^1.16.1",
     "cookie-parser": "^1.4.7",

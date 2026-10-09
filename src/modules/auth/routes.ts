@@ -1,12 +1,18 @@
 import { Router } from "express";
 import { AuthController } from "./controller";
-import { isUser } from "@/middlewares/isUser";
-import CategoryController from "../categories/controller";
+import { isAdmin, isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "../../middlewares/authorized";
 
 const authRouter: Router = Router();
 
 authRouter.post("/login", AuthController.login);
-authRouter.post("/register", AuthController.register);
+authRouter.post(
+  "/register",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AuthController.register,
+);
+authRouter.post("/refresh", AuthController.refresh);
 authRouter.get("/me", isUser, AuthController.me);
 authRouter.get("/logout", isUser, AuthController.logout);
 authRouter.get("/test", AuthController.test);

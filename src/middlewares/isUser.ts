@@ -103,7 +103,7 @@ export const isAdmin = async (
     }
 
     // Check if user is admin
-    if (userContext.role !== "Admin") {
+    if (userContext.role !== "ADMIN") {
       throw new CustomError("Forbidden: Admin access required", 403);
     }
 
