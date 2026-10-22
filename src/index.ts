@@ -5,12 +5,15 @@ import { trimBody } from "./middlewares/trimBody";
 import appRoutes from "./router";
 import cors from "cors";
 import { prismaMain } from "./lib/prismaClient";
+import morgan from "morgan";
+import { seedDefaultAdmin } from "./dev/seedDefaultAdmin";
 
 const app = express();
 // =================================================
 // Middlewares
 // =================================================
 app.use(express.json());
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -26,7 +29,7 @@ async function main() {
   try {
     await prismaMain.$connect();
     console.log("Database connected");
-
+    seedDefaultAdmin()
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Server is running at PORT:${process.env.PORT || 8000}`);
     });

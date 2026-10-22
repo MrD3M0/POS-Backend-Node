@@ -5,7 +5,7 @@ PROJECT EXPORT FOR LLMs
 PROJECT INFORMATION:
 --------------------------------------------------
 Project Name: POS-Backend-Node
-Generated On: 2026-10-09 17:54:13 (Asia/Katmandu / GMT+06:45)
+Generated On: 2026-10-09 18:18:27 (Asia/Katmandu / GMT+06:45)
 Total Files Processed: 102
 Export Tool: Easy Whole Project to Single Text File for LLMs v1.1.0
 Tool Author: Jota / José Guilherme Pandolfi
@@ -137,10 +137,10 @@ PROJECT STRUCTURE
 │   │   ├── 📄 error.ts (4.42 KB)
 │   │   ├── 📄 queryFilters.ts (652 B)
 │   │   └── 📄 response.ts (1.2 KB)
-│   ├── 📄 index.ts (1.08 KB)
+│   ├── 📄 index.ts (1.14 KB)
 │   └── 📄 router.ts (478 B)
-├── 📄 package.json (1.23 KB)
-├── 📄 pnpm-lock.yaml (80.85 KB)
+├── 📄 package.json (1.28 KB)
+├── 📄 pnpm-lock.yaml (81.14 KB)
 ├── 📄 prisma.config.ts (260 B)
 └── 📄 tsconfig.json (626 B)
 
@@ -128732,15 +128732,15 @@ FILE: src/index.ts
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 1.08 KB
+Size: 1.14 KB
 Extension: .ts
 Language: typescript
 Location: src/index.ts
 Relative Path: src
 Created: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-Modified: 2026-10-01 09:09:05 (Asia/Katmandu / GMT+06:45)
-MD5: aaab0cd32b8a31ffe940dc6cd22cbe04
-SHA256: ac36c57a462c6aeb1e18afaf7bb04d1e6cf69c6a3dbb008d6b14170af2641331
+Modified: 2026-10-09 18:18:27 (Asia/Katmandu / GMT+06:45)
+MD5: d123320086e2ce1b1c8fe7477826c4c9
+SHA256: e37946ab28f840868bdb453ab37719a4783a50c5e829ffb07eb121dd17275434
 Encoding: ASCII
 
 FILE CONTENT:
@@ -128752,12 +128752,14 @@ import { trimBody } from "./middlewares/trimBody";
 import appRoutes from "./router";
 import cors from "cors";
 import { prismaMain } from "./lib/prismaClient";
+import morgan from "morgan";
 
 const app = express();
 // =================================================
 // Middlewares
 // =================================================
 app.use(express.json());
+app.use(morgan("dev"));
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -128831,15 +128833,15 @@ FILE: package.json
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 1.23 KB
+Size: 1.28 KB
 Extension: .json
 Language: json
 Location: package.json
 Relative Path: root
-Created: 2026-09-27 15:25:06 (Asia/Katmandu / GMT+06:45)
-Modified: 2026-09-27 15:25:06 (Asia/Katmandu / GMT+06:45)
-MD5: 6dd3e78c889a97709a6e775e6969fff1
-SHA256: dc7b8828cd8ccd929f37b1f3904c5b96d0d0aadfd76e68217ed2f705c813f9ec
+Created: 2026-10-09 18:06:26 (Asia/Katmandu / GMT+06:45)
+Modified: 2026-10-09 18:06:26 (Asia/Katmandu / GMT+06:45)
+MD5: 6d42bcd71ec4b67dbf1b80899ca761fd
+SHA256: 602c2118c78664c84fed3844f5a3f3fe36a095a964a4d91c7d46895640ba2f7e
 Encoding: ASCII
 
 FILE CONTENT:
@@ -128867,6 +128869,7 @@ FILE CONTENT:
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "@sbmdkl/nepali-date-converter": "^2.0.5",
     "@types/cors": "^2.8.19",
     "axios": "^1.16.1",
     "cookie-parser": "^1.4.7",
@@ -128903,15 +128906,15 @@ FILE: pnpm-lock.yaml
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 80.85 KB
+Size: 81.14 KB
 Extension: .yaml
 Language: yaml
 Location: pnpm-lock.yaml
 Relative Path: root
-Created: 2026-09-27 15:25:06 (Asia/Katmandu / GMT+06:45)
-Modified: 2026-09-27 15:25:06 (Asia/Katmandu / GMT+06:45)
-MD5: 5ed2e47150eab7d2a5c89b9e6e117d72
-SHA256: eb23f3c61c188c4271d91401576e9807a5aeca7ca42ce9bc87cdb66f5197bcda
+Created: 2026-10-09 18:17:30 (Asia/Katmandu / GMT+06:45)
+Modified: 2026-10-09 18:17:30 (Asia/Katmandu / GMT+06:45)
+MD5: 5d6febd78851fd832aa2ba4928cf39e7
+SHA256: 715ed0ea788b130995850dbe06c82a415bb93960f59b68c0d5d1417e034f5cd0
 Encoding: ASCII
 
 FILE CONTENT:
@@ -128932,6 +128935,9 @@ importers:
       '@prisma/client':
         specifier: ^7.8.0
         version: 7.8.0(prisma@7.8.0(@types/react@19.2.14)(react-dom@19.2.6(react@19.2.6))(react@19.2.6)(typescript@6.0.3))(typescript@6.0.3)
+      '@sbmdkl/nepali-date-converter':
+        specifier: ^2.0.5
+        version: 2.0.5
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
@@ -129331,6 +129337,9 @@ packages:
     peerDependenciesMeta:
       '@types/react':
         optional: true
+
+  '@sbmdkl/nepali-date-converter@2.0.5':
+    resolution: {integrity: sha512-LWars3RnZOU/Iqw2I5FCnYoQHVOnqt6RLgfekTVIF5pnvnBCVDPZa2tZfnj7abobhFZ4l53CTKFUOlQ5bVOXSg==}
 
   '@standard-schema/spec@1.1.0':
     resolution: {integrity: sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==}
@@ -130551,6 +130560,8 @@ snapshots:
       react: 19.2.6
     optionalDependencies:
       '@types/react': 19.2.14
+
+  '@sbmdkl/nepali-date-converter@2.0.5': {}
 
   '@standard-schema/spec@1.1.0': {}
 
