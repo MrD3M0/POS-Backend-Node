@@ -1,0 +1,48 @@
+- [Batch Module] API module for Batch model following the established pattern (controller, service, routes, validator)
+- [Otp Module] API module for Otp model with soft-delete support
+- [Employee Module] API module for Employee model
+- [Principal Module] API module for Principal model
+- [Accountant Module] API module for Accountant model
+- [Staff Module] API module for Staff model
+- [Teacher Module] API module for Teacher model
+- [Student Module] API module for Student model
+- [Guardian Module] API module for Guardian model
+- [Course Module] API module for Course model
+- [BatchTerm Module] API module for BatchTerm model
+- [Subject Module] API module for Subject model
+- [BatchTermSubject Module] API module for BatchTermSubject model
+- [TeachingAssignment Module] API module for TeachingAssignment model
+- [AttendanceSession Module] API module for AttendanceSession model
+- [StudentAttendance Module] API module for StudentAttendance model
+- [EmployeeAttendance Module] API module for EmployeeAttendance model
+- [LeaveType Module] API module for LeaveType model
+- [ExamType Module] API module for ExamType model
+- [GradeScale Module] API module for GradeScale model
+- [FeeHead Module] API module for FeeHead model
+- [PaymentMethod Module] API module for PaymentMethod model
+- [SalaryComponent Module] API module for SalaryComponent model
+- [TaxSlab Module] API module for TaxSlab model
+- [SalaryStructure Module] API module for SalaryStructure model
+- [SalaryStructureItem Module] API module for SalaryStructureItem model
+- [Result Module] API module for Result model
+- [ResultSubject Module] API module for ResultSubject model
+- [FeeStructure Module] API module for FeeStructure model
+- [FeeStructureItem Module] API module for FeeStructureItem model
+- [StudentFee Module] API module for StudentFee model
+- [StudentFeeItem Module] API module for StudentFeeItem model
+- [FeeInstallment Module] API module for FeeInstallment model
+- [FeePayment Module] API module for FeePayment model
+- [FeePaymentMethodLine Module] API module for FeePaymentMethodLine model
+- [FeePaymentAllocation Module] API module for FeePaymentAllocation model
+- [FiscalYear Module] API module for FiscalYear model
+- [Account Module] API module for Account model
+- [JournalEntry Module] API module for JournalEntry model
+- [JournalLine Module] API module for JournalLine model
+- [Payroll Module] API module for Payroll model
+- [Payslip Module] API module for Payslip model
+- [PayslipItem Module] API module for PayslipItem model
+- [Notice Module] API module for Notice model
+- [NoticeTarget Module] API module for NoticeTarget model
+- [Setting Module] API module for Setting model
+
+Updated on 2026-10-27.

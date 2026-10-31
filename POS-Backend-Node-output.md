@@ -3,8 +3,8 @@
 ## 📊 Project Information
 
 - **Project Name**: `POS-Backend-Node`
-- **Generated On**: 2026-10-09 18:18:27 (Asia/Katmandu / GMT+06:45)
-- **Total Files Processed**: 102
+- **Generated On**: 2026-10-31 14:21:12 (Asia/Katmandu / GMT+06:45)
+- **Total Files Processed**: 330
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
 
@@ -25,10 +25,12 @@
 │   │   ├── 📁 20261001000000_init/
 │   │   │   └── 📄 migration.sql (56.11 KB)
 │   │   └── 📄 migration_lock.toml (66 B)
-│   └── 📄 schema.prisma (47.98 KB)
+│   └── 📄 schema.prisma (44.98 KB)
 ├── 📁 src/
 │   ├── 📁 @types/
 │   │   └── 📄 type.ts (128 B)
+│   ├── 📁 dev/
+│   │   └── 📄 seedDefaultAdmin.ts (1.11 KB)
 │   ├── 📁 errors/
 │   │   └── 📄 CustomError.ts (1.5 KB)
 │   ├── 📁 generated/
@@ -104,42 +106,326 @@
 │   │       └── 📄 models.ts (2.72 KB)
 │   ├── 📁 lib/
 │   │   └── 📄 prismaClient.ts (404 B)
+│   ├── 📁 memory/
+│   │   └── 📄 MEMORY.md (2.62 KB)
 │   ├── 📁 middlewares/
 │   │   ├── 📄 authorized.ts (1.73 KB)
 │   │   ├── 📄 isUser.ts (3.89 KB)
 │   │   └── 📄 trimBody.ts (610 B)
 │   ├── 📁 modules/
+│   │   ├── 📁 account/
+│   │   │   ├── 📄 controller.ts (2.22 KB)
+│   │   │   ├── 📄 routes.ts (696 B)
+│   │   │   ├── 📄 service.ts (2.3 KB)
+│   │   │   └── 📄 validator.ts (652 B)
+│   │   ├── 📁 account-type/
+│   │   │   ├── 📄 controller.ts (2.96 KB)
+│   │   │   ├── 📄 routes.ts (855 B)
+│   │   │   ├── 📄 service.ts (4.21 KB)
+│   │   │   └── 📄 validator.ts (947 B)
+│   │   ├── 📁 accountant/
+│   │   │   ├── 📄 controller.ts (2.27 KB)
+│   │   │   ├── 📄 routes.ts (647 B)
+│   │   │   ├── 📄 service.ts (2.72 KB)
+│   │   │   └── 📄 validator.ts (422 B)
+│   │   ├── 📁 attendance-session/
+│   │   │   ├── 📄 controller.ts (2.34 KB)
+│   │   │   ├── 📄 routes.ts (762 B)
+│   │   │   ├── 📄 service.ts (2.28 KB)
+│   │   │   └── 📄 validator.ts (726 B)
+│   │   ├── 📁 attendance-status/
+│   │   │   ├── 📄 controller.ts (3.22 KB)
+│   │   │   ├── 📄 routes.ts (902 B)
+│   │   │   ├── 📄 service.ts (4.55 KB)
+│   │   │   └── 📄 validator.ts (1.04 KB)
 │   │   ├── 📁 auth/
 │   │   │   ├── 📄 controller.ts (9.04 KB)
 │   │   │   ├── 📄 routes.ts (692 B)
 │   │   │   ├── 📄 service.ts (1.38 KB)
 │   │   │   └── 📄 validator.ts (990 B)
-│   │   ├── 📁 bill/
-│   │   │   ├── 📄 controller.ts (5.27 KB)
+│   │   ├── 📁 batch/
+│   │   │   ├── 📄 controller.ts (3.06 KB)
+│   │   │   ├── 📄 routes.ts (958 B)
+│   │   │   ├── 📄 service.ts (5.21 KB)
+│   │   │   └── 📄 validator.ts (951 B)
+│   │   ├── 📁 batch-term/
+│   │   │   ├── 📄 controller.ts (3.04 KB)
+│   │   │   ├── 📄 routes.ts (933 B)
+│   │   │   ├── 📄 service.ts (5.1 KB)
+│   │   │   └── 📄 validator.ts (1.01 KB)
+│   │   ├── 📁 batch-term-subject/
+│   │   │   ├── 📄 controller.ts (3.3 KB)
+│   │   │   ├── 📄 routes.ts (982 B)
+│   │   │   ├── 📄 service.ts (5.17 KB)
+│   │   │   └── 📄 validator.ts (986 B)
+│   │   ├── 📁 course/
+│   │   │   ├── 📄 controller.ts (2.89 KB)
+│   │   │   ├── 📄 routes.ts (912 B)
+│   │   │   ├── 📄 service.ts (3.38 KB)
+│   │   │   └── 📄 validator.ts (987 B)
+│   │   ├── 📁 course-system/
+│   │   │   ├── 📄 controller.ts (3.12 KB)
+│   │   │   ├── 📄 routes.ts (1007 B)
+│   │   │   ├── 📄 service.ts (4.34 KB)
+│   │   │   └── 📄 validator.ts (917 B)
+│   │   ├── 📁 employee/
+│   │   │   ├── 📄 controller.ts (2.94 KB)
+│   │   │   ├── 📄 routes.ts (756 B)
+│   │   │   ├── 📄 service.ts (6.11 KB)
+│   │   │   └── 📄 validator.ts (2.2 KB)
+│   │   ├── 📁 employee-attendance/
+│   │   │   ├── 📄 controller.ts (2.37 KB)
+│   │   │   ├── 📄 routes.ts (770 B)
+│   │   │   ├── 📄 service.ts (2.66 KB)
+│   │   │   └── 📄 validator.ts (740 B)
+│   │   ├── 📁 exam/
+│   │   │   ├── 📄 controller.ts (2.18 KB)
+│   │   │   ├── 📄 routes.ts (796 B)
+│   │   │   ├── 📄 service.ts (2.19 KB)
+│   │   │   └── 📄 validator.ts (635 B)
+│   │   ├── 📁 exam-mark/
+│   │   │   ├── 📄 controller.ts (2.23 KB)
+│   │   │   ├── 📄 routes.ts (690 B)
+│   │   │   ├── 📄 service.ts (2.48 KB)
+│   │   │   └── 📄 validator.ts (655 B)
+│   │   ├── 📁 exam-subject/
+│   │   │   ├── 📄 controller.ts (2.26 KB)
+│   │   │   ├── 📄 routes.ts (838 B)
+│   │   │   ├── 📄 service.ts (2.17 KB)
+│   │   │   └── 📄 validator.ts (687 B)
+│   │   ├── 📁 exam-type/
+│   │   │   ├── 📄 controller.ts (2.24 KB)
+│   │   │   ├── 📄 routes.ts (740 B)
+│   │   │   ├── 📄 service.ts (1.99 KB)
+│   │   │   └── 📄 validator.ts (396 B)
+│   │   ├── 📁 fee-head/
+│   │   │   ├── 📄 controller.ts (2.25 KB)
+│   │   │   ├── 📄 routes.ts (714 B)
+│   │   │   ├── 📄 service.ts (2.04 KB)
+│   │   │   └── 📄 validator.ts (471 B)
+│   │   ├── 📁 fee-installment/
+│   │   │   ├── 📄 controller.ts (2.33 KB)
+│   │   │   ├── 📄 routes.ts (756 B)
+│   │   │   ├── 📄 service.ts (2.36 KB)
+│   │   │   └── 📄 validator.ts (571 B)
+│   │   ├── 📁 fee-payment/
+│   │   │   ├── 📄 controller.ts (2.26 KB)
+│   │   │   ├── 📄 routes.ts (718 B)
+│   │   │   ├── 📄 service.ts (2.37 KB)
+│   │   │   └── 📄 validator.ts (901 B)
+│   │   ├── 📁 fee-payment-allocation/
+│   │   │   ├── 📄 controller.ts (2.4 KB)
+│   │   │   ├── 📄 routes.ts (760 B)
+│   │   │   ├── 📄 service.ts (2.52 KB)
+│   │   │   └── 📄 validator.ts (708 B)
+│   │   ├── 📁 fee-payment-method-line/
+│   │   │   ├── 📄 controller.ts (2.38 KB)
+│   │   │   ├── 📄 routes.ts (760 B)
+│   │   │   ├── 📄 service.ts (2.39 KB)
+│   │   │   └── 📄 validator.ts (693 B)
+│   │   ├── 📁 fee-structure/
+│   │   │   ├── 📄 controller.ts (2.32 KB)
+│   │   │   ├── 📄 routes.ts (744 B)
+│   │   │   ├── 📄 service.ts (2.3 KB)
+│   │   │   └── 📄 validator.ts (593 B)
+│   │   ├── 📁 fee-structure-item/
+│   │   │   ├── 📄 controller.ts (2.36 KB)
+│   │   │   ├── 📄 routes.ts (768 B)
+│   │   │   ├── 📄 service.ts (2.67 KB)
+│   │   │   └── 📄 validator.ts (624 B)
+│   │   ├── 📁 fiscal-year/
+│   │   │   ├── 📄 controller.ts (2.25 KB)
+│   │   │   ├── 📄 routes.ts (718 B)
+│   │   │   ├── 📄 service.ts (2.24 KB)
+│   │   │   └── 📄 validator.ts (609 B)
+│   │   ├── 📁 grade-scale/
+│   │   │   ├── 📄 controller.ts (2.28 KB)
+│   │   │   ├── 📄 routes.ts (832 B)
+│   │   │   ├── 📄 service.ts (2.13 KB)
+│   │   │   └── 📄 validator.ts (745 B)
+│   │   ├── 📁 guardian/
+│   │   │   ├── 📄 controller.ts (2.24 KB)
+│   │   │   ├── 📄 routes.ts (732 B)
+│   │   │   ├── 📄 service.ts (2.32 KB)
+│   │   │   └── 📄 validator.ts (745 B)
+│   │   ├── 📁 guardian-relation/
+│   │   │   ├── 📄 controller.ts (3.22 KB)
+│   │   │   ├── 📄 routes.ts (1.03 KB)
+│   │   │   ├── 📄 service.ts (4.45 KB)
+│   │   │   └── 📄 validator.ts (1011 B)
+│   │   ├── 📁 journal-entry/
+│   │   │   ├── 📄 controller.ts (2.28 KB)
+│   │   │   ├── 📄 routes.ts (712 B)
+│   │   │   ├── 📄 service.ts (2.57 KB)
+│   │   │   └── 📄 validator.ts (942 B)
+│   │   ├── 📁 journal-line/
+│   │   │   ├── 📄 controller.ts (2.26 KB)
+│   │   │   ├── 📄 routes.ts (706 B)
+│   │   │   ├── 📄 service.ts (2.34 KB)
+│   │   │   └── 📄 validator.ts (791 B)
+│   │   ├── 📁 journal-source/
+│   │   │   ├── 📄 controller.ts (2.99 KB)
+│   │   │   ├── 📄 routes.ts (841 B)
+│   │   │   ├── 📄 service.ts (4.23 KB)
+│   │   │   └── 📄 validator.ts (888 B)
+│   │   ├── 📁 leave-type/
+│   │   │   ├── 📄 controller.ts (2.31 KB)
+│   │   │   ├── 📄 routes.ts (709 B)
+│   │   │   ├── 📄 service.ts (2.01 KB)
+│   │   │   └── 📄 validator.ts (351 B)
+│   │   ├── 📁 notice/
+│   │   │   ├── 📄 controller.ts (2.21 KB)
+│   │   │   ├── 📄 routes.ts (826 B)
+│   │   │   ├── 📄 service.ts (2.2 KB)
+│   │   │   └── 📄 validator.ts (668 B)
+│   │   ├── 📁 notice-target/
+│   │   │   ├── 📄 controller.ts (2.28 KB)
+│   │   │   ├── 📄 routes.ts (862 B)
+│   │   │   ├── 📄 service.ts (2.21 KB)
+│   │   │   └── 📄 validator.ts (594 B)
+│   │   ├── 📁 otp/
+│   │   │   ├── 📄 controller.ts (2.11 KB)
+│   │   │   ├── 📄 routes.ts (546 B)
+│   │   │   ├── 📄 service.ts (1.99 KB)
+│   │   │   └── 📄 validator.ts (479 B)
+│   │   ├── 📁 payment-method/
+│   │   │   ├── 📄 controller.ts (2.32 KB)
 │   │   │   ├── 📄 routes.ts (750 B)
-│   │   │   ├── 📄 service.ts (11.12 KB)
-│   │   │   └── 📄 validator.ts (904 B)
-│   │   ├── 📁 categories/
-│   │   │   ├── 📄 controller.ts (3.37 KB)
-│   │   │   ├── 📄 routes.ts (465 B)
-│   │   │   ├── 📄 service.ts (3.8 KB)
-│   │   │   └── 📄 validator.ts (602 B)
-│   │   ├── 📁 product/
-│   │   │   ├── 📄 controller.ts (4.57 KB)
-│   │   │   ├── 📄 routes.ts (629 B)
-│   │   │   ├── 📄 service.ts (5.78 KB)
-│   │   │   └── 📄 validator.ts (992 B)
-│   │   └── 📁 text/
+│   │   │   ├── 📄 service.ts (2.21 KB)
+│   │   │   └── 📄 validator.ts (491 B)
+│   │   ├── 📁 payroll/
+│   │   │   ├── 📄 controller.ts (2.22 KB)
+│   │   │   ├── 📄 routes.ts (682 B)
+│   │   │   ├── 📄 service.ts (2.58 KB)
+│   │   │   └── 📄 validator.ts (544 B)
+│   │   ├── 📁 payslip/
+│   │   │   ├── 📄 controller.ts (2.21 KB)
+│   │   │   ├── 📄 routes.ts (637 B)
+│   │   │   ├── 📄 service.ts (2.28 KB)
+│   │   │   └── 📄 validator.ts (1.28 KB)
+│   │   ├── 📁 payslip-item/
+│   │   │   ├── 📄 controller.ts (2.26 KB)
+│   │   │   ├── 📄 routes.ts (706 B)
+│   │   │   ├── 📄 service.ts (2.33 KB)
+│   │   │   └── 📄 validator.ts (709 B)
+│   │   ├── 📁 period/
+│   │   │   ├── 📄 controller.ts (2.89 KB)
+│   │   │   ├── 📄 routes.ts (776 B)
+│   │   │   ├── 📄 service.ts (3.82 KB)
+│   │   │   └── 📄 validator.ts (1.15 KB)
+│   │   ├── 📁 principal/
+│   │   │   ├── 📄 controller.ts (2.29 KB)
+│   │   │   ├── 📄 routes.ts (607 B)
+│   │   │   ├── 📄 service.ts (2.73 KB)
+│   │   │   └── 📄 validator.ts (501 B)
+│   │   ├── 📁 result/
+│   │   │   ├── 📄 controller.ts (2.94 KB)
+│   │   │   ├── 📄 routes.ts (781 B)
+│   │   │   ├── 📄 service.ts (4.13 KB)
+│   │   │   └── 📄 validator.ts (1.71 KB)
+│   │   ├── 📁 result-subject/
+│   │   │   ├── 📄 controller.ts (2.94 KB)
+│   │   │   ├── 📄 routes.ts (886 B)
+│   │   │   ├── 📄 service.ts (3.5 KB)
+│   │   │   └── 📄 validator.ts (926 B)
+│   │   ├── 📁 salary-component/
+│   │   │   ├── 📄 controller.ts (3.06 KB)
+│   │   │   ├── 📄 routes.ts (802 B)
+│   │   │   ├── 📄 service.ts (3.49 KB)
+│   │   │   └── 📄 validator.ts (982 B)
+│   │   ├── 📁 salary-structure/
+│   │   │   ├── 📄 controller.ts (3.06 KB)
+│   │   │   ├── 📄 routes.ts (802 B)
+│   │   │   ├── 📄 service.ts (3.37 KB)
+│   │   │   └── 📄 validator.ts (1.05 KB)
+│   │   ├── 📁 salary-structure-item/
+│   │   │   ├── 📄 controller.ts (2.98 KB)
+│   │   │   ├── 📄 routes.ts (830 B)
+│   │   │   ├── 📄 service.ts (3.79 KB)
+│   │   │   └── 📄 validator.ts (829 B)
+│   │   ├── 📁 setting/
+│   │   │   ├── 📄 controller.ts (3.2 KB)
+│   │   │   ├── 📄 routes.ts (825 B)
+│   │   │   ├── 📄 service.ts (3.64 KB)
+│   │   │   └── 📄 validator.ts (794 B)
+│   │   ├── 📁 staff/
+│   │   │   ├── 📄 controller.ts (2.22 KB)
+│   │   │   ├── 📄 routes.ts (583 B)
+│   │   │   ├── 📄 service.ts (2.65 KB)
+│   │   │   └── 📄 validator.ts (556 B)
+│   │   ├── 📁 student/
+│   │   │   ├── 📄 controller.ts (2.97 KB)
+│   │   │   ├── 📄 routes.ts (771 B)
+│   │   │   ├── 📄 service.ts (4.81 KB)
+│   │   │   └── 📄 validator.ts (2.26 KB)
+│   │   ├── 📁 student-attendance/
+│   │   │   ├── 📄 controller.ts (4.7 KB)
+│   │   │   ├── 📄 routes.ts (1.13 KB)
+│   │   │   ├── 📄 service.ts (10.58 KB)
+│   │   │   └── 📄 validator.ts (2.04 KB)
+│   │   ├── 📁 student-fee/
+│   │   │   ├── 📄 controller.ts (2.25 KB)
+│   │   │   ├── 📄 routes.ts (687 B)
+│   │   │   ├── 📄 service.ts (2.25 KB)
+│   │   │   └── 📄 validator.ts (490 B)
+│   │   ├── 📁 student-fee-item/
+│   │   │   ├── 📄 controller.ts (2.3 KB)
+│   │   │   ├── 📄 routes.ts (711 B)
+│   │   │   ├── 📄 service.ts (2.26 KB)
+│   │   │   └── 📄 validator.ts (920 B)
+│   │   ├── 📁 student-status/
+│   │   │   ├── 📄 controller.ts (3.14 KB)
+│   │   │   ├── 📄 routes.ts (881 B)
+│   │   │   ├── 📄 service.ts (4.37 KB)
+│   │   │   └── 📄 validator.ts (928 B)
+│   │   ├── 📁 subject/
+│   │   │   ├── 📄 controller.ts (2.91 KB)
+│   │   │   ├── 📄 routes.ts (805 B)
+│   │   │   ├── 📄 service.ts (3.38 KB)
+│   │   │   └── 📄 validator.ts (797 B)
+│   │   ├── 📁 tax-slab/
+│   │   │   ├── 📄 controller.ts (3.01 KB)
+│   │   │   ├── 📄 routes.ts (802 B)
+│   │   │   ├── 📄 service.ts (3.5 KB)
+│   │   │   └── 📄 validator.ts (860 B)
+│   │   ├── 📁 teacher/
+│   │   │   ├── 📄 controller.ts (2.26 KB)
+│   │   │   ├── 📄 routes.ts (641 B)
+│   │   │   ├── 📄 service.ts (2.78 KB)
+│   │   │   └── 📄 validator.ts (667 B)
+│   │   ├── 📁 teacher-batch-pay/
+│   │   │   ├── 📄 controller.ts (3.14 KB)
+│   │   │   ├── 📄 routes.ts (858 B)
+│   │   │   ├── 📄 service.ts (3.69 KB)
+│   │   │   └── 📄 validator.ts (1.12 KB)
+│   │   ├── 📁 teaching-assignment/
+│   │   │   ├── 📄 controller.ts (2.37 KB)
+│   │   │   ├── 📄 routes.ts (727 B)
+│   │   │   ├── 📄 service.ts (2.32 KB)
+│   │   │   └── 📄 validator.ts (704 B)
+│   │   ├── 📁 user/
+│   │   │   ├── 📄 controller.ts (4.11 KB)
+│   │   │   ├── 📄 routes.ts (902 B)
+│   │   │   ├── 📄 service.ts (6.94 KB)
+│   │   │   └── 📄 validator.ts (1.51 KB)
+│   │   └── 📁 workflow-status/
+│   │       ├── 📄 controller.ts (3.19 KB)
+│   │       ├── 📄 routes.ts (888 B)
+│   │       ├── 📄 service.ts (4.6 KB)
+│   │       └── 📄 validator.ts (939 B)
 │   ├── 📁 utils/
 │   │   ├── 📄 cookies.ts (804 B)
 │   │   ├── 📄 error.ts (4.42 KB)
 │   │   ├── 📄 queryFilters.ts (652 B)
 │   │   └── 📄 response.ts (1.2 KB)
-│   ├── 📄 index.ts (1.14 KB)
-│   └── 📄 router.ts (478 B)
-├── 📄 package.json (1.28 KB)
-├── 📄 pnpm-lock.yaml (81.14 KB)
+│   ├── 📄 index.ts (1.22 KB)
+│   └── 📄 router.ts (6.88 KB)
+├── 📁 state/
+├── 📄 list_modules.ps1 (454 B)
+├── 📄 package.json (1.31 KB)
+├── 📄 pnpm-lock.yaml (81.44 KB)
 ├── 📄 prisma.config.ts (260 B)
+├── 📄 survey.ps1 (474 B)
 └── 📄 tsconfig.json (626 B)
 ```
 
@@ -150,6 +436,7 @@
 - [📄 prisma/migrations/20261001000000_init/migration.sql](#📄-prisma-migrations-20261001000000-init-migration-sql)
 - [📄 prisma/migrations/migration_lock.toml](#📄-prisma-migrations-migration-lock-toml)
 - [📄 src/@types/type.ts](#📄-src-types-type-ts)
+- [📄 src/dev/seedDefaultAdmin.ts](#📄-src-dev-seeddefaultadmin-ts)
 - [📄 src/errors/CustomError.ts](#📄-src-errors-customerror-ts)
 - [📄 src/generated/prisma/internal/class.ts](#📄-src-generated-prisma-internal-class-ts)
 - [📄 src/generated/prisma/internal/prismaNamespace.ts](#📄-src-generated-prisma-internal-prismanamespace-ts)
@@ -219,34 +506,261 @@
 - [📄 src/generated/prisma/enums.ts](#📄-src-generated-prisma-enums-ts)
 - [📄 src/generated/prisma/models.ts](#📄-src-generated-prisma-models-ts)
 - [📄 src/lib/prismaClient.ts](#📄-src-lib-prismaclient-ts)
+- [📄 src/memory/MEMORY.md](#📄-src-memory-memory-md)
 - [📄 src/middlewares/authorized.ts](#📄-src-middlewares-authorized-ts)
 - [📄 src/middlewares/isUser.ts](#📄-src-middlewares-isuser-ts)
 - [📄 src/middlewares/trimBody.ts](#📄-src-middlewares-trimbody-ts)
+- [📄 src/modules/account/controller.ts](#📄-src-modules-account-controller-ts)
+- [📄 src/modules/account/routes.ts](#📄-src-modules-account-routes-ts)
+- [📄 src/modules/account/service.ts](#📄-src-modules-account-service-ts)
+- [📄 src/modules/account/validator.ts](#📄-src-modules-account-validator-ts)
+- [📄 src/modules/account-type/controller.ts](#📄-src-modules-account-type-controller-ts)
+- [📄 src/modules/account-type/routes.ts](#📄-src-modules-account-type-routes-ts)
+- [📄 src/modules/account-type/service.ts](#📄-src-modules-account-type-service-ts)
+- [📄 src/modules/account-type/validator.ts](#📄-src-modules-account-type-validator-ts)
+- [📄 src/modules/accountant/controller.ts](#📄-src-modules-accountant-controller-ts)
+- [📄 src/modules/accountant/routes.ts](#📄-src-modules-accountant-routes-ts)
+- [📄 src/modules/accountant/service.ts](#📄-src-modules-accountant-service-ts)
+- [📄 src/modules/accountant/validator.ts](#📄-src-modules-accountant-validator-ts)
+- [📄 src/modules/attendance-session/controller.ts](#📄-src-modules-attendance-session-controller-ts)
+- [📄 src/modules/attendance-session/routes.ts](#📄-src-modules-attendance-session-routes-ts)
+- [📄 src/modules/attendance-session/service.ts](#📄-src-modules-attendance-session-service-ts)
+- [📄 src/modules/attendance-session/validator.ts](#📄-src-modules-attendance-session-validator-ts)
+- [📄 src/modules/attendance-status/controller.ts](#📄-src-modules-attendance-status-controller-ts)
+- [📄 src/modules/attendance-status/routes.ts](#📄-src-modules-attendance-status-routes-ts)
+- [📄 src/modules/attendance-status/service.ts](#📄-src-modules-attendance-status-service-ts)
+- [📄 src/modules/attendance-status/validator.ts](#📄-src-modules-attendance-status-validator-ts)
 - [📄 src/modules/auth/controller.ts](#📄-src-modules-auth-controller-ts)
 - [📄 src/modules/auth/routes.ts](#📄-src-modules-auth-routes-ts)
 - [📄 src/modules/auth/service.ts](#📄-src-modules-auth-service-ts)
 - [📄 src/modules/auth/validator.ts](#📄-src-modules-auth-validator-ts)
-- [📄 src/modules/bill/controller.ts](#📄-src-modules-bill-controller-ts)
-- [📄 src/modules/bill/routes.ts](#📄-src-modules-bill-routes-ts)
-- [📄 src/modules/bill/service.ts](#📄-src-modules-bill-service-ts)
-- [📄 src/modules/bill/validator.ts](#📄-src-modules-bill-validator-ts)
-- [📄 src/modules/categories/controller.ts](#📄-src-modules-categories-controller-ts)
-- [📄 src/modules/categories/routes.ts](#📄-src-modules-categories-routes-ts)
-- [📄 src/modules/categories/service.ts](#📄-src-modules-categories-service-ts)
-- [📄 src/modules/categories/validator.ts](#📄-src-modules-categories-validator-ts)
-- [📄 src/modules/product/controller.ts](#📄-src-modules-product-controller-ts)
-- [📄 src/modules/product/routes.ts](#📄-src-modules-product-routes-ts)
-- [📄 src/modules/product/service.ts](#📄-src-modules-product-service-ts)
-- [📄 src/modules/product/validator.ts](#📄-src-modules-product-validator-ts)
+- [📄 src/modules/batch/controller.ts](#📄-src-modules-batch-controller-ts)
+- [📄 src/modules/batch/routes.ts](#📄-src-modules-batch-routes-ts)
+- [📄 src/modules/batch/service.ts](#📄-src-modules-batch-service-ts)
+- [📄 src/modules/batch/validator.ts](#📄-src-modules-batch-validator-ts)
+- [📄 src/modules/batch-term/controller.ts](#📄-src-modules-batch-term-controller-ts)
+- [📄 src/modules/batch-term/routes.ts](#📄-src-modules-batch-term-routes-ts)
+- [📄 src/modules/batch-term/service.ts](#📄-src-modules-batch-term-service-ts)
+- [📄 src/modules/batch-term/validator.ts](#📄-src-modules-batch-term-validator-ts)
+- [📄 src/modules/batch-term-subject/controller.ts](#📄-src-modules-batch-term-subject-controller-ts)
+- [📄 src/modules/batch-term-subject/routes.ts](#📄-src-modules-batch-term-subject-routes-ts)
+- [📄 src/modules/batch-term-subject/service.ts](#📄-src-modules-batch-term-subject-service-ts)
+- [📄 src/modules/batch-term-subject/validator.ts](#📄-src-modules-batch-term-subject-validator-ts)
+- [📄 src/modules/course/controller.ts](#📄-src-modules-course-controller-ts)
+- [📄 src/modules/course/routes.ts](#📄-src-modules-course-routes-ts)
+- [📄 src/modules/course/service.ts](#📄-src-modules-course-service-ts)
+- [📄 src/modules/course/validator.ts](#📄-src-modules-course-validator-ts)
+- [📄 src/modules/course-system/controller.ts](#📄-src-modules-course-system-controller-ts)
+- [📄 src/modules/course-system/routes.ts](#📄-src-modules-course-system-routes-ts)
+- [📄 src/modules/course-system/service.ts](#📄-src-modules-course-system-service-ts)
+- [📄 src/modules/course-system/validator.ts](#📄-src-modules-course-system-validator-ts)
+- [📄 src/modules/employee/controller.ts](#📄-src-modules-employee-controller-ts)
+- [📄 src/modules/employee/routes.ts](#📄-src-modules-employee-routes-ts)
+- [📄 src/modules/employee/service.ts](#📄-src-modules-employee-service-ts)
+- [📄 src/modules/employee/validator.ts](#📄-src-modules-employee-validator-ts)
+- [📄 src/modules/employee-attendance/controller.ts](#📄-src-modules-employee-attendance-controller-ts)
+- [📄 src/modules/employee-attendance/routes.ts](#📄-src-modules-employee-attendance-routes-ts)
+- [📄 src/modules/employee-attendance/service.ts](#📄-src-modules-employee-attendance-service-ts)
+- [📄 src/modules/employee-attendance/validator.ts](#📄-src-modules-employee-attendance-validator-ts)
+- [📄 src/modules/exam/controller.ts](#📄-src-modules-exam-controller-ts)
+- [📄 src/modules/exam/routes.ts](#📄-src-modules-exam-routes-ts)
+- [📄 src/modules/exam/service.ts](#📄-src-modules-exam-service-ts)
+- [📄 src/modules/exam/validator.ts](#📄-src-modules-exam-validator-ts)
+- [📄 src/modules/exam-mark/controller.ts](#📄-src-modules-exam-mark-controller-ts)
+- [📄 src/modules/exam-mark/routes.ts](#📄-src-modules-exam-mark-routes-ts)
+- [📄 src/modules/exam-mark/service.ts](#📄-src-modules-exam-mark-service-ts)
+- [📄 src/modules/exam-mark/validator.ts](#📄-src-modules-exam-mark-validator-ts)
+- [📄 src/modules/exam-subject/controller.ts](#📄-src-modules-exam-subject-controller-ts)
+- [📄 src/modules/exam-subject/routes.ts](#📄-src-modules-exam-subject-routes-ts)
+- [📄 src/modules/exam-subject/service.ts](#📄-src-modules-exam-subject-service-ts)
+- [📄 src/modules/exam-subject/validator.ts](#📄-src-modules-exam-subject-validator-ts)
+- [📄 src/modules/exam-type/controller.ts](#📄-src-modules-exam-type-controller-ts)
+- [📄 src/modules/exam-type/routes.ts](#📄-src-modules-exam-type-routes-ts)
+- [📄 src/modules/exam-type/service.ts](#📄-src-modules-exam-type-service-ts)
+- [📄 src/modules/exam-type/validator.ts](#📄-src-modules-exam-type-validator-ts)
+- [📄 src/modules/fee-head/controller.ts](#📄-src-modules-fee-head-controller-ts)
+- [📄 src/modules/fee-head/routes.ts](#📄-src-modules-fee-head-routes-ts)
+- [📄 src/modules/fee-head/service.ts](#📄-src-modules-fee-head-service-ts)
+- [📄 src/modules/fee-head/validator.ts](#📄-src-modules-fee-head-validator-ts)
+- [📄 src/modules/fee-installment/controller.ts](#📄-src-modules-fee-installment-controller-ts)
+- [📄 src/modules/fee-installment/routes.ts](#📄-src-modules-fee-installment-routes-ts)
+- [📄 src/modules/fee-installment/service.ts](#📄-src-modules-fee-installment-service-ts)
+- [📄 src/modules/fee-installment/validator.ts](#📄-src-modules-fee-installment-validator-ts)
+- [📄 src/modules/fee-payment/controller.ts](#📄-src-modules-fee-payment-controller-ts)
+- [📄 src/modules/fee-payment/routes.ts](#📄-src-modules-fee-payment-routes-ts)
+- [📄 src/modules/fee-payment/service.ts](#📄-src-modules-fee-payment-service-ts)
+- [📄 src/modules/fee-payment/validator.ts](#📄-src-modules-fee-payment-validator-ts)
+- [📄 src/modules/fee-payment-allocation/controller.ts](#📄-src-modules-fee-payment-allocation-controller-ts)
+- [📄 src/modules/fee-payment-allocation/routes.ts](#📄-src-modules-fee-payment-allocation-routes-ts)
+- [📄 src/modules/fee-payment-allocation/service.ts](#📄-src-modules-fee-payment-allocation-service-ts)
+- [📄 src/modules/fee-payment-allocation/validator.ts](#📄-src-modules-fee-payment-allocation-validator-ts)
+- [📄 src/modules/fee-payment-method-line/controller.ts](#📄-src-modules-fee-payment-method-line-controller-ts)
+- [📄 src/modules/fee-payment-method-line/routes.ts](#📄-src-modules-fee-payment-method-line-routes-ts)
+- [📄 src/modules/fee-payment-method-line/service.ts](#📄-src-modules-fee-payment-method-line-service-ts)
+- [📄 src/modules/fee-payment-method-line/validator.ts](#📄-src-modules-fee-payment-method-line-validator-ts)
+- [📄 src/modules/fee-structure/controller.ts](#📄-src-modules-fee-structure-controller-ts)
+- [📄 src/modules/fee-structure/routes.ts](#📄-src-modules-fee-structure-routes-ts)
+- [📄 src/modules/fee-structure/service.ts](#📄-src-modules-fee-structure-service-ts)
+- [📄 src/modules/fee-structure/validator.ts](#📄-src-modules-fee-structure-validator-ts)
+- [📄 src/modules/fee-structure-item/controller.ts](#📄-src-modules-fee-structure-item-controller-ts)
+- [📄 src/modules/fee-structure-item/routes.ts](#📄-src-modules-fee-structure-item-routes-ts)
+- [📄 src/modules/fee-structure-item/service.ts](#📄-src-modules-fee-structure-item-service-ts)
+- [📄 src/modules/fee-structure-item/validator.ts](#📄-src-modules-fee-structure-item-validator-ts)
+- [📄 src/modules/fiscal-year/controller.ts](#📄-src-modules-fiscal-year-controller-ts)
+- [📄 src/modules/fiscal-year/routes.ts](#📄-src-modules-fiscal-year-routes-ts)
+- [📄 src/modules/fiscal-year/service.ts](#📄-src-modules-fiscal-year-service-ts)
+- [📄 src/modules/fiscal-year/validator.ts](#📄-src-modules-fiscal-year-validator-ts)
+- [📄 src/modules/grade-scale/controller.ts](#📄-src-modules-grade-scale-controller-ts)
+- [📄 src/modules/grade-scale/routes.ts](#📄-src-modules-grade-scale-routes-ts)
+- [📄 src/modules/grade-scale/service.ts](#📄-src-modules-grade-scale-service-ts)
+- [📄 src/modules/grade-scale/validator.ts](#📄-src-modules-grade-scale-validator-ts)
+- [📄 src/modules/guardian/controller.ts](#📄-src-modules-guardian-controller-ts)
+- [📄 src/modules/guardian/routes.ts](#📄-src-modules-guardian-routes-ts)
+- [📄 src/modules/guardian/service.ts](#📄-src-modules-guardian-service-ts)
+- [📄 src/modules/guardian/validator.ts](#📄-src-modules-guardian-validator-ts)
+- [📄 src/modules/guardian-relation/controller.ts](#📄-src-modules-guardian-relation-controller-ts)
+- [📄 src/modules/guardian-relation/routes.ts](#📄-src-modules-guardian-relation-routes-ts)
+- [📄 src/modules/guardian-relation/service.ts](#📄-src-modules-guardian-relation-service-ts)
+- [📄 src/modules/guardian-relation/validator.ts](#📄-src-modules-guardian-relation-validator-ts)
+- [📄 src/modules/journal-entry/controller.ts](#📄-src-modules-journal-entry-controller-ts)
+- [📄 src/modules/journal-entry/routes.ts](#📄-src-modules-journal-entry-routes-ts)
+- [📄 src/modules/journal-entry/service.ts](#📄-src-modules-journal-entry-service-ts)
+- [📄 src/modules/journal-entry/validator.ts](#📄-src-modules-journal-entry-validator-ts)
+- [📄 src/modules/journal-line/controller.ts](#📄-src-modules-journal-line-controller-ts)
+- [📄 src/modules/journal-line/routes.ts](#📄-src-modules-journal-line-routes-ts)
+- [📄 src/modules/journal-line/service.ts](#📄-src-modules-journal-line-service-ts)
+- [📄 src/modules/journal-line/validator.ts](#📄-src-modules-journal-line-validator-ts)
+- [📄 src/modules/journal-source/controller.ts](#📄-src-modules-journal-source-controller-ts)
+- [📄 src/modules/journal-source/routes.ts](#📄-src-modules-journal-source-routes-ts)
+- [📄 src/modules/journal-source/service.ts](#📄-src-modules-journal-source-service-ts)
+- [📄 src/modules/journal-source/validator.ts](#📄-src-modules-journal-source-validator-ts)
+- [📄 src/modules/leave-type/controller.ts](#📄-src-modules-leave-type-controller-ts)
+- [📄 src/modules/leave-type/routes.ts](#📄-src-modules-leave-type-routes-ts)
+- [📄 src/modules/leave-type/service.ts](#📄-src-modules-leave-type-service-ts)
+- [📄 src/modules/leave-type/validator.ts](#📄-src-modules-leave-type-validator-ts)
+- [📄 src/modules/notice/controller.ts](#📄-src-modules-notice-controller-ts)
+- [📄 src/modules/notice/routes.ts](#📄-src-modules-notice-routes-ts)
+- [📄 src/modules/notice/service.ts](#📄-src-modules-notice-service-ts)
+- [📄 src/modules/notice/validator.ts](#📄-src-modules-notice-validator-ts)
+- [📄 src/modules/notice-target/controller.ts](#📄-src-modules-notice-target-controller-ts)
+- [📄 src/modules/notice-target/routes.ts](#📄-src-modules-notice-target-routes-ts)
+- [📄 src/modules/notice-target/service.ts](#📄-src-modules-notice-target-service-ts)
+- [📄 src/modules/notice-target/validator.ts](#📄-src-modules-notice-target-validator-ts)
+- [📄 src/modules/otp/controller.ts](#📄-src-modules-otp-controller-ts)
+- [📄 src/modules/otp/routes.ts](#📄-src-modules-otp-routes-ts)
+- [📄 src/modules/otp/service.ts](#📄-src-modules-otp-service-ts)
+- [📄 src/modules/otp/validator.ts](#📄-src-modules-otp-validator-ts)
+- [📄 src/modules/payment-method/controller.ts](#📄-src-modules-payment-method-controller-ts)
+- [📄 src/modules/payment-method/routes.ts](#📄-src-modules-payment-method-routes-ts)
+- [📄 src/modules/payment-method/service.ts](#📄-src-modules-payment-method-service-ts)
+- [📄 src/modules/payment-method/validator.ts](#📄-src-modules-payment-method-validator-ts)
+- [📄 src/modules/payroll/controller.ts](#📄-src-modules-payroll-controller-ts)
+- [📄 src/modules/payroll/routes.ts](#📄-src-modules-payroll-routes-ts)
+- [📄 src/modules/payroll/service.ts](#📄-src-modules-payroll-service-ts)
+- [📄 src/modules/payroll/validator.ts](#📄-src-modules-payroll-validator-ts)
+- [📄 src/modules/payslip/controller.ts](#📄-src-modules-payslip-controller-ts)
+- [📄 src/modules/payslip/routes.ts](#📄-src-modules-payslip-routes-ts)
+- [📄 src/modules/payslip/service.ts](#📄-src-modules-payslip-service-ts)
+- [📄 src/modules/payslip/validator.ts](#📄-src-modules-payslip-validator-ts)
+- [📄 src/modules/payslip-item/controller.ts](#📄-src-modules-payslip-item-controller-ts)
+- [📄 src/modules/payslip-item/routes.ts](#📄-src-modules-payslip-item-routes-ts)
+- [📄 src/modules/payslip-item/service.ts](#📄-src-modules-payslip-item-service-ts)
+- [📄 src/modules/payslip-item/validator.ts](#📄-src-modules-payslip-item-validator-ts)
+- [📄 src/modules/period/controller.ts](#📄-src-modules-period-controller-ts)
+- [📄 src/modules/period/routes.ts](#📄-src-modules-period-routes-ts)
+- [📄 src/modules/period/service.ts](#📄-src-modules-period-service-ts)
+- [📄 src/modules/period/validator.ts](#📄-src-modules-period-validator-ts)
+- [📄 src/modules/principal/controller.ts](#📄-src-modules-principal-controller-ts)
+- [📄 src/modules/principal/routes.ts](#📄-src-modules-principal-routes-ts)
+- [📄 src/modules/principal/service.ts](#📄-src-modules-principal-service-ts)
+- [📄 src/modules/principal/validator.ts](#📄-src-modules-principal-validator-ts)
+- [📄 src/modules/result/controller.ts](#📄-src-modules-result-controller-ts)
+- [📄 src/modules/result/routes.ts](#📄-src-modules-result-routes-ts)
+- [📄 src/modules/result/service.ts](#📄-src-modules-result-service-ts)
+- [📄 src/modules/result/validator.ts](#📄-src-modules-result-validator-ts)
+- [📄 src/modules/result-subject/controller.ts](#📄-src-modules-result-subject-controller-ts)
+- [📄 src/modules/result-subject/routes.ts](#📄-src-modules-result-subject-routes-ts)
+- [📄 src/modules/result-subject/service.ts](#📄-src-modules-result-subject-service-ts)
+- [📄 src/modules/result-subject/validator.ts](#📄-src-modules-result-subject-validator-ts)
+- [📄 src/modules/salary-component/controller.ts](#📄-src-modules-salary-component-controller-ts)
+- [📄 src/modules/salary-component/routes.ts](#📄-src-modules-salary-component-routes-ts)
+- [📄 src/modules/salary-component/service.ts](#📄-src-modules-salary-component-service-ts)
+- [📄 src/modules/salary-component/validator.ts](#📄-src-modules-salary-component-validator-ts)
+- [📄 src/modules/salary-structure/controller.ts](#📄-src-modules-salary-structure-controller-ts)
+- [📄 src/modules/salary-structure/routes.ts](#📄-src-modules-salary-structure-routes-ts)
+- [📄 src/modules/salary-structure/service.ts](#📄-src-modules-salary-structure-service-ts)
+- [📄 src/modules/salary-structure/validator.ts](#📄-src-modules-salary-structure-validator-ts)
+- [📄 src/modules/salary-structure-item/controller.ts](#📄-src-modules-salary-structure-item-controller-ts)
+- [📄 src/modules/salary-structure-item/routes.ts](#📄-src-modules-salary-structure-item-routes-ts)
+- [📄 src/modules/salary-structure-item/service.ts](#📄-src-modules-salary-structure-item-service-ts)
+- [📄 src/modules/salary-structure-item/validator.ts](#📄-src-modules-salary-structure-item-validator-ts)
+- [📄 src/modules/setting/controller.ts](#📄-src-modules-setting-controller-ts)
+- [📄 src/modules/setting/routes.ts](#📄-src-modules-setting-routes-ts)
+- [📄 src/modules/setting/service.ts](#📄-src-modules-setting-service-ts)
+- [📄 src/modules/setting/validator.ts](#📄-src-modules-setting-validator-ts)
+- [📄 src/modules/staff/controller.ts](#📄-src-modules-staff-controller-ts)
+- [📄 src/modules/staff/routes.ts](#📄-src-modules-staff-routes-ts)
+- [📄 src/modules/staff/service.ts](#📄-src-modules-staff-service-ts)
+- [📄 src/modules/staff/validator.ts](#📄-src-modules-staff-validator-ts)
+- [📄 src/modules/student/controller.ts](#📄-src-modules-student-controller-ts)
+- [📄 src/modules/student/routes.ts](#📄-src-modules-student-routes-ts)
+- [📄 src/modules/student/service.ts](#📄-src-modules-student-service-ts)
+- [📄 src/modules/student/validator.ts](#📄-src-modules-student-validator-ts)
+- [📄 src/modules/student-attendance/controller.ts](#📄-src-modules-student-attendance-controller-ts)
+- [📄 src/modules/student-attendance/routes.ts](#📄-src-modules-student-attendance-routes-ts)
+- [📄 src/modules/student-attendance/service.ts](#📄-src-modules-student-attendance-service-ts)
+- [📄 src/modules/student-attendance/validator.ts](#📄-src-modules-student-attendance-validator-ts)
+- [📄 src/modules/student-fee/controller.ts](#📄-src-modules-student-fee-controller-ts)
+- [📄 src/modules/student-fee/routes.ts](#📄-src-modules-student-fee-routes-ts)
+- [📄 src/modules/student-fee/service.ts](#📄-src-modules-student-fee-service-ts)
+- [📄 src/modules/student-fee/validator.ts](#📄-src-modules-student-fee-validator-ts)
+- [📄 src/modules/student-fee-item/controller.ts](#📄-src-modules-student-fee-item-controller-ts)
+- [📄 src/modules/student-fee-item/routes.ts](#📄-src-modules-student-fee-item-routes-ts)
+- [📄 src/modules/student-fee-item/service.ts](#📄-src-modules-student-fee-item-service-ts)
+- [📄 src/modules/student-fee-item/validator.ts](#📄-src-modules-student-fee-item-validator-ts)
+- [📄 src/modules/student-status/controller.ts](#📄-src-modules-student-status-controller-ts)
+- [📄 src/modules/student-status/routes.ts](#📄-src-modules-student-status-routes-ts)
+- [📄 src/modules/student-status/service.ts](#📄-src-modules-student-status-service-ts)
+- [📄 src/modules/student-status/validator.ts](#📄-src-modules-student-status-validator-ts)
+- [📄 src/modules/subject/controller.ts](#📄-src-modules-subject-controller-ts)
+- [📄 src/modules/subject/routes.ts](#📄-src-modules-subject-routes-ts)
+- [📄 src/modules/subject/service.ts](#📄-src-modules-subject-service-ts)
+- [📄 src/modules/subject/validator.ts](#📄-src-modules-subject-validator-ts)
+- [📄 src/modules/tax-slab/controller.ts](#📄-src-modules-tax-slab-controller-ts)
+- [📄 src/modules/tax-slab/routes.ts](#📄-src-modules-tax-slab-routes-ts)
+- [📄 src/modules/tax-slab/service.ts](#📄-src-modules-tax-slab-service-ts)
+- [📄 src/modules/tax-slab/validator.ts](#📄-src-modules-tax-slab-validator-ts)
+- [📄 src/modules/teacher/controller.ts](#📄-src-modules-teacher-controller-ts)
+- [📄 src/modules/teacher/routes.ts](#📄-src-modules-teacher-routes-ts)
+- [📄 src/modules/teacher/service.ts](#📄-src-modules-teacher-service-ts)
+- [📄 src/modules/teacher/validator.ts](#📄-src-modules-teacher-validator-ts)
+- [📄 src/modules/teacher-batch-pay/controller.ts](#📄-src-modules-teacher-batch-pay-controller-ts)
+- [📄 src/modules/teacher-batch-pay/routes.ts](#📄-src-modules-teacher-batch-pay-routes-ts)
+- [📄 src/modules/teacher-batch-pay/service.ts](#📄-src-modules-teacher-batch-pay-service-ts)
+- [📄 src/modules/teacher-batch-pay/validator.ts](#📄-src-modules-teacher-batch-pay-validator-ts)
+- [📄 src/modules/teaching-assignment/controller.ts](#📄-src-modules-teaching-assignment-controller-ts)
+- [📄 src/modules/teaching-assignment/routes.ts](#📄-src-modules-teaching-assignment-routes-ts)
+- [📄 src/modules/teaching-assignment/service.ts](#📄-src-modules-teaching-assignment-service-ts)
+- [📄 src/modules/teaching-assignment/validator.ts](#📄-src-modules-teaching-assignment-validator-ts)
+- [📄 src/modules/user/controller.ts](#📄-src-modules-user-controller-ts)
+- [📄 src/modules/user/routes.ts](#📄-src-modules-user-routes-ts)
+- [📄 src/modules/user/service.ts](#📄-src-modules-user-service-ts)
+- [📄 src/modules/user/validator.ts](#📄-src-modules-user-validator-ts)
+- [📄 src/modules/workflow-status/controller.ts](#📄-src-modules-workflow-status-controller-ts)
+- [📄 src/modules/workflow-status/routes.ts](#📄-src-modules-workflow-status-routes-ts)
+- [📄 src/modules/workflow-status/service.ts](#📄-src-modules-workflow-status-service-ts)
+- [📄 src/modules/workflow-status/validator.ts](#📄-src-modules-workflow-status-validator-ts)
 - [📄 src/utils/cookies.ts](#📄-src-utils-cookies-ts)
 - [📄 src/utils/error.ts](#📄-src-utils-error-ts)
 - [📄 src/utils/queryFilters.ts](#📄-src-utils-queryfilters-ts)
 - [📄 src/utils/response.ts](#📄-src-utils-response-ts)
 - [📄 src/index.ts](#📄-src-index-ts)
 - [📄 src/router.ts](#📄-src-router-ts)
+- [📄 list_modules.ps1](#📄-list-modules-ps1)
 - [📄 package.json](#📄-package-json)
 - [📄 pnpm-lock.yaml](#📄-pnpm-lock-yaml)
 - [📄 prisma.config.ts](#📄-prisma-config-ts)
+- [📄 survey.ps1](#📄-survey-ps1)
 - [📄 tsconfig.json](#📄-tsconfig-json)
 
 ---
@@ -255,21 +769,23 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Files | 102 |
-| Total Directories | 19 |
-| Text Files | 101 |
+| Total Files | 330 |
+| Total Directories | 77 |
+| Text Files | 329 |
 | Binary Files | 1 |
-| Total Size | 5.44 MB |
+| Total Size | 5.84 MB |
 
 ### 📄 File Types Distribution
 
 | Extension | Count |
 |-----------|-------|
-| `.ts` | 96 |
+| `.ts` | 321 |
+| `.ps1` | 2 |
 | `.json` | 2 |
 | `.sql` | 1 |
 | `.toml` | 1 |
 | `.prisma` | 1 |
+| `.md` | 1 |
 | `.yaml` | 1 |
 
 ## 💻 File Code Contents
@@ -1998,6 +2514,72 @@ export type T_Context = {
   userId: string;
   role: "USER" | "ADMIN" | "PRINCIPAL" | "ACCOUNTANT" | "TEACHER" | "STAFF";
 };
+
+```
+
+---
+
+### <a id="📄-src-dev-seeddefaultadmin-ts"></a>📄 `src/dev/seedDefaultAdmin.ts`
+
+**File Info:**
+- **Size**: 1.11 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/dev/seedDefaultAdmin.ts`
+- **Relative Path**: `src/dev`
+- **Created**: 2026-10-12 16:41:30 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-12 16:44:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3f141e10f9c2dc82e56556b3ac6c01fb`
+- **SHA256**: `1fa6b4f1991cd8e3e8eb51bbb65e9b3e191f382cb332fed88e206007d3dfcaae`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+
+import { prismaMain } from '@/lib/prismaClient';
+import * as bcrypt from 'bcrypt';
+
+
+
+export async function seedDefaultAdmin() {
+  const email = 'admin@gmail.com';
+  const plainPassword = 'admin123';
+
+  try {
+    // Check if admin already exists
+    const existingUser = await prismaMain.user.findUnique({
+      where: { email },
+    });
+
+    if (existingUser) {
+      console.log('Default admin user already exists.');
+      return;
+    }
+
+    // Hash the password
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(plainPassword, saltRounds);
+
+    // Create the admin user
+    const adminUser = await prismaMain.user.create({
+      data: {
+        email: email,
+        passwordHash: hashedPassword,
+        // Add other required fields based on your schema (e.g., role, name, etc.)
+        role: 'ADMIN',
+        isEmailVerified: true,
+
+      },
+    });
+
+    console.log(`Default admin created successfully: ${adminUser.email}`);
+  } catch (error) {
+    console.error('Error creating default admin user:', error);
+  } finally {
+    await prismaMain.$disconnect();
+  }
+}
 
 ```
 
@@ -125941,6 +126523,75 @@ export { prismaMain };
 
 ---
 
+### <a id="📄-src-memory-memory-md"></a>📄 `src/memory/MEMORY.md`
+
+**File Info:**
+- **Size**: 2.62 KB
+- **Extension**: `.md`
+- **Language**: `text`
+- **Location**: `src/memory/MEMORY.md`
+- **Relative Path**: `src/memory`
+- **Created**: 2026-10-27 03:05:44 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:05:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `00759ca7d5553ec6751456f837671ef5`
+- **SHA256**: `f73df801218c1313126223011d09048737d52b14eb0156d202ac76b37d69ab92`
+- **Encoding**: ASCII
+
+**File code content:**
+
+````markdown
+- [Batch Module] API module for Batch model following the established pattern (controller, service, routes, validator)
+- [Otp Module] API module for Otp model with soft-delete support
+- [Employee Module] API module for Employee model
+- [Principal Module] API module for Principal model
+- [Accountant Module] API module for Accountant model
+- [Staff Module] API module for Staff model
+- [Teacher Module] API module for Teacher model
+- [Student Module] API module for Student model
+- [Guardian Module] API module for Guardian model
+- [Course Module] API module for Course model
+- [BatchTerm Module] API module for BatchTerm model
+- [Subject Module] API module for Subject model
+- [BatchTermSubject Module] API module for BatchTermSubject model
+- [TeachingAssignment Module] API module for TeachingAssignment model
+- [AttendanceSession Module] API module for AttendanceSession model
+- [StudentAttendance Module] API module for StudentAttendance model
+- [EmployeeAttendance Module] API module for EmployeeAttendance model
+- [LeaveType Module] API module for LeaveType model
+- [ExamType Module] API module for ExamType model
+- [GradeScale Module] API module for GradeScale model
+- [FeeHead Module] API module for FeeHead model
+- [PaymentMethod Module] API module for PaymentMethod model
+- [SalaryComponent Module] API module for SalaryComponent model
+- [TaxSlab Module] API module for TaxSlab model
+- [SalaryStructure Module] API module for SalaryStructure model
+- [SalaryStructureItem Module] API module for SalaryStructureItem model
+- [Result Module] API module for Result model
+- [ResultSubject Module] API module for ResultSubject model
+- [FeeStructure Module] API module for FeeStructure model
+- [FeeStructureItem Module] API module for FeeStructureItem model
+- [StudentFee Module] API module for StudentFee model
+- [StudentFeeItem Module] API module for StudentFeeItem model
+- [FeeInstallment Module] API module for FeeInstallment model
+- [FeePayment Module] API module for FeePayment model
+- [FeePaymentMethodLine Module] API module for FeePaymentMethodLine model
+- [FeePaymentAllocation Module] API module for FeePaymentAllocation model
+- [FiscalYear Module] API module for FiscalYear model
+- [Account Module] API module for Account model
+- [JournalEntry Module] API module for JournalEntry model
+- [JournalLine Module] API module for JournalLine model
+- [Payroll Module] API module for Payroll model
+- [Payslip Module] API module for Payslip model
+- [PayslipItem Module] API module for PayslipItem model
+- [Notice Module] API module for Notice model
+- [NoticeTarget Module] API module for NoticeTarget model
+- [Setting Module] API module for Setting model
+
+Updated on 2026-10-27.
+````
+
+---
+
 ### <a id="📄-src-middlewares-authorized-ts"></a>📄 `src/middlewares/authorized.ts`
 
 **File Info:**
@@ -126202,6 +126853,1839 @@ export const trimBody = function (
       error,
     });
   }
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-account-controller-ts"></a>📄 `src/modules/account/controller.ts`
+
+**File Info:**
+- **Size**: 2.22 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account/controller.ts`
+- **Relative Path**: `src/modules/account`
+- **Created**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e1b49aa49f03ccf87bbd3303612cd0b4`
+- **SHA256**: `5320840a25798796d4e98c956d28d00508f4eceabe1ee3930643fa366236ca0f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { AccountService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateAccountCreate } from "./validator";
+
+export const AccountController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await AccountService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Accounts fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateAccountCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const account = await AccountService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Account created successfully",
+        data: account,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const account = await AccountService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Account retrieved successfully",
+        data: account,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await AccountService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Account deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-account-routes-ts"></a>📄 `src/modules/account/routes.ts`
+
+**File Info:**
+- **Size**: 696 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account/routes.ts`
+- **Relative Path**: `src/modules/account`
+- **Created**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:27:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c4379718ac8ff74847548f6b3f6a4cd8`
+- **SHA256**: `4bfacbf01aeebb4ffea5921933b6ded21308977d256b4dd21f2f73be7a157137`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { AccountController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  AccountController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  AccountController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  AccountController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  AccountController.delete,
+);
+
+export const accountRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-account-service-ts"></a>📄 `src/modules/account/service.ts`
+
+**File Info:**
+- **Size**: 2.3 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account/service.ts`
+- **Relative Path**: `src/modules/account`
+- **Created**: 2026-10-29 06:40:02 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:02 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `395062b78051ca708f394c48cb8d4749`
+- **SHA256**: `bddeb01b9172fb636e06b23a577d9bd4f018b3e7fec4e92519b3724d63f34c8d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { AccountCreateInput } from "./validator";
+
+export const AccountService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [accounts, total] = await Promise.all([
+      prismaMain.account.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+        include: {
+          children: true,
+          journalLines: true,
+        },
+      }),
+      prismaMain.account.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: accounts,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: AccountCreateInput, userId?: string) {
+    try {
+      const account = await prismaMain.account.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          children: true,
+          journalLines: true,
+        },
+      });
+      return account;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An account with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const account = await prismaMain.account.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        children: true,
+        journalLines: true,
+      },
+    });
+
+    if (!account) {
+      throw new CustomError("Account not found", 404);
+    }
+
+    return account;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.account.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Account not found", 404);
+    }
+
+    await prismaMain.account.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-account-validator-ts"></a>📄 `src/modules/account/validator.ts`
+
+**File Info:**
+- **Size**: 652 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account/validator.ts`
+- **Relative Path**: `src/modules/account`
+- **Created**: 2026-10-29 06:40:02 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:02 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2c8d0df18824862f09e61fcb8e86d8ce`
+- **SHA256**: `1acb3aee67a8b3d8d9f57429289ac7ba21eb2114414a7155b166338588d9b672`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const accountCreateInputSchema = z.object({
+  code: z.string().min(1, "Code is required"),
+  name: z.string().min(1, "Name is required"),
+  accountTypeId: z.string().uuid("Invalid Account Type ID format").optional(),
+  parentId: z.string().uuid("Invalid Parent ID format").optional(),
+  isGroup: z.boolean().optional(),
+  isSystem: z.boolean().optional(),
+});
+
+export type AccountCreateInput = z.infer<typeof accountCreateInputSchema>;
+export type AccountUpdateInput = z.infer<typeof accountCreateInputSchema>;
+
+export const validateAccountCreate = (data: unknown) => {
+  return accountCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-account-type-controller-ts"></a>📄 `src/modules/account-type/controller.ts`
+
+**File Info:**
+- **Size**: 2.96 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account-type/controller.ts`
+- **Relative Path**: `src/modules/account-type`
+- **Created**: 2026-10-31 12:58:57 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:02:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a1a28f6d06191ef718531ff7ffe4d8a7`
+- **SHA256**: `59780d510aaca528c144740ee587c1f317c5519d348ae7ea4a1a9248480b935b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateAccountTypeCreate,
+  validateAccountTypeUpdate,
+} from "./validator";
+import { AccountTypeService } from "./service";
+
+export const AccountTypeController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await AccountTypeService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Account types fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateAccountTypeCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await AccountTypeService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Account type created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await AccountTypeService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Account type retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateAccountTypeUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await AccountTypeService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Account type updated successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await AccountTypeService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Account type deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-account-type-routes-ts"></a>📄 `src/modules/account-type/routes.ts`
+
+**File Info:**
+- **Size**: 855 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account-type/routes.ts`
+- **Relative Path**: `src/modules/account-type`
+- **Created**: 2026-10-31 13:00:19 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:00:20 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e2d2c8ebdc2a2cc11d9c5a5ed4385ea1`
+- **SHA256**: `3b5d88ce8438224a016c32be7c802ae2952edca9cd10c6ed2604aa383be60cee`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { AccountTypeController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  AccountTypeController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  AccountTypeController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  AccountTypeController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  AccountTypeController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AccountTypeController.delete,
+);
+
+export const accountTypeRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-account-type-service-ts"></a>📄 `src/modules/account-type/service.ts`
+
+**File Info:**
+- **Size**: 4.21 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account-type/service.ts`
+- **Relative Path**: `src/modules/account-type`
+- **Created**: 2026-10-31 13:00:33 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:01:49 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c6568cbb2adbce50244a0557edb50f59`
+- **SHA256**: `8ba46e4abb26582aa48b6d11f89eb860f530d0b1bb2994c9850dbafe55026551`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import { AccountTypeCreateInput, AccountTypeUpdateInput } from "./validator";
+
+export const AccountTypeService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.accountType.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      }),
+      prismaMain.accountType.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: AccountTypeCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.accountType.findFirst({
+      where: { code: data.code },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted account type already uses this code. Use a different code."
+          : "An account type with this code already exists",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.accountType.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "An account type with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.accountType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Account type not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: AccountTypeUpdateInput, userId?: string) {
+    const existing = await prismaMain.accountType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Account type not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.accountType.findFirst({
+        where: { code: data.code, NOT: { id } },
+      });
+
+      if (duplicate) {
+        throw new CustomError(
+          "An account type with this code already exists",
+          409,
+        );
+      }
+    }
+
+    try {
+      return await prismaMain.accountType.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "An account type with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.accountType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Account type not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.account.count({
+        where: { accountTypeId: id, deletedAt: null },
+      }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This account type is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.accountType.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-account-type-validator-ts"></a>📄 `src/modules/account-type/validator.ts`
+
+**File Info:**
+- **Size**: 947 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/account-type/validator.ts`
+- **Relative Path**: `src/modules/account-type`
+- **Created**: 2026-10-31 13:00:57 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:00:59 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e3ba3c0de92f7f0544e2d88797558569`
+- **SHA256**: `2eac2dadd28623b5e49d874fd778f6fb101656e0f13f8ab685da4c72d41b00b8`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const accountTypeCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(255, "Name is too long"),
+  isDebitNormal: z.boolean(),
+  sortOrder: z.number().int().min(0).default(0),
+});
+
+export const accountTypeUpdateInputSchema =
+  accountTypeCreateInputSchema.partial();
+
+export type AccountTypeCreateInput = z.infer<
+  typeof accountTypeCreateInputSchema
+>;
+export type AccountTypeUpdateInput = z.infer<
+  typeof accountTypeUpdateInputSchema
+>;
+
+export const validateAccountTypeCreate = (data: unknown) => {
+  return accountTypeCreateInputSchema.parse(data);
+};
+
+export const validateAccountTypeUpdate = (data: unknown) => {
+  return accountTypeUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-accountant-controller-ts"></a>📄 `src/modules/accountant/controller.ts`
+
+**File Info:**
+- **Size**: 2.27 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/accountant/controller.ts`
+- **Relative Path**: `src/modules/accountant`
+- **Created**: 2026-10-29 06:27:51 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:27:51 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `179ce2324da413905ca932059ce5f17d`
+- **SHA256**: `5d606c054c47d7cd51c1fa476e62f72cfb313547b5bb45ee359bdb17159e04f6`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { AccountantService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateAccountantCreate } from "./validator";
+
+export const AccountantController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await AccountantService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Accountants fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateAccountantCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const accountant = await AccountantService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Accountant created successfully",
+        data: accountant,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const accountant = await AccountantService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Accountant retrieved successfully",
+        data: accountant,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await AccountantService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Accountant deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-accountant-routes-ts"></a>📄 `src/modules/accountant/routes.ts`
+
+**File Info:**
+- **Size**: 647 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/accountant/routes.ts`
+- **Relative Path**: `src/modules/accountant`
+- **Created**: 2026-10-29 06:27:51 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:27:55 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `bb0c3cc901d8d43cf975a33cd7185bae`
+- **SHA256**: `856710aa288223080007f75428fd13d9be860224b3c67049e7fa13ad0a4baf5b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { AccountantController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  AccountantController.index,
+);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), AccountantController.create);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  AccountantController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AccountantController.delete,
+);
+
+export const accountantRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-accountant-service-ts"></a>📄 `src/modules/accountant/service.ts`
+
+**File Info:**
+- **Size**: 2.72 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/accountant/service.ts`
+- **Relative Path**: `src/modules/accountant`
+- **Created**: 2026-10-29 06:27:50 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:27:50 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3e02efde186e7915c689b72e7f602549`
+- **SHA256**: `0faf0fda4831136d4aa3d2a13bb58679414f86ef839d292d53c8d604d46b7b02`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { AccountantCreateInput } from "./validator";
+
+export const AccountantService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { employee: { firstName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { lastName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { employeeCode: { contains: query.search, mode: "insensitive" } } },
+      ];
+    }
+
+    const [accountants, total] = await Promise.all([
+      prismaMain.accountant.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          employee: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.accountant.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: accountants,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: AccountantCreateInput, userId?: string) {
+    // Validate employee exists and is not soft-deleted
+    const employee = await prismaMain.employee.findFirst({
+      where: { id: data.employeeId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found or has been deleted", 404);
+    }
+
+    try {
+      const accountant = await prismaMain.accountant.create({
+        data: {
+          ...data,
+          employeeId: data.employeeId,
+          createdBy: userId,
+        },
+        include: {
+          employee: true,
+        },
+      });
+      return accountant;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee is already assigned as Accountant", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const accountant = await prismaMain.accountant.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        employee: true,
+      },
+    });
+
+    if (!accountant) {
+      throw new CustomError("Accountant not found", 404);
+    }
+
+    return accountant;
+  },
+
+  async delete(id: string, userId?: string) {
+    const accountant = await prismaMain.accountant.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!accountant) {
+      throw new CustomError("Accountant not found", 404);
+    }
+
+    await prismaMain.accountant.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-accountant-validator-ts"></a>📄 `src/modules/accountant/validator.ts`
+
+**File Info:**
+- **Size**: 422 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/accountant/validator.ts`
+- **Relative Path**: `src/modules/accountant`
+- **Created**: 2026-10-29 06:27:50 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:27:50 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `931c852214dfa82141f8980e7ddc9063`
+- **SHA256**: `31eac8918c9b786e91441c63479063d52b152148bf72b02a451c7597c168489b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const accountantCreateInputSchema = z.object({
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+});
+
+export type AccountantCreateInput = z.infer<typeof accountantCreateInputSchema>;
+export type AccountantUpdateInput = z.infer<typeof accountantCreateInputSchema>;
+
+export const validateAccountantCreate = (data: unknown) => {
+  return accountantCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-attendance-session-controller-ts"></a>📄 `src/modules/attendance-session/controller.ts`
+
+**File Info:**
+- **Size**: 2.34 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-session/controller.ts`
+- **Relative Path**: `src/modules/attendance-session`
+- **Created**: 2026-10-29 06:40:04 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:04 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8d60de6d99ce3097c969d636675134fa`
+- **SHA256**: `07dd84056c0b9e62522b36a870c1c5f3b048b7737e7c611ef5dba5d9bec30ed7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { AttendanceSessionService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateAttendanceSessionCreate } from "./validator";
+
+export const AttendanceSessionController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await AttendanceSessionService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance sessions fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateAttendanceSessionCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const session = await AttendanceSessionService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Attendance session created successfully",
+        data: session,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const session = await AttendanceSessionService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance session retrieved successfully",
+        data: session,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await AttendanceSessionService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance session deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-attendance-session-routes-ts"></a>📄 `src/modules/attendance-session/routes.ts`
+
+**File Info:**
+- **Size**: 762 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-session/routes.ts`
+- **Relative Path**: `src/modules/attendance-session`
+- **Created**: 2026-10-29 06:40:04 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:28:13 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cc01e2b3f41209df27686a92564d421a`
+- **SHA256**: `417fb90a38b47377f8b415a3b14362c6a79084480c31836b126d4e2cd32d2419`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { AttendanceSessionController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"),
+  AttendanceSessionController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "TEACHER"),
+  AttendanceSessionController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"),
+  AttendanceSessionController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "TEACHER"),
+  AttendanceSessionController.delete,
+);
+
+export const attendanceSessionRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-attendance-session-service-ts"></a>📄 `src/modules/attendance-session/service.ts`
+
+**File Info:**
+- **Size**: 2.28 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-session/service.ts`
+- **Relative Path**: `src/modules/attendance-session`
+- **Created**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a65eed2cc5bc8f05089726fa38e30ffc`
+- **SHA256**: `8cc386010ec2463b78c49d2990c970d46f8bad6e65d675fe9467d37effa14a0a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { AttendanceSessionCreateInput } from "./validator";
+
+export const AttendanceSessionService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { dateBs: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [sessions, total] = await Promise.all([
+      prismaMain.attendanceSession.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          attendances: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.attendanceSession.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: sessions,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: AttendanceSessionCreateInput, userId?: string) {
+    try {
+      const session = await prismaMain.attendanceSession.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          attendances: true,
+        },
+      });
+      return session;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An attendance session with this date already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const session = await prismaMain.attendanceSession.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        attendances: true,
+      },
+    });
+
+    if (!session) {
+      throw new CustomError("Attendance session not found", 404);
+    }
+
+    return session;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.attendanceSession.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Attendance session not found", 404);
+    }
+
+    await prismaMain.attendanceSession.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-attendance-session-validator-ts"></a>📄 `src/modules/attendance-session/validator.ts`
+
+**File Info:**
+- **Size**: 726 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-session/validator.ts`
+- **Relative Path**: `src/modules/attendance-session`
+- **Created**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:03 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d387073ebeb79904abc623e8e6347c7d`
+- **SHA256**: `0ec1baa30a6ae6bd26d478b3441b2e56b2f0b301ce6b4a1b235056652033872c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const attendanceSessionCreateInputSchema = z.object({
+  teachingAssignmentId: z.string().uuid("Invalid Teaching Assignment ID format").optional(),
+  teacherId: z.string().uuid("Invalid Teacher ID format").optional(),
+  periodId: z.string().uuid("Invalid Period ID format").optional(),
+  dateBs: z.string().min(1, "Date is required"),
+  isLocked: z.boolean().optional(),
+});
+
+export type AttendanceSessionCreateInput = z.infer<typeof attendanceSessionCreateInputSchema>;
+export type AttendanceSessionUpdateInput = z.infer<typeof attendanceSessionCreateInputSchema>;
+
+export const validateAttendanceSessionCreate = (data: unknown) => {
+  return attendanceSessionCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-attendance-status-controller-ts"></a>📄 `src/modules/attendance-status/controller.ts`
+
+**File Info:**
+- **Size**: 3.22 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-status/controller.ts`
+- **Relative Path**: `src/modules/attendance-status`
+- **Created**: 2026-10-31 13:03:27 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:05:00 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `165b593f661c53d9bc4144defc08c6cd`
+- **SHA256**: `93ad9a1c713ab1ee951fc8e181c3060b2bf7cded8694b50f0ac3bc97efcd0b10`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateAttendanceStatusCreate,
+  validateAttendanceStatusUpdate,
+} from "./validator";
+import { AttendanceStatusService } from "./service";
+
+export const AttendanceStatusController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+      const isActive =
+        req.query.isActive !== undefined
+          ? req.query.isActive === "true"
+          : undefined;
+
+      const result = await AttendanceStatusService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance statuses fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateAttendanceStatusCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await AttendanceStatusService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Attendance status created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await AttendanceStatusService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance status retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateAttendanceStatusUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await AttendanceStatusService.update(
+        id,
+        validatedData,
+        userId,
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance status updated successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await AttendanceStatusService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Attendance status deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-attendance-status-routes-ts"></a>📄 `src/modules/attendance-status/routes.ts`
+
+**File Info:**
+- **Size**: 902 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-status/routes.ts`
+- **Relative Path**: `src/modules/attendance-status`
+- **Created**: 2026-10-31 13:03:57 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:03:59 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a37d82259512553efb38d10e62b737c0`
+- **SHA256**: `6027bf10c653d483a004f5300dbe37f55cf753d01c43f217ad4b8a43ba54068d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { AttendanceStatusController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  AttendanceStatusController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AttendanceStatusController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  AttendanceStatusController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AttendanceStatusController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  AttendanceStatusController.delete,
+);
+
+export const attendanceStatusRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-attendance-status-service-ts"></a>📄 `src/modules/attendance-status/service.ts`
+
+**File Info:**
+- **Size**: 4.55 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-status/service.ts`
+- **Relative Path**: `src/modules/attendance-status`
+- **Created**: 2026-10-31 13:04:11 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:05:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9ede1a8f1c427b049040e3c337529cab`
+- **SHA256**: `e07016b9b96785bf949a34166608158ba5ec3592797a6e7f1ddc8cc57ba561c5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import {
+  AttendanceStatusCreateInput,
+  AttendanceStatusUpdateInput,
+} from "./validator";
+
+export const AttendanceStatusService = {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    isActive?: boolean;
+  }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.attendanceStatus.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: { name: "asc" },
+      }),
+      prismaMain.attendanceStatus.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: AttendanceStatusCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.attendanceStatus.findFirst({
+      where: { code: data.code },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted attendance status already uses this code. Use a different code."
+          : "An attendance status with this code already exists",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.attendanceStatus.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "An attendance status with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.attendanceStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Attendance status not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: AttendanceStatusUpdateInput, userId?: string) {
+    const existing = await prismaMain.attendanceStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Attendance status not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.attendanceStatus.findFirst({
+        where: { code: data.code, NOT: { id } },
+      });
+
+      if (duplicate) {
+        throw new CustomError(
+          "An attendance status with this code already exists",
+          409,
+        );
+      }
+    }
+
+    try {
+      return await prismaMain.attendanceStatus.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "An attendance status with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.attendanceStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Attendance status not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.studentAttendance.count({
+        where: { statusId: id, deletedAt: null },
+      }),
+      prismaMain.employeeAttendance.count({
+        where: { statusId: id, deletedAt: null },
+      }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This attendance status is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.attendanceStatus.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-attendance-status-validator-ts"></a>📄 `src/modules/attendance-status/validator.ts`
+
+**File Info:**
+- **Size**: 1.04 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/attendance-status/validator.ts`
+- **Relative Path**: `src/modules/attendance-status`
+- **Created**: 2026-10-31 13:04:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:04:30 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `7e5e1c3f0ff053617f6b9b2c102eb00b`
+- **SHA256**: `79e0a77fa1b107746a0b41bb31c0b49794ec10cca01b9e3be6a587629024ace8`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const attendanceStatusCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(255, "Name is too long"),
+  // 1 = full pay/present, 0.5 = half day, 0 = no pay
+  salaryFactor: z.number().min(0).max(1).default(1),
+  isActive: z.boolean().default(true),
+});
+
+export const attendanceStatusUpdateInputSchema =
+  attendanceStatusCreateInputSchema.partial();
+
+export type AttendanceStatusCreateInput = z.infer<
+  typeof attendanceStatusCreateInputSchema
+>;
+export type AttendanceStatusUpdateInput = z.infer<
+  typeof attendanceStatusUpdateInputSchema
+>;
+
+export const validateAttendanceStatusCreate = (data: unknown) => {
+  return attendanceStatusCreateInputSchema.parse(data);
+};
+
+export const validateAttendanceStatusUpdate = (data: unknown) => {
+  return attendanceStatusUpdateInputSchema.parse(data);
 };
 
 ```
@@ -126690,49 +129174,53 @@ export function ValidateRegister(data: unknown): T_RegisterSchema {
 
 ---
 
-### <a id="📄-src-modules-bill-controller-ts"></a>📄 `src/modules/bill/controller.ts`
+### <a id="📄-src-modules-batch-controller-ts"></a>📄 `src/modules/batch/controller.ts`
 
 **File Info:**
-- **Size**: 5.27 KB
+- **Size**: 3.06 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/bill/controller.ts`
-- **Relative Path**: `src/modules/bill`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `2eee7a39ffd28a96599f218e1438abfe`
-- **SHA256**: `7984f431f7440e241544a51679587a35d4dd62c22867f4ba0638dedab2cd990e`
+- **Location**: `src/modules/batch/controller.ts`
+- **Relative Path**: `src/modules/batch`
+- **Created**: 2026-10-12 17:09:15 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-12 17:41:40 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `19aa54d04ac7c7a35d1e5aaa29d4ca09`
+- **SHA256**: `4c309cf4b4dade2c8c4db166879d58ce5344f5f3d85e40fdda312a7751f36df4`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-// bill/controller.ts
+import { Request, Response } from "express";
+import { BatchService } from "./service";
+import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { ResponseHandler } from "@/utils/response";
-import { Request, Response } from "express";
-import { validateBillCreate } from "./validator";
-import { BillService } from "./service";
+import { validateBatchCreate, validateBatchUpdate } from "./validator";
 
-const BillController = {
+export const BatchController = {
   index: async (req: Request, res: Response) => {
     try {
-      const context = res.locals.context;
-      const userId = context.userId;
-
-      const { limit, page } = queryFilters(req);
+      const { page, limit, search } = queryFilters(req);
+      const courseId = req.query.courseId as string | undefined;
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
-      const result = await BillService.index(pageNumber, limitNumber, userId);
+      const result = await BatchService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        courseId,
+        isActive,
+      });
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Bills fetched successfully!",
+        message: "Batches fetched successfully!",
         data: {
-          data: result.bills,
+          data: result.batches,
           pagination: result.pagination,
         },
       });
@@ -126743,35 +129231,32 @@ const BillController = {
 
   create: async (req: Request, res: Response) => {
     try {
-      const context = res.locals.context;
-      const userId = context.userId;
+      const validatedData = validateBatchCreate(req.body);
+      const userId = res.locals.context?.userId;
 
-      const data = validateBillCreate(req.body);
-
-      const bill = await BillService.create(data, userId);
+      const batch = await BatchService.create(validatedData, userId);
 
       return ResponseHandler.success({
         res,
         code: 201,
-        message: "Bill created successfully",
-        data: bill,
+        message: "Batch created successfully",
+        data: batch,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
   },
 
-  getById: async (req: Request, res: Response) => {
+  retrieve: async (req: Request, res: Response) => {
     try {
-      const billId = req.params.id as string;
-
-      const bill = await BillService.getById(billId);
+      const id = req.params.id as string;
+      const batch = await BatchService.getById(id);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Bill fetched successfully",
-        data: bill,
+        message: "Batch retrieved successfully",
+        data: batch,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
@@ -126780,16 +129265,17 @@ const BillController = {
 
   update: async (req: Request, res: Response) => {
     try {
-      const billId = req.params.id as string;
-      const data = validateBillCreate(req.body);
+      const id = req.params.id as string;
+      const validatedData = validateBatchUpdate(req.body);
+      const userId = res.locals.context?.userId;
 
-      const bill = await BillService.update(billId, data);
+      const batch = await BatchService.update(id, validatedData, userId);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Bill updated successfully",
-        data: bill,
+        message: "Batch updated successfully",
+        data: batch,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
@@ -126798,54 +129284,420 @@ const BillController = {
 
   delete: async (req: Request, res: Response) => {
     try {
-      const billId = req.params.id as string;
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
 
-      await BillService.delete(billId);
+      await BatchService.delete(id, userId);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Bill deleted successfully",
+        message: "Batch deleted successfully",
         data: null,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
   },
+};
 
-  getBillsByDateRange: async (req: Request, res: Response) => {
+```
+
+---
+
+### <a id="📄-src-modules-batch-routes-ts"></a>📄 `src/modules/batch/routes.ts`
+
+**File Info:**
+- **Size**: 958 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch/routes.ts`
+- **Relative Path**: `src/modules/batch`
+- **Created**: 2026-10-12 17:08:50 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:28:57 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `945370be39f26a08576833072c157ac1`
+- **SHA256**: `03d02978528f5660af991b8c30254dddf2ad935bd35a48084de127249a5586b7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { BatchController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  BatchController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  BatchController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchController.delete,
+);
+
+export const batchRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-batch-service-ts"></a>📄 `src/modules/batch/service.ts`
+
+**File Info:**
+- **Size**: 5.21 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch/service.ts`
+- **Relative Path**: `src/modules/batch`
+- **Created**: 2026-10-12 17:10:10 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-12 17:10:12 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b532be3115aaa6ef94399e0a92e4f9c3`
+- **SHA256**: `aabb4f765d52d09ecd2948dbcce440f0ac2fcb75c710fc42f164619e1e85728b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { BatchCreateInput, BatchUpdateInput } from "./validator";
+
+export const BatchService = {
+  async index(query: { page?: number; limit?: number; search?: string; courseId?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.name = {
+        contains: query.search,
+        mode: "insensitive",
+      };
+    }
+
+    if (query.courseId) {
+      whereClause.courseId = query.courseId;
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [batches, total] = await Promise.all([
+      prismaMain.batch.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          course: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.batch.count({ where: whereClause }),
+    ]);
+
+    return {
+      batches,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: BatchCreateInput, userId?: string) {
+    // Validate that Course exists and is not soft-deleted
+    const course = await prismaMain.course.findFirst({
+      where: { id: data.courseId, deletedAt: null },
+    });
+
+    if (!course) {
+      throw new CustomError("Course not found or has been deleted", 404);
+    }
+
+    // Validate that currentTermNumber does not exceed totalTerms
+    if (data.currentTermNumber > course.totalTerms) {
+      throw new CustomError(
+        `Current term number (${data.currentTermNumber}) cannot exceed course total terms (${course.totalTerms})`,
+        400
+      );
+    }
+
+    // Check duplicate batch name within the same course
+    const existing = await prismaMain.batch.findFirst({
+      where: {
+        courseId: data.courseId,
+        name: data.name,
+        deletedAt: null,
+      },
+    });
+
+    if (existing) {
+      throw new CustomError("A batch with this name already exists for this course", 409);
+    }
+
     try {
-      const context = res.locals.context;
-      const userId = context.userId;
-
-      const { startDate, endDate, page, limit } = req.query;
-
-      if (!startDate || !endDate) {
-        return ResponseHandler.error({
-          res,
-          code: 400,
-          message: "startDate and endDate are required",
-          error: null,
-        });
+      const batch = await prismaMain.batch.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          course: true,
+        },
+      });
+      return batch;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A batch with this name already exists for this course", 409);
       }
+      throw error;
+    }
+  },
 
+  async getById(id: string) {
+    const batch = await prismaMain.batch.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        course: true,
+      },
+    });
+
+    if (!batch) {
+      throw new CustomError("Batch not found", 404);
+    }
+
+    return batch;
+  },
+
+  async update(id: string, data: BatchUpdateInput, userId?: string) {
+    const batch = await prismaMain.batch.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!batch) {
+      throw new CustomError("Batch not found", 404);
+    }
+
+    const targetCourseId = data.courseId || batch.courseId;
+
+    // Validate course if changed or referenced
+    const course = await prismaMain.course.findFirst({
+      where: { id: targetCourseId, deletedAt: null },
+    });
+
+    if (!course) {
+      throw new CustomError("Course not found or has been deleted", 404);
+    }
+
+    const targetTermNumber = data.currentTermNumber !== undefined ? data.currentTermNumber : batch.currentTermNumber;
+    if (targetTermNumber > course.totalTerms) {
+      throw new CustomError(
+        `Current term number (${targetTermNumber}) cannot exceed course total terms (${course.totalTerms})`,
+        400
+      );
+    }
+
+    const targetName = data.name !== undefined ? data.name : batch.name;
+    if (data.name || data.courseId) {
+      const duplicate = await prismaMain.batch.findFirst({
+        where: {
+          courseId: targetCourseId,
+          name: targetName,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+
+      if (duplicate) {
+        throw new CustomError("A batch with this name already exists for this course", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.batch.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          course: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A batch with this name already exists for this course", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const batch = await prismaMain.batch.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!batch) {
+      throw new CustomError("Batch not found", 404);
+    }
+
+    await prismaMain.batch.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-batch-validator-ts"></a>📄 `src/modules/batch/validator.ts`
+
+**File Info:**
+- **Size**: 951 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch/validator.ts`
+- **Relative Path**: `src/modules/batch`
+- **Created**: 2026-10-12 17:10:51 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-12 17:10:53 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `63b40acd55994f309d6aaa681908f6b3`
+- **SHA256**: `7d281a0e7bda629116f9b099c7309bce0a9fcdb60df5929bfd2220496518f3cc`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const batchCreateInputSchema = z.object({
+  courseId: z.string().uuid("Invalid Course ID format"),
+  name: z.string().min(1, "Batch name is required").max(100, "Batch name is too long"),
+  startDateBs: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+    .optional()
+    .nullable(),
+  currentTermNumber: z.number().int().positive("Term number must be a positive integer").default(1),
+  isActive: z.boolean().default(true),
+});
+
+export const batchUpdateInputSchema = batchCreateInputSchema.partial();
+
+export type BatchCreateInput = z.infer<typeof batchCreateInputSchema>;
+export type BatchUpdateInput = z.infer<typeof batchUpdateInputSchema>;
+
+export const validateBatchCreate = (data: unknown) => {
+  return batchCreateInputSchema.parse(data);
+};
+
+export const validateBatchUpdate = (data: unknown) => {
+  return batchUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-controller-ts"></a>📄 `src/modules/batch-term/controller.ts`
+
+**File Info:**
+- **Size**: 3.04 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term/controller.ts`
+- **Relative Path**: `src/modules/batch-term`
+- **Created**: 2026-10-27 03:11:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:11:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `978a057deb8a9160453628b0cb2ba157`
+- **SHA256**: `946b9c5f5e564c3b6fff9f3ba9e033236167d75a7eb72c6e08515d6605b6aadf`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { BatchTermService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateBatchTermCreate, validateBatchTermUpdate } from "./validator";
+
+export const BatchTermController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const batchId = req.query.batchId as string | undefined;
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
-      const result = await BillService.getBillsByDateRange(
-        userId,
-        new Date(startDate as string),
-        new Date(endDate as string),
-        pageNumber,
-        limitNumber,
-      );
+      const result = await BatchTermService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        batchId,
+        isActive,
+      });
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Bills fetched successfully!",
+        message: "BatchTerms fetched successfully!",
         data: {
-          data: result.bills,
+          data: result.batchTerms,
           pagination: result.pagination,
         },
       });
@@ -126854,17 +129706,11829 @@ const BillController = {
     }
   },
 
-  getTotalSales: async (req: Request, res: Response) => {
+  create: async (req: Request, res: Response) => {
     try {
-      const context = res.locals.context;
-      const userId = context.userId;
+      const validatedData = validateBatchTermCreate(req.body);
+      const userId = res.locals.context?.userId;
 
-      const result = await BillService.getTotalSales(userId);
+      const batchTerm = await BatchTermService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "BatchTerm created successfully",
+        data: batchTerm,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const batchTerm = await BatchTermService.getById(id);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Total sales fetched successfully",
+        message: "BatchTerm retrieved successfully",
+        data: batchTerm,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateBatchTermUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const batchTerm = await BatchTermService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "BatchTerm updated successfully",
+        data: batchTerm,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await BatchTermService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "BatchTerm deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-routes-ts"></a>📄 `src/modules/batch-term/routes.ts`
+
+**File Info:**
+- **Size**: 933 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term/routes.ts`
+- **Relative Path**: `src/modules/batch-term`
+- **Created**: 2026-10-27 03:11:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:28:47 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6df3965dae71e7654d9d6fecf9fdb158`
+- **SHA256**: `d9a96557b9ef97fb904f81e540015dd102d36ffb6274634762790f1fc8cee334`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { BatchTermController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  BatchTermController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchTermController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  BatchTermController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchTermController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchTermController.delete,
+);
+
+export const batchTermRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-service-ts"></a>📄 `src/modules/batch-term/service.ts`
+
+**File Info:**
+- **Size**: 5.1 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term/service.ts`
+- **Relative Path**: `src/modules/batch-term`
+- **Created**: 2026-10-27 03:09:51 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:09:51 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3a074c097f46f9902e1fe9155614a96b`
+- **SHA256**: `7e5e9adf139e96addb2c3e023e7a769aa70c42f616dd9adb9c79ae3fa252ed8b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { BatchTermCreateInput, BatchTermUpdateInput } from "./validator";
+
+export const BatchTermService = {
+  async index(query: { page?: number; limit?: number; search?: string; batchId?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.name = { contains: query.search, mode: "insensitive" };
+    }
+
+    if (query.batchId) {
+      whereClause.batchId = query.batchId;
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [batchTerms, total] = await Promise.all([
+      prismaMain.batchTerm.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          batch: { include: { course: true } },
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.batchTerm.count({ where: whereClause }),
+    ]);
+
+    return {
+      batchTerms,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: BatchTermCreateInput, userId?: string) {
+    // Validate that Batch exists and is not soft-deleted
+    const batch = await prismaMain.batch.findFirst({
+      where: { id: data.batchId, deletedAt: null },
+    });
+
+    if (!batch) {
+      throw new CustomError("Batch not found or has been deleted", 404);
+    }
+
+    // Check duplicate term number within the same batch
+    const existing = await prismaMain.batchTerm.findFirst({
+      where: {
+        batchId: data.batchId,
+        termNumber: data.termNumber,
+        deletedAt: null,
+      },
+    });
+
+    if (existing) {
+      throw new CustomError("A term with this number already exists for this batch", 409);
+    }
+
+    // Validate term number does not exceed course total terms
+    const course = await prismaMain.course.findFirst({
+      where: { id: batch.courseId, deletedAt: null },
+    });
+
+    if (data.termNumber > course.totalTerms) {
+      throw new CustomError(
+        `Term number (${data.termNumber}) cannot exceed course total terms (${course.totalTerms})`,
+        400,
+      );
+    }
+
+    try {
+      const batchTerm = await prismaMain.batchTerm.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          batch: { include: { course: true } },
+        },
+      });
+      return batchTerm;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A term with this number already exists for this batch", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const batchTerm = await prismaMain.batchTerm.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        batch: { include: { course: true } },
+        subjects: true,
+        exams: true,
+      },
+    });
+
+    if (!batchTerm) {
+      throw new CustomError("BatchTerm not found", 404);
+    }
+
+    return batchTerm;
+  },
+
+  async update(id: string, data: BatchTermUpdateInput, userId?: string) {
+    const batchTerm = await prismaMain.batchTerm.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!batchTerm) {
+      throw new CustomError("BatchTerm not found", 404);
+    }
+
+    // Validate batch if changed
+    if (data.batchId && data.batchId !== batchTerm.batchId) {
+      const batch = await prismaMain.batch.findFirst({
+        where: { id: data.batchId, deletedAt: null },
+      });
+      if (!batch) {
+        throw new CustomError("Batch not found or has been deleted", 404);
+      }
+    }
+
+    // Check duplicate term number if changed
+    if (data.termNumber !== undefined && data.termNumber !== batchTerm.termNumber) {
+      const targetBatchId = data.batchId || batchTerm.batchId;
+      const duplicate = await prismaMain.batchTerm.findFirst({
+        where: {
+          batchId: targetBatchId,
+          termNumber: data.termNumber,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+
+      if (duplicate) {
+        throw new CustomError("A term with this number already exists for this batch", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.batchTerm.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          batch: { include: { course: true } },
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A term with this number already exists for this batch", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const batchTerm = await prismaMain.batchTerm.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!batchTerm) {
+      throw new CustomError("BatchTerm not found", 404);
+    }
+
+    await prismaMain.batchTerm.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-validator-ts"></a>📄 `src/modules/batch-term/validator.ts`
+
+**File Info:**
+- **Size**: 1.01 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term/validator.ts`
+- **Relative Path**: `src/modules/batch-term`
+- **Created**: 2026-10-27 03:09:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:09:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c28fe8e4d9cd576ed92fd6644b662bb9`
+- **SHA256**: `9aafed98c91624d850738c76bc38263641a3bfe4b56a42b19bdbff9b0bfa7c0b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const batchTermCreateInputSchema = z.object({
+  batchId: z.string().uuid("Invalid Batch ID format"),
+  termNumber: z.number().int().positive("Term number must be a positive integer"),
+  name: z.string().min(1, "Term name is required").max(100, "Term name is too long"),
+  startDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  endDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  isActive: z.boolean().default(true),
+});
+
+export const batchTermUpdateInputSchema = batchTermCreateInputSchema.partial();
+
+export type BatchTermCreateInput = z.infer<typeof batchTermCreateInputSchema>;
+export type BatchTermUpdateInput = z.infer<typeof batchTermUpdateInputSchema>;
+
+export const validateBatchTermCreate = (data: unknown) => {
+  return batchTermCreateInputSchema.parse(data);
+};
+
+export const validateBatchTermUpdate = (data: unknown) => {
+  return batchTermUpdateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-subject-controller-ts"></a>📄 `src/modules/batch-term-subject/controller.ts`
+
+**File Info:**
+- **Size**: 3.3 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term-subject/controller.ts`
+- **Relative Path**: `src/modules/batch-term-subject`
+- **Created**: 2026-10-27 03:12:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:12:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d07aa92467c5098554a4ae72490164be`
+- **SHA256**: `c96d5407dd686d127e7cc5b1a831e9280d4083b843cc1c7d17949341b6bb51d4`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { BatchTermSubjectService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateBatchTermSubjectCreate, validateBatchTermSubjectUpdate } from "./validator";
+
+export const BatchTermSubjectController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const batchTermId = req.query.batchTermId as string | undefined;
+      const subjectId = req.query.subjectId as string | undefined;
+      const isElective = req.query.isElective !== undefined ? req.query.isElective === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await BatchTermSubjectService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        batchTermId,
+        subjectId,
+        isElective,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "BatchTermSubjects fetched successfully!",
+        data: {
+          data: result.batchTermSubjects,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateBatchTermSubjectCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const batchTermSubject = await BatchTermSubjectService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "BatchTermSubject created successfully",
+        data: batchTermSubject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const batchTermSubject = await BatchTermSubjectService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "BatchTermSubject retrieved successfully",
+        data: batchTermSubject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateBatchTermSubjectUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const batchTermSubject = await BatchTermSubjectService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "BatchTermSubject updated successfully",
+        data: batchTermSubject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await BatchTermSubjectService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "BatchTermSubject deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-subject-routes-ts"></a>📄 `src/modules/batch-term-subject/routes.ts`
+
+**File Info:**
+- **Size**: 982 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term-subject/routes.ts`
+- **Relative Path**: `src/modules/batch-term-subject`
+- **Created**: 2026-10-27 03:12:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:28:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4c6ad5afa648836923e597fcd5319c0a`
+- **SHA256**: `0aa1a95cc6583599c5f77c2ed6b6104c1236a2a40e0c90afe4c5f85fc2029c9f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { BatchTermSubjectController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  BatchTermSubjectController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchTermSubjectController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  BatchTermSubjectController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchTermSubjectController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  BatchTermSubjectController.delete,
+);
+
+export const batchTermSubjectRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-subject-service-ts"></a>📄 `src/modules/batch-term-subject/service.ts`
+
+**File Info:**
+- **Size**: 5.17 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term-subject/service.ts`
+- **Relative Path**: `src/modules/batch-term-subject`
+- **Created**: 2026-10-27 03:12:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:12:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `13eb0ad2f60a5e73d93f7189d06da74d`
+- **SHA256**: `983cb7fd1324f989d775fcc93d86e1cfd1c9629d4794860bbaa93a83030d172f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { BatchTermSubjectCreateInput, BatchTermSubjectUpdateInput } from "./validator";
+
+export const BatchTermSubjectService = {
+  async index(query: { page?: number; limit?: number; search?: string; batchTermId?: string; subjectId?: string; isElective?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { subject: { name: { contains: query.search, mode: "insensitive" } } },
+        { subject: { code: { contains: query.search, mode: "insensitive" } } },
+      ];
+    }
+
+    if (query.batchTermId) {
+      whereClause.batchTermId = query.batchTermId;
+    }
+
+    if (query.subjectId) {
+      whereClause.subjectId = query.subjectId;
+    }
+
+    if (query.isElective !== undefined) {
+      whereClause.isElective = query.isElective;
+    }
+
+    const [batchTermSubjects, total] = await Promise.all([
+      prismaMain.batchTermSubject.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          subject: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.batchTermSubject.count({ where: whereClause }),
+    ]);
+
+    return {
+      batchTermSubjects,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: BatchTermSubjectCreateInput, userId?: string) {
+    // Validate that BatchTerm exists and is not soft-deleted
+    const batchTerm = await prismaMain.batchTerm.findFirst({
+      where: { id: data.batchTermId, deletedAt: null },
+    });
+
+    if (!batchTerm) {
+      throw new CustomError("BatchTerm not found or has been deleted", 404);
+    }
+
+    // Validate that Subject exists and is not soft-deleted
+    const subject = await prismaMain.subject.findFirst({
+      where: { id: data.subjectId, deletedAt: null },
+    });
+
+    if (!subject) {
+      throw new CustomError("Subject not found or has been deleted", 404);
+    }
+
+    // Check duplicate combination of batchTerm + subject
+    const existing = await prismaMain.batchTermSubject.findFirst({
+      where: {
+        batchTermId: data.batchTermId,
+        subjectId: data.subjectId,
+        deletedAt: null,
+      },
+    });
+
+    if (existing) {
+      throw new CustomError("This subject is already assigned to this batch term", 409);
+    }
+
+    try {
+      const batchTermSubject = await prismaMain.batchTermSubject.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          subject: true,
+        },
+      });
+      return batchTermSubject;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("This subject is already assigned to this batch term", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const batchTermSubject = await prismaMain.batchTermSubject.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        subject: true,
+        assignments: true,
+        examSubjects: true,
+      },
+    });
+
+    if (!batchTermSubject) {
+      throw new CustomError("BatchTermSubject not found", 404);
+    }
+
+    return batchTermSubject;
+  },
+
+  async update(id: string, data: BatchTermSubjectUpdateInput, userId?: string) {
+    const existing = await prismaMain.batchTermSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("BatchTermSubject not found", 404);
+    }
+
+    // Validate batchTerm if changed
+    if (data.batchTermId && data.batchTermId !== existing.batchTermId) {
+      const batchTerm = await prismaMain.batchTerm.findFirst({
+        where: { id: data.batchTermId, deletedAt: null },
+      });
+      if (!batchTerm) {
+        throw new CustomError("BatchTerm not found or has been deleted", 404);
+      }
+    }
+
+    // Validate subject if changed
+    if (data.subjectId && data.subjectId !== existing.subjectId) {
+      const subject = await prismaMain.subject.findFirst({
+        where: { id: data.subjectId, deletedAt: null },
+      });
+      if (!subject) {
+        throw new CustomError("Subject not found or has been deleted", 404);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.batchTermSubject.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          subject: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("This subject is already assigned to this batch term", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.batchTermSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("BatchTermSubject not found", 404);
+    }
+
+    await prismaMain.batchTermSubject.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-batch-term-subject-validator-ts"></a>📄 `src/modules/batch-term-subject/validator.ts`
+
+**File Info:**
+- **Size**: 986 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/batch-term-subject/validator.ts`
+- **Relative Path**: `src/modules/batch-term-subject`
+- **Created**: 2026-10-27 03:12:28 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:12:28 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `7be37d20d3e5c357cec3d1991e06db35`
+- **SHA256**: `0889442ad73c566f9876eb140ba2133256da21bad29b025e1fa9fa07b09873cd`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+import { Decimal } from "decimal.js";
+
+const creditHourSchema = z.number().positive("Credit hour must be a positive number").max(999.9, "Credit hour is too large");
+
+export const batchTermSubjectCreateInputSchema = z.object({
+  batchTermId: z.string().uuid("Invalid BatchTerm ID format"),
+  subjectId: z.string().uuid("Invalid Subject ID format"),
+  creditHour: creditHourSchema,
+  isElective: z.boolean().default(false),
+});
+
+export const batchTermSubjectUpdateInputSchema = batchTermSubjectCreateInputSchema.partial();
+
+export type BatchTermSubjectCreateInput = z.infer<typeof batchTermSubjectCreateInputSchema>;
+export type BatchTermSubjectUpdateInput = z.infer<typeof batchTermSubjectUpdateInputSchema>;
+
+export const validateBatchTermSubjectCreate = (data: unknown) => {
+  return batchTermSubjectCreateInputSchema.parse(data);
+};
+
+export const validateBatchTermSubjectUpdate = (data: unknown) => {
+  return batchTermSubjectUpdateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-course-controller-ts"></a>📄 `src/modules/course/controller.ts`
+
+**File Info:**
+- **Size**: 2.89 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course/controller.ts`
+- **Relative Path**: `src/modules/course`
+- **Created**: 2026-10-27 03:07:22 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:07:22 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `40499ee3d0789b3b7e546b24d551507f`
+- **SHA256**: `dc9c5411d2548dbb03a457d41df268ed134cbe5f2e29c6d177b96982fd6d4586`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { CourseService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateCourseCreate, validateCourseUpdate } from "./validator";
+
+export const CourseController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await CourseService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Courses fetched successfully!",
+        data: {
+          data: result.courses,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateCourseCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const course = await CourseService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Course created successfully",
+        data: course,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const course = await CourseService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course retrieved successfully",
+        data: course,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateCourseUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const course = await CourseService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course updated successfully",
+        data: course,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await CourseService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-course-routes-ts"></a>📄 `src/modules/course/routes.ts`
+
+**File Info:**
+- **Size**: 912 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course/routes.ts`
+- **Relative Path**: `src/modules/course`
+- **Created**: 2026-10-27 03:07:23 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:29:20 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5148b159b406bdf0463c915ddacd0d11`
+- **SHA256**: `73de9a3d230fbe98881537427dc449a8453c656d199330bb325452d2d4152a16`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { CourseController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  CourseController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  CourseController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  CourseController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  CourseController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  CourseController.delete,
+);
+
+export const courseRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-course-service-ts"></a>📄 `src/modules/course/service.ts`
+
+**File Info:**
+- **Size**: 3.38 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course/service.ts`
+- **Relative Path**: `src/modules/course`
+- **Created**: 2026-10-27 03:07:22 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:07:22 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `74d72cc68462243a11d3d03ca469a6a7`
+- **SHA256**: `8b43a511c14c1be0d4c746b1c10f939851f042ca8f12e1452e1e876d36df4c84`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { CourseCreateInput, CourseUpdateInput } from "./validator";
+
+export const CourseService = {
+  async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+        { code: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [courses, total] = await Promise.all([
+      prismaMain.course.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.course.count({ where: whereClause }),
+    ]);
+
+    return {
+      courses,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: CourseCreateInput, userId?: string) {
+    const existing = await prismaMain.course.findFirst({
+      where: { code: data.code, deletedAt: null },
+    });
+
+    if (existing) {
+      throw new CustomError("A course with this code already exists", 409);
+    }
+
+    try {
+      const course = await prismaMain.course.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return course;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A course with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const course = await prismaMain.course.findFirst({
+      where: { id, deletedAt: null },
+      include: { batches: true, feeStructures: true },
+    });
+
+    if (!course) {
+      throw new CustomError("Course not found", 404);
+    }
+
+    return course;
+  },
+
+  async update(id: string, data: CourseUpdateInput, userId?: string) {
+    const course = await prismaMain.course.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!course) {
+      throw new CustomError("Course not found", 404);
+    }
+
+    if (data.code) {
+      const duplicate = await prismaMain.course.findFirst({
+        where: {
+          code: data.code,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+
+      if (duplicate) {
+        throw new CustomError("A course with this code already exists", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.course.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A course with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const course = await prismaMain.course.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!course) {
+      throw new CustomError("Course not found", 404);
+    }
+
+    await prismaMain.course.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-course-validator-ts"></a>📄 `src/modules/course/validator.ts`
+
+**File Info:**
+- **Size**: 987 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course/validator.ts`
+- **Relative Path**: `src/modules/course`
+- **Created**: 2026-10-27 03:07:22 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:07:22 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e681873df7365236f960c67fbca55870`
+- **SHA256**: `88d5c525fee557fbf1198c8bb3df032c055b79a13b98c70f31e65d5b2a3059e6`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const courseCreateInputSchema = z.object({
+  code: z.string().min(1, "Course code is required").max(50, "Course code is too long"),
+  name: z.string().min(1, "Course name is required").max(255, "Course name is too long"),
+  system: z.enum(["SEMESTER", "YEARLY"], {
+    errorMap: () => ({ message: "System must be SEMESTER or YEARLY" }),
+  }),
+  totalTerms: z.number().int().positive("Total terms must be a positive integer"),
+  description: z.string().optional().nullable(),
+  isActive: z.boolean().default(true),
+});
+
+export const courseUpdateInputSchema = courseCreateInputSchema.partial();
+
+export type CourseCreateInput = z.infer<typeof courseCreateInputSchema>;
+export type CourseUpdateInput = z.infer<typeof courseUpdateInputSchema>;
+
+export const validateCourseCreate = (data: unknown) => {
+  return courseCreateInputSchema.parse(data);
+};
+
+export const validateCourseUpdate = (data: unknown) => {
+  return courseUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-course-system-controller-ts"></a>📄 `src/modules/course-system/controller.ts`
+
+**File Info:**
+- **Size**: 3.12 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course-system/controller.ts`
+- **Relative Path**: `src/modules/course-system`
+- **Created**: 2026-10-31 13:06:30 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:08:41 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `07315d1612679c4a1104a61fa22d971e`
+- **SHA256**: `ec9cd7775989a0aaaf7e49a69be3eba95425f3f6882ad8468de69eca1f3d3fb7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateCourseSystemCreate,
+  validateCourseSystemUpdate,
+} from "./validator";
+import { CourseSystemService } from "./service";
+
+export const CourseSystemController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+      const isActive =
+        req.query.isActive !== undefined
+          ? req.query.isActive === "true"
+          : undefined;
+
+      const result = await CourseSystemService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course systems fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateCourseSystemCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await CourseSystemService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Course system created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await CourseSystemService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course system retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateCourseSystemUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await CourseSystemService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course system updated successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await CourseSystemService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Course system deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-course-system-routes-ts"></a>📄 `src/modules/course-system/routes.ts`
+
+**File Info:**
+- **Size**: 1007 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course-system/routes.ts`
+- **Relative Path**: `src/modules/course-system`
+- **Created**: 2026-10-31 13:06:55 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:06:57 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2cf1e3fa2e1756d473952c474794830c`
+- **SHA256**: `e3a43d73dfd36263c2748b53b3c02dc21fc62031de3f76544f9456491c63ad5e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { CourseSystemController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  CourseSystemController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  CourseSystemController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  CourseSystemController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  CourseSystemController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  CourseSystemController.delete,
+);
+
+export const courseSystemRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-course-system-service-ts"></a>📄 `src/modules/course-system/service.ts`
+
+**File Info:**
+- **Size**: 4.34 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course-system/service.ts`
+- **Relative Path**: `src/modules/course-system`
+- **Created**: 2026-10-31 13:07:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:08:00 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `134dcd2419bfba767103d0206f779703`
+- **SHA256**: `61a3d35e40cb32be86707cbc0768540932926f2f837f90d322916792828472a2`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import { CourseSystemCreateInput, CourseSystemUpdateInput } from "./validator";
+
+export const CourseSystemService = {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    isActive?: boolean;
+  }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.courseSystem.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: { name: "asc" },
+      }),
+      prismaMain.courseSystem.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: CourseSystemCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.courseSystem.findFirst({
+      where: { code: data.code },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted course system already uses this code. Use a different code."
+          : "A course system with this code already exists",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.courseSystem.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A course system with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.courseSystem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Course system not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: CourseSystemUpdateInput, userId?: string) {
+    const existing = await prismaMain.courseSystem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Course system not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.courseSystem.findFirst({
+        where: { code: data.code, NOT: { id } },
+      });
+
+      if (duplicate) {
+        throw new CustomError(
+          "A course system with this code already exists",
+          409,
+        );
+      }
+    }
+
+    try {
+      return await prismaMain.courseSystem.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A course system with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.courseSystem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Course system not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.course.count({
+        where: { courseSystemId: id, deletedAt: null },
+      }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This course system is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.courseSystem.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-course-system-validator-ts"></a>📄 `src/modules/course-system/validator.ts`
+
+**File Info:**
+- **Size**: 917 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/course-system/validator.ts`
+- **Relative Path**: `src/modules/course-system`
+- **Created**: 2026-10-31 13:07:32 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:07:34 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `45734dd8ce0ff59a45d51ea247d70363`
+- **SHA256**: `9c92666b9b1fe43778521343472cad5018d8819dbe2cc87323cf0005b626c22c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const courseSystemCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(255, "Name is too long"),
+  isActive: z.boolean().default(true),
+});
+
+export const courseSystemUpdateInputSchema =
+  courseSystemCreateInputSchema.partial();
+
+export type CourseSystemCreateInput = z.infer<
+  typeof courseSystemCreateInputSchema
+>;
+export type CourseSystemUpdateInput = z.infer<
+  typeof courseSystemUpdateInputSchema
+>;
+
+export const validateCourseSystemCreate = (data: unknown) => {
+  return courseSystemCreateInputSchema.parse(data);
+};
+
+export const validateCourseSystemUpdate = (data: unknown) => {
+  return courseSystemUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-employee-controller-ts"></a>📄 `src/modules/employee/controller.ts`
+
+**File Info:**
+- **Size**: 2.94 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee/controller.ts`
+- **Relative Path**: `src/modules/employee`
+- **Created**: 2026-10-27 03:08:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:08:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1bd4d0128b83f77a050a0df4b582e951`
+- **SHA256**: `f6033e8e62bb5e9ff9d0bf95bc21e73ac74f089c9e47d8171ff873a559e5c94d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { EmployeeService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateEmployeeCreate, validateEmployeeUpdate } from "./validator";
+
+export const EmployeeController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await EmployeeService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employees fetched successfully!",
+        data: {
+          data: result.employees,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateEmployeeCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const employee = await EmployeeService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Employee created successfully",
+        data: employee,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const employee = await EmployeeService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employee retrieved successfully",
+        data: employee,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateEmployeeUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const employee = await EmployeeService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employee updated successfully",
+        data: employee,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await EmployeeService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employee deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-employee-routes-ts"></a>📄 `src/modules/employee/routes.ts`
+
+**File Info:**
+- **Size**: 756 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee/routes.ts`
+- **Relative Path**: `src/modules/employee`
+- **Created**: 2026-10-27 03:08:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:30:01 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `64bc3dc1404269c1c0468affc956de99`
+- **SHA256**: `fed725e125eda659de975ff13f296112f756949c7540ab4504162e4a0e9734f7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { EmployeeController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  EmployeeController.index,
+);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), EmployeeController.create);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  EmployeeController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  EmployeeController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  EmployeeController.delete,
+);
+
+export const employeeRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-employee-service-ts"></a>📄 `src/modules/employee/service.ts`
+
+**File Info:**
+- **Size**: 6.11 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee/service.ts`
+- **Relative Path**: `src/modules/employee`
+- **Created**: 2026-10-27 03:08:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:08:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `663f420feaf8c0131f6f9cdaa51d6412`
+- **SHA256**: `e5611142abefd67bc6a6cfd186f9ccf6addd40b408e820aacfc75fc6c4fe2fd3`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { EmployeeCreateInput, EmployeeUpdateInput } from "./validator";
+
+export const EmployeeService = {
+  async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { firstName: { contains: query.search, mode: "insensitive" } },
+        { lastName: { contains: query.search, mode: "insensitive" } },
+        { employeeCode: { contains: query.search, mode: "insensitive" } },
+        { email: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [employees, total] = await Promise.all([
+      prismaMain.employee.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          user: { select: { id: true, email: true, username: true, role: true } },
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.employee.count({ where: whereClause }),
+    ]);
+
+    return {
+      employees,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: EmployeeCreateInput, userId?: string) {
+    // Check if userId exists and is not soft-deleted
+    if (data.userId) {
+      const user = await prismaMain.user.findFirst({
+        where: { id: data.userId, deletedAt: null },
+      });
+      if (!user) {
+        throw new CustomError("User not found or has been deleted", 404);
+      }
+    }
+
+    // Check duplicate employeeCode
+    const existingCode = await prismaMain.employee.findFirst({
+      where: { employeeCode: data.employeeCode, deletedAt: null },
+    });
+
+    if (existingCode) {
+      throw new CustomError("An employee with this code already exists", 409);
+    }
+
+    // Check duplicate panNo
+    if (data.panNo) {
+      const existingPan = await prismaMain.employee.findFirst({
+        where: { panNo: data.panNo, deletedAt: null },
+      });
+      if (existingPan) {
+        throw new CustomError("An employee with this PAN number already exists", 409);
+      }
+    }
+
+    // Check duplicate ssfNo
+    if (data.ssfNo) {
+      const existingSsf = await prismaMain.employee.findFirst({
+        where: { ssfNo: data.ssfNo, deletedAt: null },
+      });
+      if (existingSsf) {
+        throw new CustomError("An employee with this SSF number already exists", 409);
+      }
+    }
+
+    try {
+      const employee = await prismaMain.employee.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          user: { select: { id: true, email: true, username: true, role: true } },
+        },
+      });
+      return employee;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("Duplicate entry found", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const employee = await prismaMain.employee.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        user: { select: { id: true, email: true, username: true, role: true } },
+        principal: true,
+        teacher: true,
+        accountant: true,
+        staff: true,
+      },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found", 404);
+    }
+
+    return employee;
+  },
+
+  async update(id: string, data: EmployeeUpdateInput, userId?: string) {
+    const employee = await prismaMain.employee.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found", 404);
+    }
+
+    // Check if userId exists
+    if (data.userId) {
+      const user = await prismaMain.user.findFirst({
+        where: { id: data.userId, deletedAt: null },
+      });
+      if (!user) {
+        throw new CustomError("User not found or has been deleted", 404);
+      }
+    }
+
+    // Check duplicate employeeCode
+    if (data.employeeCode && data.employeeCode !== employee.employeeCode) {
+      const duplicate = await prismaMain.employee.findFirst({
+        where: {
+          employeeCode: data.employeeCode,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+      if (duplicate) {
+        throw new CustomError("An employee with this code already exists", 409);
+      }
+    }
+
+    // Check duplicate panNo
+    if (data.panNo && data.panNo !== employee.panNo) {
+      const duplicate = await prismaMain.employee.findFirst({
+        where: {
+          panNo: data.panNo,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+      if (duplicate) {
+        throw new CustomError("An employee with this PAN number already exists", 409);
+      }
+    }
+
+    // Check duplicate ssfNo
+    if (data.ssfNo && data.ssfNo !== employee.ssfNo) {
+      const duplicate = await prismaMain.employee.findFirst({
+        where: {
+          ssfNo: data.ssfNo,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+      if (duplicate) {
+        throw new CustomError("An employee with this SSF number already exists", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.employee.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          user: { select: { id: true, email: true, username: true, role: true } },
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("Duplicate entry found", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const employee = await prismaMain.employee.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found", 404);
+    }
+
+    await prismaMain.employee.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-employee-validator-ts"></a>📄 `src/modules/employee/validator.ts`
+
+**File Info:**
+- **Size**: 2.2 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee/validator.ts`
+- **Relative Path**: `src/modules/employee`
+- **Created**: 2026-10-27 03:08:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:08:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3cd22a9b42c3999f941b0a25e863cedf`
+- **SHA256**: `e6b424558397360e21e7f67ba82557a2b561df76a0f8d4403919995c1704c7d7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const employeeCreateInputSchema = z.object({
+  userId: z.string().uuid("Invalid User ID format").optional().nullable(),
+  employeeCode: z.string().min(1, "Employee code is required").max(50, "Employee code is too long"),
+  firstName: z.string().min(1, "First name is required").max(100, "First name is too long"),
+  middleName: z.string().max(100, "Middle name is too long").optional().nullable(),
+  lastName: z.string().min(1, "Last name is required").max(100, "Last name is too long"),
+  gender: z.enum(["MALE", "FEMALE", "OTHERS"], {
+    errorMap: () => ({ message: "Gender must be MALE, FEMALE, or OTHERS" }),
+  }),
+  dobBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  phone: z.string().max(20, "Phone number is too long").optional().nullable(),
+  email: z.string().email("Invalid email format").max(255, "Email is too long").optional().nullable(),
+  permanentAddress: z.string().optional().nullable(),
+  temporaryAddress: z.string().optional().nullable(),
+  photoUrl: z.string().url("Invalid URL format").optional().nullable(),
+  designation: z.string().min(1, "Designation is required").max(100, "Designation is too long"),
+  joinDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+  leaveDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  panNo: z.string().max(20, "PAN number is too long").optional().nullable(),
+  ssfNo: z.string().max(20, "SSF number is too long").optional().nullable(),
+  bankName: z.string().max(100, "Bank name is too long").optional().nullable(),
+  bankAccountNo: z.string().max(50, "Bank account number is too long").optional().nullable(),
+  isActive: z.boolean().default(true),
+});
+
+export const employeeUpdateInputSchema = employeeCreateInputSchema.partial();
+
+export type EmployeeCreateInput = z.infer<typeof employeeCreateInputSchema>;
+export type EmployeeUpdateInput = z.infer<typeof employeeUpdateInputSchema>;
+
+export const validateEmployeeCreate = (data: unknown) => {
+  return employeeCreateInputSchema.parse(data);
+};
+
+export const validateEmployeeUpdate = (data: unknown) => {
+  return employeeUpdateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-employee-attendance-controller-ts"></a>📄 `src/modules/employee-attendance/controller.ts`
+
+**File Info:**
+- **Size**: 2.37 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee-attendance/controller.ts`
+- **Relative Path**: `src/modules/employee-attendance`
+- **Created**: 2026-10-29 06:44:27 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:27 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ed42c85c96dc9f8857daec3bbbbc7cda`
+- **SHA256**: `57dbc74f0f5b979dd820b43eb6c1e9d63c5eea7553e2a8208367057553454fdc`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { EmployeeAttendanceService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateEmployeeAttendanceCreate } from "./validator";
+
+export const EmployeeAttendanceController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await EmployeeAttendanceService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employee attendances fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateEmployeeAttendanceCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const record = await EmployeeAttendanceService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Employee attendance record created successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const record = await EmployeeAttendanceService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employee attendance record retrieved successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await EmployeeAttendanceService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Employee attendance record deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-employee-attendance-routes-ts"></a>📄 `src/modules/employee-attendance/routes.ts`
+
+**File Info:**
+- **Size**: 770 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee-attendance/routes.ts`
+- **Relative Path**: `src/modules/employee-attendance`
+- **Created**: 2026-10-29 06:44:27 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:29:39 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e733325afd305dd7ac08caf82b1cc0a9`
+- **SHA256**: `7a2f4c233ecd5ddf31122a9efac25303b69f3b65ab5eacf03c0f100a42ad7610`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { EmployeeAttendanceController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  EmployeeAttendanceController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "STAFF"),
+  EmployeeAttendanceController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  EmployeeAttendanceController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "STAFF"),
+  EmployeeAttendanceController.delete,
+);
+
+export const employeeAttendanceRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-employee-attendance-service-ts"></a>📄 `src/modules/employee-attendance/service.ts`
+
+**File Info:**
+- **Size**: 2.66 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee-attendance/service.ts`
+- **Relative Path**: `src/modules/employee-attendance`
+- **Created**: 2026-10-29 06:44:27 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:27 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f9a4648c38ff051ec6b890dfd31e6322`
+- **SHA256**: `ebb77d2d72e4d52a22f9e5d1f98bd03ad722a68d99c1545e936693c28327e529`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { EmployeeAttendanceCreateInput } from "./validator";
+
+export const EmployeeAttendanceService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { employeeId: { contains: query.search, mode: "insensitive" } },
+        { dateBs: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [records, total] = await Promise.all([
+      prismaMain.employeeAttendance.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          leaveType: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.employeeAttendance.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: records,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: EmployeeAttendanceCreateInput, userId?: string) {
+    // Validate employee exists and is not soft-deleted
+    const employee = await prismaMain.employee.findFirst({
+      where: { id: data.employeeId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found or has been deleted", 404);
+    }
+
+    try {
+      const record = await prismaMain.employeeAttendance.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          leaveType: true,
+        },
+      });
+      return record;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An attendance record for this employee on this date already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const record = await prismaMain.employeeAttendance.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        leaveType: true,
+      },
+    });
+
+    if (!record) {
+      throw new CustomError("Employee attendance record not found", 404);
+    }
+
+    return record;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.employeeAttendance.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Employee attendance record not found", 404);
+    }
+
+    await prismaMain.employeeAttendance.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-employee-attendance-validator-ts"></a>📄 `src/modules/employee-attendance/validator.ts`
+
+**File Info:**
+- **Size**: 740 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/employee-attendance/validator.ts`
+- **Relative Path**: `src/modules/employee-attendance`
+- **Created**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6344e4e74e37378c1150e1be75b67d3e`
+- **SHA256**: `111abfec8c10cc0935a760d53c4f881ae7205fcdbfa4519e228b14f6cedd4f27`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const employeeAttendanceCreateInputSchema = z.object({
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+  dateBs: z.string().min(1, "Date is required"),
+  statusId: z.string().uuid("Invalid Status ID format").optional(),
+  leaveTypeId: z.string().uuid("Invalid Leave Type ID format").optional(),
+  remarks: z.string().optional(),
+  isLocked: z.boolean().optional(),
+});
+
+export type EmployeeAttendanceCreateInput = z.infer<typeof employeeAttendanceCreateInputSchema>;
+export type EmployeeAttendanceUpdateInput = z.infer<typeof employeeAttendanceCreateInputSchema>;
+
+export const validateEmployeeAttendanceCreate = (data: unknown) => {
+  return employeeAttendanceCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-exam-controller-ts"></a>📄 `src/modules/exam/controller.ts`
+
+**File Info:**
+- **Size**: 2.18 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam/controller.ts`
+- **Relative Path**: `src/modules/exam`
+- **Created**: 2026-10-29 06:47:14 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:14 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9e76710a8a341455168b68d520a49e2a`
+- **SHA256**: `a2fdc9e31372d7dd4dc61bd6e3e1d998ce242ef8a4337d090cd5ae4eb2045a85`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ExamService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateExamCreate } from "./validator";
+
+export const ExamController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await ExamService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exams fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateExamCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const exam = await ExamService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Exam created successfully",
+        data: exam,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const exam = await ExamService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam retrieved successfully",
+        data: exam,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await ExamService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-routes-ts"></a>📄 `src/modules/exam/routes.ts`
+
+**File Info:**
+- **Size**: 796 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam/routes.ts`
+- **Relative Path**: `src/modules/exam`
+- **Created**: 2026-10-29 06:47:15 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:31:12 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `411be6e9c8b57023b1ac050982547bc9`
+- **SHA256**: `f7806ce0ecbd5903b21df3943555797ac1edfe6057b86190ada37ab7227d642c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { ExamController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  ExamController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  ExamController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  ExamController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  ExamController.delete,
+);
+
+export const examRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-service-ts"></a>📄 `src/modules/exam/service.ts`
+
+**File Info:**
+- **Size**: 2.19 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam/service.ts`
+- **Relative Path**: `src/modules/exam`
+- **Created**: 2026-10-29 06:47:14 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:14 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `57de3553026577a5b9a049d2463c9f2b`
+- **SHA256**: `1a5cf1d8482ec7346c02dac2163f382dca43d62c2d500716c1c754e4c38dc235`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { ExamCreateInput } from "./validator";
+
+export const ExamService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [exams, total] = await Promise.all([
+      prismaMain.exam.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          examSubjects: true,
+          examMarks: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.exam.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: exams,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: ExamCreateInput, userId?: string) {
+    try {
+      const exam = await prismaMain.exam.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          examSubjects: true,
+          examMarks: true,
+        },
+      });
+      return exam;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An exam with these dates already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const exam = await prismaMain.exam.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        examSubjects: true,
+        examMarks: true,
+      },
+    });
+
+    if (!exam) {
+      throw new CustomError("Exam not found", 404);
+    }
+
+    return exam;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.exam.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Exam not found", 404);
+    }
+
+    await prismaMain.exam.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-validator-ts"></a>📄 `src/modules/exam/validator.ts`
+
+**File Info:**
+- **Size**: 635 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam/validator.ts`
+- **Relative Path**: `src/modules/exam`
+- **Created**: 2026-10-29 06:47:14 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:14 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `dce1fb7d7a1597c34c70728163fd53d2`
+- **SHA256**: `c64c8fd1841bdd6ef7a9f8022ea79ab2dd77305840734fd7d1186a66d9b4423c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const examCreateInputSchema = z.object({
+  batchTermId: z.string().uuid("Invalid Batch Term ID format").optional(),
+  examTypeId: z.string().uuid("Invalid Exam Type ID format").optional(),
+  name: z.string().min(1, "Exam name is required"),
+  startDateBs: z.string().min(1, "Start date is required"),
+  endDateBs: z.string().min(1, "End date is required"),
+});
+
+export type ExamCreateInput = z.infer<typeof examCreateInputSchema>;
+export type ExamUpdateInput = z.infer<typeof examCreateInputSchema>;
+
+export const validateExamCreate = (data: unknown) => {
+  return examCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-exam-mark-controller-ts"></a>📄 `src/modules/exam-mark/controller.ts`
+
+**File Info:**
+- **Size**: 2.23 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-mark/controller.ts`
+- **Relative Path**: `src/modules/exam-mark`
+- **Created**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d6596b91192f1693036b43eae9523f9c`
+- **SHA256**: `7cb148145e7b7c82303a2f159660db7bee490d163055cf31183b9677c36bc166`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ExamMarkService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateExamMarkCreate } from "./validator";
+
+export const ExamMarkController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await ExamMarkService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam marks fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateExamMarkCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const mark = await ExamMarkService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Exam mark created successfully",
+        data: mark,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const mark = await ExamMarkService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam mark retrieved successfully",
+        data: mark,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await ExamMarkService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam mark deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-mark-routes-ts"></a>📄 `src/modules/exam-mark/routes.ts`
+
+**File Info:**
+- **Size**: 690 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-mark/routes.ts`
+- **Relative Path**: `src/modules/exam-mark`
+- **Created**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:30:21 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1d87659cdd6cccc3b4304c6639d41e2a`
+- **SHA256**: `af8eccf5ab46da85747ef9ce1f657346e21424418c66ab00dbcb8008604342eb`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { ExamMarkController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
+  ExamMarkController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "TEACHER"),
+  ExamMarkController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
+  ExamMarkController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "TEACHER"),
+  ExamMarkController.delete,
+);
+
+export const examMarkRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-mark-service-ts"></a>📄 `src/modules/exam-mark/service.ts`
+
+**File Info:**
+- **Size**: 2.48 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-mark/service.ts`
+- **Relative Path**: `src/modules/exam-mark`
+- **Created**: 2026-10-29 06:47:15 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3f20d669434045d57b52d7959caa4269`
+- **SHA256**: `b14dc705d6599c02c53315d91c56392475792639dc14f7c9dbb9431c29b7dd14`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { ExamMarkCreateInput } from "./validator";
+
+export const ExamMarkService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { studentId: { contains: query.search, mode: "insensitive" } },
+        { examSubjectId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [marks, total] = await Promise.all([
+      prismaMain.examMark.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          student: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.examMark.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: marks,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: ExamMarkCreateInput, userId?: string) {
+    // Validate exam and exam subject exist
+    const [exam] = await Promise.all([
+      prismaMain.exam.findFirst({ where: { id: data.examId, deletedAt: null } }),
+    ]);
+    if (!exam) {
+      throw new CustomError("Exam not found", 404);
+    }
+
+    try {
+      const mark = await prismaMain.examMark.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          student: true,
+        },
+      });
+      return mark;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An exam mark already exists for this student and subject", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const mark = await prismaMain.examMark.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        student: true,
+      },
+    });
+
+    if (!mark) {
+      throw new CustomError("Exam mark not found", 404);
+    }
+
+    return mark;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.examMark.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Exam mark not found", 404);
+    }
+
+    await prismaMain.examMark.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-mark-validator-ts"></a>📄 `src/modules/exam-mark/validator.ts`
+
+**File Info:**
+- **Size**: 655 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-mark/validator.ts`
+- **Relative Path**: `src/modules/exam-mark`
+- **Created**: 2026-10-29 06:47:15 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:15 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6ee67917d59a3649e4c968c92e46f125`
+- **SHA256**: `66096a81cd30403bc5814b8837a0644eadd353bb66fdf728083e369291581691`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const examMarkCreateInputSchema = z.object({
+  examId: z.string().uuid("Invalid Exam ID format"),
+  examSubjectId: z.string().uuid("Invalid Exam Subject ID format"),
+  studentId: z.string().uuid("Invalid Student ID format"),
+  marksObtained: z.string().min(1, "Marks are required"),
+  isAbsent: z.boolean().optional(),
+  remarks: z.string().optional(),
+});
+
+export type ExamMarkCreateInput = z.infer<typeof examMarkCreateInputSchema>;
+export type ExamMarkUpdateInput = z.infer<typeof examMarkCreateInputSchema>;
+
+export const validateExamMarkCreate = (data: unknown) => {
+  return examMarkCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-exam-subject-controller-ts"></a>📄 `src/modules/exam-subject/controller.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-subject/controller.ts`
+- **Relative Path**: `src/modules/exam-subject`
+- **Created**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d50e7bc7c2d55421f867228cb4c75d56`
+- **SHA256**: `83dc2b3a6789101d5a510808adb0695366e327e9b2acf5b077a48e1667af57d5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ExamSubjectService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateExamSubjectCreate } from "./validator";
+
+export const ExamSubjectController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await ExamSubjectService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam subjects fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateExamSubjectCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await ExamSubjectService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Exam subject created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await ExamSubjectService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam subject retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await ExamSubjectService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam subject deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-subject-routes-ts"></a>📄 `src/modules/exam-subject/routes.ts`
+
+**File Info:**
+- **Size**: 838 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-subject/routes.ts`
+- **Relative Path**: `src/modules/exam-subject`
+- **Created**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:30:41 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2f6f87d4cbb5ccb6ed9d88ce3c7ae620`
+- **SHA256**: `5c12eb9df6c5225c2afbb24cbc8363c7afb187778ac5bcade53e9d8c9b9c6a79`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { ExamSubjectController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  ExamSubjectController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  ExamSubjectController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  ExamSubjectController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  ExamSubjectController.delete,
+);
+
+export const examSubjectRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-subject-service-ts"></a>📄 `src/modules/exam-subject/service.ts`
+
+**File Info:**
+- **Size**: 2.17 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-subject/service.ts`
+- **Relative Path**: `src/modules/exam-subject`
+- **Created**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `92dd657dc8b023d2552a18ceee85fc92`
+- **SHA256**: `510cb9c17d0686051c9f177117a5aad9e01978c4044678932bff74682f7e5e29`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { ExamSubjectCreateInput } from "./validator";
+
+export const ExamSubjectService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { examId: { contains: query.search, mode: "insensitive" } },
+        { fullMarks: { contains: query.search, mode: "insensitive" } },
+        { passMarks: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.examSubject.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.examSubject.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: ExamSubjectCreateInput, userId?: string) {
+    try {
+      const item = await prismaMain.examSubject.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return item;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An exam subject with this exam already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.examSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Exam subject not found", 404);
+    }
+
+    return item;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.examSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Exam subject not found", 404);
+    }
+
+    await prismaMain.examSubject.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-subject-validator-ts"></a>📄 `src/modules/exam-subject/validator.ts`
+
+**File Info:**
+- **Size**: 687 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-subject/validator.ts`
+- **Relative Path**: `src/modules/exam-subject`
+- **Created**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a55d27f442317741a4217e32fc686ecf`
+- **SHA256**: `1076c62111c623af5ab94f1dbdf003b17d79c7f35c4f631bb0504987e1f56e50`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const examSubjectCreateInputSchema = z.object({
+  examId: z.string().uuid("Invalid Exam ID format"),
+  batchTermSubjectId: z.string().uuid("Invalid Batch Term Subject ID format").optional(),
+  fullMarks: z.string().min(1, "Full marks are required"),
+  passMarks: z.string().min(1, "Pass marks are required"),
+  examDateBs: z.string().min(1, "Exam date is required"),
+});
+
+export type ExamSubjectCreateInput = z.infer<typeof examSubjectCreateInputSchema>;
+export type ExamSubjectUpdateInput = z.infer<typeof examSubjectCreateInputSchema>;
+
+export const validateExamSubjectCreate = (data: unknown) => {
+  return examSubjectCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-exam-type-controller-ts"></a>📄 `src/modules/exam-type/controller.ts`
+
+**File Info:**
+- **Size**: 2.24 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-type/controller.ts`
+- **Relative Path**: `src/modules/exam-type`
+- **Created**: 2026-10-29 06:30:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2b87e6d90e9dd75f9ca4db859ce1f2d6`
+- **SHA256**: `a7fa6bd517ee5d2baa5b983014564a35c522214475aba84a456e5659b64b0763`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ExamTypeService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateExamTypeCreate } from "./validator";
+
+export const ExamTypeController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await ExamTypeService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam types fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateExamTypeCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const examType = await ExamTypeService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Exam type created successfully",
+        data: examType,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const examType = await ExamTypeService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam type retrieved successfully",
+        data: examType,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await ExamTypeService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam type deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-type-routes-ts"></a>📄 `src/modules/exam-type/routes.ts`
+
+**File Info:**
+- **Size**: 740 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-type/routes.ts`
+- **Relative Path**: `src/modules/exam-type`
+- **Created**: 2026-10-29 06:30:19 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:31:02 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `636b79be182a4e613da9f2db37348430`
+- **SHA256**: `40fc69b3413a4912e7bf36ce7e4b619219d3e41e7ecebd248d17add38f65918f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { ExamTypeController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  ExamTypeController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  ExamTypeController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  ExamTypeController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  ExamTypeController.delete,
+);
+
+export const examTypeRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-type-service-ts"></a>📄 `src/modules/exam-type/service.ts`
+
+**File Info:**
+- **Size**: 1.99 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-type/service.ts`
+- **Relative Path**: `src/modules/exam-type`
+- **Created**: 2026-10-29 06:30:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ebded4246cc7e723e36f4cf1f1531b74`
+- **SHA256**: `06598087321157d32e7c67c37ab5adec3d5ee7c7fb933faa86aba896ad3e34f0`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { ExamTypeCreateInput } from "./validator";
+
+export const ExamTypeService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [examTypes, total] = await Promise.all([
+      prismaMain.examType.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.examType.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: examTypes,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: ExamTypeCreateInput, userId?: string) {
+    try {
+      const examType = await prismaMain.examType.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return examType;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An exam type with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const examType = await prismaMain.examType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!examType) {
+      throw new CustomError("Exam type not found", 404);
+    }
+
+    return examType;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.examType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Exam type not found", 404);
+    }
+
+    await prismaMain.examType.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-exam-type-validator-ts"></a>📄 `src/modules/exam-type/validator.ts`
+
+**File Info:**
+- **Size**: 396 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/exam-type/validator.ts`
+- **Relative Path**: `src/modules/exam-type`
+- **Created**: 2026-10-29 06:30:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c8d77283ccf655540745baff70d5c386`
+- **SHA256**: `076cfd3e6a859ebd9ef028816a4534d5ac0c87fae096bdcadd3706be7277670d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const examTypeCreateInputSchema = z.object({
+  name: z.string().max(255, "Name is too long"),
+});
+
+export type ExamTypeCreateInput = z.infer<typeof examTypeCreateInputSchema>;
+export type ExamTypeUpdateInput = z.infer<typeof examTypeCreateInputSchema>;
+
+export const validateExamTypeCreate = (data: unknown) => {
+  return examTypeCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-fee-head-controller-ts"></a>📄 `src/modules/fee-head/controller.ts`
+
+**File Info:**
+- **Size**: 2.25 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-head/controller.ts`
+- **Relative Path**: `src/modules/fee-head`
+- **Created**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9262dccd05a7c61761b7f67943ba409d`
+- **SHA256**: `3ba6c614cc269b1204fc32e9e7eae24ad48d236506cba79796b5a4825a2ecc9b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeeHeadService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeeHeadCreate } from "./validator";
+
+export const FeeHeadController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeeHeadService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee heads fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeeHeadCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const head = await FeeHeadService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee head created successfully",
+        data: head,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const head = await FeeHeadService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee head retrieved successfully",
+        data: head,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeeHeadService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee head deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-head-routes-ts"></a>📄 `src/modules/fee-head/routes.ts`
+
+**File Info:**
+- **Size**: 714 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-head/routes.ts`
+- **Relative Path**: `src/modules/fee-head`
+- **Created**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:31:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cd9a0ea110cbcfcd4198801506d0935a`
+- **SHA256**: `2cc0bc3eee798fdd2f11451fe62196b5fe5b4a516a8e3b5c7192f3fbe1c1150c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeeHeadController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeHeadController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeHeadController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeHeadController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeHeadController.delete,
+);
+
+export const feeHeadRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-head-service-ts"></a>📄 `src/modules/fee-head/service.ts`
+
+**File Info:**
+- **Size**: 2.04 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-head/service.ts`
+- **Relative Path**: `src/modules/fee-head`
+- **Created**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e3261cb6e972850a50dd9f212f73f5df`
+- **SHA256**: `15edbd2a03a1fe098fa6e6abb8f75bca3e53fdcf1bd8c739e1c632c49cf5e2fb`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeeHeadCreateInput } from "./validator";
+
+export const FeeHeadService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.feeHead.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feeHead.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeeHeadCreateInput, userId?: string) {
+    try {
+      const head = await prismaMain.feeHead.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return head;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A fee head with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const head = await prismaMain.feeHead.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!head) {
+      throw new CustomError("Fee head not found", 404);
+    }
+
+    return head;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feeHead.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee head not found", 404);
+    }
+
+    await prismaMain.feeHead.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-head-validator-ts"></a>📄 `src/modules/fee-head/validator.ts`
+
+**File Info:**
+- **Size**: 471 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-head/validator.ts`
+- **Relative Path**: `src/modules/fee-head`
+- **Created**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:07:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b9d5df459f61f96177a6a151daae191c`
+- **SHA256**: `6633c2493e7ef7807a2b9087e4cc829abb732c94e1c118742155cf3d3e21ee43`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feeHeadCreateInputSchema = z.object({
+  code: z.string().min(1, "Code is required"),
+  name: z.string().min(1, "Name is required"),
+  isActive: z.boolean().optional(),
+});
+
+export type FeeHeadCreateInput = z.infer<typeof feeHeadCreateInputSchema>;
+export type FeeHeadUpdateInput = z.infer<typeof feeHeadCreateInputSchema>;
+
+export const validateFeeHeadCreate = (data: unknown) => {
+  return feeHeadCreateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-installment-controller-ts"></a>📄 `src/modules/fee-installment/controller.ts`
+
+**File Info:**
+- **Size**: 2.33 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-installment/controller.ts`
+- **Relative Path**: `src/modules/fee-installment`
+- **Created**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4bfba608c265f4bb75f3dbdf604e46f2`
+- **SHA256**: `c02a591563bc68eb9c3bad74ec0fe268e1159daab95f399e02365b94b02ee070`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeeInstallmentService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeeInstallmentCreate } from "./validator";
+
+export const FeeInstallmentController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeeInstallmentService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee installments fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeeInstallmentCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const installment = await FeeInstallmentService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee installment created successfully",
+        data: installment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const installment = await FeeInstallmentService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee installment retrieved successfully",
+        data: installment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeeInstallmentService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee installment deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-installment-routes-ts"></a>📄 `src/modules/fee-installment/routes.ts`
+
+**File Info:**
+- **Size**: 756 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-installment/routes.ts`
+- **Relative Path**: `src/modules/fee-installment`
+- **Created**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:31:38 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `609215d5086f728f0cd8635ca46918b6`
+- **SHA256**: `4dfd3a5b89bd58525f2f7cff0818127a828bedf2579e729f0e882ea231ea1125`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeeInstallmentController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeInstallmentController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeInstallmentController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeInstallmentController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeInstallmentController.delete,
+);
+
+export const feeInstallmentRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-installment-service-ts"></a>📄 `src/modules/fee-installment/service.ts`
+
+**File Info:**
+- **Size**: 2.36 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-installment/service.ts`
+- **Relative Path**: `src/modules/fee-installment`
+- **Created**: 2026-10-29 06:54:05 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:05 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c888dc9c1195edd7e0cfe3d49335daab`
+- **SHA256**: `680b29cf66d31e77d967995cf87ba861c4218384345df08e795c1c51507f7b47`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeeInstallmentCreateInput } from "./validator";
+
+export const FeeInstallmentService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { studentFeeItemId: { contains: query.search, mode: "insensitive" } },
+        { dueDateBs: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [installments, total] = await Promise.all([
+      prismaMain.feeInstallment.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          studentFee: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feeInstallment.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: installments,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeeInstallmentCreateInput, userId?: string) {
+    try {
+      const installment = await prismaMain.feeInstallment.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          studentFee: true,
+        },
+      });
+      return installment;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An installment already exists for this student fee item", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const installment = await prismaMain.feeInstallment.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        studentFee: true,
+      },
+    });
+
+    if (!installment) {
+      throw new CustomError("Fee installment not found", 404);
+    }
+
+    return installment;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feeInstallment.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee installment not found", 404);
+    }
+
+    await prismaMain.feeInstallment.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-installment-validator-ts"></a>📄 `src/modules/fee-installment/validator.ts`
+
+**File Info:**
+- **Size**: 571 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-installment/validator.ts`
+- **Relative Path**: `src/modules/fee-installment`
+- **Created**: 2026-10-29 06:54:05 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:05 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `fab635bfbb4c24f9b77fccc002567741`
+- **SHA256**: `90a7ee6aa6724d5ab0c33b1174686a4e1b27b65b7670659ceb1ba7d028a933e6`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feeInstallmentCreateInputSchema = z.object({
+  studentFeeItemId: z.string().uuid("Invalid Student Fee Item ID format"),
+  dueDateBs: z.string().min(1, "Due date is required"),
+  amount: z.string().min(1, "Amount is required"),
+});
+
+export type FeeInstallmentCreateInput = z.infer<typeof feeInstallmentCreateInputSchema>;
+export type FeeInstallmentUpdateInput = z.infer<typeof feeInstallmentCreateInputSchema>;
+
+export const validateFeeInstallmentCreate = (data: unknown) => {
+  return feeInstallmentCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-controller-ts"></a>📄 `src/modules/fee-payment/controller.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment/controller.ts`
+- **Relative Path**: `src/modules/fee-payment`
+- **Created**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5cb2172babe776f6e03352e4f4e5f578`
+- **SHA256**: `93282696375dd660e906c59cbfaf835ca7bb31de9c69482419f201018e1985a7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeePaymentService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeePaymentCreate } from "./validator";
+
+export const FeePaymentController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeePaymentService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payments fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeePaymentCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const payment = await FeePaymentService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee payment created successfully",
+        data: payment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const payment = await FeePaymentService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment retrieved successfully",
+        data: payment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeePaymentService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-routes-ts"></a>📄 `src/modules/fee-payment/routes.ts`
+
+**File Info:**
+- **Size**: 718 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment/routes.ts`
+- **Relative Path**: `src/modules/fee-payment`
+- **Created**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:32:33 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `78f04e2e1fc2c86b5906a3c251d2a982`
+- **SHA256**: `4308bcec6ffb74f0560ba880ce90b789a66648b61424657f0d1d4f65a2695054`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeePaymentController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeePaymentController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeePaymentController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeePaymentController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  FeePaymentController.delete,
+);
+
+export const feePaymentRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-service-ts"></a>📄 `src/modules/fee-payment/service.ts`
+
+**File Info:**
+- **Size**: 2.37 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment/service.ts`
+- **Relative Path**: `src/modules/fee-payment`
+- **Created**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a900520fd2f56592834ed9040632256c`
+- **SHA256**: `aa706b9d44e0cf7f6ea4d754e6f933ceb16cc793e3f067749aa83c313b3340a1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeePaymentCreateInput } from "./validator";
+
+export const FeePaymentService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { receiptNo: { contains: query.search, mode: "insensitive" } },
+        { studentId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [payments, total] = await Promise.all([
+      prismaMain.feePayment.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          allocations: true,
+          methodLines: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feePayment.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: payments,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeePaymentCreateInput, userId?: string) {
+    try {
+      const payment = await prismaMain.feePayment.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          allocations: true,
+          methodLines: true,
+        },
+      });
+      return payment;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A fee payment already exists for this student and year", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const payment = await prismaMain.feePayment.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        allocations: true,
+        methodLines: true,
+      },
+    });
+
+    if (!payment) {
+      throw new CustomError("Fee payment not found", 404);
+    }
+
+    return payment;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feePayment.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee payment not found", 404);
+    }
+
+    await prismaMain.feePayment.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-validator-ts"></a>📄 `src/modules/fee-payment/validator.ts`
+
+**File Info:**
+- **Size**: 901 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment/validator.ts`
+- **Relative Path**: `src/modules/fee-payment`
+- **Created**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1d2946ef9d3ee2f1779701e142a22938`
+- **SHA256**: `12955ea1807ae5b039159912ecdf7863ba16cc4f34919244391675df4f4d148d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feePaymentCreateInputSchema = z.object({
+  receiptNo: z.string().optional(),
+  studentId: z.string().uuid("Invalid Student ID format"),
+  fiscalYearId: z.string().uuid("Invalid Fiscal Year ID format").optional(),
+  paymentDateBs: z.string().min(1, "Payment date is required"),
+  totalAmount: z.string().min(1, "Total amount is required"),
+  remarks: z.string().optional(),
+  isCancelled: z.boolean().optional(),
+  cancelledAt: z.string().datetime().optional(),
+  cancelReason: z.string().optional(),
+  journalEntryId: z.string().uuid("Invalid Journal Entry ID format").optional(),
+});
+
+export type FeePaymentCreateInput = z.infer<typeof feePaymentCreateInputSchema>;
+export type FeePaymentUpdateInput = z.infer<typeof feePaymentCreateInputSchema>;
+
+export const validateFeePaymentCreate = (data: unknown) => {
+  return feePaymentCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-allocation-controller-ts"></a>📄 `src/modules/fee-payment-allocation/controller.ts`
+
+**File Info:**
+- **Size**: 2.4 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-allocation/controller.ts`
+- **Relative Path**: `src/modules/fee-payment-allocation`
+- **Created**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8a99eb025b7f9522fe4982015a495f53`
+- **SHA256**: `7441a4333ccc40a3cfbd72ef4a3e8eb19542a03042b783334ce823096ef5d2ea`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeePaymentAllocationService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeePaymentAllocationCreate } from "./validator";
+
+export const FeePaymentAllocationController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeePaymentAllocationService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment allocations fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeePaymentAllocationCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const allocation = await FeePaymentAllocationService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee payment allocation created successfully",
+        data: allocation,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const allocation = await FeePaymentAllocationService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment allocation retrieved successfully",
+        data: allocation,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeePaymentAllocationService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment allocation deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-allocation-routes-ts"></a>📄 `src/modules/fee-payment-allocation/routes.ts`
+
+**File Info:**
+- **Size**: 760 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-allocation/routes.ts`
+- **Relative Path**: `src/modules/fee-payment-allocation`
+- **Created**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:32:00 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `18ff5760e51a9c0fe5cc79f530359d2e`
+- **SHA256**: `404778dfd1e2ef9bf6ad5c07ac6331533a2ca915e27401247645ef8d3e2afe96`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeePaymentAllocationController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  FeePaymentAllocationController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeePaymentAllocationController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  FeePaymentAllocationController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  FeePaymentAllocationController.delete,
+);
+
+export const feePaymentAllocationRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-allocation-service-ts"></a>📄 `src/modules/fee-payment-allocation/service.ts`
+
+**File Info:**
+- **Size**: 2.52 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-allocation/service.ts`
+- **Relative Path**: `src/modules/fee-payment-allocation`
+- **Created**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `89ac980dcc4559cbc298f3b07bf0fcd0`
+- **SHA256**: `f2f5776d74aea7619344a41f18844784db70d7a530b49eca0d98226517445cd8`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeePaymentAllocationCreateInput } from "./validator";
+
+export const FeePaymentAllocationService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { feePaymentId: { contains: query.search, mode: "insensitive" } },
+        { studentFeeItemId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [allocations, total] = await Promise.all([
+      prismaMain.feePaymentAllocation.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          studentFee: true,
+          installment: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feePaymentAllocation.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: allocations,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeePaymentAllocationCreateInput, userId?: string) {
+    try {
+      const allocation = await prismaMain.feePaymentAllocation.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          studentFee: true,
+          installment: true,
+        },
+      });
+      return allocation;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An allocation already exists for this payment and student fee item", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const allocation = await prismaMain.feePaymentAllocation.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        studentFee: true,
+        installment: true,
+      },
+    });
+
+    if (!allocation) {
+      throw new CustomError("Fee payment allocation not found", 404);
+    }
+
+    return allocation;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feePaymentAllocation.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee payment allocation not found", 404);
+    }
+
+    await prismaMain.feePaymentAllocation.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-allocation-validator-ts"></a>📄 `src/modules/fee-payment-allocation/validator.ts`
+
+**File Info:**
+- **Size**: 708 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-allocation/validator.ts`
+- **Relative Path**: `src/modules/fee-payment-allocation`
+- **Created**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `738ae95dd3eb68277e305523faa9b4f8`
+- **SHA256**: `a1c8b76535e71626d95e9d8449db605caa9e5252259e2a469ff7ab8744375ee5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feePaymentAllocationCreateInputSchema = z.object({
+  feePaymentId: z.string().uuid("Invalid Fee Payment ID format"),
+  studentFeeItemId: z.string().uuid("Invalid Student Fee Item ID format"),
+  feeInstallmentId: z.string().uuid("Invalid Fee Installment ID format").optional(),
+  amount: z.string().min(1, "Amount is required"),
+});
+
+export type FeePaymentAllocationCreateInput = z.infer<typeof feePaymentAllocationCreateInputSchema>;
+export type FeePaymentAllocationUpdateInput = z.infer<typeof feePaymentAllocationCreateInputSchema>;
+
+export const validateFeePaymentAllocationCreate = (data: unknown) => {
+  return feePaymentAllocationCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-method-line-controller-ts"></a>📄 `src/modules/fee-payment-method-line/controller.ts`
+
+**File Info:**
+- **Size**: 2.38 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-method-line/controller.ts`
+- **Relative Path**: `src/modules/fee-payment-method-line`
+- **Created**: 2026-10-29 06:54:08 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:08 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e47ee911877faeef5e1806a4d5f18dbe`
+- **SHA256**: `e840efdcc615320ae3f1a2a444001aba8e6782dd5ef813bb6a8f231589e7da26`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeePaymentMethodLineService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeePaymentMethodLineCreate } from "./validator";
+
+export const FeePaymentMethodLineController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeePaymentMethodLineService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment method lines fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeePaymentMethodLineCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const line = await FeePaymentMethodLineService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee payment method line created successfully",
+        data: line,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const line = await FeePaymentMethodLineService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment method line retrieved successfully",
+        data: line,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeePaymentMethodLineService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment method line deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-method-line-routes-ts"></a>📄 `src/modules/fee-payment-method-line/routes.ts`
+
+**File Info:**
+- **Size**: 760 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-method-line/routes.ts`
+- **Relative Path**: `src/modules/fee-payment-method-line`
+- **Created**: 2026-10-29 06:54:08 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:32:19 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ba6bd727e2fab3e78140b179797dbb72`
+- **SHA256**: `a08fbe28cf58662eac6d36d47c7ff529c89d593f9174a7d32ba848065f27aa8e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeePaymentMethodLineController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  FeePaymentMethodLineController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeePaymentMethodLineController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  FeePaymentMethodLineController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  FeePaymentMethodLineController.delete,
+);
+
+export const feePaymentMethodLineRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-method-line-service-ts"></a>📄 `src/modules/fee-payment-method-line/service.ts`
+
+**File Info:**
+- **Size**: 2.39 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-method-line/service.ts`
+- **Relative Path**: `src/modules/fee-payment-method-line`
+- **Created**: 2026-10-29 06:54:08 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:08 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `645cf1d5b7315d45d110642af4bb09e0`
+- **SHA256**: `ad5842f8e714dbc47394abddd93dcf599df4f4bf3051caf9fb064bf9f91a3abd`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeePaymentMethodLineCreateInput } from "./validator";
+
+export const FeePaymentMethodLineService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { feePaymentId: { contains: query.search, mode: "insensitive" } },
+        { referenceNo: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [lines, total] = await Promise.all([
+      prismaMain.feePaymentMethodLine.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          paymentMethod: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feePaymentMethodLine.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: lines,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeePaymentMethodLineCreateInput, userId?: string) {
+    try {
+      const line = await prismaMain.feePaymentMethodLine.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          paymentMethod: true,
+        },
+      });
+      return line;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A payment method line already exists for this payment", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const line = await prismaMain.feePaymentMethodLine.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        paymentMethod: true,
+      },
+    });
+
+    if (!line) {
+      throw new CustomError("Fee payment method line not found", 404);
+    }
+
+    return line;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feePaymentMethodLine.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee payment method line not found", 404);
+    }
+
+    await prismaMain.feePaymentMethodLine.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-payment-method-line-validator-ts"></a>📄 `src/modules/fee-payment-method-line/validator.ts`
+
+**File Info:**
+- **Size**: 693 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-payment-method-line/validator.ts`
+- **Relative Path**: `src/modules/fee-payment-method-line`
+- **Created**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:54:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f8e8ffe78e405f33b5c343a221c54122`
+- **SHA256**: `488e1e4409bb861490ecfa0f6606d8321ee82e6bf31e8516e05cf6df40933730`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feePaymentMethodLineCreateInputSchema = z.object({
+  feePaymentId: z.string().uuid("Invalid Fee Payment ID format"),
+  paymentMethodId: z.string().uuid("Invalid Payment Method ID format"),
+  amount: z.string().min(1, "Amount is required"),
+  referenceNo: z.string().optional(),
+  bankName: z.string().optional(),
+});
+
+export type FeePaymentMethodLineCreateInput = z.infer<typeof feePaymentMethodLineCreateInputSchema>;
+export type FeePaymentMethodLineUpdateInput = z.infer<typeof feePaymentMethodLineCreateInputSchema>;
+
+export const validateFeePaymentMethodLineCreate = (data: unknown) => {
+  return feePaymentMethodLineCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-controller-ts"></a>📄 `src/modules/fee-structure/controller.ts`
+
+**File Info:**
+- **Size**: 2.32 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure/controller.ts`
+- **Relative Path**: `src/modules/fee-structure`
+- **Created**: 2026-10-29 07:09:23 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:09:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3331acf79d4b2c95b34b0fedfe4386cc`
+- **SHA256**: `e306fb8d7fceb87267b46ac95f7c7c9c0f174fc296782fab75e2b29bb9c643b2`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeeStructureService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeeStructureCreate } from "./validator";
+
+export const FeeStructureController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeeStructureService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structures fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeeStructureCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const structure = await FeeStructureService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee structure created successfully",
+        data: structure,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const structure = await FeeStructureService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structure retrieved successfully",
+        data: structure,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeeStructureService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structure deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-routes-ts"></a>📄 `src/modules/fee-structure/routes.ts`
+
+**File Info:**
+- **Size**: 744 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure/routes.ts`
+- **Relative Path**: `src/modules/fee-structure`
+- **Created**: 2026-10-29 07:09:23 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:33:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `057c00f3097dc02c9fba434d5840a003`
+- **SHA256**: `1e7e16622897d69b19cdb6bdc53337916f10f837e8ff064a097196056d8d1571`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeeStructureController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeStructureController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeStructureController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeStructureController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeStructureController.delete,
+);
+
+export const feeStructureRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-service-ts"></a>📄 `src/modules/fee-structure/service.ts`
+
+**File Info:**
+- **Size**: 2.3 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure/service.ts`
+- **Relative Path**: `src/modules/fee-structure`
+- **Created**: 2026-10-29 07:09:24 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:09:24 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `58b49a8fe303d4a157fb52031ff5404a`
+- **SHA256**: `9a682c4d18c40d888742d66aa21aff7f6146813db40e165e47338cd5670b7853`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeeStructureCreateInput } from "./validator";
+
+export const FeeStructureService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [structures, total] = await Promise.all([
+      prismaMain.feeStructure.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          items: true,
+          installments: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feeStructure.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: structures,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeeStructureCreateInput, userId?: string) {
+    try {
+      const structure = await prismaMain.feeStructure.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          items: true,
+          installments: true,
+        },
+      });
+      return structure;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A fee structure with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const structure = await prismaMain.feeStructure.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        items: true,
+        installments: true,
+      },
+    });
+
+    if (!structure) {
+      throw new CustomError("Fee structure not found", 404);
+    }
+
+    return structure;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feeStructure.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee structure not found", 404);
+    }
+
+    await prismaMain.feeStructure.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-validator-ts"></a>📄 `src/modules/fee-structure/validator.ts`
+
+**File Info:**
+- **Size**: 593 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure/validator.ts`
+- **Relative Path**: `src/modules/fee-structure`
+- **Created**: 2026-10-29 07:09:23 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:09:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c30fa78cab6a9e5100e257ed5e062183`
+- **SHA256**: `67af94711fd2dbc8a39cc131f3780fc0ea249ec2366ade3ca3b50b20136d85d7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feeStructureCreateInputSchema = z.object({
+  courseId: z.string().uuid("Invalid Course ID format"),
+  batchId: z.string().uuid("Invalid Batch ID format").optional().nullable(),
+  name: z.string().min(1, "Name is required"),
+  isActive: z.boolean().optional(),
+});
+
+export type FeeStructureCreateInput = z.infer<typeof feeStructureCreateInputSchema>;
+export type FeeStructureUpdateInput = z.infer<typeof feeStructureCreateInputSchema>;
+
+export const validateFeeStructureCreate = (data: unknown) => {
+  return feeStructureCreateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-item-controller-ts"></a>📄 `src/modules/fee-structure-item/controller.ts`
+
+**File Info:**
+- **Size**: 2.36 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure-item/controller.ts`
+- **Relative Path**: `src/modules/fee-structure-item`
+- **Created**: 2026-10-29 07:09:25 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:09:25 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `18decb5b09029e63a8daab00d83d00b2`
+- **SHA256**: `dce099144c10c53750af1a1b8848f86a3b4fe495985ce7f88f150c988f723047`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FeeStructureItemService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFeeStructureItemCreate } from "./validator";
+
+export const FeeStructureItemController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FeeStructureItemService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structure items fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeeStructureItemCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await FeeStructureItemService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee structure item created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await FeeStructureItemService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structure item retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FeeStructureItemService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structure item deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-item-routes-ts"></a>📄 `src/modules/fee-structure-item/routes.ts`
+
+**File Info:**
+- **Size**: 768 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure-item/routes.ts`
+- **Relative Path**: `src/modules/fee-structure-item`
+- **Created**: 2026-10-29 07:09:24 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:32:54 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a8a1427f18d778bd254e9b1dacdee063`
+- **SHA256**: `48ab55b6678792322db06229f6fb2fc0e617307de5051956d119f235db233c5f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FeeStructureItemController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeStructureItemController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeStructureItemController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FeeStructureItemController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeStructureItemController.delete,
+);
+
+export const feeStructureItemRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-item-service-ts"></a>📄 `src/modules/fee-structure-item/service.ts`
+
+**File Info:**
+- **Size**: 2.67 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure-item/service.ts`
+- **Relative Path**: `src/modules/fee-structure-item`
+- **Created**: 2026-10-29 07:09:25 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:09:25 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `903c83b8bc62193e0c550cabbe8b2edd`
+- **SHA256**: `9f8078c065adc1cc544d0e17bfa21d31ccda2785b7db9dd1757faf339b836444`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FeeStructureItemCreateInput } from "./validator";
+
+export const FeeStructureItemService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { feeHeadId: { contains: query.search, mode: "insensitive" } },
+        { description: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.feeStructureItem.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          feeHead: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.feeStructureItem.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FeeStructureItemCreateInput, userId?: string) {
+    // Validate parent fee structure exists and not soft-deleted
+    const [structure] = await Promise.all([
+      prismaMain.feeStructure.findFirst({ where: { id: data.feeStructureId, deletedAt: null } }),
+    ]);
+    if (!structure) {
+      throw new CustomError("Fee structure not found", 404);
+    }
+
+    try {
+      const item = await prismaMain.feeStructureItem.create({
+        data: {
+          ...data,
+          feeStructureId: data.feeStructureId,
+          createdBy: userId,
+        },
+        include: {
+          feeHead: true,
+        },
+      });
+      return item;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A fee structure item for this head and term already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.feeStructureItem.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        feeHead: true,
+      },
+    });
+
+    if (!item) {
+      throw new CustomError("Fee structure item not found", 404);
+    }
+
+    return item;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.feeStructureItem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fee structure item not found", 404);
+    }
+
+    await prismaMain.feeStructureItem.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fee-structure-item-validator-ts"></a>📄 `src/modules/fee-structure-item/validator.ts`
+
+**File Info:**
+- **Size**: 624 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fee-structure-item/validator.ts`
+- **Relative Path**: `src/modules/fee-structure-item`
+- **Created**: 2026-10-29 07:09:24 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:09:24 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `54da7e83e6719584fdfb09209b4d1aa0`
+- **SHA256**: `f11e1ef70e6839fbfe997752b4c19370bb4e7e43d6b90f1a8b1d87e8fee3125c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const feeStructureItemCreateInputSchema = z.object({
+  feeStructureId: z.string().uuid("Invalid Fee Structure ID format"),
+  feeHeadId: z.string().uuid("Invalid Fee Head ID format"),
+  termNumber: z.number().int().min(1),
+  amount: z.string().min(1, "Amount is required"),
+});
+
+export type FeeStructureItemCreateInput = z.infer<typeof feeStructureItemCreateInputSchema>;
+export type FeeStructureItemUpdateInput = z.infer<typeof feeStructureItemCreateInputSchema>;
+
+export const validateFeeStructureItemCreate = (data: unknown) => {
+  return feeStructureItemCreateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fiscal-year-controller-ts"></a>📄 `src/modules/fiscal-year/controller.ts`
+
+**File Info:**
+- **Size**: 2.25 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fiscal-year/controller.ts`
+- **Relative Path**: `src/modules/fiscal-year`
+- **Created**: 2026-10-29 06:51:13 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:51:13 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `90241c9e6934b6e0e4ebc5db1e08bfd5`
+- **SHA256**: `b67e016d4cd7c3c013020899a395f95a01be683923970e8be3c1815c0a80b7d9`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { FiscalYearService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateFiscalYearCreate } from "./validator";
+
+export const FiscalYearController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await FiscalYearService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fiscal years fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFiscalYearCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const year = await FiscalYearService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fiscal year created successfully",
+        data: year,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const year = await FiscalYearService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fiscal year retrieved successfully",
+        data: year,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await FiscalYearService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fiscal year deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fiscal-year-routes-ts"></a>📄 `src/modules/fiscal-year/routes.ts`
+
+**File Info:**
+- **Size**: 718 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fiscal-year/routes.ts`
+- **Relative Path**: `src/modules/fiscal-year`
+- **Created**: 2026-10-29 06:51:13 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:33:19 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `abd2f61f7158b877b69288bd8ff8ba1c`
+- **SHA256**: `56a2eed25d9bc9809313a34d0e10c4f4afddfdba0195c06f18fbee4c6c4d6326`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { FiscalYearController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FiscalYearController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FiscalYearController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  FiscalYearController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  FiscalYearController.delete,
+);
+
+export const fiscalYearRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-fiscal-year-service-ts"></a>📄 `src/modules/fiscal-year/service.ts`
+
+**File Info:**
+- **Size**: 2.24 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fiscal-year/service.ts`
+- **Relative Path**: `src/modules/fiscal-year`
+- **Created**: 2026-10-29 06:51:12 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:51:12 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3f2091d177c6020a8f4f2a24fb72815f`
+- **SHA256**: `8c080e5788806c25ba3484e174fe8c7cb713b5bd132e249b0c39aef55f10d645`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { FiscalYearCreateInput } from "./validator";
+
+export const FiscalYearService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [years, total] = await Promise.all([
+      prismaMain.fiscalYear.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          periods: true,
+          batches: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.fiscalYear.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: years,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: FiscalYearCreateInput, userId?: string) {
+    try {
+      const year = await prismaMain.fiscalYear.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          periods: true,
+          batches: true,
+        },
+      });
+      return year;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A fiscal year with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const year = await prismaMain.fiscalYear.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        periods: true,
+        batches: true,
+      },
+    });
+
+    if (!year) {
+      throw new CustomError("Fiscal year not found", 404);
+    }
+
+    return year;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.fiscalYear.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Fiscal year not found", 404);
+    }
+
+    await prismaMain.fiscalYear.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-fiscal-year-validator-ts"></a>📄 `src/modules/fiscal-year/validator.ts`
+
+**File Info:**
+- **Size**: 609 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/fiscal-year/validator.ts`
+- **Relative Path**: `src/modules/fiscal-year`
+- **Created**: 2026-10-29 06:51:12 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:51:12 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `0987d0e8c222e37139e8ccb2e978d0dd`
+- **SHA256**: `8d5c82f9696a7ee063926aefaa3aa350d1bdb528598689f4d4df16d167e0728e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const fiscalYearCreateInputSchema = z.object({
+  name: z.string().min(1, "Fiscal year name is required"),
+  startDateBs: z.string().min(1, "Start date is required"),
+  endDateBs: z.string().min(1, "End date is required"),
+  isCurrent: z.boolean().optional(),
+  isClosed: z.boolean().optional(),
+});
+
+export type FiscalYearCreateInput = z.infer<typeof fiscalYearCreateInputSchema>;
+export type FiscalYearUpdateInput = z.infer<typeof fiscalYearCreateInputSchema>;
+
+export const validateFiscalYearCreate = (data: unknown) => {
+  return fiscalYearCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-grade-scale-controller-ts"></a>📄 `src/modules/grade-scale/controller.ts`
+
+**File Info:**
+- **Size**: 2.28 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/grade-scale/controller.ts`
+- **Relative Path**: `src/modules/grade-scale`
+- **Created**: 2026-10-29 06:40:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:07 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e8389a8bd0b8116cc8db48f8f5926baf`
+- **SHA256**: `2986b1386d38d35815dcc37f9ea0ac3051f3ed54666ec1282870d8dea01e89ed`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { GradeScaleService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateGradeScaleItemCreate } from "./validator";
+
+export const GradeScaleController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await GradeScaleService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Grade scale items fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateGradeScaleItemCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await GradeScaleService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Grade scale item created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await GradeScaleService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Grade scale item retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await GradeScaleService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Grade scale item deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-grade-scale-routes-ts"></a>📄 `src/modules/grade-scale/routes.ts`
+
+**File Info:**
+- **Size**: 832 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/grade-scale/routes.ts`
+- **Relative Path**: `src/modules/grade-scale`
+- **Created**: 2026-10-29 06:40:07 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:33:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a456974a0951e1fa82d907ddec665bd6`
+- **SHA256**: `e56499ecb5fdaec8276bc517eb1f106637a6c4d6d5797d2de4474c6d04d8fab9`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { GradeScaleController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  GradeScaleController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  GradeScaleController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  GradeScaleController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  GradeScaleController.delete,
+);
+
+export const gradeScaleRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-grade-scale-service-ts"></a>📄 `src/modules/grade-scale/service.ts`
+
+**File Info:**
+- **Size**: 2.13 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/grade-scale/service.ts`
+- **Relative Path**: `src/modules/grade-scale`
+- **Created**: 2026-10-29 06:40:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c181b4709ed71a0b1cda0b636cbcc1bb`
+- **SHA256**: `e39b18833544779186fdf4f21fad4661b77cdbae472ef53fed812e421f66ecbb`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { GradeScaleItemCreateInput } from "./validator";
+
+export const GradeScaleService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { grade: { contains: query.search, mode: "insensitive" } },
+        { description: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.gradeScaleItem.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.gradeScaleItem.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: GradeScaleItemCreateInput, userId?: string) {
+    try {
+      const item = await prismaMain.gradeScaleItem.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return item;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A grade scale item with this grade already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.gradeScaleItem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Grade scale item not found", 404);
+    }
+
+    return item;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.gradeScaleItem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Grade scale item not found", 404);
+    }
+
+    await prismaMain.gradeScaleItem.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-grade-scale-validator-ts"></a>📄 `src/modules/grade-scale/validator.ts`
+
+**File Info:**
+- **Size**: 745 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/grade-scale/validator.ts`
+- **Relative Path**: `src/modules/grade-scale`
+- **Created**: 2026-10-29 06:40:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2403dd007c91df2f885b32df6b5e310e`
+- **SHA256**: `c3ace77cb87ef67ab291b5ca8945527f6899a2671417b2a8814ae96e536d4320`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const gradeScaleItemCreateInputSchema = z.object({
+  grade: z.string().min(1, "Grade is required"),
+  minPercent: z.string().min(1, "Minimum Percentage is required"),
+  maxPercent: z.string().min(1, "Maximum Percentage is required"),
+  gradePoint: z.string().min(1, "Grade Point is required"),
+  description: z.string().optional(),
+  isPassGrade: z.boolean().optional(),
+  isActive: z.boolean().optional(),
+});
+
+export type GradeScaleItemCreateInput = z.infer<typeof gradeScaleItemCreateInputSchema>;
+export type GradeScaleItemUpdateInput = z.infer<typeof gradeScaleItemCreateInputSchema>;
+
+export const validateGradeScaleItemCreate = (data: unknown) => {
+  return gradeScaleItemCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-guardian-controller-ts"></a>📄 `src/modules/guardian/controller.ts`
+
+**File Info:**
+- **Size**: 2.24 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian/controller.ts`
+- **Relative Path**: `src/modules/guardian`
+- **Created**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `238e32848268801137222ccab6a6f8c6`
+- **SHA256**: `abec88c2be0e7d0eaf0de84a19ce77142bbbe72009e0c170a20f26df2c2736bc`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { GuardianService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateGuardianCreate } from "./validator";
+
+export const GuardianController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await GuardianService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardians fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateGuardianCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const guardian = await GuardianService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Guardian created successfully",
+        data: guardian,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const guardian = await GuardianService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardian retrieved successfully",
+        data: guardian,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await GuardianService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardian deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-guardian-routes-ts"></a>📄 `src/modules/guardian/routes.ts`
+
+**File Info:**
+- **Size**: 732 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian/routes.ts`
+- **Relative Path**: `src/modules/guardian`
+- **Created**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:34:02 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9d503be61be2083bd89c4b3963042b7c`
+- **SHA256**: `bf40902199acf92afd6421bb9b11a088332ca2a4fe1895916af66a2fdad4717d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { GuardianController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  GuardianController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "STAFF"),
+  GuardianController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  GuardianController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "STAFF"),
+  GuardianController.delete,
+);
+
+export const guardianRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-guardian-service-ts"></a>📄 `src/modules/guardian/service.ts`
+
+**File Info:**
+- **Size**: 2.32 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian/service.ts`
+- **Relative Path**: `src/modules/guardian`
+- **Created**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f6fbedbcb428d415476ae1975f1a2f86`
+- **SHA256**: `0cb542a1b3228240bf1c39e40221976db0e8371947a33aa641c2d7d40ab309b9`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { GuardianCreateInput } from "./validator";
+
+export const GuardianService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { fullName: { contains: query.search, mode: "insensitive" } },
+        { phone: { contains: query.search, mode: "insensitive" } },
+        { email: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [guardians, total] = await Promise.all([
+      prismaMain.guardian.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          relation: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.guardian.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: guardians,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: GuardianCreateInput, userId?: string) {
+    try {
+      const guardian = await prismaMain.guardian.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          relation: true,
+        },
+      });
+      return guardian;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A guardian with this student and relation already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const guardian = await prismaMain.guardian.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        relation: true,
+      },
+    });
+
+    if (!guardian) {
+      throw new CustomError("Guardian not found", 404);
+    }
+
+    return guardian;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.guardian.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Guardian not found", 404);
+    }
+
+    await prismaMain.guardian.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-guardian-validator-ts"></a>📄 `src/modules/guardian/validator.ts`
+
+**File Info:**
+- **Size**: 745 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian/validator.ts`
+- **Relative Path**: `src/modules/guardian`
+- **Created**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:25 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e0015cf0aa53cbcf90c1f0381e52cf0d`
+- **SHA256**: `504b171bd063648f9044c102c5266699fc5b595328f3108a8eb89c40e9d4392a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const guardianCreateInputSchema = z.object({
+  studentId: z.string().uuid("Invalid Student ID format"),
+  relationId: z.string().uuid("Invalid Guardian Relation ID format").optional(),
+  fullName: z.string().min(1, "Full name is required"),
+  phone: z.string().optional(),
+  email: z.string().email("Invalid email format").optional(),
+  occupation: z.string().optional(),
+  address: z.string().optional(),
+  isPrimary: z.boolean().optional(),
+});
+
+export type GuardianCreateInput = z.infer<typeof guardianCreateInputSchema>;
+export type GuardianUpdateInput = z.infer<typeof guardianCreateInputSchema>;
+
+export const validateGuardianCreate = (data: unknown) => {
+  return guardianCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-guardian-relation-controller-ts"></a>📄 `src/modules/guardian-relation/controller.ts`
+
+**File Info:**
+- **Size**: 3.22 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian-relation/controller.ts`
+- **Relative Path**: `src/modules/guardian-relation`
+- **Created**: 2026-10-31 13:10:53 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:12:30 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ebd7310690315ce0fcd9aad1db3b7f8f`
+- **SHA256**: `727b474d06398a179e1e0d8eb047bbd63bebc6b7ccfdf3c814a2beea9ccf7547`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateGuardianRelationCreate,
+  validateGuardianRelationUpdate,
+} from "./validator";
+import { GuardianRelationService } from "./service";
+
+export const GuardianRelationController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+      const isActive =
+        req.query.isActive !== undefined
+          ? req.query.isActive === "true"
+          : undefined;
+
+      const result = await GuardianRelationService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardian relations fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateGuardianRelationCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await GuardianRelationService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Guardian relation created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await GuardianRelationService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardian relation retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateGuardianRelationUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await GuardianRelationService.update(
+        id,
+        validatedData,
+        userId,
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardian relation updated successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await GuardianRelationService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Guardian relation deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-guardian-relation-routes-ts"></a>📄 `src/modules/guardian-relation/routes.ts`
+
+**File Info:**
+- **Size**: 1.03 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian-relation/routes.ts`
+- **Relative Path**: `src/modules/guardian-relation`
+- **Created**: 2026-10-31 13:11:48 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:11:49 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `177b9fcf640ec16f8e438a2fb22565d1`
+- **SHA256**: `16ac849efb30d2dc93c81c4082a37494f98ea003723367ca7d1bb9960ae31f8a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { GuardianRelationController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  GuardianRelationController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "STAFF"),
+  GuardianRelationController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  GuardianRelationController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "STAFF"),
+  GuardianRelationController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  GuardianRelationController.delete,
+);
+
+export const guardianRelationRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-guardian-relation-service-ts"></a>📄 `src/modules/guardian-relation/service.ts`
+
+**File Info:**
+- **Size**: 4.45 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian-relation/service.ts`
+- **Relative Path**: `src/modules/guardian-relation`
+- **Created**: 2026-10-31 13:12:00 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:12:02 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `74566070e91ae8e42202b5de58e8e193`
+- **SHA256**: `45e4523a5019ecce538ca84b53ed18f90d6ec5e05160ddddbb622be894bbb308`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import {
+  GuardianRelationCreateInput,
+  GuardianRelationUpdateInput,
+} from "./validator";
+
+export const GuardianRelationService = {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    isActive?: boolean;
+  }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.guardianRelation.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+      }),
+      prismaMain.guardianRelation.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: GuardianRelationCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.guardianRelation.findFirst({
+      where: { code: data.code },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted guardian relation already uses this code. Use a different code."
+          : "A guardian relation with this code already exists",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.guardianRelation.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A guardian relation with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.guardianRelation.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Guardian relation not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: GuardianRelationUpdateInput, userId?: string) {
+    const existing = await prismaMain.guardianRelation.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Guardian relation not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.guardianRelation.findFirst({
+        where: { code: data.code, NOT: { id } },
+      });
+
+      if (duplicate) {
+        throw new CustomError(
+          "A guardian relation with this code already exists",
+          409,
+        );
+      }
+    }
+
+    try {
+      return await prismaMain.guardianRelation.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A guardian relation with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.guardianRelation.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Guardian relation not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.guardian.count({ where: { relationId: id, deletedAt: null } }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This guardian relation is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.guardianRelation.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-guardian-relation-validator-ts"></a>📄 `src/modules/guardian-relation/validator.ts`
+
+**File Info:**
+- **Size**: 1011 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/guardian-relation/validator.ts`
+- **Relative Path**: `src/modules/guardian-relation`
+- **Created**: 2026-10-31 13:11:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:11:20 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3c62705a9e5d3d285958bae9b015da06`
+- **SHA256**: `7f2a2711731bb29f089fbd1b91e6963be5480163f9476e8f375e4d4bd9ee1ab1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const guardianRelationCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(255, "Name is too long"),
+  sortOrder: z.number().int().min(0).default(0),
+  isActive: z.boolean().default(true),
+});
+
+export const guardianRelationUpdateInputSchema =
+  guardianRelationCreateInputSchema.partial();
+
+export type GuardianRelationCreateInput = z.infer<
+  typeof guardianRelationCreateInputSchema
+>;
+export type GuardianRelationUpdateInput = z.infer<
+  typeof guardianRelationUpdateInputSchema
+>;
+
+export const validateGuardianRelationCreate = (data: unknown) => {
+  return guardianRelationCreateInputSchema.parse(data);
+};
+
+export const validateGuardianRelationUpdate = (data: unknown) => {
+  return guardianRelationUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-entry-controller-ts"></a>📄 `src/modules/journal-entry/controller.ts`
+
+**File Info:**
+- **Size**: 2.28 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-entry/controller.ts`
+- **Relative Path**: `src/modules/journal-entry`
+- **Created**: 2026-10-29 07:00:46 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:46 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9e2ed9ff4b843a5d86e1de14be11e7d6`
+- **SHA256**: `40c259e59cf7cebcfa1beeb80fbc1f036da31678d6fbabb24b99830554b131d6`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { JournalEntryService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateJournalEntryCreate } from "./validator";
+
+export const JournalEntryController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await JournalEntryService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal entries fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateJournalEntryCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const entry = await JournalEntryService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Journal entry created successfully",
+        data: entry,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const entry = await JournalEntryService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal entry retrieved successfully",
+        data: entry,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await JournalEntryService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal entry deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-entry-routes-ts"></a>📄 `src/modules/journal-entry/routes.ts`
+
+**File Info:**
+- **Size**: 712 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-entry/routes.ts`
+- **Relative Path**: `src/modules/journal-entry`
+- **Created**: 2026-10-29 07:00:46 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:34:15 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f569a6ef0267c6f3fab43e5da328cdb9`
+- **SHA256**: `f5ab5efcb1aa46782a1806644ca2e1dd3d42c2067cdeb4f81fc4199a92fdbedf`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { JournalEntryController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  JournalEntryController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  JournalEntryController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  JournalEntryController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  JournalEntryController.delete,
+);
+
+export const journalEntryRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-entry-service-ts"></a>📄 `src/modules/journal-entry/service.ts`
+
+**File Info:**
+- **Size**: 2.57 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-entry/service.ts`
+- **Relative Path**: `src/modules/journal-entry`
+- **Created**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5b009df8fdfb718dea2f642de35da8e6`
+- **SHA256**: `9df44c70caa461d65110e850206ab4af17f1125c2b3019b1409ec1ed6268dc15`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { JournalEntryCreateInput } from "./validator";
+
+export const JournalEntryService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { entryNo: { contains: query.search, mode: "insensitive" } },
+        { description: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [entries, total] = await Promise.all([
+      prismaMain.journalEntry.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          lines: true,
+          source: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.journalEntry.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: entries,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: JournalEntryCreateInput, userId?: string) {
+    // Validate fiscal year exists
+    const year = await prismaMain.fiscalYear.findFirst({
+      where: { id: data.fiscalYearId, deletedAt: null },
+    });
+    if (!year) {
+      throw new CustomError("Fiscal year not found", 404);
+    }
+
+    try {
+      const entry = await prismaMain.journalEntry.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          lines: true,
+          source: true,
+        },
+      });
+      return entry;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A journal entry with this number already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const entry = await prismaMain.journalEntry.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        lines: true,
+        source: true,
+      },
+    });
+
+    if (!entry) {
+      throw new CustomError("Journal entry not found", 404);
+    }
+
+    return entry;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.journalEntry.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Journal entry not found", 404);
+    }
+
+    await prismaMain.journalEntry.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-entry-validator-ts"></a>📄 `src/modules/journal-entry/validator.ts`
+
+**File Info:**
+- **Size**: 942 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-entry/validator.ts`
+- **Relative Path**: `src/modules/journal-entry`
+- **Created**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `186a3132af394752920a0494500bf105`
+- **SHA256**: `79ad4f57a6a37b6e7eb8f6fb8f1cda0cdc1aede5262bdb3a7d7588eae58f7eba`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const journalEntryCreateInputSchema = z.object({
+  entryNo: z.string().min(1, "Entry number is required"),
+  fiscalYearId: z.string().uuid("Invalid Fiscal Year ID format"),
+  dateBs: z.string().min(1, "Date is required"),
+  description: z.string().min(1, "Description is required"),
+  sourceId: z.string().uuid("Invalid Source ID format").optional(),
+  sourceRefId: z.string().uuid("Invalid Source Ref ID format").optional(),
+  isManual: z.boolean().optional(),
+  isBackdated: z.boolean().optional(),
+  isReversed: z.boolean().optional(),
+  reversalOfId: z.string().uuid("Invalid Reversal Of ID format").optional(),
+});
+
+export type JournalEntryCreateInput = z.infer<typeof journalEntryCreateInputSchema>;
+export type JournalEntryUpdateInput = z.infer<typeof journalEntryCreateInputSchema>;
+
+export const validateJournalEntryCreate = (data: unknown) => {
+  return journalEntryCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-journal-line-controller-ts"></a>📄 `src/modules/journal-line/controller.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-line/controller.ts`
+- **Relative Path**: `src/modules/journal-line`
+- **Created**: 2026-10-29 07:00:47 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:47 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `04e5ae909dd0ed678d8ca07fc3cc7b40`
+- **SHA256**: `f6bc541ca92c857b8faeefe98d254b857ac17b1b87a068cde42e79ec56490676`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { JournalLineService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateJournalLineCreate } from "./validator";
+
+export const JournalLineController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await JournalLineService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal lines fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateJournalLineCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const line = await JournalLineService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Journal line created successfully",
+        data: line,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const line = await JournalLineService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal line retrieved successfully",
+        data: line,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await JournalLineService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal line deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-line-routes-ts"></a>📄 `src/modules/journal-line/routes.ts`
+
+**File Info:**
+- **Size**: 706 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-line/routes.ts`
+- **Relative Path**: `src/modules/journal-line`
+- **Created**: 2026-10-29 07:00:47 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:34:47 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4663e1fb0efdd42a06a801ee6a5c6851`
+- **SHA256**: `cdf351154694591240a380199967eb3fa88f8848b8ab1a8cffd1a9e222154d08`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { JournalLineController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  JournalLineController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  JournalLineController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  JournalLineController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  JournalLineController.delete,
+);
+
+export const journalLineRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-line-service-ts"></a>📄 `src/modules/journal-line/service.ts`
+
+**File Info:**
+- **Size**: 2.34 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-line/service.ts`
+- **Relative Path**: `src/modules/journal-line`
+- **Created**: 2026-10-29 07:00:47 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:34:38 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `7709ccf6e0fc7780d9582afd0cc67d61`
+- **SHA256**: `61e57a605fcee5ed399b55c4dbefef0f88eb5ea1e84613e713b97cf26b6fdaac`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { JournalLineCreateInput } from "./validator";
+
+export const JournalLineService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { accountId: { contains: query.search, mode: "insensitive" } },
+        { studentId: { contains: query.search, mode: "insensitive" } },
+        { employeeId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [lines, total] = await Promise.all([
+      prismaMain.journalLine.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          account: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.journalLine.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: lines,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: JournalLineCreateInput, userId?: string) {
+    try {
+      const line = await prismaMain.journalLine.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          account: true,
+        },
+      });
+      return line;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A journal line already exists for this entry and account", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const line = await prismaMain.journalLine.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        account: true,
+      },
+    });
+
+    if (!line) {
+      throw new CustomError("Journal line not found", 404);
+    }
+
+    return line;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.journalLine.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Journal line not found", 404);
+    }
+
+    await prismaMain.journalLine.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-line-validator-ts"></a>📄 `src/modules/journal-line/validator.ts`
+
+**File Info:**
+- **Size**: 791 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-line/validator.ts`
+- **Relative Path**: `src/modules/journal-line`
+- **Created**: 2026-10-29 07:00:46 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:46 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `01bc116041dd6ae40a0054155a664ba2`
+- **SHA256**: `da35e7b611197be08cafe677830db59afeabdeeb23b9873206c59c62d3c4b4ea`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const journalLineCreateInputSchema = z.object({
+  journalEntryId: z.string().uuid("Invalid Journal Entry ID format"),
+  accountId: z.string().uuid("Invalid Account ID format"),
+  debit: z.string().min(1, "Debit amount is required"),
+  credit: z.string().min(1, "Credit amount is required"),
+  description: z.string().optional(),
+  studentId: z.string().uuid("Invalid Student ID format").optional(),
+  employeeId: z.string().uuid("Invalid Employee ID format").optional(),
+});
+
+export type JournalLineCreateInput = z.infer<typeof journalLineCreateInputSchema>;
+export type JournalLineUpdateInput = z.infer<typeof journalLineCreateInputSchema>;
+
+export const validateJournalLineCreate = (data: unknown) => {
+  return journalLineCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-journal-source-controller-ts"></a>📄 `src/modules/journal-source/controller.ts`
+
+**File Info:**
+- **Size**: 2.99 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-source/controller.ts`
+- **Relative Path**: `src/modules/journal-source`
+- **Created**: 2026-10-31 13:13:38 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:15:08 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `68c5e8dd4d268a4122aafad1276d50d1`
+- **SHA256**: `ef3669fff3851029722364e92f2c0a0865a45613a1b568341748cb11147b7ebd`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateJournalSourceCreate,
+  validateJournalSourceUpdate,
+} from "./validator";
+import { JournalSourceService } from "./service";
+
+export const JournalSourceController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await JournalSourceService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal sources fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateJournalSourceCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await JournalSourceService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Journal source created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await JournalSourceService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal source retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateJournalSourceUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await JournalSourceService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal source updated successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await JournalSourceService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal source deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-source-routes-ts"></a>📄 `src/modules/journal-source/routes.ts`
+
+**File Info:**
+- **Size**: 841 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-source/routes.ts`
+- **Relative Path**: `src/modules/journal-source`
+- **Created**: 2026-10-31 13:13:53 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:13:54 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f244ca518239a46d831d05ab80898f90`
+- **SHA256**: `5a5fc6a8ad75bfd424d53159a76d5419c9088020efb9a2c42efa8813937b7c9a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { JournalSourceController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  JournalSourceController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  JournalSourceController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  JournalSourceController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  JournalSourceController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  JournalSourceController.delete,
+);
+
+export const journalSourceRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-source-service-ts"></a>📄 `src/modules/journal-source/service.ts`
+
+**File Info:**
+- **Size**: 4.23 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-source/service.ts`
+- **Relative Path**: `src/modules/journal-source`
+- **Created**: 2026-10-31 13:14:02 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:14:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `47d63a7e60353ae59b4c663f0851f1ba`
+- **SHA256**: `ee0f363d7d6d85715f2e8c0df58baf135c9c39ff868281f5cf480d79571af125`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import {
+  JournalSourceCreateInput,
+  JournalSourceUpdateInput,
+} from "./validator";
+
+export const JournalSourceService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.journalSource.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: { name: "asc" },
+      }),
+      prismaMain.journalSource.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: JournalSourceCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.journalSource.findFirst({
+      where: { code: data.code },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted journal source already uses this code. Use a different code."
+          : "A journal source with this code already exists",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.journalSource.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A journal source with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.journalSource.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Journal source not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: JournalSourceUpdateInput, userId?: string) {
+    const existing = await prismaMain.journalSource.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Journal source not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.journalSource.findFirst({
+        where: { code: data.code, NOT: { id } },
+      });
+
+      if (duplicate) {
+        throw new CustomError(
+          "A journal source with this code already exists",
+          409,
+        );
+      }
+    }
+
+    try {
+      return await prismaMain.journalSource.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A journal source with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.journalSource.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Journal source not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.journalEntry.count({
+        where: { sourceId: id, deletedAt: null },
+      }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This journal source is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.journalSource.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-journal-source-validator-ts"></a>📄 `src/modules/journal-source/validator.ts`
+
+**File Info:**
+- **Size**: 888 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/journal-source/validator.ts`
+- **Relative Path**: `src/modules/journal-source`
+- **Created**: 2026-10-31 13:14:22 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:14:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `86b287851ac38698d68e7e26e6539e22`
+- **SHA256**: `c2cd6a80c885ff8ff9dce419db3620e48fc349438bef2dc8e8c18a6d03b4478b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const journalSourceCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(255, "Name is too long"),
+});
+
+export const journalSourceUpdateInputSchema =
+  journalSourceCreateInputSchema.partial();
+
+export type JournalSourceCreateInput = z.infer<
+  typeof journalSourceCreateInputSchema
+>;
+export type JournalSourceUpdateInput = z.infer<
+  typeof journalSourceUpdateInputSchema
+>;
+
+export const validateJournalSourceCreate = (data: unknown) => {
+  return journalSourceCreateInputSchema.parse(data);
+};
+
+export const validateJournalSourceUpdate = (data: unknown) => {
+  return journalSourceUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-leave-type-controller-ts"></a>📄 `src/modules/leave-type/controller.ts`
+
+**File Info:**
+- **Size**: 2.31 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/leave-type/controller.ts`
+- **Relative Path**: `src/modules/leave-type`
+- **Created**: 2026-10-29 06:40:05 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:05 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ac281ff8d5cba21acdeb5d41c91f5542`
+- **SHA256**: `70f045d8715a12d045ba5a43dd1e5862c1f5dfa88e508882b3bb473895ec35e5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { LeaveTypeService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateLeaveTypeCreate } from "./validator";
+import { validateLeaveTypeUpdate } from "./validator";
+
+export const LeaveTypeController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await LeaveTypeService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Leave types fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateLeaveTypeCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const leaveType = await LeaveTypeService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Leave type created successfully",
+        data: leaveType,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const leaveType = await LeaveTypeService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Leave type retrieved successfully",
+        data: leaveType,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await LeaveTypeService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Leave type deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-leave-type-routes-ts"></a>📄 `src/modules/leave-type/routes.ts`
+
+**File Info:**
+- **Size**: 709 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/leave-type/routes.ts`
+- **Relative Path**: `src/modules/leave-type`
+- **Created**: 2026-10-29 06:40:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:35:04 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `865668d1e0e3f44c0b6ff9e79bb711d7`
+- **SHA256**: `c627a2a13424d94deb861bee3069a954e5b741e4434f0ed8aa06f1b58b5db6a7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { LeaveTypeController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  LeaveTypeController.index,
+);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), LeaveTypeController.create);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  LeaveTypeController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  LeaveTypeController.delete,
+);
+
+export const leaveTypeRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-leave-type-service-ts"></a>📄 `src/modules/leave-type/service.ts`
+
+**File Info:**
+- **Size**: 2.01 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/leave-type/service.ts`
+- **Relative Path**: `src/modules/leave-type`
+- **Created**: 2026-10-29 06:30:19 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:19 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `aaffc8a0ac9f106068ad6674fa6ef905`
+- **SHA256**: `af1f9b09cb60307feeddf92793ab8f68110d7c035471ebcbd6ca9d51cd16b34e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { LeaveTypeCreateInput } from "./validator";
+
+export const LeaveTypeService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [leaveTypes, total] = await Promise.all([
+      prismaMain.leaveType.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.leaveType.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: leaveTypes,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: LeaveTypeCreateInput, userId?: string) {
+    try {
+      const leaveType = await prismaMain.leaveType.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return leaveType;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A leave type with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const leaveType = await prismaMain.leaveType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!leaveType) {
+      throw new CustomError("Leave type not found", 404);
+    }
+
+    return leaveType;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.leaveType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Leave type not found", 404);
+    }
+
+    await prismaMain.leaveType.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-leave-type-validator-ts"></a>📄 `src/modules/leave-type/validator.ts`
+
+**File Info:**
+- **Size**: 351 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/leave-type/validator.ts`
+- **Relative Path**: `src/modules/leave-type`
+- **Created**: 2026-10-29 06:40:05 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:40:05 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cdeb63c860dfde3344bdee9f95dc91c1`
+- **SHA256**: `7d696d3c92e6c1c7279abfc62bf46961e72402a9c36002d6f6acc04b9d8abf06`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const leaveTypeUpdateInputSchema = z.object({
+  name: z.string().max(255).optional(),
+  isActive: z.boolean().optional(),
+});
+
+export type LeaveTypeUpdateInput = z.infer<typeof leaveTypeUpdateInputSchema>;
+export const validateLeaveTypeUpdate = (data: unknown) => {
+  return leaveTypeUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-controller-ts"></a>📄 `src/modules/notice/controller.ts`
+
+**File Info:**
+- **Size**: 2.21 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice/controller.ts`
+- **Relative Path**: `src/modules/notice`
+- **Created**: 2026-10-29 06:55:33 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:33 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `802085aeac1b59df91d9cbc394bcad0f`
+- **SHA256**: `2043c2e18d700dfb65cd560fb33bc20db3fb9c2ae67d2ab0b555580162f3f2eb`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { NoticeService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateNoticeCreate } from "./validator";
+
+export const NoticeController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await NoticeService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Notices fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateNoticeCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const notice = await NoticeService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Notice created successfully",
+        data: notice,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const notice = await NoticeService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Notice retrieved successfully",
+        data: notice,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await NoticeService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Notice deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-routes-ts"></a>📄 `src/modules/notice/routes.ts`
+
+**File Info:**
+- **Size**: 826 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice/routes.ts`
+- **Relative Path**: `src/modules/notice`
+- **Created**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:35:30 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `31f841235a4b437341b57c81e4f90b6f`
+- **SHA256**: `544ace5b9494cc0e498bf7bdfe2d43d212330001f0c93bd5a1016ef10a23f80d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { NoticeController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  NoticeController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "STAFF"),
+  NoticeController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  NoticeController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "STAFF"),
+  NoticeController.delete,
+);
+
+export const noticeRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-service-ts"></a>📄 `src/modules/notice/service.ts`
+
+**File Info:**
+- **Size**: 2.2 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice/service.ts`
+- **Relative Path**: `src/modules/notice`
+- **Created**: 2026-10-29 06:55:33 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:33 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `73e07abe5e85415799fd210532e0659f`
+- **SHA256**: `b15cfc5bf849e8caaec55ff1cdffd22fa04adc6094e8de38510f6c4079113a33`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { NoticeCreateInput } from "./validator";
+
+export const NoticeService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { title: { contains: query.search, mode: "insensitive" } },
+        { body: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [notices, total] = await Promise.all([
+      prismaMain.notice.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          targets: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.notice.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: notices,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: NoticeCreateInput, userId?: string) {
+    try {
+      const notice = await prismaMain.notice.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          targets: true,
+        },
+      });
+      return notice;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A notice with this title already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const notice = await prismaMain.notice.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        targets: true,
+      },
+    });
+
+    if (!notice) {
+      throw new CustomError("Notice not found", 404);
+    }
+
+    return notice;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.notice.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Notice not found", 404);
+    }
+
+    await prismaMain.notice.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-validator-ts"></a>📄 `src/modules/notice/validator.ts`
+
+**File Info:**
+- **Size**: 668 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice/validator.ts`
+- **Relative Path**: `src/modules/notice`
+- **Created**: 2026-10-29 06:55:33 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:33 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4dcab2bf8593df785b93aa9ef802521d`
+- **SHA256**: `5410473f14a6a63685aa6c2bc26cc3c1dc4faee6ff2e944e0ef6e0d57dc70680`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const noticeCreateInputSchema = z.object({
+  title: z.string().min(1, "Title is required"),
+  body: z.string().min(1, "Body is required"),
+  attachmentUrl: z.string().url("Invalid URL format").optional(),
+  isPinned: z.boolean().optional(),
+  isPublished: z.boolean().optional(),
+  publishedAt: z.string().datetime().optional(),
+  expiresOnBs: z.string().datetime().optional(),
+});
+
+export type NoticeCreateInput = z.infer<typeof noticeCreateInputSchema>;
+export type NoticeUpdateInput = z.infer<typeof noticeCreateInputSchema>;
+
+export const validateNoticeCreate = (data: unknown) => {
+  return noticeCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-notice-target-controller-ts"></a>📄 `src/modules/notice-target/controller.ts`
+
+**File Info:**
+- **Size**: 2.28 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice-target/controller.ts`
+- **Relative Path**: `src/modules/notice-target`
+- **Created**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a348b36ad3cc0160dc1109300cabb160`
+- **SHA256**: `36388632b93037002e6b0067a2c4cbc32e58ab1599baa46dbcf301a8d10427dd`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { NoticeTargetService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateNoticeTargetCreate } from "./validator";
+
+export const NoticeTargetController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await NoticeTargetService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Notice targets fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateNoticeTargetCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const target = await NoticeTargetService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Notice target created successfully",
+        data: target,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const target = await NoticeTargetService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Notice target retrieved successfully",
+        data: target,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await NoticeTargetService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Notice target deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-target-routes-ts"></a>📄 `src/modules/notice-target/routes.ts`
+
+**File Info:**
+- **Size**: 862 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice-target/routes.ts`
+- **Relative Path**: `src/modules/notice-target`
+- **Created**: 2026-10-29 06:55:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:35:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `59c1b77ea67a623a2c48d66ce9b3390e`
+- **SHA256**: `67a55f3fe5d10548c85d1db56905a057300282389e1bf9e96dc6bc4173bc99c2`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { NoticeTargetController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  NoticeTargetController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "STAFF"),
+  NoticeTargetController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo(
+    "ADMIN",
+    "PRINCIPAL",
+    "ACCOUNTANT",
+    "TEACHER",
+    "STAFF",
+    "STUDENT",
+  ),
+  NoticeTargetController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "STAFF"),
+  NoticeTargetController.delete,
+);
+
+export const noticeTargetRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-target-service-ts"></a>📄 `src/modules/notice-target/service.ts`
+
+**File Info:**
+- **Size**: 2.21 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice-target/service.ts`
+- **Relative Path**: `src/modules/notice-target`
+- **Created**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8592d525104a3d80eaf002f706f034f6`
+- **SHA256**: `9b95c0c8dfeef65f547d79c5c9e381a086ad996e32bf3e505b58e61e06bc71a2`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { NoticeTargetCreateInput } from "./validator";
+
+export const NoticeTargetService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { role: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [targets, total] = await Promise.all([
+      prismaMain.noticeTarget.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          notice: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.noticeTarget.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: targets,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: NoticeTargetCreateInput, userId?: string) {
+    try {
+      const target = await prismaMain.noticeTarget.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          notice: true,
+        },
+      });
+      return target;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A notice target already exists for this notice and role", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const target = await prismaMain.noticeTarget.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        notice: true,
+      },
+    });
+
+    if (!target) {
+      throw new CustomError("Notice target not found", 404);
+    }
+
+    return target;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.noticeTarget.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Notice target not found", 404);
+    }
+
+    await prismaMain.noticeTarget.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-notice-target-validator-ts"></a>📄 `src/modules/notice-target/validator.ts`
+
+**File Info:**
+- **Size**: 594 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/notice-target/validator.ts`
+- **Relative Path**: `src/modules/notice-target`
+- **Created**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:34 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e36d9cbb1a0c69b322ea5677e8cf416f`
+- **SHA256**: `ad8a657add0920a80e80b59160391af0f71014dd50cebe3aafce44953be328bf`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const noticeTargetCreateInputSchema = z.object({
+  noticeId: z.string().uuid("Invalid Notice ID format"),
+  role: z.enum(["ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF", "STUDENT"]).optional(),
+  batchId: z.string().uuid("Invalid Batch ID format").optional(),
+});
+
+export type NoticeTargetCreateInput = z.infer<typeof noticeTargetCreateInputSchema>;
+export type NoticeTargetUpdateInput = z.infer<typeof noticeTargetCreateInputSchema>;
+
+export const validateNoticeTargetCreate = (data: unknown) => {
+  return noticeTargetCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-otp-controller-ts"></a>📄 `src/modules/otp/controller.ts`
+
+**File Info:**
+- **Size**: 2.11 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/otp/controller.ts`
+- **Relative Path**: `src/modules/otp`
+- **Created**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4c5b5f434f8943df0642d5df864da044`
+- **SHA256**: `d64dbc1818606de50e718e1c16ca70251997fe2c09aa3dee6c2a5a2a7856b372`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { OtpService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateOtpCreate } from "./validator";
+
+export const OtpController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await OtpService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "OTPs fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateOtpCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const otp = await OtpService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "OTP created successfully",
+        data: otp,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const otp = await OtpService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "OTP retrieved successfully",
+        data: otp,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+
+      await OtpService.delete(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "OTP deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-otp-routes-ts"></a>📄 `src/modules/otp/routes.ts`
+
+**File Info:**
+- **Size**: 546 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/otp/routes.ts`
+- **Relative Path**: `src/modules/otp`
+- **Created**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:35:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c927697c390013f54126c16d18e0eb8b`
+- **SHA256**: `9610933fce03cad263f87596201305bb3e98872f2f28ef4e1e722f0990e590c8`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { OtpController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN"), OtpController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), OtpController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN"), OtpController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), OtpController.delete);
+
+export const otpRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-otp-service-ts"></a>📄 `src/modules/otp/service.ts`
+
+**File Info:**
+- **Size**: 1.99 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/otp/service.ts`
+- **Relative Path**: `src/modules/otp`
+- **Created**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9271261bf20f18b0be1a7315b6108160`
+- **SHA256**: `13177f4bd7a427b8fca9ab5e7173384510b796e51c5e5d600b8b908fb95ec4c0`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { OtpCreateInput } from "./validator";
+
+export const OtpService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { userId: { contains: query.search, mode: "insensitive" } },
+        { code: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [otps, total] = await Promise.all([
+      prismaMain.otp.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.otp.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: otps,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: OtpCreateInput, userId?: string) {
+    try {
+      const otp = await prismaMain.otp.create({
+        data: {
+          ...data,
+          userId,
+          createdBy: userId,
+        },
+      });
+      return otp;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An OTP already exists for this user and expiry time", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const otp = await prismaMain.otp.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!otp) {
+      throw new CustomError("OTP not found", 404);
+    }
+
+    return otp;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.otp.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("OTP not found", 404);
+    }
+
+    await prismaMain.otp.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-otp-validator-ts"></a>📄 `src/modules/otp/validator.ts`
+
+**File Info:**
+- **Size**: 479 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/otp/validator.ts`
+- **Relative Path**: `src/modules/otp`
+- **Created**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:47:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d99d819cebbd13264d04491801f12592`
+- **SHA256**: `e7f45e68b467d201aaa573d3790c706eee4ae519076db8b2358f957845eda5e5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const otpCreateInputSchema = z.object({
+  userId: z.string().uuid("Invalid User ID format"),
+  code: z.string().min(1, "OTP code is required"),
+  expiresAt: z.string().min(1, "Expiration time is required"),
+});
+
+export type OtpCreateInput = z.infer<typeof otpCreateInputSchema>;
+export type OtpUpdateInput = z.infer<typeof otpCreateInputSchema>;
+
+export const validateOtpCreate = (data: unknown) => {
+  return otpCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-payment-method-controller-ts"></a>📄 `src/modules/payment-method/controller.ts`
+
+**File Info:**
+- **Size**: 2.32 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payment-method/controller.ts`
+- **Relative Path**: `src/modules/payment-method`
+- **Created**: 2026-10-29 06:30:21 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:21 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `0ccf69acd8a798ccf227227f41f20905`
+- **SHA256**: `0c65d50e0e625429b2cfe7e749d2f27d06ffdb8d5bc804361ac663035ea78e57`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { PaymentMethodService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validatePaymentMethodCreate } from "./validator";
+
+export const PaymentMethodController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await PaymentMethodService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payment methods fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validatePaymentMethodCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const paymentMethod = await PaymentMethodService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Payment method created successfully",
+        data: paymentMethod,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const paymentMethod = await PaymentMethodService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payment method retrieved successfully",
+        data: paymentMethod,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await PaymentMethodService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payment method deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payment-method-routes-ts"></a>📄 `src/modules/payment-method/routes.ts`
+
+**File Info:**
+- **Size**: 750 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payment-method/routes.ts`
+- **Relative Path**: `src/modules/payment-method`
+- **Created**: 2026-10-29 06:30:21 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:36:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b41eb57273d0230d3f92877a80202d90`
+- **SHA256**: `fd18be8f748c6151700b97eae79e1e2abb5c1331a5472bf3a348bc6bc4acf08c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { PaymentMethodController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  PaymentMethodController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  PaymentMethodController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
+  PaymentMethodController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  PaymentMethodController.delete,
+);
+
+export const paymentMethodRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-payment-method-service-ts"></a>📄 `src/modules/payment-method/service.ts`
+
+**File Info:**
+- **Size**: 2.21 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payment-method/service.ts`
+- **Relative Path**: `src/modules/payment-method`
+- **Created**: 2026-10-29 06:30:20 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:20 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `934c301685ee333b6c157a061d9b565d`
+- **SHA256**: `34057afc322b44729863fb32548e7c13eb4a1c5e8320b212ceb208cb30fcc05b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { PaymentMethodCreateInput } from "./validator";
+
+export const PaymentMethodService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+        { code: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [paymentMethods, total] = await Promise.all([
+      prismaMain.paymentMethod.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          feePaymentMethodLines: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.paymentMethod.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: paymentMethods,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: PaymentMethodCreateInput, userId?: string) {
+    try {
+      const paymentMethod = await prismaMain.paymentMethod.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return paymentMethod;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A payment method with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const paymentMethod = await prismaMain.paymentMethod.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!paymentMethod) {
+      throw new CustomError("Payment method not found", 404);
+    }
+
+    return paymentMethod;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.paymentMethod.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Payment method not found", 404);
+    }
+
+    await prismaMain.paymentMethod.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payment-method-validator-ts"></a>📄 `src/modules/payment-method/validator.ts`
+
+**File Info:**
+- **Size**: 491 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payment-method/validator.ts`
+- **Relative Path**: `src/modules/payment-method`
+- **Created**: 2026-10-29 06:30:20 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:30:20 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b9b06620b092cfcf758f834732da9a8b`
+- **SHA256**: `3ad8a3792601c14c57599aa638cd11cbec20d7745b8ea1c9d29779d0b7368b87`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const paymentMethodCreateInputSchema = z.object({
+  name: z.string().max(255, "Name is too long"),
+  code: z.string().max(255, "Code is too long").optional(),
+});
+
+export type PaymentMethodCreateInput = z.infer<typeof paymentMethodCreateInputSchema>;
+export type PaymentMethodUpdateInput = z.infer<typeof paymentMethodCreateInputSchema>;
+
+export const validatePaymentMethodCreate = (data: unknown) => {
+  return paymentMethodCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-payroll-controller-ts"></a>📄 `src/modules/payroll/controller.ts`
+
+**File Info:**
+- **Size**: 2.22 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payroll/controller.ts`
+- **Relative Path**: `src/modules/payroll`
+- **Created**: 2026-10-29 07:00:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `95449ece21ebf447405bd64b3c03506c`
+- **SHA256**: `b200992b12cc8343848b1193ae7d98905edfb4831ca270aafba779cd9b856b55`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { PayrollService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validatePayrollCreate } from "./validator";
+
+export const PayrollController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await PayrollService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payroll fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validatePayrollCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const record = await PayrollService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Payroll created successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const record = await PayrollService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payrol retrieved successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await PayrollService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payroll deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payroll-routes-ts"></a>📄 `src/modules/payroll/routes.ts`
+
+**File Info:**
+- **Size**: 682 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payroll/routes.ts`
+- **Relative Path**: `src/modules/payroll`
+- **Created**: 2026-10-29 07:00:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:36:23 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `506ddb865988f07f49d8cb0607843950`
+- **SHA256**: `e9ae864e081334e0119c213be1ac17e3abdbd917b3ec6995403868061a1a6c7a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { PayrollController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  PayrollController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  PayrollController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  PayrollController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  PayrollController.delete,
+);
+
+export const payrollRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-payroll-service-ts"></a>📄 `src/modules/payroll/service.ts`
+
+**File Info:**
+- **Size**: 2.58 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payroll/service.ts`
+- **Relative Path**: `src/modules/payroll`
+- **Created**: 2026-10-29 07:00:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c6159ef98b2afb95203de14e86519c1e`
+- **SHA256**: `2312b4d44757117ad9d417324b07816a05e5868f8d43822e04317f9765b42d4a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { PayrollCreateInput } from "./validator";
+
+export const PayrollService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { fiscalYearId: { contains: query.search, mode: "insensitive" } },
+        { yearBs: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [records, total] = await Promise.all([
+      prismaMain.payroll.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          payslips: true,
+          journalEntry: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.payroll.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: records,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: PayrollCreateInput, userId?: string) {
+    // Validate fiscal year exists and not soft-deleted
+    const year = await prismaMain.fiscalYear.findFirst({
+      where: { id: data.fiscalYearId, deletedAt: null },
+    });
+    if (!year) {
+      throw new CustomError("Fiscal year not found", 404);
+    }
+
+    try {
+      const record = await prismaMain.payroll.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          payslips: true,
+          journalEntry: true,
+        },
+      });
+      return record;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A payroll already exists for this fiscal year, year and month", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const record = await prismaMain.payroll.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        payslips: true,
+        journalEntry: true,
+      },
+    });
+
+    if (!record) {
+      throw new CustomError("Payroll not found", 404);
+    }
+
+    return record;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.payroll.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Payroll not found", 404);
+    }
+
+    await prismaMain.payroll.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payroll-validator-ts"></a>📄 `src/modules/payroll/validator.ts`
+
+**File Info:**
+- **Size**: 544 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payroll/validator.ts`
+- **Relative Path**: `src/modules/payroll`
+- **Created**: 2026-10-29 07:00:41 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:41 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `095b4d5dcc3775afa901188b21e14843`
+- **SHA256**: `e28a5cd610e99d3bb3f730b6d9737f5ae845624e607fefbd97dda9ff376f9a84`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const payrollCreateInputSchema = z.object({
+  fiscalYearId: z.string().uuid("Invalid Fiscal Year ID format"),
+  yearBs: z.string().min(1, "Year is required"),
+  monthBs: z.string().min(1, "Month is required"),
+  totalDays: z.number().int().min(0),
+});
+
+export type PayrollCreateInput = z.infer<typeof payrollCreateInputSchema>;
+export type PayrollUpdateInput = z.infer<typeof payrollCreateInputSchema>;
+
+export const validatePayrollCreate = (data: unknown) => {
+  return payrollCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-payslip-controller-ts"></a>📄 `src/modules/payslip/controller.ts`
+
+**File Info:**
+- **Size**: 2.21 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip/controller.ts`
+- **Relative Path**: `src/modules/payslip`
+- **Created**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `da26511c322768f619521a5c917c71a1`
+- **SHA256**: `babe4126fad817d36313a0b73061811bffa6d3f99107cb336bdf3e41a7f0bcb1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { PayslipService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validatePayslipCreate } from "./validator";
+
+export const PayslipController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await PayslipService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payslips fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validatePayslipCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const slip = await PayslipService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Payslip created successfully",
+        data: slip,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const slip = await PayslipService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payslip retrieved successfully",
+        data: slip,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await PayslipService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payslip deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payslip-routes-ts"></a>📄 `src/modules/payslip/routes.ts`
+
+**File Info:**
+- **Size**: 637 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip/routes.ts`
+- **Relative Path**: `src/modules/payslip`
+- **Created**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:36:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `eedae2945704ead3afc47853cc61a3ac`
+- **SHA256**: `5ab4eab1067e936e4ba07069da89a0017b1741d8a26b99f006c2a25f5e1c30e7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { PayslipController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), PayslipController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), PayslipController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), PayslipController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), PayslipController.delete);
+
+export const payslipRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-payslip-service-ts"></a>📄 `src/modules/payslip/service.ts`
+
+**File Info:**
+- **Size**: 2.28 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip/service.ts`
+- **Relative Path**: `src/modules/payslip`
+- **Created**: 2026-10-29 07:00:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6efb56c98e8643d022b12688bab97451`
+- **SHA256**: `4fb2fc51d38a4b6d792bf572d0a162969e8c48431aaa66b0798d3bc8f06ef558`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { PayslipCreateInput } from "./validator";
+
+export const PayslipService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { payslipNo: { contains: query.search, mode: "insensitive" } },
+        { employeeId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [slips, total] = await Promise.all([
+      prismaMain.payslip.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          items: true,
+          employee: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.payslip.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: slips,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: PayslipCreateInput, userId?: string) {
+    try {
+      const slip = await prismaMain.payslip.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          items: true,
+          employee: true,
+        },
+      });
+      return slip;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A payslip already exists with this number", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const slip = await prismaMain.payslip.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        items: true,
+        employee: true,
+      },
+    });
+
+    if (!slip) {
+      throw new CustomError("Payslip not found", 404);
+    }
+
+    return slip;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.payslip.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Payslip not found", 404);
+    }
+
+    await prismaMain.payslip.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payslip-validator-ts"></a>📄 `src/modules/payslip/validator.ts`
+
+**File Info:**
+- **Size**: 1.28 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip/validator.ts`
+- **Relative Path**: `src/modules/payslip`
+- **Created**: 2026-10-29 07:00:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8175d60534f718e2698ddd4dd96ac486`
+- **SHA256**: `61330bae27b66488fe2e47a55c893ef204285b680c053960fd88470824d55057`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const payslipCreateInputSchema = z.object({
+  payslipNo: z.string().min(1, "Payslip number is required"),
+  payrollId: z.string().uuid("Invalid Payroll ID format"),
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+  paymentMethodId: z.string().uuid("Invalid Payment Method ID format").optional(),
+  presentDays: z.string().min(1, "Present days are required"),
+  halfDays: z.number().int().min(0),
+  paidLeaveDays: z.number().int().min(0),
+  unpaidLeaveDays: z.number().int().min(0),
+  absentDays: z.number().int().min(0),
+  basicSalary: z.string().min(1, "Basic salary is required"),
+  attendanceDeduction: z.string().optional(),
+  totalAllowance: z.string().optional(),
+  teachingPay: z.string().optional(),
+  grossPay: z.string().min(1, "Gross pay is required"),
+  totalDeduction: z.string().min(1, "Total deduction is required"),
+  taxAmount: z.string().min(1, "Tax amount is required"),
+  netPay: z.string().min(1, "Net pay is required"),
+  paidDateBs: z.string().min(1, "Paid date is required"),
+});
+
+export type PayslipCreateInput = z.infer<typeof payslipCreateInputSchema>;
+export type PayslipUpdateInput = z.infer<typeof payslipCreateInputSchema>;
+
+export const validatePayslipCreate = (data: unknown) => {
+  return payslipCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-payslip-item-controller-ts"></a>📄 `src/modules/payslip-item/controller.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip-item/controller.ts`
+- **Relative Path**: `src/modules/payslip-item`
+- **Created**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4ebce3bcda3a035ec76f653a96a405d6`
+- **SHA256**: `7d59be718c5179f53f77e22279668f181b86e76751aa0a31a4b9833bea4a0e9b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { PayslipItemService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validatePayslipItemCreate } from "./validator";
+
+export const PayslipItemController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await PayslipItemService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payslip items fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validatePayslipItemCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await PayslipItemService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Payslip item created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await PayslipItemService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payslip item retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await PayslipItemService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Payslip item deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payslip-item-routes-ts"></a>📄 `src/modules/payslip-item/routes.ts`
+
+**File Info:**
+- **Size**: 706 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip-item/routes.ts`
+- **Relative Path**: `src/modules/payslip-item`
+- **Created**: 2026-10-29 07:00:45 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:36:34 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `052c3224a23db9c73b510fbd97f75311`
+- **SHA256**: `0861631c406cc8848b3b87eb15205a123da65b7443c1e93701cf462eab699901`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { PayslipItemController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  PayslipItemController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  PayslipItemController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  PayslipItemController.retrieve,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  PayslipItemController.delete,
+);
+
+export const payslipItemRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-payslip-item-service-ts"></a>📄 `src/modules/payslip-item/service.ts`
+
+**File Info:**
+- **Size**: 2.33 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip-item/service.ts`
+- **Relative Path**: `src/modules/payslip-item`
+- **Created**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b5dc39ed24cd330f62e9f88af5763d66`
+- **SHA256**: `cdd84da4b66634abcac7f9c371e4dbae290312580d140344a9f314f89fa54e88`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { PayslipItemCreateInput } from "./validator";
+
+export const PayslipItemService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { componentId: { contains: query.search, mode: "insensitive" } },
+        { description: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.payslipItem.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          salaryComponent: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.payslipItem.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: PayslipItemCreateInput, userId?: string) {
+    try {
+      const item = await prismaMain.payslipItem.create({
+        data: {
+          ...data,
+          payslipId: data.payslipId,
+          createdBy: userId,
+        },
+        include: {
+          salaryComponent: true,
+        },
+      });
+      return item;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A payslip item already exists for this payslip and component", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.payslipItem.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        salaryComponent: true,
+      },
+    });
+
+    if (!item) {
+      throw new CustomError("Payslip item not found", 404);
+    }
+
+    return item;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.payslipItem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Payslip item not found", 404);
+    }
+
+    await prismaMain.payslipItem.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-payslip-item-validator-ts"></a>📄 `src/modules/payslip-item/validator.ts`
+
+**File Info:**
+- **Size**: 709 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/payslip-item/validator.ts`
+- **Relative Path**: `src/modules/payslip-item`
+- **Created**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 07:00:44 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b9016300e1309ff261c83e6b98f3516a`
+- **SHA256**: `55da97a00c293b5826ab897d63b726f109f938dc00ee8c0a074f0054d99b0197`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const payslipItemCreateInputSchema = z.object({
+  payslipId: z.string().uuid("Invalid Payslip ID format"),
+  componentId: z.string().uuid("Invalid Salary Component ID format").optional(),
+  description: z.string().min(1, "Description is required"),
+  amount: z.string().min(1, "Amount is required"),
+  isDeduction: z.boolean().optional(),
+  isEmployerContribution: z.boolean().optional(),
+});
+
+export type PayslipItemCreateInput = z.infer<typeof payslipItemCreateInputSchema>;
+export type PayslipItemUpdateInput = z.infer<typeof payslipItemCreateInputSchema>;
+
+export const validatePayslipItemCreate = (data: unknown) => {
+  return payslipItemCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-period-controller-ts"></a>📄 `src/modules/period/controller.ts`
+
+**File Info:**
+- **Size**: 2.89 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/period/controller.ts`
+- **Relative Path**: `src/modules/period`
+- **Created**: 2026-10-27 03:38:04 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:38:04 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ef61addaa247c41c5fbe244cb3db8465`
+- **SHA256**: `6f80c38da962dafa9d2d4e14df5e29fb30ce34b3885c74368757397a75802c6a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { PeriodService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validatePeriodCreate, validatePeriodUpdate } from "./validator";
+
+export const PeriodController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await PeriodService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Periods fetched successfully!",
+        data: {
+          data: result.periods,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validatePeriodCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const period = await PeriodService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Period created successfully",
+        data: period,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const period = await PeriodService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Period retrieved successfully",
+        data: period,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validatePeriodUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const period = await PeriodService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Period updated successfully",
+        data: period,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await PeriodService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Period deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-period-routes-ts"></a>📄 `src/modules/period/routes.ts`
+
+**File Info:**
+- **Size**: 776 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/period/routes.ts`
+- **Relative Path**: `src/modules/period`
+- **Created**: 2026-10-27 03:38:05 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:36:53 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `60e01b3dc544a4b1bd0cf6fced0b6647`
+- **SHA256**: `f008e7e5d7f619cd3b80206bc67f118a17dcc98c61e03962d5c2dc138b3682b1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { PeriodController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"), PeriodController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PeriodController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"), PeriodController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PeriodController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PeriodController.delete);
+
+export const periodRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-period-service-ts"></a>📄 `src/modules/period/service.ts`
+
+**File Info:**
+- **Size**: 3.82 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/period/service.ts`
+- **Relative Path**: `src/modules/period`
+- **Created**: 2026-10-27 03:38:04 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:38:04 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `35201ffb199cd4b3cec5f74bf449b9a9`
+- **SHA256**: `db4e0475f66ef711e0477648f4668ddce6d4436500ac9e74f08cdf4001065354`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { PeriodCreateInput, PeriodUpdateInput } from "./validator";
+
+export const PeriodService = {
+  async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [periods, total] = await Promise.all([
+      prismaMain.period.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          sessions: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.period.count({ where: whereClause }),
+    ]);
+
+    return {
+      periods,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: PeriodCreateInput, userId?: string) {
+    // Check duplicate period number within same name
+    const existing = await prismaMain.period.findFirst({
+      where: {
+        name: data.name,
+        deletedAt: null,
+      },
+    });
+
+    if (existing && existing.periodNumber === data.periodNumber) {
+      throw new CustomError("A period with this name already exists", 409);
+    }
+
+    try {
+      const period = await prismaMain.period.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          sessions: true,
+        },
+      });
+      return period;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A period with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const period = await prismaMain.period.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        sessions: true,
+      },
+    });
+
+    if (!period) {
+      throw new CustomError("Period not found", 404);
+    }
+
+    return period;
+  },
+
+  async update(id: string, data: PeriodUpdateInput, userId?: string) {
+    const existing = await prismaMain.period.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Period not found", 404);
+    }
+
+    const targetName = data.name !== undefined ? data.name : existing.name;
+    const targetPeriodNumber = data.periodNumber !== undefined ? data.periodNumber : existing.periodNumber;
+
+    if (targetPeriodNumber !== existing.periodNumber) {
+      const duplicate = await prismaMain.period.findFirst({
+        where: {
+          name: targetName,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+
+      if (duplicate) {
+        throw new CustomError("A period with this name already exists", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.period.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          sessions: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A period with this name already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.period.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Period not found", 404);
+    }
+
+    await prismaMain.period.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-period-validator-ts"></a>📄 `src/modules/period/validator.ts`
+
+**File Info:**
+- **Size**: 1.15 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/period/validator.ts`
+- **Relative Path**: `src/modules/period`
+- **Created**: 2026-10-27 04:10:19 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 04:10:19 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d74b038418ce4bde2dbddd7b326a6613`
+- **SHA256**: `63abc808aff7df288450920d46e95f29b2eaaececc89b0cb9bb397de61150ba2`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const periodCreateInputSchema = z.object({
+  periodNumber: z.number().int().min(1, "Period number must be a positive integer"),
+  name: z.string().min(1, "Period name is required").max(100, "Period name is too long"),
+  startTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Time must be in HH:mm format")
+    .max(5, "Time must be in HH:mm format")
+    .refine((t: string) => t.length === 5, "Time must be in HH:mm format"),
+  endTime: z
+    .string()
+    .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Time must be in HH:mm format")
+    .max(5, "Time must be in HH:mm format")
+    .refine((t: string) => t.length === 5, "Time must be in HH:mm format"),
+  isActive: z.boolean().default(true),
+});
+
+export const periodUpdateInputSchema = periodCreateInputSchema.partial();
+
+export type PeriodCreateInput = z.infer<typeof periodCreateInputSchema>;
+export type PeriodUpdateInput = z.infer<typeof periodUpdateInputSchema>;
+
+export const validatePeriodCreate = (data: unknown) => {
+  return periodCreateInputSchema.parse(data);
+};
+
+export const validatePeriodUpdate = (data: unknown) => {
+  return periodUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-principal-controller-ts"></a>📄 `src/modules/principal/controller.ts`
+
+**File Info:**
+- **Size**: 2.29 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/principal/controller.ts`
+- **Relative Path**: `src/modules/principal`
+- **Created**: 2026-10-27 03:13:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:13:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `0f959b9af5ef7308c9d2884bee5aab15`
+- **SHA256**: `5b1c655b274738a0f500b5994e6cfd6509410ceeae423921483aaab31bb83bce`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { PrincipalService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validatePrincipalCreate } from "./validator";
+
+export const PrincipalController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await PrincipalService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Principals fetched successfully!",
+        data: {
+          data: result.principals,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validatePrincipalCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const principal = await PrincipalService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Principal created successfully",
+        data: principal,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const principal = await PrincipalService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Principal retrieved successfully",
+        data: principal,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await PrincipalService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Principal deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-principal-routes-ts"></a>📄 `src/modules/principal/routes.ts`
+
+**File Info:**
+- **Size**: 607 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/principal/routes.ts`
+- **Relative Path**: `src/modules/principal`
+- **Created**: 2026-10-27 03:13:32 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:37:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1de6d6c5677b53174c59058866de5b2a`
+- **SHA256**: `2a56131fba8e3f6ba3c511693a323f1d973b66873561cce74042afc37183a65f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { PrincipalController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PrincipalController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), PrincipalController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PrincipalController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), PrincipalController.delete);
+
+export const principalRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-principal-service-ts"></a>📄 `src/modules/principal/service.ts`
+
+**File Info:**
+- **Size**: 2.73 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/principal/service.ts`
+- **Relative Path**: `src/modules/principal`
+- **Created**: 2026-10-27 03:13:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:13:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e21fa6c271942202913198d683d278ab`
+- **SHA256**: `5718024e6a751dbcd9ba844ee696bceea7b35056bfc3f97479d3f8652819d38a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { PrincipalCreateInput } from "./validator";
+
+export const PrincipalService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { employee: { firstName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { lastName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { employeeCode: { contains: query.search, mode: "insensitive" } } },
+      ];
+    }
+
+    const [principals, total] = await Promise.all([
+      prismaMain.principal.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          employee: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.principal.count({ where: whereClause }),
+    ]);
+
+    return {
+      principals,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: PrincipalCreateInput, userId?: string) {
+    // Validate employee exists and is not soft-deleted
+    const employee = await prismaMain.employee.findFirst({
+      where: { id: data.employeeId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found or has been deleted", 404);
+    }
+
+    try {
+      const principal = await prismaMain.principal.create({
+        data: {
+          ...data,
+          employeeId: data.employeeId,
+          createdBy: userId,
+        },
+        include: {
+          employee: true,
+        },
+      });
+      return principal;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee with this ID is already assigned as Principal", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const principal = await prismaMain.principal.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        employee: true,
+      },
+    });
+
+    if (!principal) {
+      throw new CustomError("Principal not found", 404);
+    }
+
+    return principal;
+  },
+
+  async delete(id: string, userId?: string) {
+    const principal = await prismaMain.principal.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!principal) {
+      throw new CustomError("Principal not found", 404);
+    }
+
+    await prismaMain.principal.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-principal-validator-ts"></a>📄 `src/modules/principal/validator.ts`
+
+**File Info:**
+- **Size**: 501 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/principal/validator.ts`
+- **Relative Path**: `src/modules/principal`
+- **Created**: 2026-10-27 03:13:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:13:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `23ba5adb897bd74f288837cfcdd9b644`
+- **SHA256**: `cb7764a8aa12705ac5cf4c6a05206e19fab15e1eac0f88bfd774ee54aec1be7d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const principalCreateInputSchema = z.object({
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+  createdBy: z.string().uuid("Invalid Creator User ID format").optional().nullable(),
+});
+
+export type PrincipalCreateInput = z.infer<typeof principalCreateInputSchema>;
+export type PrincipalUpdateInput = z.infer<typeof principalCreateInputSchema>;
+
+export const validatePrincipalCreate = (data: unknown) => {
+  return principalCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-result-controller-ts"></a>📄 `src/modules/result/controller.ts`
+
+**File Info:**
+- **Size**: 2.94 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/result/controller.ts`
+- **Relative Path**: `src/modules/result`
+- **Created**: 2026-10-27 03:38:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:38:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e1ba430504772aabc408827cc554df4a`
+- **SHA256**: `af2cd6a2544ed904d14bc09467bcc6c95ee309dbb8b328fa0c2d3fe4c2388b2a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ResultService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateResultCreate, validateResultUpdate } from "./validator";
+
+export const ResultController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const studentId = req.query.studentId as string | undefined;
+      const status = req.query.status as string | undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await ResultService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        studentId,
+        status,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Results fetched successfully!",
+        data: {
+          data: result.results,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateResultCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const result = await ResultService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Result created successfully",
         data: result,
       });
     } catch (error) {
@@ -126872,40 +141536,53 @@ const BillController = {
     }
   },
 
-  getBillsByCategory: async (req: Request, res: Response) => {
+  retrieve: async (req: Request, res: Response) => {
     try {
-      const context = res.locals.context;
-      const userId = context.userId;
-
-      const { categoryId, page, limit } = req.query;
-
-      if (!categoryId) {
-        return ResponseHandler.error({
-          res,
-          code: 400,
-          message: "categoryId is required",
-          error: null,
-        });
-      }
-
-      const pageNumber = Number(page) || 1;
-      const limitNumber = Number(limit) || 10;
-
-      const result = await BillService.getBillsByCategory(
-        userId,
-        categoryId as string,
-        pageNumber,
-        limitNumber,
-      );
+      const id = req.params.id as string;
+      const result = await ResultService.getById(id);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Bills fetched successfully!",
-        data: {
-          data: result.bills,
-          pagination: result.pagination,
-        },
+        message: "Result retrieved successfully",
+        data: result,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateResultUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const result = await ResultService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Result updated successfully",
+        data: result,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await ResultService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Result deleted successfully",
+        data: null,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
@@ -126913,557 +141590,235 @@ const BillController = {
   },
 };
 
-export default BillController;
-
 ```
 
 ---
 
-### <a id="📄-src-modules-bill-routes-ts"></a>📄 `src/modules/bill/routes.ts`
+### <a id="📄-src-modules-result-routes-ts"></a>📄 `src/modules/result/routes.ts`
 
 **File Info:**
-- **Size**: 750 B
+- **Size**: 781 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/bill/routes.ts`
-- **Relative Path**: `src/modules/bill`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `9d65eddc1509ca49bef34bf1ff28afb1`
-- **SHA256**: `494511b8d07212cb7eae7e1b2dbaf85c145ac588bc88d4f00b252e7eaa1f3e84`
+- **Location**: `src/modules/result/routes.ts`
+- **Relative Path**: `src/modules/result`
+- **Created**: 2026-10-27 03:38:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:37:28 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f57a2587364c420459645dd89185c2b6`
+- **SHA256**: `ee6e2fdedfcaf4fb083c8e7e069a077eb882d2fe0edf649a3f501eb3b00188e8`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-// bill/routes.ts
 import { Router } from "express";
-import BillController from "./controller";
+import { ResultController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
 
-const billRouter: Router = Router();
+const router = Router();
 
-// Basic CRUD routes
-billRouter.get("/", isUser, BillController.index);
-billRouter.post("/", isUser, BillController.create);
-billRouter.get("/sales/total", isUser, BillController.getTotalSales);
-billRouter.get("/date-range", isUser, BillController.getBillsByDateRange);
-billRouter.get("/category/:categoryId", isUser, BillController.getBillsByCategory);
-billRouter.get("/:id", isUser, BillController.getById);
-billRouter.patch("/:id", isUser, BillController.update);
-billRouter.delete("/:id", isUser, BillController.delete);
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"), ResultController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"), ResultController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"), ResultController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"), ResultController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"), ResultController.delete);
 
-export default billRouter;
+export const resultRouter = router;
 ```
 
 ---
 
-### <a id="📄-src-modules-bill-service-ts"></a>📄 `src/modules/bill/service.ts`
+### <a id="📄-src-modules-result-service-ts"></a>📄 `src/modules/result/service.ts`
 
 **File Info:**
-- **Size**: 11.12 KB
+- **Size**: 4.13 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/bill/service.ts`
-- **Relative Path**: `src/modules/bill`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `879e4cfaab0d9eb156e98a961d237d45`
-- **SHA256**: `9455065a88256448ccf0da35cd6a9640d64022641352b9223fbca3d710a7adc2`
+- **Location**: `src/modules/result/service.ts`
+- **Relative Path**: `src/modules/result`
+- **Created**: 2026-10-27 03:38:42 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:38:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `42c83cc1b264b95d2046c016f567280b`
+- **SHA256**: `7460541bd63376f1e8e453fb49828406477084591bdcca6b5ba5d573f69d3981`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-// bill/service.ts
 import { prismaMain } from "@/lib/prismaClient";
-import { CustomError, ValidationError } from "@/errors/CustomError";
-import { T_BillCreateInput } from "./validator";
+import { CustomError } from "@/errors/CustomError";
+import { ResultCreateInput, ResultUpdateInput } from "./validator";
 
-export const BillService = {
-  index: async (pageNumber: number, limitNumber: number, userId: string) => {
-    const skip = (pageNumber - 1) * limitNumber;
-    const take = limitNumber;
+export const ResultService = {
+  async index(query: { page?: number; limit?: number; search?: string; studentId?: string; status?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
 
-    const bills = await prismaMain.bill.findMany({
-      where: {
-        userId,
-      },
-      include: {
-        billItems: {
-          include: {
-            product: {
-              include: {
-                category: true,
-              },
-            },
-          },
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { student: { fullName: { contains: query.search, mode: "insensitive" } } },
+        { remarks: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.studentId) {
+      whereClause.studentId = query.studentId;
+    }
+
+    if (query.status) {
+      whereClause.status = query.status;
+    }
+
+    const [results, total] = await Promise.all([
+      prismaMain.result.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          student: true,
+          exam: true,
+          subjects: true,
         },
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-          },
-        },
-      },
-      skip,
-      take,
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    const totalBills = await prismaMain.bill.count({
-      where: {
-        userId,
-      },
-    });
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.result.count({ where: whereClause }),
+    ]);
 
     return {
-      bills,
+      results,
       pagination: {
-        page: pageNumber,
-        limit: limitNumber,
-        total: totalBills,
+        page,
+        limit,
+        total,
       },
     };
   },
 
-  create: async (data: T_BillCreateInput, userId: string) => {
-    const { discountType, discount, products } = data;
+  async create(data: ResultCreateInput, userId?: string) {
+    // Validate student exists
+    const student = await prismaMain.student.findFirst({
+      where: { id: data.studentId, deletedAt: null },
+    });
 
-    // Validate all products exist and belong to the user
-    const productIds = products.map((p) => p.productId);
-    const dbProducts = await prismaMain.product.findMany({
+    if (!student) {
+      throw new CustomError("Student not found or has been deleted", 404);
+    }
+
+    // Validate exam exists
+    const exam = await prismaMain.exam.findFirst({
+      where: { id: data.examId, deletedAt: null },
+    });
+
+    if (!exam) {
+      throw new CustomError("Exam not found or has been deleted", 404);
+    }
+
+    // Check duplicate [studentId, examId]
+    const existing = await prismaMain.result.findFirst({
       where: {
-        id: {
-          in: productIds,
-        },
-        userId,
+        studentId: data.studentId,
+        examId: data.examId,
+        deletedAt: null,
       },
     });
 
-    if (dbProducts.length !== productIds.length)
-      throw new ValidationError({
-        products: "One or more products not found or don't belong to this user",
-      });
-
-    // Calculate total and prepare bill items
-    let total = 0;
-    const billItemsData = products.map((p) => {
-      const product = dbProducts.find((dp) => dp.id === p.productId);
-      if (!product) throw new CustomError("Product not found", 404);
-
-      // Check if quantity is available
-      if (product.quantity < p.quantity)
-        throw new ValidationError({
-          quantity: `Insufficient quantity for product ${product.name}. Available: ${product.quantity}`,
-        });
-
-      const itemTotal = product.price * p.quantity;
-      total += itemTotal;
-
-      return {
-        productId: p.productId,
-        quantity: p.quantity,
-        unitPrice: product.price,
-        total: itemTotal,
-      };
-    });
-
-    // Calculate final bill amount
-    let finalBillAmount = total;
-    if (discountType === "Percentage") {
-      finalBillAmount = total - (total * discount) / 100;
-    } else if (discountType === "Exact") {
-      finalBillAmount = total - discount;
+    if (existing) {
+      throw new CustomError("A result already exists for this student and exam", 409);
     }
 
-    // Ensure final bill amount is not negative
-    if (finalBillAmount < 0) finalBillAmount = 0;
+    try {
+      const result = await prismaMain.result.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          student: true,
+          exam: true,
+          subjects: true,
+        },
+      });
+      return result;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A result already exists for this student and exam", 409);
+      }
+      throw error;
+    }
+  },
 
-    // Create the bill with bill items and decrease product quantities
-    const bill = await prismaMain.bill.create({
+  async getById(id: string) {
+    const result = await prismaMain.result.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        student: true,
+        exam: true,
+        subjects: true,
+      },
+    });
+
+    if (!result) {
+      throw new CustomError("Result not found", 404);
+    }
+
+    return result;
+  },
+
+  async update(id: string, data: ResultUpdateInput, userId?: string) {
+    const existing = await prismaMain.result.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Result not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.result.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          student: true,
+          exam: true,
+          subjects: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A result already exists for this student and exam", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.result.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Result not found", 404);
+    }
+
+    await prismaMain.result.update({
+      where: { id },
       data: {
-        userId,
-        discountType,
-        discount,
-        total,
-        finalBillAmount,
-        billItems: {
-          createMany: {
-            data: billItemsData,
-          },
-        },
-      },
-      include: {
-        billItems: {
-          include: {
-            product: {
-              include: {
-                category: true,
-              },
-            },
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-          },
-        },
+        deletedAt: new Date(),
+        updatedBy: userId,
       },
     });
 
-    // Decrease product quantities
-    for (const item of billItemsData) {
-      await prismaMain.product.update({
-        where: { id: item.productId },
-        data: {
-          quantity: {
-            decrement: item.quantity,
-          },
-        },
-      });
-    }
-
-    return bill;
-  },
-
-  getById: async (billId: string) => {
-    const bill = await prismaMain.bill.findUnique({
-      where: { id: billId },
-      include: {
-        billItems: {
-          include: {
-            product: {
-              include: {
-                category: true,
-              },
-            },
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-          },
-        },
-      },
-    });
-
-    if (!bill) throw new CustomError("Bill not found", 404);
-
-    return bill;
-  },
-
-  update: async (billId: string, data: T_BillCreateInput) => {
-    // Get existing bill with items
-    const existingBill = await prismaMain.bill.findUnique({
-      where: { id: billId },
-      include: {
-        billItems: true,
-      },
-    });
-
-    if (!existingBill) throw new CustomError("Bill not found", 404);
-
-    const { discountType, discount, products } = data;
-
-    // Validate all products exist and belong to the user
-    const productIds = products.map((p) => p.productId);
-    const dbProducts = await prismaMain.product.findMany({
-      where: {
-        id: {
-          in: productIds,
-        },
-        userId: existingBill.userId,
-      },
-    });
-
-    if (dbProducts.length !== productIds.length)
-      throw new ValidationError({
-        products: "One or more products not found",
-      });
-
-    // Calculate total and prepare bill items
-    let total = 0;
-    const billItemsData = products.map((p) => {
-      const product = dbProducts.find((dp) => dp.id === p.productId);
-      if (!product) throw new CustomError("Product not found", 404);
-
-      const itemTotal = product.price * p.quantity;
-      total += itemTotal;
-
-      return {
-        productId: p.productId,
-        quantity: p.quantity,
-        unitPrice: product.price,
-        total: itemTotal,
-      };
-    });
-
-    // Calculate final bill amount
-    let finalBillAmount = total;
-    if (discountType === "Percentage") {
-      finalBillAmount = total - (total * discount) / 100;
-    } else if (discountType === "Exact") {
-      finalBillAmount = total - discount;
-    }
-
-    if (finalBillAmount < 0) finalBillAmount = 0;
-
-    // Restore old quantities first
-    for (const oldItem of existingBill.billItems) {
-      await prismaMain.product.update({
-        where: { id: oldItem.productId },
-        data: {
-          quantity: {
-            increment: oldItem.quantity,
-          },
-        },
-      });
-    }
-
-    // Delete old bill items
-    await prismaMain.billItem.deleteMany({
-      where: { billId },
-    });
-
-    // Update bill with new items
-    const updatedBill = await prismaMain.bill.update({
-      where: { id: billId },
-      data: {
-        discountType,
-        discount,
-        total,
-        finalBillAmount,
-        billItems: {
-          createMany: {
-            data: billItemsData,
-          },
-        },
-      },
-      include: {
-        billItems: {
-          include: {
-            product: {
-              include: {
-                category: true,
-              },
-            },
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-          },
-        },
-      },
-    });
-
-    // Decrease new product quantities
-    for (const newItem of billItemsData) {
-      await prismaMain.product.update({
-        where: { id: newItem.productId },
-        data: {
-          quantity: {
-            decrement: newItem.quantity,
-          },
-        },
-      });
-    }
-
-    return updatedBill;
-  },
-
-  delete: async (billId: string) => {
-    const bill = await prismaMain.bill.findUnique({
-      where: { id: billId },
-      include: {
-        billItems: true,
-      },
-    });
-
-    if (!bill) throw new CustomError("Bill not found", 404);
-
-    // Restore product quantities before deleting bill
-    for (const item of bill.billItems) {
-      await prismaMain.product.update({
-        where: { id: item.productId },
-        data: {
-          quantity: {
-            increment: item.quantity,
-          },
-        },
-      });
-    }
-
-    // Delete bill items first (cascade should handle this, but explicit delete is safer)
-    await prismaMain.billItem.deleteMany({
-      where: { billId },
-    });
-
-    // Delete the bill
-    return await prismaMain.bill.delete({
-      where: { id: billId },
-    });
-  },
-
-  getBillsByDateRange: async (
-    userId: string,
-    startDate: Date,
-    endDate: Date,
-    pageNumber: number,
-    limitNumber: number,
-  ) => {
-    const skip = (pageNumber - 1) * limitNumber;
-    const take = limitNumber;
-
-    const bills = await prismaMain.bill.findMany({
-      where: {
-        userId,
-        createdAt: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-      include: {
-        billItems: {
-          include: {
-            product: {
-              include: {
-                category: true,
-              },
-            },
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-          },
-        },
-      },
-      skip,
-      take,
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    const total = await prismaMain.bill.count({
-      where: {
-        userId,
-        createdAt: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-    });
-
-    return {
-      bills,
-      pagination: {
-        page: pageNumber,
-        limit: limitNumber,
-        total,
-      },
-    };
-  },
-
-  getTotalSales: async (userId: string) => {
-    const result = await prismaMain.bill.aggregate({
-      where: { userId },
-      _sum: {
-        finalBillAmount: true,
-      },
-      _count: true,
-    });
-
-    return {
-      totalBills: result._count,
-      totalSales: result._sum.finalBillAmount || 0,
-    };
-  },
-
-  getBillsByCategory: async (
-    userId: string,
-    categoryId: string,
-    pageNumber: number,
-    limitNumber: number,
-  ) => {
-    const skip = (pageNumber - 1) * limitNumber;
-    const take = limitNumber;
-
-    const bills = await prismaMain.bill.findMany({
-      where: {
-        userId,
-        billItems: {
-          some: {
-            product: {
-              categoryId,
-            },
-          },
-        },
-      },
-      include: {
-        billItems: {
-          include: {
-            product: {
-              include: {
-                category: true,
-              },
-            },
-          },
-          where: {
-            product: {
-              categoryId,
-            },
-          },
-        },
-        user: {
-          select: {
-            id: true,
-            username: true,
-            email: true,
-          },
-        },
-      },
-      skip,
-      take,
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    const total = await prismaMain.bill.count({
-      where: {
-        userId,
-        billItems: {
-          some: {
-            product: {
-              categoryId,
-            },
-          },
-        },
-      },
-    });
-
-    return {
-      bills,
-      pagination: {
-        page: pageNumber,
-        limit: limitNumber,
-        total,
-      },
-    };
+    return null;
   },
 };
 
@@ -127471,378 +141826,1523 @@ export const BillService = {
 
 ---
 
-### <a id="📄-src-modules-bill-validator-ts"></a>📄 `src/modules/bill/validator.ts`
+### <a id="📄-src-modules-result-validator-ts"></a>📄 `src/modules/result/validator.ts`
 
 **File Info:**
-- **Size**: 904 B
+- **Size**: 1.71 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/bill/validator.ts`
-- **Relative Path**: `src/modules/bill`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `90c41c92cf9a5c97f6042d96c842bd76`
-- **SHA256**: `23b0a6380b356ce8534c25812878dcd2f14f67c30c60a6154aa4d866ba9bfd67`
+- **Location**: `src/modules/result/validator.ts`
+- **Relative Path**: `src/modules/result`
+- **Created**: 2026-10-27 03:38:41 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:38:41 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5dc9b42eb92564bec9a51756a8e8ecac`
+- **SHA256**: `1f1c6098a1067996d0f4448bf6ccb6340260639823db3573b3a27dae5bd0306a`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-// bill/validator.ts
-import z from "zod";
+import { z } from "zod";
 
-export const billCreateInputSchema = z.object({
-  discountType: z.enum(["Exact", "Percentage"], {
-    message: "Discount type must be Exact or Percentage",
-  }),
-  discount: z
-    .number({ message: "Discount is required" })
-    .nonnegative("Discount cannot be negative")
-    .default(0),
-  products: z
-    .array(
-      z.object({
-        productId: z.string({ message: "Product ID is required" }),
-        quantity: z
-          .number({ message: "Quantity is required" })
-          .int("Quantity must be an integer")
-          .positive("Quantity must be greater than 0"),
-      }),
-    )
-    .min(1, "At least one product is required"),
+export const resultCreateInputSchema = z.object({
+  studentId: z.string().uuid("Invalid Student ID format"),
+  examId: z.string().uuid("Invalid Exam ID format"),
+  totalMarks: z.number().min(0, "Total marks must be a positive number"),
+  fullMarks: z.number().min(1, "Full marks must be greater than 0"),
+  percentage: z.number().min(0, "Percentage must be between 0 and 100"),
+  totalCreditHour: z.number().min(0, "Total credit hour must be >= 0"),
+  gpa: z.number().min(0).max(4, "GPA must be between 0 and 4"),
+  cgpa: z.number().min(0).max(4).optional().nullable(),
+  isPassed: z.boolean(),
+  status: z.enum(["PENDING", "SUBMITTED", "APPROVED", "PUBLISHED"], {
+    errorMap: () => ({ message: "Status must be PENDING, SUBMITTED, APPROVED, or PUBLISHED" }),
+  }).default("PENDING"),
+  submittedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  approvedBy: z.string().uuid("Invalid User ID format").optional().nullable(),
+  approvedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  publishedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  remarks: z.string().max(1000, "Remarks too long").optional().nullable(),
 });
 
-export type T_BillCreateInput = z.infer<typeof billCreateInputSchema>;
+export const resultUpdateInputSchema = resultCreateInputSchema.partial();
 
-export const validateBillCreate = (data: T_BillCreateInput) => {
-  return billCreateInputSchema.parse(data);
+export type ResultCreateInput = z.infer<typeof resultCreateInputSchema>;
+export type ResultUpdateInput = z.infer<typeof resultUpdateInputSchema>;
+
+export const validateResultCreate = (data: unknown) => {
+  return resultCreateInputSchema.parse(data);
+};
+
+export const validateResultUpdate = (data: unknown) => {
+  return resultUpdateInputSchema.parse(data);
 };
 
 ```
 
 ---
 
-### <a id="📄-src-modules-categories-controller-ts"></a>📄 `src/modules/categories/controller.ts`
+### <a id="📄-src-modules-result-subject-controller-ts"></a>📄 `src/modules/result-subject/controller.ts`
+
+**File Info:**
+- **Size**: 2.94 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/result-subject/controller.ts`
+- **Relative Path**: `src/modules/result-subject`
+- **Created**: 2026-10-27 03:39:39 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:39:39 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6ebcad001f844529c877204d4e24fcf0`
+- **SHA256**: `cba16bfd1bbc7e42d16c90d451a9349d7815d8ebd8bc94426c8a43de978ce627`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ResultSubjectService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateResultSubjectCreate, validateResultSubjectUpdate } from "./validator";
+
+export const ResultSubjectController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await ResultSubjectService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Result subjects fetched successfully!",
+        data: {
+          data: result.resultSubjects,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateResultSubjectCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const resultSubject = await ResultSubjectService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Result subject created successfully",
+        data: resultSubject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const resultSubject = await ResultSubjectService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Result subject retrieved successfully",
+        data: resultSubject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateResultSubjectUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const resultSubject = await ResultSubjectService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Result subject updated successfully",
+        data: resultSubject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await ResultSubjectService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Result subject deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-result-subject-routes-ts"></a>📄 `src/modules/result-subject/routes.ts`
+
+**File Info:**
+- **Size**: 886 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/result-subject/routes.ts`
+- **Relative Path**: `src/modules/result-subject`
+- **Created**: 2026-10-27 03:39:39 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:37:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a3605223a0309a180316841c386eb274`
+- **SHA256**: `f3f34d0d3e00509bb64aac306028e182cf2a31fc9550eb9a22bfab085cc8eda3`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { ResultSubjectController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"),
+  ResultSubjectController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
+  ResultSubjectController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"),
+  ResultSubjectController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
+  ResultSubjectController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
+  ResultSubjectController.delete,
+);
+
+export const resultSubjectRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-result-subject-service-ts"></a>📄 `src/modules/result-subject/service.ts`
+
+**File Info:**
+- **Size**: 3.5 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/result-subject/service.ts`
+- **Relative Path**: `src/modules/result-subject`
+- **Created**: 2026-10-27 03:48:59 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:48:59 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `e974d5b739cc3beb48e989772f7784bd`
+- **SHA256**: `7d0583c679df6f805eda78e5a80d9504e630d4b7bb495b4f2f89f5937bdf1f3b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { ResultSubjectCreateInput, ResultSubjectUpdateInput } from "./validator";
+
+export const ResultSubjectService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { examSubject: { name: { contains: query.search, mode: "insensitive" } } },
+        { result: { remarks: { contains: query.search, mode: "insensitive" } } },
+      ];
+    }
+
+    const [resultSubjects, total] = await Promise.all([
+      prismaMain.resultSubject.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          examSubject: true,
+          gradeScale: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.resultSubject.count({ where: whereClause }),
+    ]);
+
+    return {
+      resultSubjects,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: ResultSubjectCreateInput, userId?: string) {
+    // Validate exam subject exists
+    const examSubject = await prismaMain.examSubject.findFirst({
+      where: { id: data.examSubjectId, deletedAt: null },
+    });
+
+    if (!examSubject) {
+      throw new CustomError("Exam subject not found or has been deleted", 404);
+    }
+
+    try {
+      const resultSubject = await prismaMain.resultSubject.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          examSubject: true,
+          gradeScale: true,
+        },
+      });
+      return resultSubject;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A result subject already exists for this exam subject", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const resultSubject = await prismaMain.resultSubject.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        examSubject: true,
+        gradeScale: true,
+      },
+    });
+
+    if (!resultSubject) {
+      throw new CustomError("Result subject not found", 404);
+    }
+
+    return resultSubject;
+  },
+
+  async update(id: string, data: ResultSubjectUpdateInput, userId?: string) {
+    const existing = await prismaMain.resultSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Result subject not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.resultSubject.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          examSubject: true,
+          gradeScale: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A result subject already exists for this exam subject", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.resultSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Result subject not found", 404);
+    }
+
+    await prismaMain.resultSubject.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-result-subject-validator-ts"></a>📄 `src/modules/result-subject/validator.ts`
+
+**File Info:**
+- **Size**: 926 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/result-subject/validator.ts`
+- **Relative Path**: `src/modules/result-subject`
+- **Created**: 2026-10-27 03:39:38 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:39:38 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8b5624e2d06b296e2411fbfeac178186`
+- **SHA256**: `7944d49882689871fbf7ba48ddb619f3a857588048c49465507ef0dc5dfd3440`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const resultSubjectCreateInputSchema = z.object({
+  examSubjectId: z.string().uuid("Invalid Exam Subject ID format"),
+  marksObtained: z.number().min(0, "Marks obtained must be >= 0"),
+  fullMarks: z.number().min(1, "Full marks must be > 0"),
+  creditHour: z.number().min(0, "Credit hour must be >= 0"),
+  gradePoint: z.number().min(0).max(4, "Grade point must be between 0 and 4"),
+});
+
+export const resultSubjectUpdateInputSchema = resultSubjectCreateInputSchema.partial();
+
+export type ResultSubjectCreateInput = z.infer<typeof resultSubjectCreateInputSchema>;
+export type ResultSubjectUpdateInput = z.infer<typeof resultSubjectUpdateInputSchema>;
+
+export const validateResultSubjectCreate = (data: unknown) => {
+  return resultSubjectCreateInputSchema.parse(data);
+};
+
+export const validateResultSubjectUpdate = (data: unknown) => {
+  return resultSubjectUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-component-controller-ts"></a>📄 `src/modules/salary-component/controller.ts`
+
+**File Info:**
+- **Size**: 3.06 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-component/controller.ts`
+- **Relative Path**: `src/modules/salary-component`
+- **Created**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f980c886602158ff9e0686391cee8ccc`
+- **SHA256**: `cdc4c4928c81cb1a48a8fd6a970a470272dba9970ada71aa7cae5c3637b652cb`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { SalaryComponentService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateSalaryComponentCreate, validateSalaryComponentUpdate } from "./validator";
+
+export const SalaryComponentController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await SalaryComponentService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary components fetched successfully!",
+        data: {
+          data: result.components,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateSalaryComponentCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const component = await SalaryComponentService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Salary component created successfully",
+        data: component,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const component = await SalaryComponentService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary component retrieved successfully",
+        data: component,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateSalaryComponentUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const component = await SalaryComponentService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary component updated successfully",
+        data: component,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await SalaryComponentService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary component deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-component-routes-ts"></a>📄 `src/modules/salary-component/routes.ts`
+
+**File Info:**
+- **Size**: 802 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-component/routes.ts`
+- **Relative Path**: `src/modules/salary-component`
+- **Created**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:37:41 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d467be3038a66ee24d6e55f7cbae3a6a`
+- **SHA256**: `109fbc9c90e53f46c28062cafb17a5b302e64145f9d63fb71eb2498799491aac`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { SalaryComponentController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryComponentController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryComponentController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryComponentController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryComponentController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryComponentController.delete);
+
+export const salaryComponentRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-salary-component-service-ts"></a>📄 `src/modules/salary-component/service.ts`
+
+**File Info:**
+- **Size**: 3.49 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-component/service.ts`
+- **Relative Path**: `src/modules/salary-component`
+- **Created**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d7db856d5f0d157162ebf183e2facce0`
+- **SHA256**: `c036075a7e3543adbd041a24b1aa3f47a70ed0aac647b2bfb73b6b7181fab26a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { SalaryComponentCreateInput, SalaryComponentUpdateInput } from "./validator";
+
+export const SalaryComponentService = {
+  async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [components, total] = await Promise.all([
+      prismaMain.salaryComponent.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          structureItems: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.salaryComponent.count({ where: whereClause }),
+    ]);
+
+    return {
+      components,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: SalaryComponentCreateInput, userId?: string) {
+    // Check duplicate code
+    const existing = await prismaMain.salaryComponent.findFirst({
+      where: { code: data.code, deletedAt: null },
+    });
+
+    if (existing) {
+      throw new CustomError("A salary component with this code already exists", 409);
+    }
+
+    try {
+      const component = await prismaMain.salaryComponent.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          structureItems: true,
+        },
+      });
+      return component;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A salary component with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const component = await prismaMain.salaryComponent.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        structureItems: true,
+      },
+    });
+
+    if (!component) {
+      throw new CustomError("Salary component not found", 404);
+    }
+
+    return component;
+  },
+
+  async update(id: string, data: SalaryComponentUpdateInput, userId?: string) {
+    const existing = await prismaMain.salaryComponent.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Salary component not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.salaryComponent.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          structureItems: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A salary component with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.salaryComponent.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Salary component not found", 404);
+    }
+
+    await prismaMain.salaryComponent.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-component-validator-ts"></a>📄 `src/modules/salary-component/validator.ts`
+
+**File Info:**
+- **Size**: 982 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-component/validator.ts`
+- **Relative Path**: `src/modules/salary-component`
+- **Created**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:42:18 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cbfbfee4c17f6dbd5d76c0b9d275decc`
+- **SHA256**: `d8308f3412d504c10b6216ec6827469d01db343a1eb6d96a46f42e4addaad4d4`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const salaryComponentCreateInputSchema = z.object({
+  code: z.string().min(1, "Component code is required").max(50, "Component code is too long"),
+  name: z.string().min(1, "Component name is required").max(100, "Component name is too long"),
+  isDeduction: z.boolean().default(false),
+  isEmployerContribution: z.boolean().default(false),
+  isTaxable: z.boolean().default(true),
+  isActive: z.boolean().default(true),
+});
+
+export const salaryComponentUpdateInputSchema = salaryComponentCreateInputSchema.partial();
+
+export type SalaryComponentCreateInput = z.infer<typeof salaryComponentCreateInputSchema>;
+export type SalaryComponentUpdateInput = z.infer<typeof salaryComponentUpdateInputSchema>;
+
+export const validateSalaryComponentCreate = (data: unknown) => {
+  return salaryComponentCreateInputSchema.parse(data);
+};
+
+export const validateSalaryComponentUpdate = (data: unknown) => {
+  return salaryComponentUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-structure-controller-ts"></a>📄 `src/modules/salary-structure/controller.ts`
+
+**File Info:**
+- **Size**: 3.06 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-structure/controller.ts`
+- **Relative Path**: `src/modules/salary-structure`
+- **Created**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b759da74825e9d3b7340dc54881d662e`
+- **SHA256**: `3663b3f5b91a81063a7951328982ed711a8f1f5954678a46d8ac78791c12af5e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { SalaryStructureService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateSalaryStructureCreate, validateSalaryStructureUpdate } from "./validator";
+
+export const SalaryStructureController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await SalaryStructureService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary structures fetched successfully!",
+        data: {
+          data: result.structures,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateSalaryStructureCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const structure = await SalaryStructureService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Salary structure created successfully",
+        data: structure,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const structure = await SalaryStructureService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary structure retrieved successfully",
+        data: structure,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateSalaryStructureUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const structure = await SalaryStructureService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary structure updated successfully",
+        data: structure,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await SalaryStructureService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary structure deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-structure-routes-ts"></a>📄 `src/modules/salary-structure/routes.ts`
+
+**File Info:**
+- **Size**: 802 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-structure/routes.ts`
+- **Relative Path**: `src/modules/salary-structure`
+- **Created**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:38:49 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `446877a6e302d55716692f44b1ca84d2`
+- **SHA256**: `8752969378ee06d615f23531e18eec7bebd6c6f5632c69f0519fbca41184c8df`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { SalaryStructureController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryStructureController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryStructureController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryStructureController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryStructureController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryStructureController.delete);
+
+export const salaryStructureRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-salary-structure-service-ts"></a>📄 `src/modules/salary-structure/service.ts`
 
 **File Info:**
 - **Size**: 3.37 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/categories/controller.ts`
-- **Relative Path**: `src/modules/categories`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `02a5e9e79aefbab44d0aa0f15734ebac`
-- **SHA256**: `e3200bbfe813521b773eb6740e709e9580178cbeedfdc60c5287d619a3fc9af6`
+- **Location**: `src/modules/salary-structure/service.ts`
+- **Relative Path**: `src/modules/salary-structure`
+- **Created**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `21fb50966ee4e56493775e730398b760`
+- **SHA256**: `ee54d101241badc27b2319c0555c437817920b42d8c5fdbda1441a246b43efd4`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
 import { prismaMain } from "@/lib/prismaClient";
-import { ErrorHandler } from "@/utils/error";
-import { calculateSkipAndTake, queryFilters } from "@/utils/queryFilters";
-import { ResponseHandler } from "@/utils/response";
-import { Request, Response } from "express";
-import { validateCategoryCreate } from "./validator";
-import { CategoryService } from "./service";
+import { CustomError } from "@/errors/CustomError";
+import { SalaryStructureCreateInput, SalaryStructureUpdateInput } from "./validator";
 
-const CategoryController = {
+export const SalaryStructureService = {
+  async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { remarks: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [structures, total] = await Promise.all([
+      prismaMain.salaryStructure.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          employee: true,
+          items: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.salaryStructure.count({ where: whereClause }),
+    ]);
+
+    return {
+      structures,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: SalaryStructureCreateInput, userId?: string) {
+    // Validate employee exists
+    const employee = await prismaMain.employee.findFirst({
+      where: { id: data.employeeId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found or has been deleted", 404);
+    }
+
+    try {
+      const structure = await prismaMain.salaryStructure.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          employee: true,
+          items: true,
+        },
+      });
+      return structure;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A salary structure already exists for this employee", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const structure = await prismaMain.salaryStructure.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        employee: true,
+        items: true,
+      },
+    });
+
+    if (!structure) {
+      throw new CustomError("Salary structure not found", 404);
+    }
+
+    return structure;
+  },
+
+  async update(id: string, data: SalaryStructureUpdateInput, userId?: string) {
+    const existing = await prismaMain.salaryStructure.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Salary structure not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.salaryStructure.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          employee: true,
+          items: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A salary structure already exists for this employee", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.salaryStructure.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Salary structure not found", 404);
+    }
+
+    await prismaMain.salaryStructure.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-structure-validator-ts"></a>📄 `src/modules/salary-structure/validator.ts`
+
+**File Info:**
+- **Size**: 1.05 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-structure/validator.ts`
+- **Relative Path**: `src/modules/salary-structure`
+- **Created**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:43:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3c229c5a83090122fe0859cdce8d19c7`
+- **SHA256**: `e4f83e6de8a070b734ecd45416889160f103b34f17409d8475baeca3fde49698`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const salaryStructureCreateInputSchema = z.object({
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+  basicSalary: z.number().min(0, "Basic salary must be >= 0"),
+  effectiveFromBs: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+    .optional(),
+  effectiveToBs: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
+    .optional()
+    .nullable(),
+  remarks: z.string().max(1000, "Remarks too long").optional().nullable(),
+});
+
+export const salaryStructureUpdateInputSchema = salaryStructureCreateInputSchema.partial();
+
+export type SalaryStructureCreateInput = z.infer<typeof salaryStructureCreateInputSchema>;
+export type SalaryStructureUpdateInput = z.infer<typeof salaryStructureUpdateInputSchema>;
+
+export const validateSalaryStructureCreate = (data: unknown) => {
+  return salaryStructureCreateInputSchema.parse(data);
+};
+
+export const validateSalaryStructureUpdate = (data: unknown) => {
+  return salaryStructureUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-salary-structure-item-controller-ts"></a>📄 `src/modules/salary-structure-item/controller.ts`
+
+**File Info:**
+- **Size**: 2.98 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/salary-structure-item/controller.ts`
+- **Relative Path**: `src/modules/salary-structure-item`
+- **Created**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `798217674c16de8babcd59a260eb6b9b`
+- **SHA256**: `6ac0dba733c563708b1e6aa3e07e30dabbbef7f437487a5615499554b0fb529c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { SalaryStructureItemService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateSalaryStructureItemCreate, validateSalaryStructureItemUpdate } from "./validator";
+
+export const SalaryStructureItemController = {
   index: async (req: Request, res: Response) => {
     try {
-      // Get the user info from the response locals
-      const context = res.locals.context;
-
-      // Get the user id from the context
-      const userId = context.userId;
-
-      // Get the request query for pagination and search
-      const { limit, page, search } = queryFilters(req);
-
+      const { page, limit, search } = queryFilters(req);
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
-      const searchTerm = typeof search === "string" ? search : "";
-
-      // Call the service
-      const result = await CategoryService.index(pageNumber, limitNumber, searchTerm, userId);
+      const result = await SalaryStructureItemService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Categories fetched successfully!",
+        message: "Salary structure items fetched successfully!",
         data: {
-          data: result.categories,
+          data: result.items,
           pagination: result.pagination,
         },
       });
     } catch (error) {
-      // Handle errors
       return ErrorHandler.handleError(res, error);
     }
   },
+
   create: async (req: Request, res: Response) => {
     try {
-      // Get the user info from the response locals
-      const context = res.locals.context;
+      const validatedData = validateSalaryStructureItemCreate(req.body);
+      const userId = res.locals.context?.userId;
 
-      // Get the user id from the context
-      const userId = context.userId;
+      const item = await SalaryStructureItemService.create(validatedData, userId);
 
-      // Validated the data from the User
-      const { name, shortName } = validateCategoryCreate(req.body);
-
-      // Call the service
-      const category = await CategoryService.create({ name, shortName }, userId);
-
-      // Return the response
       return ResponseHandler.success({
         res,
         code: 201,
-        message: "Category created successfully",
-        data: category,
+        message: "Salary structure item created successfully",
+        data: item,
       });
     } catch (error) {
-      // If error occurs, handle the error
       return ErrorHandler.handleError(res, error);
     }
   },
+
   retrieve: async (req: Request, res: Response) => {
     try {
-      // Get the parameter from the Url
-      const categoryId = req.params.id as string;
-
-      // Call the service
-      const category = await CategoryService.getById(categoryId);
+      const id = req.params.id as string;
+      const item = await SalaryStructureItemService.getById(id);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Category fetched successfully",
-        data: category,
+        message: "Salary structure item retrieved successfully",
+        data: item,
       });
     } catch (error) {
-      // If error occurs, handle the error
       return ErrorHandler.handleError(res, error);
     }
   },
+
   update: async (req: Request, res: Response) => {
     try {
-      // Get parameter from the URL
-      const categoryId = req.params.id as string;
+      const id = req.params.id as string;
+      const validatedData = validateSalaryStructureItemUpdate(req.body);
+      const userId = res.locals.context?.userId;
 
-      // Validate the data from the request body
-      const data = validateCategoryCreate(req.body);
-
-      // Call the service
-      const category = await CategoryService.update(categoryId, data);
+      const item = await SalaryStructureItemService.update(id, validatedData, userId);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Category updated successfully",
-        data: category,
+        message: "Salary structure item updated successfully",
+        data: item,
       });
     } catch (error) {
-      // If error occurs, handle the error
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await SalaryStructureItemService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Salary structure item deleted successfully",
+        data: null,
+      });
+    } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
   },
 };
 
-export default CategoryController;
 ```
 
 ---
 
-### <a id="📄-src-modules-categories-routes-ts"></a>📄 `src/modules/categories/routes.ts`
+### <a id="📄-src-modules-salary-structure-item-routes-ts"></a>📄 `src/modules/salary-structure-item/routes.ts`
 
 **File Info:**
-- **Size**: 465 B
+- **Size**: 830 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/categories/routes.ts`
-- **Relative Path**: `src/modules/categories`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `110540e2cd042129b44d5cd3aac32188`
-- **SHA256**: `cf00a007a355a459d1338df537b13ef550966085469d525a5ff44636be272657`
+- **Location**: `src/modules/salary-structure-item/routes.ts`
+- **Relative Path**: `src/modules/salary-structure-item`
+- **Created**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:39:00 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `fabb5c91461cf03de02fe73d105b6413`
+- **SHA256**: `7ae1648565194f2593fa8f8c9d688775debdaef524a66aee85d1a3f900456ae7`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
 import { Router } from "express";
-import CategoryController from "./controller";
+import { SalaryStructureItemController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
 
-const categoryRouter: Router = Router();
+const router = Router();
 
-categoryRouter.get("/", isUser, CategoryController.index);
-categoryRouter.post("/", isUser, CategoryController.create);
-categoryRouter.get("/:id", isUser, CategoryController.retrieve);
-categoryRouter.patch("/:id", isUser, CategoryController.update);
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryStructureItemController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryStructureItemController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryStructureItemController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryStructureItemController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryStructureItemController.delete);
 
-export default categoryRouter;
-
+export const salaryStructureItemRouter = router;
 ```
 
 ---
 
-### <a id="📄-src-modules-categories-service-ts"></a>📄 `src/modules/categories/service.ts`
+### <a id="📄-src-modules-salary-structure-item-service-ts"></a>📄 `src/modules/salary-structure-item/service.ts`
 
 **File Info:**
-- **Size**: 3.8 KB
+- **Size**: 3.79 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/categories/service.ts`
-- **Relative Path**: `src/modules/categories`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `eb794bca3f1694da515f0c334d893a33`
-- **SHA256**: `c8224286e2c7ab93f31525bf10a8be730c0d87bc4f777d8e2593d3fa9d788ada`
+- **Location**: `src/modules/salary-structure-item/service.ts`
+- **Relative Path**: `src/modules/salary-structure-item`
+- **Created**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f9011195cd6c3e6393896cdd5f04affa`
+- **SHA256**: `8c178ba298344f5037db2704746577fbf8908dcc4e095c862f17d01c4f6f1718`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
 import { prismaMain } from "@/lib/prismaClient";
-import { CustomError, ValidationError } from "@/errors/CustomError";
-import { T_CategoryCreateInput } from "./validator";
+import { CustomError } from "@/errors/CustomError";
+import { SalaryStructureItemCreateInput, SalaryStructureItemUpdateInput } from "./validator";
 
-export const CategoryService = {
-  index: async (
-    page: number,
-    limit: number,
-    search: string,
-    userId: string,
-  ) => {
+export const SalaryStructureItemService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
     const skip = (page - 1) * limit;
-    const searchTerm = typeof search === "string" ? search : "";
 
-    // Get all categories from the database
-    const categories = await prismaMain.category.findMany({
-      where: {
-        name: searchTerm
-          ? { contains: searchTerm, mode: "insensitive" }
-          : undefined,
-        userId,
-      },
-      skip,
-      take: limit,
-    });
+    const whereClause: any = {};
 
-    // Get the total count of categories without pagination
-    const totalCategories = await prismaMain.category.count({
-      where: {
-        name: searchTerm
-          ? { contains: searchTerm, mode: "insensitive" }
-          : undefined,
-        userId,
-      },
-    });
+    if (query.search) {
+      whereClause.OR = [
+        { component: { name: { contains: query.search, mode: "insensitive" } } },
+        { amount: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.salaryStructureItem.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          component: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.salaryStructureItem.count({ where: whereClause }),
+    ]);
 
     return {
-      categories,
+      items,
       pagination: {
         page,
         limit,
-        total: totalCategories,
+        total,
       },
     };
   },
 
-  create: async (data: T_CategoryCreateInput, userId: string) => {
-    // Validate if category with same name exists
-    const existingCategoryByName = await prismaMain.category.findFirst({
-      where: { name: data.name },
+  async create(data: SalaryStructureItemCreateInput, userId?: string) {
+    // Validate component exists and is not soft-deleted
+    const component = await prismaMain.salaryComponent.findFirst({
+      where: { id: data.componentId, deletedAt: null },
     });
-    if (existingCategoryByName)
-      throw new ValidationError({
-        name: "Category with the same name already exists",
-      });
 
-    // Validate if category with same shortName exists
-    const existingCategoryByShortName = await prismaMain.category.findFirst({
-      where: { shortName: data.shortName },
+    if (!component) {
+      throw new CustomError("Salary component not found or has been deleted", 404);
+    }
+
+    // Check duplicate [salaryStructureId, componentId] — find via parent structure
+    const structure = await prismaMain.salaryStructure.findFirst({
+      where: { id: data.componentId, deletedAt: null },
     });
-    if (existingCategoryByShortName)
-      throw new ValidationError({
-        shortName: "Category with the same short name already exists",
-      });
 
-    // Create the category
-    return await prismaMain.category.create({
-      data: {
-        name: data.name,
-        shortName: data.shortName,
-        userId,
+    if (!structure) {
+      throw new CustomError("Salary structure not found or has been deleted", 404);
+    }
+
+    try {
+      const item = await prismaMain.salaryStructureItem.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          component: true,
+        },
+      });
+      return item;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A salary structure item already exists for this component in this structure", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.salaryStructureItem.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        component: true,
       },
     });
+
+    if (!item) {
+      throw new CustomError("Salary structure item not found", 404);
+    }
+
+    return item;
   },
 
-  getById: async (id: string) => {
-    const category = await prismaMain.category.findUnique({
-      where: { id },
+  async update(id: string, data: SalaryStructureItemUpdateInput, userId?: string) {
+    const existing = await prismaMain.salaryStructureItem.findFirst({
+      where: { id, deletedAt: null },
     });
 
-    if (!category) throw new CustomError("Category not found", 404);
+    if (!existing) {
+      throw new CustomError("Salary structure item not found", 404);
+    }
 
-    return category;
+    try {
+      const updated = await prismaMain.salaryStructureItem.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          component: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A salary structure item already exists for this component in this structure", 409);
+      }
+      throw error;
+    }
   },
 
-  update: async (id: string, data: T_CategoryCreateInput) => {
-    // Get the existing category
-    const existingCategory = await prismaMain.category.findUnique({
-      where: { id },
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.salaryStructureItem.findFirst({
+      where: { id, deletedAt: null },
     });
 
-    if (!existingCategory) throw new CustomError("Category not found", 404);
+    if (!existing) {
+      throw new CustomError("Salary structure item not found", 404);
+    }
 
-    // Validate if category with same name exists
-    const existingCategoryByName = await prismaMain.category.findFirst({
-      where: { name: data.name },
-    });
-    if (
-      !!existingCategoryByName &&
-      existingCategory.id !== existingCategoryByName.id
-    )
-      throw new ValidationError({
-        name: "Category with the same name already exists",
-      });
-
-    // Validate if category with same shortName exists
-    const existingCategoryByShortName = await prismaMain.category.findFirst({
-      where: { shortName: data.shortName },
-    });
-    if (
-      !!existingCategoryByShortName &&
-      existingCategory.id !== existingCategoryByShortName.id
-    )
-      throw new ValidationError({
-        shortName: "Category with the same short name already exists",
-      });
-
-    // Update the category
-    return await prismaMain.category.update({
+    await prismaMain.salaryStructureItem.update({
       where: { id },
       data: {
-        name: data.name,
-        shortName: data.shortName,
+        deletedAt: new Date(),
+        updatedBy: userId,
       },
     });
-  },
 
-  getByName: async (name: string) => {
-    return await prismaMain.category.findFirst({
-      where: { name },
-    });
-  },
-
-  getByShortName: async (shortName: string) => {
-    return await prismaMain.category.findFirst({
-      where: { shortName },
-    });
+    return null;
   },
 };
 
@@ -127850,503 +143350,5703 @@ export const CategoryService = {
 
 ---
 
-### <a id="📄-src-modules-categories-validator-ts"></a>📄 `src/modules/categories/validator.ts`
+### <a id="📄-src-modules-salary-structure-item-validator-ts"></a>📄 `src/modules/salary-structure-item/validator.ts`
 
 **File Info:**
-- **Size**: 602 B
+- **Size**: 829 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/categories/validator.ts`
-- **Relative Path**: `src/modules/categories`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `e8a0ff12cb0a31ce1f82d1703b4583f5`
-- **SHA256**: `961d0d694ba065252a282074fc2687d54556c394ff17d4617550e086ef03a5de`
+- **Location**: `src/modules/salary-structure-item/validator.ts`
+- **Relative Path**: `src/modules/salary-structure-item`
+- **Created**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:44:37 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `75fea11b942e8e007474cf4e24e210f7`
+- **SHA256**: `a0e7f26de8fbfcefdecef59fe7f744c654ad4f20d54be3bfa0926aad9dceb1fc`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-import z from "zod";
+import { z } from "zod";
 
-export const categoryCreateInputSchema = z.object({
-  name: z
-    .string({ message: "Name is required" })
-    .min(1, "Name is required")
-    .max(100, "Name must be at most 100 characters"),
-  shortName: z
-    .string({ message: "Short name is required" })
-    .min(1, "Short name is required")
-    .max(3, "Short name must be at most 3 characters"),
+export const salaryStructureItemCreateInputSchema = z.object({
+  componentId: z.string().uuid("Invalid Salary Component ID format"),
+  amount: z.number().min(0, "Amount must be >= 0"),
+  isPercentOfBasic: z.boolean().default(false),
 });
 
-export type T_CategoryCreateInput = z.infer<typeof categoryCreateInputSchema>;
+export const salaryStructureItemUpdateInputSchema = salaryStructureItemCreateInputSchema.partial();
 
-export const validateCategoryCreate = (data: T_CategoryCreateInput) => {
-  return categoryCreateInputSchema.parse(data);
+export type SalaryStructureItemCreateInput = z.infer<typeof salaryStructureItemCreateInputSchema>;
+export type SalaryStructureItemUpdateInput = z.infer<typeof salaryStructureItemUpdateInputSchema>;
+
+export const validateSalaryStructureItemCreate = (data: unknown) => {
+  return salaryStructureItemCreateInputSchema.parse(data);
+};
+
+export const validateSalaryStructureItemUpdate = (data: unknown) => {
+  return salaryStructureItemUpdateInputSchema.parse(data);
 };
 
 ```
 
 ---
 
-### <a id="📄-src-modules-product-controller-ts"></a>📄 `src/modules/product/controller.ts`
+### <a id="📄-src-modules-setting-controller-ts"></a>📄 `src/modules/setting/controller.ts`
 
 **File Info:**
-- **Size**: 4.57 KB
+- **Size**: 3.2 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/product/controller.ts`
-- **Relative Path**: `src/modules/product`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `7dbceef9caa4950c9148cc9cc5c0bb29`
-- **SHA256**: `ed5d6a957a0dfdb5669fbcb039820a18de40adb71a2fa182bbceae6016eeb68d`
+- **Location**: `src/modules/setting/controller.ts`
+- **Relative Path**: `src/modules/setting`
+- **Created**: 2026-10-27 03:46:01 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:46:01 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `88d1c926b8c2dacc8493b687b5718ede`
+- **SHA256**: `8f53ef07ce89fae3e43611e30747dcdfc14f56be578728417471dc6828ac22a0`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-// product/controller.ts
+import { Request, Response } from "express";
+import { SettingService } from "./service";
+import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { ResponseHandler } from "@/utils/response";
-import { Request, Response } from "express";
-import { validateProductCreate } from "./validator";
-import { ProductService } from "./service";
+import { validateSettingCreate, validateSettingUpdate } from "./validator";
 
-const ProductController = {
+export const SettingController = {
   index: async (req: Request, res: Response) => {
     try {
-      // Get the user info from the response locals
-      const context = res.locals.context;
-
-      // Get the user id from the context
-      const userId = context.userId;
-
-      // Get the request query for pagination and search
-      const { limit, page, search } = queryFilters(req);
-
+      const { page, limit, search } = queryFilters(req);
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
-      const searchTerm = typeof search === "string" ? search : "";
+      const result = await SettingService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
 
-      // Call the service
-      const result = await ProductService.index(
-        pageNumber,
-        limitNumber,
-        searchTerm,
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Settings fetched successfully!",
+        data: {
+          data: result.settings,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateSettingCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const setting = await SettingService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Setting created successfully",
+        data: setting,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const setting = await SettingService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Setting retrieved successfully",
+        data: setting,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieveByKey: async (req: Request, res: Response) => {
+    try {
+      const key = req.params.key as string;
+      const setting = await SettingService.getByKey(key);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Setting retrieved successfully",
+        data: setting,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateSettingUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const setting = await SettingService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Setting updated successfully",
+        data: setting,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await SettingService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Setting deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-setting-routes-ts"></a>📄 `src/modules/setting/routes.ts`
+
+**File Info:**
+- **Size**: 825 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/setting/routes.ts`
+- **Relative Path**: `src/modules/setting`
+- **Created**: 2026-10-27 03:46:01 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:39:13 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `7da6864403ebd6bcd3a030800dbaf47d`
+- **SHA256**: `7e5ea1424cf6e08dda4389cb66fe5d21f21a3bbc5326aea422612332234a25e0`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { SettingController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  SettingController.index,
+);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), SettingController.create);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  SettingController.retrieve,
+);
+router.get(
+  "/key/:key",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  SettingController.retrieveByKey,
+);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN"), SettingController.update);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  SettingController.delete,
+);
+
+export const settingRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-setting-service-ts"></a>📄 `src/modules/setting/service.ts`
+
+**File Info:**
+- **Size**: 3.64 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/setting/service.ts`
+- **Relative Path**: `src/modules/setting`
+- **Created**: 2026-10-27 04:08:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 04:08:35 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6ceea97babf712556c6d194f9fb01efd`
+- **SHA256**: `a576b040f917182231dc2345e4acce1042a4a74cbf828dc63210d2fb1fe7a006`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { SettingCreateInput, SettingUpdateInput } from "./validator";
+
+export const SettingService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { key: { contains: query.search, mode: "insensitive" } },
+        { value: { contains: query.search, mode: "insensitive" } },
+        { description: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [settings, total] = await Promise.all([
+      prismaMain.setting.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.setting.count({ where: whereClause }),
+    ]);
+
+    return {
+      settings,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: SettingCreateInput, userId?: string) {
+    // Check duplicate key
+    const existing = await prismaMain.setting.findFirst({
+      where: { key: data.key, deletedAt: null },
+    });
+
+    if (existing) {
+      throw new CustomError("A setting with this key already exists", 409);
+    }
+
+    try {
+      const setting = await prismaMain.setting.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return setting;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A setting with this key already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const setting = await prismaMain.setting.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!setting) {
+      throw new CustomError("Setting not found", 404);
+    }
+
+    return setting;
+  },
+
+  async getByKey(key: string) {
+    const setting = await prismaMain.setting.findFirst({
+      where: { key, deletedAt: null },
+    });
+
+    if (!setting) {
+      throw new CustomError("Setting not found", 404);
+    }
+
+    return setting;
+  },
+
+  async update(id: string, data: SettingUpdateInput, userId?: string) {
+    const existing = await prismaMain.setting.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Setting not found", 404);
+    }
+
+    // If key is being updated, check for uniqueness
+    if (data.key && data.key !== existing.key) {
+      const duplicate = await prismaMain.setting.findFirst({
+        where: {
+          key: data.key,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+
+      if (duplicate) {
+        throw new CustomError("A setting with this key already exists", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.setting.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A setting with this key already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  delete: async (id: string, userId?: string) => {
+    const existing = await prismaMain.setting.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Setting not found", 404);
+    }
+
+    await prismaMain.setting.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-setting-validator-ts"></a>📄 `src/modules/setting/validator.ts`
+
+**File Info:**
+- **Size**: 794 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/setting/validator.ts`
+- **Relative Path**: `src/modules/setting`
+- **Created**: 2026-10-27 03:46:01 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:46:01 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f6c2157d54c3c67e1940fa8be640ff46`
+- **SHA256**: `bdfd7f05cd3c8623abd6792a3948cccf1e856ae5cb44d16b47b60eccca53f75f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const settingCreateInputSchema = z.object({
+  key: z.string().min(1, "Setting key is required").max(100, "Setting key is too long"),
+  value: z.string().min(1, "Setting value is required").max(5000, "Setting value is too long"),
+  description: z.string().max(500, "Description too long").optional().nullable(),
+});
+
+export const settingUpdateInputSchema = settingCreateInputSchema.partial();
+
+export type SettingCreateInput = z.infer<typeof settingCreateInputSchema>;
+export type SettingUpdateInput = z.infer<typeof settingUpdateInputSchema>;
+
+export const validateSettingCreate = (data: unknown) => {
+  return settingCreateInputSchema.parse(data);
+};
+
+export const validateSettingUpdate = (data: unknown) => {
+  return settingUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-staff-controller-ts"></a>📄 `src/modules/staff/controller.ts`
+
+**File Info:**
+- **Size**: 2.22 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/staff/controller.ts`
+- **Relative Path**: `src/modules/staff`
+- **Created**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b58931a19dc8890e04b7beabcc6dab93`
+- **SHA256**: `baf9ba099c83dbc2375b03c4b789e14e8e472a5c8d9b901ab67b4ced4c5769ac`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { StaffService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateStaffCreate } from "./validator";
+
+export const StaffController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await StaffService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Staff fetched successfully!",
+        data: {
+          data: result.staffs,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStaffCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const staff = await StaffService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Staff created successfully",
+        data: staff,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const staff = await StaffService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Staff retrieved successfully",
+        data: staff,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await StaffService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Staff deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-staff-routes-ts"></a>📄 `src/modules/staff/routes.ts`
+
+**File Info:**
+- **Size**: 583 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/staff/routes.ts`
+- **Relative Path**: `src/modules/staff`
+- **Created**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:39:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5c8b833058b222a6d6e7de803275536a`
+- **SHA256**: `63cd0b88d4c8d7bb7ad3e0212d1aa856cc7de38d3e098d54822337839387fe5f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { StaffController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), StaffController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), StaffController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), StaffController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), StaffController.delete);
+
+export const staffRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-staff-service-ts"></a>📄 `src/modules/staff/service.ts`
+
+**File Info:**
+- **Size**: 2.65 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/staff/service.ts`
+- **Relative Path**: `src/modules/staff`
+- **Created**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b2a5e3ef964ecbdbaa3a68395be098ba`
+- **SHA256**: `31d2e43e25d0c9464b88887fe1e23afaf9f2bf6fc2dbd6aef4a96e04ea299183`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { StaffCreateInput } from "./validator";
+
+export const StaffService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { employee: { firstName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { lastName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { employeeCode: { contains: query.search, mode: "insensitive" } } },
+      ];
+    }
+
+    const [staffs, total] = await Promise.all([
+      prismaMain.staff.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          employee: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.staff.count({ where: whereClause }),
+    ]);
+
+    return {
+      staffs,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: StaffCreateInput, userId?: string) {
+    // Validate employee exists and is not soft-deleted
+    const employee = await prismaMain.employee.findFirst({
+      where: { id: data.employeeId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found or has been deleted", 404);
+    }
+
+    try {
+      const staff = await prismaMain.staff.create({
+        data: {
+          ...data,
+          employeeId: data.employeeId,
+          createdBy: userId,
+        },
+        include: {
+          employee: true,
+        },
+      });
+      return staff;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee with this ID is already assigned as Staff", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const staff = await prismaMain.staff.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        employee: true,
+      },
+    });
+
+    if (!staff) {
+      throw new CustomError("Staff not found", 404);
+    }
+
+    return staff;
+  },
+
+  async delete(id: string, userId?: string) {
+    const staff = await prismaMain.staff.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!staff) {
+      throw new CustomError("Staff not found", 404);
+    }
+
+    await prismaMain.staff.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-staff-validator-ts"></a>📄 `src/modules/staff/validator.ts`
+
+**File Info:**
+- **Size**: 556 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/staff/validator.ts`
+- **Relative Path**: `src/modules/staff`
+- **Created**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:15:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2de7efc77c72094b3f2bf52c633f191e`
+- **SHA256**: `fb797f70ea4a64115cac6cb57622660ebd347465a5e998e66cd8253645522f0e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const staffCreateInputSchema = z.object({
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+  department: z.string().max(100, "Department is too long").optional().nullable(),
+  createdBy: z.string().uuid("Invalid Creator User ID format").optional().nullable(),
+});
+
+export type StaffCreateInput = z.infer<typeof staffCreateInputSchema>;
+export type StaffUpdateInput = z.infer<typeof staffCreateInputSchema>;
+
+export const validateStaffCreate = (data: unknown) => {
+  return staffCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-student-controller-ts"></a>📄 `src/modules/student/controller.ts`
+
+**File Info:**
+- **Size**: 2.97 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student/controller.ts`
+- **Relative Path**: `src/modules/student`
+- **Created**: 2026-10-27 03:18:19 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:18:19 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `fa5ae23db4c15970479eb7bc8f9838c8`
+- **SHA256**: `487e58ee30d51a67c04abfbe35d8dcd8b391edf1d93fd4a2020493826be5a315`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { StudentService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateStudentCreate, validateStudentUpdate } from "./validator";
+
+export const StudentController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const status = req.query.status as string | undefined;
+      const approvalStatus = req.query.approvalStatus as string | undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await StudentService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        status,
+        approvalStatus,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Students fetched successfully!",
+        data: {
+          data: result.students,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const student = await StudentService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Student created successfully",
+        data: student,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const student = await StudentService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student retrieved successfully",
+        data: student,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateStudentUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const student = await StudentService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student updated successfully",
+        data: student,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await StudentService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-student-routes-ts"></a>📄 `src/modules/student/routes.ts`
+
+**File Info:**
+- **Size**: 771 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student/routes.ts`
+- **Relative Path**: `src/modules/student`
+- **Created**: 2026-10-27 03:18:19 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:40:02 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `209d2252fb845047c43367d0a04629f6`
+- **SHA256**: `c574a2bfeb4f2a439158a2967a3e6729bbb9317a0968f8e7e342cfe190146e3e`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { StudentController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"), StudentController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "STAFF"), StudentController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"), StudentController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "STAFF"), StudentController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "STAFF"), StudentController.delete);
+
+export const studentRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-student-service-ts"></a>📄 `src/modules/student/service.ts`
+
+**File Info:**
+- **Size**: 4.81 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student/service.ts`
+- **Relative Path**: `src/modules/student`
+- **Created**: 2026-10-27 03:17:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:17:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `efad2164e9143efbbb8298422ef8911c`
+- **SHA256**: `5ce7c57f390cdf26caa5a77d0a4812507f024ef14ea6b537ed558c0dd862495a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { StudentCreateInput, StudentUpdateInput } from "./validator";
+
+export const StudentService = {
+  async index(query: { page?: number; limit?: number; search?: string; status?: string; approvalStatus?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { firstName: { contains: query.search, mode: "insensitive" } },
+        { lastName: { contains: query.search, mode: "insensitive" } },
+        { universityRegNo: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.status) {
+      whereClause.status = query.status;
+    }
+
+    if (query.approvalStatus) {
+      whereClause.approvalStatus = query.approvalStatus;
+    }
+
+    const [students, total] = await Promise.all([
+      prismaMain.student.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          batch: true,
+          guardians: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.student.count({ where: whereClause }),
+    ]);
+
+    return {
+      students,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: StudentCreateInput, userId?: string) {
+    // Validate batch exists and is not soft-deleted
+    const batch = await prismaMain.batch.findFirst({
+      where: { id: data.batchId, deletedAt: null },
+    });
+
+    if (!batch) {
+      throw new CustomError("Batch not found or has been deleted", 404);
+    }
+
+    // Check duplicate universityRegNo
+    const existingRegNo = await prismaMain.student.findFirst({
+      where: { universityRegNo: data.universityRegNo, deletedAt: null },
+    });
+
+    if (existingRegNo) {
+      throw new CustomError("A student with this university registration number already exists", 409);
+    }
+
+    // Validate userId if provided
+    if (data.userId) {
+      const user = await prismaMain.user.findFirst({
+        where: { id: data.userId, deletedAt: null },
+      });
+      if (!user) {
+        throw new CustomError("User not found or has been deleted", 404);
+      }
+    } else {
+      // If no userId provided, reject creation of non-PENDING students
+      if (data.approvalStatus !== "APPROVED") {
+        throw new CustomError("User ID is required for students that are not yet approved", 400);
+      }
+    }
+
+    try {
+      const student = await prismaMain.student.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          batch: true,
+          guardians: true,
+        },
+      });
+      return student;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A student with this university registration number already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const student = await prismaMain.student.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        batch: true,
+        guardians: true,
+        fees: true,
+        payments: true,
+      },
+    });
+
+    if (!student) {
+      throw new CustomError("Student not found", 404);
+    }
+
+    return student;
+  },
+
+  async update(id: string, data: StudentUpdateInput, userId?: string) {
+    const existing = await prismaMain.student.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Student not found", 404);
+    }
+
+    // Validate batch if changed
+    if (data.batchId && data.batchId !== existing.batchId) {
+      const batch = await prismaMain.batch.findFirst({
+        where: { id: data.batchId, deletedAt: null },
+      });
+      if (!batch) {
+        throw new CustomError("Batch not found or has been deleted", 404);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.student.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          batch: true,
+          guardians: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A student with this university registration number already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.student.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Student not found", 404);
+    }
+
+    await prismaMain.student.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-student-validator-ts"></a>📄 `src/modules/student/validator.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student/validator.ts`
+- **Relative Path**: `src/modules/student`
+- **Created**: 2026-10-27 03:17:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:17:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `11dcb7675788bdc8a6232e574d99ac54`
+- **SHA256**: `f097241403da9dc94892faba9902a49a42e93f972f28a741415004d5641446d6`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const studentCreateInputSchema = z.object({
+  userId: z.string().uuid("Invalid User ID format").optional().nullable(),
+  universityRegNo: z.string().min(1, "University registration number is required").max(50, "University registration number is too long"),
+  firstName: z.string().min(1, "First name is required").max(100, "First name is too long"),
+  middleName: z.string().max(100, "Middle name is too long").optional().nullable(),
+  lastName: z.string().min(1, "Last name is required").max(100, "Last name is too long"),
+  gender: z.enum(["MALE", "FEMALE", "OTHERS"], {
+    errorMap: () => ({ message: "Gender must be MALE, FEMALE, or OTHERS" }),
+  }),
+  dobBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+  phone: z.string().max(20, "Phone number is too long").optional().nullable(),
+  email: z.string().email("Invalid email format").max(255, "Email is too long").optional().nullable(),
+  permanentAddress: z.string().optional().nullable(),
+  temporaryAddress: z.string().optional().nullable(),
+  photoUrl: z.string().url("Invalid URL format").optional().nullable(),
+  batchId: z.string().uuid("Invalid Batch ID format"),
+  admissionDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+  status: z.enum(["ACTIVE", "GRADUATED", "DROPPED", "SUSPENDED"], {
+    errorMap: () => ({ message: "Status must be ACTIVE, GRADUATED, DROPPED, or SUSPENDED" }),
+  }).default("ACTIVE"),
+  approvalStatus: z.enum(["PENDING", "APPROVED", "REJECTED"], {
+    errorMap: () => ({ message: "Approval status must be PENDING, APPROVED, or REJECTED" }),
+  }).default("PENDING"),
+  rejectionReason: z.string().max(1000, "Rejection reason is too long").optional().nullable(),
+  createdBy: z.string().uuid("Invalid Creator User ID format").optional().nullable(),
+});
+
+export const studentUpdateInputSchema = studentCreateInputSchema.partial();
+
+export type StudentCreateInput = z.infer<typeof studentCreateInputSchema>;
+export type StudentUpdateInput = z.infer<typeof studentUpdateInputSchema>;
+
+export const validateStudentCreate = (data: unknown) => {
+  return studentCreateInputSchema.parse(data);
+};
+
+export const validateStudentUpdate = (data: unknown) => {
+  return studentUpdateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-student-attendance-controller-ts"></a>📄 `src/modules/student-attendance/controller.ts`
+
+**File Info:**
+- **Size**: 4.7 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-attendance/controller.ts`
+- **Relative Path**: `src/modules/student-attendance`
+- **Created**: 2026-10-31 13:16:02 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:18:15 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `bce6519fa3a2d6e99b2da9f7e641f2a8`
+- **SHA256**: `b2ec9697fbd0e6a863500824bff4ab2c711b4a3374325d99ff30e0cdb7f5af6a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateStudentAttendanceBulk,
+  validateStudentAttendanceCreate,
+  validateStudentAttendanceUpdate,
+} from "./validator";
+import { StudentAttendanceService } from "./service";
+
+const getActor = (res: Response) => ({
+  userId: res.locals.context?.userId as string | undefined,
+  role: res.locals.context?.role as string | undefined,
+});
+
+const asString = (value: unknown) =>
+  typeof value === "string" && value.length > 0 ? value : undefined;
+
+export const StudentAttendanceController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await StudentAttendanceService.index(
+        {
+          page: pageNumber,
+          limit: limitNumber,
+          search,
+          sessionId: asString(req.query.sessionId),
+          studentId: asString(req.query.studentId),
+          statusId: asString(req.query.statusId),
+          batchId: asString(req.query.batchId),
+          dateBs: asString(req.query.dateBs),
+        },
+        getActor(res),
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student attendances fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentAttendanceCreate(req.body);
+
+      const record = await StudentAttendanceService.create(
+        validatedData,
+        getActor(res),
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Student attendance created successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  bulkMark: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentAttendanceBulk(req.body);
+
+      const records = await StudentAttendanceService.bulkMark(
+        validatedData,
+        getActor(res),
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student attendance marked successfully",
+        data: records,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const record = await StudentAttendanceService.getById(id, getActor(res));
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student attendance retrieved successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  summary: async (req: Request, res: Response) => {
+    try {
+      const studentId = req.params.studentId as string;
+
+      const result = await StudentAttendanceService.summary(
+        studentId,
+        { fromBs: asString(req.query.fromBs), toBs: asString(req.query.toBs) },
+        getActor(res),
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student attendance summary retrieved successfully",
+        data: result,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateStudentAttendanceUpdate(req.body);
+
+      const record = await StudentAttendanceService.update(
+        id,
+        validatedData,
+        getActor(res),
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student attendance updated successfully",
+        data: record,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+
+      await StudentAttendanceService.delete(id, getActor(res));
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student attendance deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-attendance-routes-ts"></a>📄 `src/modules/student-attendance/routes.ts`
+
+**File Info:**
+- **Size**: 1.13 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-attendance/routes.ts`
+- **Relative Path**: `src/modules/student-attendance`
+- **Created**: 2026-10-31 13:16:30 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:16:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c893eacd1005e25f995bc3e3f278e1d5`
+- **SHA256**: `b27f4686d3cfeec29d693dc9364156d44d9c2649a320abc4383efb648af8865a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { StudentAttendanceController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+// Students can read only their own records (enforced in the service)
+const canRead = isAuthorizedTo(
+  "ADMIN",
+  "PRINCIPAL",
+  "TEACHER",
+  "STAFF",
+  "STUDENT",
+);
+// Teachers can write only to their own sessions (enforced in the service)
+const canWrite = isAuthorizedTo("ADMIN", "TEACHER");
+
+router.get("/", isUser, canRead, StudentAttendanceController.index);
+router.post("/", isUser, canWrite, StudentAttendanceController.create);
+router.post("/bulk", isUser, canWrite, StudentAttendanceController.bulkMark);
+router.get(
+  "/student/:studentId/summary",
+  isUser,
+  canRead,
+  StudentAttendanceController.summary,
+);
+router.get("/:id", isUser, canRead, StudentAttendanceController.retrieve);
+router.patch("/:id", isUser, canWrite, StudentAttendanceController.update);
+router.delete("/:id", isUser, canWrite, StudentAttendanceController.delete);
+
+export const studentAttendanceRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-student-attendance-service-ts"></a>📄 `src/modules/student-attendance/service.ts`
+
+**File Info:**
+- **Size**: 10.58 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-attendance/service.ts`
+- **Relative Path**: `src/modules/student-attendance`
+- **Created**: 2026-10-31 13:16:40 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:17:43 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3f7344e02bcacedfadb9bb98ca805bd1`
+- **SHA256**: `a131ac629eed85148a7a04ccebe6e2434591ebd062d9c7f7c6aee5774c0cd357`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import { StudentAttendanceBulkInput, StudentAttendanceCreateInput, StudentAttendanceUpdateInput } from "./validator";
+
+
+type Actor = { userId?: string; role?: string };
+
+const studentSelect = {
+  id: true,
+  universityRegNo: true,
+  firstName: true,
+  middleName: true,
+  lastName: true,
+  batchId: true,
+};
+
+const defaultInclude = {
+  session: true,
+  student: { select: studentSelect },
+  status: true,
+};
+
+// A teacher may only touch sessions that belong to them
+async function getTeacherIdForUser(userId?: string) {
+  if (!userId) return null;
+  const teacher = await prismaMain.teacher.findFirst({
+    where: { deletedAt: null, employee: { userId, deletedAt: null } },
+    select: { id: true },
+  });
+  return teacher?.id ?? null;
+}
+
+// A student may only read their own records
+async function getStudentIdForUser(userId?: string) {
+  if (!userId) return null;
+  const student = await prismaMain.student.findFirst({
+    where: { userId, deletedAt: null },
+    select: { id: true },
+  });
+  return student?.id ?? null;
+}
+
+// Loads the session, checks it is open and (for teachers) owned by the caller
+async function assertSessionWritable(sessionId: string, actor: Actor) {
+  const session = await prismaMain.attendanceSession.findFirst({
+    where: { id: sessionId, deletedAt: null },
+  });
+
+  if (!session) {
+    throw new CustomError("Attendance session not found", 404);
+  }
+
+  if (session.isLocked) {
+    throw new CustomError(
+      "This attendance session is locked and cannot be changed",
+      423,
+    );
+  }
+
+  if (actor.role === "TEACHER") {
+    const teacherId = await getTeacherIdForUser(actor.userId);
+    if (!teacherId || teacherId !== session.teacherId) {
+      throw new CustomError(
+        "You can only manage attendance for your own sessions",
+        403,
+      );
+    }
+  }
+
+  return session;
+}
+
+async function assertStatusExists(statusId: string) {
+  const status = await prismaMain.attendanceStatus.findFirst({
+    where: { id: statusId, isActive: true, deletedAt: null },
+    select: { id: true },
+  });
+
+  if (!status) {
+    throw new CustomError("Attendance status not found or inactive", 404);
+  }
+}
+
+async function assertStudentsExist(studentIds: string[]) {
+  const unique = [...new Set(studentIds)];
+  const count = await prismaMain.student.count({
+    where: { id: { in: unique }, deletedAt: null },
+  });
+
+  if (count !== unique.length) {
+    throw new CustomError("One or more students were not found", 404);
+  }
+}
+
+export const StudentAttendanceService = {
+  async index(
+    query: {
+      page?: number;
+      limit?: number;
+      search?: string;
+      sessionId?: string;
+      studentId?: string;
+      statusId?: string;
+      batchId?: string;
+      dateBs?: string;
+    },
+    actor: Actor,
+  ) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10;
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = { deletedAt: null };
+
+    if (query.sessionId) whereClause.sessionId = query.sessionId;
+    if (query.statusId) whereClause.statusId = query.statusId;
+    if (query.dateBs)
+      whereClause.session = { dateBs: query.dateBs, deletedAt: null };
+
+    // Students are always limited to their own attendance
+    if (actor.role === "STUDENT") {
+      const ownStudentId = await getStudentIdForUser(actor.userId);
+      if (!ownStudentId)
+        return { data: [], pagination: { page, limit, total: 0 } };
+      whereClause.studentId = ownStudentId;
+    } else if (query.studentId) {
+      whereClause.studentId = query.studentId;
+    }
+
+    const studentWhere: any = {};
+    if (query.batchId) studentWhere.batchId = query.batchId;
+    if (query.search) {
+      studentWhere.OR = [
+        { firstName: { contains: query.search, mode: "insensitive" } },
+        { lastName: { contains: query.search, mode: "insensitive" } },
+        { universityRegNo: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+    if (Object.keys(studentWhere).length > 0) {
+      whereClause.student = studentWhere;
+    }
+
+    const [records, total] = await Promise.all([
+      prismaMain.studentAttendance.findMany({
+        where: whereClause,
+        skip,
+        take,
+        include: defaultInclude,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.studentAttendance.count({ where: whereClause }),
+    ]);
+
+    return { data: records, pagination: { page, limit, total } };
+  },
+
+  async create(data: StudentAttendanceCreateInput, actor: Actor) {
+    await assertSessionWritable(data.sessionId, actor);
+    await assertStatusExists(data.statusId);
+    await assertStudentsExist([data.studentId]);
+
+    const existing = await prismaMain.studentAttendance.findFirst({
+      where: { sessionId: data.sessionId, studentId: data.studentId },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        "Attendance is already marked for this student in this session",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.studentAttendance.create({
+        data: { ...data, createdBy: actor.userId },
+        include: defaultInclude,
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "Attendance is already marked for this student in this session",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  // Creates or updates every record for the session in one transaction
+  async bulkMark(data: StudentAttendanceBulkInput, actor: Actor) {
+    await assertSessionWritable(data.sessionId, actor);
+
+    const studentIds = data.records.map((r) => r.studentId);
+    if (new Set(studentIds).size !== studentIds.length) {
+      throw new CustomError("Duplicate students found in the request", 400);
+    }
+
+    await assertStudentsExist(studentIds);
+
+    const statusIds = [...new Set(data.records.map((r) => r.statusId))];
+    const validStatuses = await prismaMain.attendanceStatus.count({
+      where: { id: { in: statusIds }, isActive: true, deletedAt: null },
+    });
+    if (validStatuses !== statusIds.length) {
+      throw new CustomError(
+        "One or more attendance statuses were not found or are inactive",
+        404,
+      );
+    }
+
+    await prismaMain.$transaction(
+      data.records.map((record) =>
+        prismaMain.studentAttendance.upsert({
+          where: {
+            sessionId_studentId: {
+              sessionId: data.sessionId,
+              studentId: record.studentId,
+            },
+          },
+          create: {
+            sessionId: data.sessionId,
+            studentId: record.studentId,
+            statusId: record.statusId,
+            remarks: record.remarks ?? null,
+            createdBy: actor.userId,
+          },
+          update: {
+            statusId: record.statusId,
+            remarks: record.remarks ?? null,
+            deletedAt: null,
+            updatedBy: actor.userId,
+          },
+        }),
+      ),
+    );
+
+    return prismaMain.studentAttendance.findMany({
+      where: { sessionId: data.sessionId, deletedAt: null },
+      include: defaultInclude,
+      orderBy: { createdAt: "asc" },
+    });
+  },
+
+  async getById(id: string, actor: Actor) {
+    const record = await prismaMain.studentAttendance.findFirst({
+      where: { id, deletedAt: null },
+      include: defaultInclude,
+    });
+
+    if (!record) {
+      throw new CustomError("Student attendance not found", 404);
+    }
+
+    if (actor.role === "STUDENT") {
+      const ownStudentId = await getStudentIdForUser(actor.userId);
+      if (record.studentId !== ownStudentId) {
+        throw new CustomError("Student attendance not found", 404);
+      }
+    }
+
+    return record;
+  },
+
+  // Totals per status for one student (optionally limited to a date range in BS, YYYY-MM-DD)
+  async summary(
+    studentId: string,
+    range: { fromBs?: string; toBs?: string },
+    actor: Actor,
+  ) {
+    if (actor.role === "STUDENT") {
+      const ownStudentId = await getStudentIdForUser(actor.userId);
+      if (studentId !== ownStudentId) {
+        throw new CustomError("Student not found", 404);
+      }
+    }
+
+    const student = await prismaMain.student.findFirst({
+      where: { id: studentId, deletedAt: null },
+      select: studentSelect,
+    });
+
+    if (!student) {
+      throw new CustomError("Student not found", 404);
+    }
+
+    const where: any = { studentId, deletedAt: null };
+    if (range.fromBs || range.toBs) {
+      where.session = {
+        dateBs: {
+          ...(range.fromBs ? { gte: range.fromBs } : {}),
+          ...(range.toBs ? { lte: range.toBs } : {}),
+        },
+      };
+    }
+
+    const [grouped, statuses] = await Promise.all([
+      prismaMain.studentAttendance.groupBy({
+        by: ["statusId"],
+        where,
+        _count: { _all: true },
+      }),
+      prismaMain.attendanceStatus.findMany({ where: { deletedAt: null } }),
+    ]);
+
+    const byStatus = grouped.map((g) => {
+      const status = statuses.find((s) => s.id === g.statusId);
+      return {
+        statusId: g.statusId,
+        code: status?.code ?? null,
+        name: status?.name ?? null,
+        count: g._count._all,
+      };
+    });
+
+    const totalSessions = byStatus.reduce((sum, s) => sum + s.count, 0);
+
+    return { student, totalSessions, byStatus };
+  },
+
+  async update(id: string, data: StudentAttendanceUpdateInput, actor: Actor) {
+    const record = await prismaMain.studentAttendance.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!record) {
+      throw new CustomError("Student attendance not found", 404);
+    }
+
+    await assertSessionWritable(record.sessionId, actor);
+
+    if (data.statusId) {
+      await assertStatusExists(data.statusId);
+    }
+
+    return prismaMain.studentAttendance.update({
+      where: { id },
+      data: { ...data, updatedBy: actor.userId },
+      include: defaultInclude,
+    });
+  },
+
+  async delete(id: string, actor: Actor) {
+    const record = await prismaMain.studentAttendance.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!record) {
+      throw new CustomError("Student attendance not found", 404);
+    }
+
+    await assertSessionWritable(record.sessionId, actor);
+
+    await prismaMain.studentAttendance.update({
+      where: { id },
+      data: { deletedAt: new Date(), updatedBy: actor.userId },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-attendance-validator-ts"></a>📄 `src/modules/student-attendance/validator.ts`
+
+**File Info:**
+- **Size**: 2.04 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-attendance/validator.ts`
+- **Relative Path**: `src/modules/student-attendance`
+- **Created**: 2026-10-31 13:17:10 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:17:11 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a5f73651f9ef9c551c7f47645746b63c`
+- **SHA256**: `8b52d1ea512ec8a55a056ae488f1ddf5946a095df8f527bea7c633b5678f5b47`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const studentAttendanceCreateInputSchema = z.object({
+  sessionId: z.string().uuid("Invalid Session ID format"),
+  studentId: z.string().uuid("Invalid Student ID format"),
+  statusId: z.string().uuid("Invalid Attendance Status ID format"),
+  remarks: z
+    .string()
+    .trim()
+    .max(500, "Remarks are too long")
+    .optional()
+    .nullable(),
+});
+
+// Only the status and remarks can change after the record is created
+export const studentAttendanceUpdateInputSchema = z.object({
+  statusId: z.string().uuid("Invalid Attendance Status ID format").optional(),
+  remarks: z
+    .string()
+    .trim()
+    .max(500, "Remarks are too long")
+    .optional()
+    .nullable(),
+});
+
+// Mark a whole class for one session in a single request
+export const studentAttendanceBulkInputSchema = z.object({
+  sessionId: z.string().uuid("Invalid Session ID format"),
+  records: z
+    .array(
+      z.object({
+        studentId: z.string().uuid("Invalid Student ID format"),
+        statusId: z.string().uuid("Invalid Attendance Status ID format"),
+        remarks: z
+          .string()
+          .trim()
+          .max(500, "Remarks are too long")
+          .optional()
+          .nullable(),
+      }),
+    )
+    .min(1, "At least one attendance record is required")
+    .max(500, "Too many records in one request"),
+});
+
+export type StudentAttendanceCreateInput = z.infer<
+  typeof studentAttendanceCreateInputSchema
+>;
+export type StudentAttendanceUpdateInput = z.infer<
+  typeof studentAttendanceUpdateInputSchema
+>;
+export type StudentAttendanceBulkInput = z.infer<
+  typeof studentAttendanceBulkInputSchema
+>;
+
+export const validateStudentAttendanceCreate = (data: unknown) => {
+  return studentAttendanceCreateInputSchema.parse(data);
+};
+
+export const validateStudentAttendanceUpdate = (data: unknown) => {
+  return studentAttendanceUpdateInputSchema.parse(data);
+};
+
+export const validateStudentAttendanceBulk = (data: unknown) => {
+  return studentAttendanceBulkInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-controller-ts"></a>📄 `src/modules/student-fee/controller.ts`
+
+**File Info:**
+- **Size**: 2.25 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee/controller.ts`
+- **Relative Path**: `src/modules/student-fee`
+- **Created**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ed1ab7085de6664c3ff56eab5672c49f`
+- **SHA256**: `00786e03eb9838ecc1ad7c09d6696c3d2b361a3057c7e828f12082612b6ffa38`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { StudentFeeService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateStudentFeeCreate } from "./validator";
+
+export const StudentFeeController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await StudentFeeService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fees fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentFeeCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const fee = await StudentFeeService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Student fee created successfully",
+        data: fee,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const fee = await StudentFeeService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fee retrieved successfully",
+        data: fee,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await StudentFeeService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fee deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-routes-ts"></a>📄 `src/modules/student-fee/routes.ts`
+
+**File Info:**
+- **Size**: 687 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee/routes.ts`
+- **Relative Path**: `src/modules/student-fee`
+- **Created**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:39:52 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `19ad7b5062e73c9da361b3c0654422ed`
+- **SHA256**: `472c954c1197c89d73f2d4765c7c46e3450fec859fa0f19202aa5015337e4e10`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { StudentFeeController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), StudentFeeController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), StudentFeeController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeController.delete);
+
+export const studentFeeRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-service-ts"></a>📄 `src/modules/student-fee/service.ts`
+
+**File Info:**
+- **Size**: 2.25 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee/service.ts`
+- **Relative Path**: `src/modules/student-fee`
+- **Created**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `721183fc2fc666b9fabdb441b3a62266`
+- **SHA256**: `87ed76690a9530a575f80b65bd767711cd650eaae9f4a14b34874db44470afb6`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { StudentFeeCreateInput } from "./validator";
+
+export const StudentFeeService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { studentId: { contains: query.search, mode: "insensitive" } },
+        { feeStructureId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [fees, total] = await Promise.all([
+      prismaMain.studentFee.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          items: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.studentFee.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: fees,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: StudentFeeCreateInput, userId?: string) {
+    try {
+      const fee = await prismaMain.studentFee.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          items: true,
+        },
+      });
+      return fee;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A student fee already exists for this student and structure", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const fee = await prismaMain.studentFee.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        items: true,
+      },
+    });
+
+    if (!fee) {
+      throw new CustomError("Student fee not found", 404);
+    }
+
+    return fee;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.studentFee.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Student fee not found", 404);
+    }
+
+    await prismaMain.studentFee.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-validator-ts"></a>📄 `src/modules/student-fee/validator.ts`
+
+**File Info:**
+- **Size**: 490 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee/validator.ts`
+- **Relative Path**: `src/modules/student-fee`
+- **Created**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:31 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `26995ca431b744e3045cd67b00af2738`
+- **SHA256**: `50b60ed6332dcb2a409f77ff56cbfefe08b3c6e1655039931b211eef809c392d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const studentFeeCreateInputSchema = z.object({
+  studentId: z.string().uuid("Invalid Student ID format"),
+  feeStructureId: z.string().uuid("Invalid Fee Structure ID format"),
+});
+
+export type StudentFeeCreateInput = z.infer<typeof studentFeeCreateInputSchema>;
+export type StudentFeeUpdateInput = z.infer<typeof studentFeeCreateInputSchema>;
+
+export const validateStudentFeeCreate = (data: unknown) => {
+  return studentFeeCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-item-controller-ts"></a>📄 `src/modules/student-fee-item/controller.ts`
+
+**File Info:**
+- **Size**: 2.3 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee-item/controller.ts`
+- **Relative Path**: `src/modules/student-fee-item`
+- **Created**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8e8ab6f726609ab6398cc10fc9b53e89`
+- **SHA256**: `74d54122e2c0c72a8fd0b74557bf97d76e087d94b03801001c72a5927c287521`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { StudentFeeItemService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateStudentFeeItemCreate } from "./validator";
+
+export const StudentFeeItemController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await StudentFeeItemService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fee items fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentFeeItemCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await StudentFeeItemService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Student fee item created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await StudentFeeItemService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fee item retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await StudentFeeItemService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fee item deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-item-routes-ts"></a>📄 `src/modules/student-fee-item/routes.ts`
+
+**File Info:**
+- **Size**: 711 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee-item/routes.ts`
+- **Relative Path**: `src/modules/student-fee-item`
+- **Created**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:39:38 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `bed1a8da083582748e9dfd695b6b54aa`
+- **SHA256**: `6efcb2da5f7f615cc6aaa8c8268df5caae65722386790adefa8568d602ea87c3`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { StudentFeeItemController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), StudentFeeItemController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeItemController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), StudentFeeItemController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeItemController.delete);
+
+export const studentFeeItemRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-item-service-ts"></a>📄 `src/modules/student-fee-item/service.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee-item/service.ts`
+- **Relative Path**: `src/modules/student-fee-item`
+- **Created**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cc848e96d6a8dabe7b7904173cc107d9`
+- **SHA256**: `fc5fdf8c175a731719cf56216fb8d541a2b84d9d45a0563ea182c0c42ca073a1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { StudentFeeItemCreateInput } from "./validator";
+
+export const StudentFeeItemService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { feeHeadId: { contains: query.search, mode: "insensitive" } },
+        { description: { contains: query.search, mode: "insensitive" } },
+        { dueDateBs: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.studentFeeItem.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.studentFeeItem.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: StudentFeeItemCreateInput, userId?: string) {
+    try {
+      const item = await prismaMain.studentFeeItem.create({
+        data: {
+          ...data,
+          studentFeeId: data.studentFeeId,
+          createdBy: userId,
+        },
+      });
+      return item;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A student fee item already exists for this fee and term", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.studentFeeItem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Student fee item not found", 404);
+    }
+
+    return item;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.studentFeeItem.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Student fee item not found", 404);
+    }
+
+    await prismaMain.studentFeeItem.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-fee-item-validator-ts"></a>📄 `src/modules/student-fee-item/validator.ts`
+
+**File Info:**
+- **Size**: 920 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-fee-item/validator.ts`
+- **Relative Path**: `src/modules/student-fee-item`
+- **Created**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:55:32 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4223b3a8ad5da1c124e7965de2ee0e50`
+- **SHA256**: `f9c6bba3253e3e0ff219add38ec02d56f415c182b66243c43deb9333e33368b4`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const studentFeeItemCreateInputSchema = z.object({
+  studentFeeId: z.string().uuid("Invalid Student Fee ID format"),
+  feeHeadId: z.string().uuid("Invalid Fee Head ID format").optional(),
+  feeStructureItemId: z.string().uuid("Invalid Fee Structure Item ID format").optional(),
+  termNumber: z.number().int().min(1),
+  description: z.string().optional(),
+  amount: z.string().min(1, "Amount is required"),
+  discountAmount: z.string().optional(),
+  discountReason: z.string().optional(),
+  netAmount: z.string().min(1, "Net amount is required"),
+  dueDateBs: z.string().optional(),
+});
+
+export type StudentFeeItemCreateInput = z.infer<typeof studentFeeItemCreateInputSchema>;
+export type StudentFeeItemUpdateInput = z.infer<typeof studentFeeItemCreateInputSchema>;
+
+export const validateStudentFeeItemCreate = (data: unknown) => {
+  return studentFeeItemCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-student-status-controller-ts"></a>📄 `src/modules/student-status/controller.ts`
+
+**File Info:**
+- **Size**: 3.14 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-status/controller.ts`
+- **Relative Path**: `src/modules/student-status`
+- **Created**: 2026-10-31 13:18:57 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:20:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b5d85b1b55e66bfa4f8939cc3165ebdf`
+- **SHA256**: `1681b176b326b8b4408dfa5c4ad35f3bc4d2b0b3eb2d72cf31c94fba302b90a3`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateStudentStatusCreate,
+  validateStudentStatusUpdate,
+} from "./validator";
+import { StudentStatusService } from "./service";
+
+export const StudentStatusController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+      const isActive =
+        req.query.isActive !== undefined
+          ? req.query.isActive === "true"
+          : undefined;
+
+      const result = await StudentStatusService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student statuses fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentStatusCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await StudentStatusService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Student status created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await StudentStatusService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student status retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateStudentStatusUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await StudentStatusService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student status updated successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await StudentStatusService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student status deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-status-routes-ts"></a>📄 `src/modules/student-status/routes.ts`
+
+**File Info:**
+- **Size**: 881 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-status/routes.ts`
+- **Relative Path**: `src/modules/student-status`
+- **Created**: 2026-10-31 13:19:13 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:19:14 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1bfb689c4e28155e1427340f6eae7cf0`
+- **SHA256**: `8fb3f16f9ddadf83ee057adaeb0a7f90f3551dde51fd0df403d32142ec97a645`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { StudentStatusController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  StudentStatusController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  StudentStatusController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  StudentStatusController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  StudentStatusController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  StudentStatusController.delete,
+);
+
+export const studentStatusRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-student-status-service-ts"></a>📄 `src/modules/student-status/service.ts`
+
+**File Info:**
+- **Size**: 4.37 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-status/service.ts`
+- **Relative Path**: `src/modules/student-status`
+- **Created**: 2026-10-31 13:19:22 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:19:58 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `80935e968b2d53aec3e998640f963617`
+- **SHA256**: `17b2b5c0e8edda30d768a43e97d8dae793bcc409e470f4e7745b37f50852ade0`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import { StudentStatusCreateInput, StudentStatusUpdateInput } from "./validator";
+
+
+export const StudentStatusService = {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    isActive?: boolean;
+  }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.studentStatus.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: { name: "asc" },
+      }),
+      prismaMain.studentStatus.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: items,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: StudentStatusCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.studentStatus.findFirst({
+      where: { code: data.code },
+    });
+
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted student status already uses this code. Use a different code."
+          : "A student status with this code already exists",
+        409,
+      );
+    }
+
+    try {
+      return await prismaMain.studentStatus.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A student status with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.studentStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!item) {
+      throw new CustomError("Student status not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: StudentStatusUpdateInput, userId?: string) {
+    const existing = await prismaMain.studentStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Student status not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.studentStatus.findFirst({
+        where: { code: data.code, NOT: { id } },
+      });
+
+      if (duplicate) {
+        throw new CustomError(
+          "A student status with this code already exists",
+          409,
+        );
+      }
+    }
+
+    try {
+      return await prismaMain.studentStatus.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A student status with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.studentStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Student status not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.student.count({
+        where: { studentStatusId: id, deletedAt: null },
+      }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This student status is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.studentStatus.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-student-status-validator-ts"></a>📄 `src/modules/student-status/validator.ts`
+
+**File Info:**
+- **Size**: 928 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/student-status/validator.ts`
+- **Relative Path**: `src/modules/student-status`
+- **Created**: 2026-10-31 13:19:38 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:19:39 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8d001fc0b81716239c9e8e305eecc394`
+- **SHA256**: `d64cc0b7389598e8fede85f79f2fe41b53ea21864a861e2e223c02fa0d86208a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const studentStatusCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
+  name: z
+    .string()
+    .trim()
+    .min(1, "Name is required")
+    .max(255, "Name is too long"),
+  isActive: z.boolean().default(true),
+});
+
+export const studentStatusUpdateInputSchema =
+  studentStatusCreateInputSchema.partial();
+
+export type StudentStatusCreateInput = z.infer<
+  typeof studentStatusCreateInputSchema
+>;
+export type StudentStatusUpdateInput = z.infer<
+  typeof studentStatusUpdateInputSchema
+>;
+
+export const validateStudentStatusCreate = (data: unknown) => {
+  return studentStatusCreateInputSchema.parse(data);
+};
+
+export const validateStudentStatusUpdate = (data: unknown) => {
+  return studentStatusUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-subject-controller-ts"></a>📄 `src/modules/subject/controller.ts`
+
+**File Info:**
+- **Size**: 2.91 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/subject/controller.ts`
+- **Relative Path**: `src/modules/subject`
+- **Created**: 2026-10-27 03:09:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:09:06 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b9d25146901c9cf1abe515263ea40140`
+- **SHA256**: `abd69c731bb7be5f1033ed9556def6e30543a7e0870eb1a335ee4b1a74aa712b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { SubjectService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateSubjectCreate, validateSubjectUpdate } from "./validator";
+
+export const SubjectController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await SubjectService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Subjects fetched successfully!",
+        data: {
+          data: result.subjects,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateSubjectCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const subject = await SubjectService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Subject created successfully",
+        data: subject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const subject = await SubjectService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Subject retrieved successfully",
+        data: subject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateSubjectUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const subject = await SubjectService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Subject updated successfully",
+        data: subject,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await SubjectService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Subject deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-subject-routes-ts"></a>📄 `src/modules/subject/routes.ts`
+
+**File Info:**
+- **Size**: 805 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/subject/routes.ts`
+- **Relative Path**: `src/modules/subject`
+- **Created**: 2026-10-27 03:09:06 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:40:33 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `a3c8a4527c61bfa350ce119baf9d8bd3`
+- **SHA256**: `db138a663cb989c9290063ea5eab6b5376153335d8ccaf4398d8548c52792a24`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { SubjectController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF", "STUDENT"), SubjectController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), SubjectController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF", "STUDENT"), SubjectController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), SubjectController.update);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), SubjectController.delete);
+
+export const subjectRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-subject-service-ts"></a>📄 `src/modules/subject/service.ts`
+
+**File Info:**
+- **Size**: 3.38 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/subject/service.ts`
+- **Relative Path**: `src/modules/subject`
+- **Created**: 2026-10-27 03:08:55 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:08:55 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `69511c4e34fd0002117d9372f4fb8d39`
+- **SHA256**: `9060851fb12851c1567fc70326ddaf09407dff6605193c319e394dc99045926a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { SubjectCreateInput, SubjectUpdateInput } from "./validator";
+
+export const SubjectService = {
+  async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { name: { contains: query.search, mode: "insensitive" } },
+        { code: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [subjects, total] = await Promise.all([
+      prismaMain.subject.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.subject.count({ where: whereClause }),
+    ]);
+
+    return {
+      subjects,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: SubjectCreateInput, userId?: string) {
+    const existing = await prismaMain.subject.findFirst({
+      where: { code: data.code, deletedAt: null },
+    });
+
+    if (existing) {
+      throw new CustomError("A subject with this code already exists", 409);
+    }
+
+    try {
+      const subject = await prismaMain.subject.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+      return subject;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A subject with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const subject = await prismaMain.subject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!subject) {
+      throw new CustomError("Subject not found", 404);
+    }
+
+    return subject;
+  },
+
+  async update(id: string, data: SubjectUpdateInput, userId?: string) {
+    const subject = await prismaMain.subject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!subject) {
+      throw new CustomError("Subject not found", 404);
+    }
+
+    if (data.code && data.code !== subject.code) {
+      const duplicate = await prismaMain.subject.findFirst({
+        where: {
+          code: data.code,
+          NOT: { id },
+          deletedAt: null,
+        },
+      });
+
+      if (duplicate) {
+        throw new CustomError("A subject with this code already exists", 409);
+      }
+    }
+
+    try {
+      const updated = await prismaMain.subject.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A subject with this code already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const subject = await prismaMain.subject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!subject) {
+      throw new CustomError("Subject not found", 404);
+    }
+
+    await prismaMain.subject.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-subject-validator-ts"></a>📄 `src/modules/subject/validator.ts`
+
+**File Info:**
+- **Size**: 797 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/subject/validator.ts`
+- **Relative Path**: `src/modules/subject`
+- **Created**: 2026-10-27 03:08:27 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:08:27 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `315ced0743a06436813f4b3d4a455637`
+- **SHA256**: `f94fa9acbbbd24addd864a84927c447360f52cd3d832650c00a5f1dd33ebf13b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const subjectCreateInputSchema = z.object({
+  code: z.string().min(1, "Subject code is required").max(20, "Subject code is too long"),
+  name: z.string().min(1, "Subject name is required").max(255, "Subject name is too long"),
+  description: z.string().optional().nullable(),
+  isActive: z.boolean().default(true),
+});
+
+export const subjectUpdateInputSchema = subjectCreateInputSchema.partial();
+
+export type SubjectCreateInput = z.infer<typeof subjectCreateInputSchema>;
+export type SubjectUpdateInput = z.infer<typeof subjectUpdateInputSchema>;
+
+export const validateSubjectCreate = (data: unknown) => {
+  return subjectCreateInputSchema.parse(data);
+};
+
+export const validateSubjectUpdate = (data: unknown) => {
+  return subjectUpdateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-tax-slab-controller-ts"></a>📄 `src/modules/tax-slab/controller.ts`
+
+**File Info:**
+- **Size**: 3.01 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/tax-slab/controller.ts`
+- **Relative Path**: `src/modules/tax-slab`
+- **Created**: 2026-10-27 03:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:47:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f77463d23441fa4eb1f94d44b685231b`
+- **SHA256**: `fd5621c32e508ec13521703b5cd3c28d50ba4f5da7b2978702a91ebfcad97777`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { TaxSlabService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateTaxSlabCreate, validateTaxSlabUpdate } from "./validator";
+
+export const TaxSlabController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const fiscalYearId = req.query.fiscalYearId as string | undefined;
+      const isCouple = req.query.isCouple !== undefined ? req.query.isCouple === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await TaxSlabService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        fiscalYearId,
+        isCouple,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Tax slabs fetched successfully!",
+        data: {
+          data: result.taxSlabs,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateTaxSlabCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const taxSlab = await TaxSlabService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Tax slab created successfully",
+        data: taxSlab,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const taxSlab = await TaxSlabService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Tax slab retrieved successfully",
+        data: taxSlab,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateTaxSlabUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const taxSlab = await TaxSlabService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Tax slab updated successfully",
+        data: taxSlab,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await TaxSlabService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Tax slab deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-tax-slab-routes-ts"></a>📄 `src/modules/tax-slab/routes.ts`
+
+**File Info:**
+- **Size**: 802 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/tax-slab/routes.ts`
+- **Relative Path**: `src/modules/tax-slab`
+- **Created**: 2026-10-27 03:47:18 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 14:20:16 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `7d2f3deefd22fc4404a8ab88d7c0a631`
+- **SHA256**: `277a230ac8d1539b09e8ae68ce3326cece02cbff7245858db199ff79157f6564`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { TaxSlabController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  TaxSlabController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  TaxSlabController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  TaxSlabController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  TaxSlabController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  TaxSlabController.delete,
+);
+
+export const taxSlabRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-tax-slab-service-ts"></a>📄 `src/modules/tax-slab/service.ts`
+
+**File Info:**
+- **Size**: 3.5 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/tax-slab/service.ts`
+- **Relative Path**: `src/modules/tax-slab`
+- **Created**: 2026-10-27 03:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:47:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3e3223e514bde22bd32f435e58bc6c50`
+- **SHA256**: `ab8f08233345e1207b3dcef32bd8c324fe6369d924f025055a02c509d5909832`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { TaxSlabCreateInput, TaxSlabUpdateInput } from "./validator";
+
+export const TaxSlabService = {
+  async index(query: { page?: number; limit?: number; search?: string; fiscalYearId?: string; isCouple?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { fromAmount: { contains: query.search, mode: "insensitive" } },
+        { toAmount: { contains: query.search, mode: "insensitive" } },
+        { ratePercent: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.fiscalYearId) {
+      whereClause.fiscalYearId = query.fiscalYearId;
+    }
+
+    if (query.isCouple !== undefined) {
+      whereClause.isCouple = query.isCouple;
+    }
+
+    const [taxSlabs, total] = await Promise.all([
+      prismaMain.taxSlab.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          fiscalYear: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.taxSlab.count({ where: whereClause }),
+    ]);
+
+    return {
+      taxSlabs,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: TaxSlabCreateInput, userId?: string) {
+    // Validate fiscal year exists
+    const fiscalYear = await prismaMain.fiscalYear.findFirst({
+      where: { id: data.fiscalYearId, deletedAt: null },
+    });
+
+    if (!fiscalYear) {
+      throw new CustomError("Fiscal year not found or has been deleted", 404);
+    }
+
+    try {
+      const taxSlab = await prismaMain.taxSlab.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          fiscalYear: true,
+        },
+      });
+      return taxSlab;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A tax slab already exists for this fiscal year", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const taxSlab = await prismaMain.taxSlab.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        fiscalYear: true,
+      },
+    });
+
+    if (!taxSlab) {
+      throw new CustomError("Tax slab not found", 404);
+    }
+
+    return taxSlab;
+  },
+
+  async update(id: string, data: TaxSlabUpdateInput, userId?: string) {
+    const existing = await prismaMain.taxSlab.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Tax slab not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.taxSlab.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          fiscalYear: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A tax slab already exists for this fiscal year", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.taxSlab.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Tax slab not found", 404);
+    }
+
+    await prismaMain.taxSlab.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-tax-slab-validator-ts"></a>📄 `src/modules/tax-slab/validator.ts`
+
+**File Info:**
+- **Size**: 860 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/tax-slab/validator.ts`
+- **Relative Path**: `src/modules/tax-slab`
+- **Created**: 2026-10-27 03:47:17 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:47:17 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `eba9187b995cd31b57b389168e166d99`
+- **SHA256**: `95b09d04694fca75ef15d173a9b3794254244a6217f777d541a7c5994fd4780d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const taxSlabCreateInputSchema = z.object({
+  fiscalYearId: z.string().uuid("Invalid Fiscal Year ID format"),
+  isCouple: z.boolean().default(false),
+  fromAmount: z.number().min(0, "From amount must be >= 0"),
+  toAmount: z.number().min(0, "To amount must be >= 0").optional().nullable(),
+  ratePercent: z.number().min(0, "Rate must be >= 0").max(100, "Rate must be <= 100"),
+});
+
+export const taxSlabUpdateInputSchema = taxSlabCreateInputSchema.partial();
+
+export type TaxSlabCreateInput = z.infer<typeof taxSlabCreateInputSchema>;
+export type TaxSlabUpdateInput = z.infer<typeof taxSlabUpdateInputSchema>;
+
+export const validateTaxSlabCreate = (data: unknown) => {
+  return taxSlabCreateInputSchema.parse(data);
+};
+
+export const validateTaxSlabUpdate = (data: unknown) => {
+  return taxSlabUpdateInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-teacher-controller-ts"></a>📄 `src/modules/teacher/controller.ts`
+
+**File Info:**
+- **Size**: 2.26 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher/controller.ts`
+- **Relative Path**: `src/modules/teacher`
+- **Created**: 2026-10-27 03:16:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:16:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `6a565b9c78f9480ac8e61b989a8a3fd5`
+- **SHA256**: `c87dece59372c137dd6cd7a93708a12f8fabb91b5000136ce6242ec93f217ebd`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { TeacherService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateTeacherCreate } from "./validator";
+
+export const TeacherController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await TeacherService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teachers fetched successfully!",
+        data: {
+          data: result.teachers,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateTeacherCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const teacher = await TeacherService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Teacher created successfully",
+        data: teacher,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const teacher = await TeacherService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher retrieved successfully",
+        data: teacher,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await TeacherService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-teacher-routes-ts"></a>📄 `src/modules/teacher/routes.ts`
+
+**File Info:**
+- **Size**: 641 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher/routes.ts`
+- **Relative Path**: `src/modules/teacher`
+- **Created**: 2026-10-27 03:16:30 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 14:21:00 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1fde0ac418c3d27592501783b0397f45`
+- **SHA256**: `4560cdce363f847a3c4f669f8426bb7362170ab668c9b51f5160ad252cc66c51`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { TeacherController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), TeacherController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), TeacherController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), TeacherController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), TeacherController.delete);
+
+export const teacherRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-teacher-service-ts"></a>📄 `src/modules/teacher/service.ts`
+
+**File Info:**
+- **Size**: 2.78 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher/service.ts`
+- **Relative Path**: `src/modules/teacher`
+- **Created**: 2026-10-27 03:16:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:16:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `5fdb585693c11ad0674b7e7df5f427b6`
+- **SHA256**: `1414934ae37b3cc1557441bca03dc2c64c30fb2a77d917656fd011fb50713d68`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { TeacherCreateInput } from "./validator";
+
+export const TeacherService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { employee: { firstName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { lastName: { contains: query.search, mode: "insensitive" } } },
+        { employee: { employeeCode: { contains: query.search, mode: "insensitive" } } },
+      ];
+    }
+
+    const [teachers, total] = await Promise.all([
+      prismaMain.teacher.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          employee: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.teacher.count({ where: whereClause }),
+    ]);
+
+    return {
+      teachers,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: TeacherCreateInput, userId?: string) {
+    // Validate employee exists and is not soft-deleted
+    const employee = await prismaMain.employee.findFirst({
+      where: { id: data.employeeId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee not found or has been deleted", 404);
+    }
+
+    try {
+      const teacher = await prismaMain.teacher.create({
+        data: {
+          ...data,
+          employeeId: data.employeeId,
+          createdBy: userId,
+        },
+        include: {
+          employee: true,
+        },
+      });
+      return teacher;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee with this ID is already assigned as Teacher", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const teacher = await prismaMain.teacher.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        employee: true,
+        assignments: { include: { batchTermSubject: true } },
+        sessions: true,
+      },
+    });
+
+    if (!teacher) {
+      throw new CustomError("Teacher not found", 404);
+    }
+
+    return teacher;
+  },
+
+  async delete(id: string, userId?: string) {
+    const teacher = await prismaMain.teacher.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!teacher) {
+      throw new CustomError("Teacher not found", 404);
+    }
+
+    await prismaMain.teacher.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-teacher-validator-ts"></a>📄 `src/modules/teacher/validator.ts`
+
+**File Info:**
+- **Size**: 667 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher/validator.ts`
+- **Relative Path**: `src/modules/teacher`
+- **Created**: 2026-10-27 03:16:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:16:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `d7f5394a158e25ad5ed076ba4903c40d`
+- **SHA256**: `ac0a91cecc8491a5bdf63a42cf62066999bf845b22f0076288e841e7558e7992`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const teacherCreateInputSchema = z.object({
+  employeeId: z.string().uuid("Invalid Employee ID format"),
+  qualification: z.string().max(255, "Qualification is too long").optional().nullable(),
+  specialization: z.string().max(255, "Specialization is too long").optional().nullable(),
+  createdBy: z.string().uuid("Invalid Creator User ID format").optional().nullable(),
+});
+
+export type TeacherCreateInput = z.infer<typeof teacherCreateInputSchema>;
+export type TeacherUpdateInput = z.infer<typeof teacherCreateInputSchema>;
+
+export const validateTeacherCreate = (data: unknown) => {
+  return teacherCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-teacher-batch-pay-controller-ts"></a>📄 `src/modules/teacher-batch-pay/controller.ts`
+
+**File Info:**
+- **Size**: 3.14 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher-batch-pay/controller.ts`
+- **Relative Path**: `src/modules/teacher-batch-pay`
+- **Created**: 2026-10-27 03:29:59 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:29:59 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `55c89a64fa99207c0ce1edba66409e5f`
+- **SHA256**: `298e340d926ab15a54707d22ab5b8550fd8ef6e33341f2397f4eca6d632e7e3a`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { TeacherBatchPayService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateTeacherBatchPayCreate, validateTeacherBatchPayUpdate } from "./validator";
+
+export const TeacherBatchPayController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const teachingAssignmentId = req.query.teachingAssignmentId as string | undefined;
+      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await TeacherBatchPayService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        teachingAssignmentId,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher batch pays fetched successfully!",
+        data: {
+          data: result.pays,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateTeacherBatchPayCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const pay = await TeacherBatchPayService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Teacher batch pay created successfully",
+        data: pay,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const pay = await TeacherBatchPayService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher batch pay retrieved successfully",
+        data: pay,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateTeacherBatchPayUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const pay = await TeacherBatchPayService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher batch pay updated successfully",
+        data: pay,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await TeacherBatchPayService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher batch pay deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-teacher-batch-pay-routes-ts"></a>📄 `src/modules/teacher-batch-pay/routes.ts`
+
+**File Info:**
+- **Size**: 858 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher-batch-pay/routes.ts`
+- **Relative Path**: `src/modules/teacher-batch-pay`
+- **Created**: 2026-10-27 03:29:59 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 14:20:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `accc0712e3325214524aee81ff3de2cd`
+- **SHA256**: `358a21ca6a8b962696d50fc35b811324737d40e057e9b2f5c6664c75dc69f945`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { TeacherBatchPayController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  TeacherBatchPayController.index,
+);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  TeacherBatchPayController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  TeacherBatchPayController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  TeacherBatchPayController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  TeacherBatchPayController.delete,
+);
+
+export const teacherBatchPayRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-teacher-batch-pay-service-ts"></a>📄 `src/modules/teacher-batch-pay/service.ts`
+
+**File Info:**
+- **Size**: 3.69 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher-batch-pay/service.ts`
+- **Relative Path**: `src/modules/teacher-batch-pay`
+- **Created**: 2026-10-27 03:29:59 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:29:59 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `7d648813fc9570bbef3d87118f9dc6f4`
+- **SHA256**: `029ce67b6a036aa1d26f8c6f1bc3d9412838f3b20dacbb22a61971c943b8072c`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { TeacherBatchPayCreateInput, TeacherBatchPayUpdateInput } from "./validator";
+
+export const TeacherBatchPayService = {
+  async index(query: { page?: number; limit?: number; teachingAssignmentId?: string; isActive?: boolean }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {};
+
+    if (query.search) {
+      whereClause.OR = [
+        { ratePerCreditHour: { contains: query.search, mode: "insensitive" } },
+        { fixedMonthlyAmount: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.teachingAssignmentId) {
+      whereClause.teachingAssignmentId = query.teachingAssignmentId;
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.effectiveFromBs = query.isActive
+        ? { gte: new Date(new Date().toISOString()) }
+        : { lt: new Date(new Date().toISOString()) };
+    }
+
+    const [pays, total] = await Promise.all([
+      prismaMain.teacherBatchPay.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          teachingAssignment: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.teacherBatchPay.count({ where: whereClause }),
+    ]);
+
+    return {
+      pays,
+      pagination: {
+        page,
+        limit,
+        total,
+      },
+    };
+  },
+
+  async create(data: TeacherBatchPayCreateInput, userId?: string) {
+    // Validate teachingAssignment exists and is not soft-deleted
+    const assignment = await prismaMain.teachingAssignment.findFirst({
+      where: { id: data.teachingAssignmentId, deletedAt: null },
+    });
+
+    if (!assignment) {
+      throw new CustomError("Teaching assignment not found or has been deleted", 404);
+    }
+
+    try {
+      const pay = await prismaMain.teacherBatchPay.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          teachingAssignment: true,
+        },
+      });
+      return pay;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("Duplicate entry found", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const pay = await prismaMain.teacherBatchPay.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        teachingAssignment: true,
+      },
+    });
+
+    if (!pay) {
+      throw new CustomError("Teacher batch pay not found", 404);
+    }
+
+    return pay;
+  },
+
+  async update(id: string, data: TeacherBatchPayUpdateInput, userId?: string) {
+    const pay = await prismaMain.teacherBatchPay.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!pay) {
+      throw new CustomError("Teacher batch pay not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.teacherBatchPay.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+        include: {
+          teachingAssignment: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("Duplicate entry found", 409);
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const pay = await prismaMain.teacherBatchPay.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!pay) {
+      throw new CustomError("Teacher batch pay not found", 404);
+    }
+
+    await prismaMain.teacherBatchPay.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+```
+
+---
+
+### <a id="📄-src-modules-teacher-batch-pay-validator-ts"></a>📄 `src/modules/teacher-batch-pay/validator.ts`
+
+**File Info:**
+- **Size**: 1.12 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teacher-batch-pay/validator.ts`
+- **Relative Path**: `src/modules/teacher-batch-pay`
+- **Created**: 2026-10-27 03:29:58 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:29:58 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `ab9365b0d4cf31795fea599e1f776555`
+- **SHA256**: `0b4f21c12404f1106a7fb25bb933e4ad5b337457a7dceb925e19bacd13e16c36`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+const decimalSchema = z
+  .number()
+  .positive("Rate must be positive")
+  .max(99999999.99, "Amount is too large");
+
+export const teacherBatchPayCreateInputSchema = z.object({
+  teachingAssignmentId: z.string().uuid("Invalid Teaching Assignment ID format"),
+  ratePerCreditHour: decimalSchema.optional().nullable(),
+  fixedMonthlyAmount: decimalSchema.optional().nullable(),
+  effectiveFromBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
+  effectiveToBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
+});
+
+export const teacherBatchPayUpdateInputSchema = teacherBatchPayCreateInputSchema.partial();
+
+export type TeacherBatchPayCreateInput = z.infer<typeof teacherBatchPayCreateInputSchema>;
+export type TeacherBatchPayUpdateInput = z.infer<typeof teacherBatchPayUpdateInputSchema>;
+
+export const validateTeacherBatchPayCreate = (data: unknown) => {
+  return teacherBatchPayCreateInputSchema.parse(data);
+};
+
+export const validateTeacherBatchPayUpdate = (data: unknown) => {
+  return teacherBatchPayUpdateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-teaching-assignment-controller-ts"></a>📄 `src/modules/teaching-assignment/controller.ts`
+
+**File Info:**
+- **Size**: 2.37 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teaching-assignment/controller.ts`
+- **Relative Path**: `src/modules/teaching-assignment`
+- **Created**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `4652358dd48f3b222679c881b78900e9`
+- **SHA256**: `a6c9a783953e8a3a5dbb9ef3f9111d394d566750b573978586ce4e8ea8c8bcc7`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { TeachingAssignmentService } from "./service";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import { validateTeachingAssignmentCreate } from "./validator";
+
+export const TeachingAssignmentController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+
+      const result = await TeachingAssignmentService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teaching assignments fetched successfully!",
+        data: result.data,
+        pagination: result.pagination,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateTeachingAssignmentCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const assignment = await TeachingAssignmentService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Teaching assignment created successfully",
+        data: assignment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const assignment = await TeachingAssignmentService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teaching assignment retrieved successfully",
+        data: assignment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await TeachingAssignmentService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teaching assignment deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-teaching-assignment-routes-ts"></a>📄 `src/modules/teaching-assignment/routes.ts`
+
+**File Info:**
+- **Size**: 727 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teaching-assignment/routes.ts`
+- **Relative Path**: `src/modules/teaching-assignment`
+- **Created**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 14:21:11 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `50f0b56fd098b056468d81e8d26fde67`
+- **SHA256**: `475dea37393f99c1a4bdee14c69c5eaf7b40f05464e664ad15e355dbca816f8d`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { TeachingAssignmentController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"), TeachingAssignmentController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), TeachingAssignmentController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER", "STAFF"), TeachingAssignmentController.retrieve);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), TeachingAssignmentController.delete);
+
+export const teachingAssignmentRouter = router;
+```
+
+---
+
+### <a id="📄-src-modules-teaching-assignment-service-ts"></a>📄 `src/modules/teaching-assignment/service.ts`
+
+**File Info:**
+- **Size**: 2.32 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teaching-assignment/service.ts`
+- **Relative Path**: `src/modules/teaching-assignment`
+- **Created**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `9305e5ffe6ae1f98fb70ef446f5e13bb`
+- **SHA256**: `847959017f0daa05135e997327047384c5a4b34cac919aa9f616e6d8026c8b44`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { TeachingAssignmentCreateInput } from "./validator";
+
+export const TeachingAssignmentService = {
+  async index(query: { page?: number; limit?: number; search?: string }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const skip = (page - 1) * limit;
+
+    const whereClause: any = {
+      deletedAt: null,
+    };
+
+    if (query.search) {
+      whereClause.OR = [
+        { teacherId: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    const [assignments, total] = await Promise.all([
+      prismaMain.teachingAssignment.findMany({
+        where: whereClause,
+        skip,
+        take: limit,
+        include: {
+          attendances: true,
+        },
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.teachingAssignment.count({ where: whereClause }),
+    ]);
+
+    return {
+      data: assignments,
+      pagination: { page, limit, total },
+    };
+  },
+
+  async create(data: TeachingAssignmentCreateInput, userId?: string) {
+    try {
+      const assignment = await prismaMain.teachingAssignment.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+        include: {
+          attendances: true,
+        },
+      });
+      return assignment;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A teaching assignment with this subject already exists", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const assignment = await prismaMain.teachingAssignment.findFirst({
+      where: { id, deletedAt: null },
+      include: {
+        attendances: true,
+      },
+    });
+
+    if (!assignment) {
+      throw new CustomError("Teaching assignment not found", 404);
+    }
+
+    return assignment;
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.teachingAssignment.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Teaching assignment not found", 404);
+    }
+
+    await prismaMain.teachingAssignment.update({
+      where: { id },
+      data: {
+        deletedAt: new Date(),
+        updatedBy: userId,
+      },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-teaching-assignment-validator-ts"></a>📄 `src/modules/teaching-assignment/validator.ts`
+
+**File Info:**
+- **Size**: 704 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/teaching-assignment/validator.ts`
+- **Relative Path**: `src/modules/teaching-assignment`
+- **Created**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-29 06:44:26 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3be6cc6e6a67fc067f4174051ec86f7f`
+- **SHA256**: `cab9d5618f7c15deaab22a565fab0d8b39cee8cb98d819d5ab409c89685f368f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const teachingAssignmentCreateInputSchema = z.object({
+  teacherId: z.string().uuid("Invalid Teacher ID format"),
+  batchTermSubjectId: z.string().uuid("Invalid Batch Term Subject ID format").optional(),
+  assignedDateBs: z.string().min(1, "Assigned date is required"),
+  endDateBs: z.string().optional(),
+  isActive: z.boolean().optional(),
+});
+
+export type TeachingAssignmentCreateInput = z.infer<typeof teachingAssignmentCreateInputSchema>;
+export type TeachingAssignmentUpdateInput = z.infer<typeof teachingAssignmentCreateInputSchema>;
+
+export const validateTeachingAssignmentCreate = (data: unknown) => {
+  return teachingAssignmentCreateInputSchema.parse(data);
+};
+```
+
+---
+
+### <a id="📄-src-modules-user-controller-ts"></a>📄 `src/modules/user/controller.ts`
+
+**File Info:**
+- **Size**: 4.11 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/user/controller.ts`
+- **Relative Path**: `src/modules/user`
+- **Created**: 2026-10-31 13:20:55 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:24:04 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cf3f5b6969ecd645f7889ff540d92234`
+- **SHA256**: `9d693e27d3abce8414390a956dab62fa3ab4a27ce9469173eb39dc2d31471717`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateUserCreate,
+  validateUserResetPassword,
+  validateUserUpdate,
+} from "./validator";
+import { UserService } from "./service";
+
+export const UserController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+      const role =
+        typeof req.query.role === "string" ? req.query.role : undefined;
+      const isActive =
+        req.query.isActive !== undefined
+          ? req.query.isActive === "true"
+          : undefined;
+
+      const result = await UserService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        role,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Users fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateUserCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const user = await UserService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "User created successfully",
+        data: user,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const user = await UserService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "User retrieved successfully",
+        data: user,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateUserUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const user = await UserService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "User updated successfully",
+        data: user,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  resetPassword: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateUserResetPassword(req.body);
+      const userId = res.locals.context?.userId;
+
+      await UserService.resetPassword(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Password reset successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  unlock: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      const user = await UserService.unlock(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "User unlocked successfully",
+        data: user,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  delete: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
+
+      await UserService.delete(id, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "User deleted successfully",
+        data: null,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-user-routes-ts"></a>📄 `src/modules/user/routes.ts`
+
+**File Info:**
+- **Size**: 902 B
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/user/routes.ts`
+- **Relative Path**: `src/modules/user`
+- **Created**: 2026-10-31 13:21:27 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:21:28 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `34be17b3182d3ad0ecb6dd6e43e847da`
+- **SHA256**: `ce7a91fa8a69be14aae65e4aed86c8a50808ce636d92337e94c9fed0ccf0e394`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Router } from "express";
+import { UserController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
+
+const router = Router();
+
+// Account management is an admin-only area
+router.get("/", isUser, isAuthorizedTo("ADMIN"), UserController.index);
+router.post("/", isUser, isAuthorizedTo("ADMIN"), UserController.create);
+router.get("/:id", isUser, isAuthorizedTo("ADMIN"), UserController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN"), UserController.update);
+router.patch(
+  "/:id/password",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  UserController.resetPassword,
+);
+router.patch(
+  "/:id/unlock",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  UserController.unlock,
+);
+router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), UserController.delete);
+
+export const userRouter = router;
+
+```
+
+---
+
+### <a id="📄-src-modules-user-service-ts"></a>📄 `src/modules/user/service.ts`
+
+**File Info:**
+- **Size**: 6.94 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/user/service.ts`
+- **Relative Path**: `src/modules/user`
+- **Created**: 2026-10-31 13:21:47 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:22:41 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `79a62a111d9d73107555e7771312fd1b`
+- **SHA256**: `93c08a70db076cb0173ea3d8dd1b7878948d0e3aaabf89557873b6d1e1dd8912`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import bcrypt from "bcrypt";
+import { prismaMain } from "@/lib/prismaClient";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import { UserCreateInput, UserUpdateInput } from "@/generated/prisma/models";
+import { UserResetPasswordInput } from "./validator";
+
+
+const SALT_ROUNDS = 10;
+
+// passwordHash must never leave the server
+const userSelect = {
+  id: true,
+  email: true,
+  username: true,
+  role: true,
+  isAdmin: true,
+  isActive: true,
+  isEmailVerified: true,
+  lastLoginAt: true,
+  failedLoginCount: true,
+  lockedUntil: true,
+  createdAt: true,
+  updatedAt: true,
+  employee: {
+    select: { id: true, employeeCode: true, firstName: true, lastName: true },
+  },
+  student: {
+    select: {
+      id: true,
+      universityRegNo: true,
+      firstName: true,
+      lastName: true,
+    },
+  },
+};
+
+export const UserService = {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    role?: string;
+    isActive?: boolean;
+  }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10;
+    const { skip, take } = calculateSkipAndTake(page, limit);
+
+    const whereClause: any = { deletedAt: null };
+
+    if (query.search) {
+      whereClause.OR = [
+        { email: { contains: query.search, mode: "insensitive" } },
+        { username: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.role) whereClause.role = query.role;
+    if (query.isActive !== undefined) whereClause.isActive = query.isActive;
+
+    const [users, total] = await Promise.all([
+      prismaMain.user.findMany({
+        where: whereClause,
+        skip,
+        take,
+        select: userSelect,
+        orderBy: { createdAt: "desc" },
+      }),
+      prismaMain.user.count({ where: whereClause }),
+    ]);
+
+    return { data: users, pagination: { page, limit, total } };
+  },
+
+  async create(data: UserCreateInput, userId?: string) {
+    // Unique indexes also cover soft-deleted rows, so check without the deletedAt filter
+    const emailTaken = await prismaMain.user.findFirst({
+      where: { email: data.email },
+    });
+    if (emailTaken) {
+      throw new CustomError("Email is already taken", 409);
+    }
+
+    if (data.username) {
+      const usernameTaken = await prismaMain.user.findFirst({
+        where: { username: data.username },
+      });
+      if (usernameTaken) {
+        throw new CustomError("Username is already taken", 409);
+      }
+    }
+
+    const { password, ...rest } = data;
+    const passwordHash = await bcrypt.hash(password, SALT_ROUNDS);
+
+    try {
+      return await prismaMain.user.create({
+        data: {
+          ...rest,
+          passwordHash,
+          isAdmin: rest.role === "ADMIN",
+          createdBy: userId,
+        },
+        select: userSelect,
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("Email or username is already taken", 409);
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const user = await prismaMain.user.findFirst({
+      where: { id, deletedAt: null },
+      select: userSelect,
+    });
+
+    if (!user) {
+      throw new CustomError("User not found", 404);
+    }
+
+    return user;
+  },
+
+  async update(id: string, data: UserUpdateInput, actingUserId?: string) {
+    const existing = await prismaMain.user.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("User not found", 404);
+    }
+
+    // An admin must not lock themselves out or demote themselves
+    if (id === actingUserId) {
+      if (data.isActive === false) {
+        throw new CustomError("You cannot deactivate your own account", 400);
+      }
+      if (data.role && data.role !== existing.role) {
+        throw new CustomError("You cannot change your own role", 400);
+      }
+    }
+
+    if (data.email && data.email !== existing.email) {
+      const emailTaken = await prismaMain.user.findFirst({
+        where: { email: data.email, NOT: { id } },
+      });
+      if (emailTaken) {
+        throw new CustomError("Email is already taken", 409);
+      }
+    }
+
+    if (data.username && data.username !== existing.username) {
+      const usernameTaken = await prismaMain.user.findFirst({
+        where: { username: data.username, NOT: { id } },
+      });
+      if (usernameTaken) {
+        throw new CustomError("Username is already taken", 409);
+      }
+    }
+
+    try {
+      return await prismaMain.user.update({
+        where: { id },
+        data: {
+          ...data,
+          ...(data.role ? { isAdmin: data.role === "ADMIN" } : {}),
+          updatedBy: actingUserId,
+        },
+        select: userSelect,
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("Email or username is already taken", 409);
+      }
+      throw error;
+    }
+  },
+
+  async resetPassword(
+    id: string,
+    data: UserResetPasswordInput,
+    actingUserId?: string,
+  ) {
+    const existing = await prismaMain.user.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("User not found", 404);
+    }
+
+    const passwordHash = await bcrypt.hash(data.password, SALT_ROUNDS);
+
+    await prismaMain.user.update({
+      where: { id },
+      data: {
+        passwordHash,
+        failedLoginCount: 0,
+        lockedUntil: null,
+        updatedBy: actingUserId,
+      },
+    });
+
+    return null;
+  },
+
+  // Clears a lock caused by too many failed logins
+  async unlock(id: string, actingUserId?: string) {
+    const existing = await prismaMain.user.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("User not found", 404);
+    }
+
+    return prismaMain.user.update({
+      where: { id },
+      data: { failedLoginCount: 0, lockedUntil: null, updatedBy: actingUserId },
+      select: userSelect,
+    });
+  },
+
+  async delete(id: string, actingUserId?: string) {
+    const existing = await prismaMain.user.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("User not found", 404);
+    }
+
+    if (id === actingUserId) {
+      throw new CustomError("You cannot delete your own account", 400);
+    }
+
+    // Keep at least one active admin in the system
+    if (existing.role === "ADMIN") {
+      const otherAdmins = await prismaMain.user.count({
+        where: { role: "ADMIN", isActive: true, deletedAt: null, NOT: { id } },
+      });
+      if (otherAdmins === 0) {
+        throw new CustomError("Cannot delete the last active admin", 400);
+      }
+    }
+
+    await prismaMain.user.update({
+      where: { id },
+      data: { deletedAt: new Date(), isActive: false, updatedBy: actingUserId },
+    });
+
+    return null;
+  },
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-user-validator-ts"></a>📄 `src/modules/user/validator.ts`
+
+**File Info:**
+- **Size**: 1.51 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/user/validator.ts`
+- **Relative Path**: `src/modules/user`
+- **Created**: 2026-10-31 13:22:35 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:22:36 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `2f3eafcb108bde04f25fbd5df6153ba8`
+- **SHA256**: `8d984767e2466df5ba4c6feb5e8ec9f1a3b36bd7f53cc402cac740473ec8ccd4`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { z } from "zod";
+
+export const roleSchema = z.enum([
+  "ADMIN",
+  "PRINCIPAL",
+  "ACCOUNTANT",
+  "TEACHER",
+  "STAFF",
+  "STUDENT",
+]);
+
+export const userCreateInputSchema = z.object({
+  email: z.string().trim().toLowerCase().email("Invalid email address"),
+  username: z
+    .string()
+    .trim()
+    .min(3, "Username must be at least 3 characters")
+    .max(50, "Username is too long")
+    .optional()
+    .nullable(),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(128),
+  role: roleSchema,
+  isActive: z.boolean().default(true),
+  isEmailVerified: z.boolean().default(false),
+});
+
+// Password is changed through its own endpoint
+export const userUpdateInputSchema = userCreateInputSchema
+  .omit({ password: true })
+  .partial();
+
+export const userResetPasswordInputSchema = z.object({
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .max(128),
+});
+
+export type UserCreateInput = z.infer<typeof userCreateInputSchema>;
+export type UserUpdateInput = z.infer<typeof userUpdateInputSchema>;
+export type UserResetPasswordInput = z.infer<
+  typeof userResetPasswordInputSchema
+>;
+
+export const validateUserCreate = (data: unknown) => {
+  return userCreateInputSchema.parse(data);
+};
+
+export const validateUserUpdate = (data: unknown) => {
+  return userUpdateInputSchema.parse(data);
+};
+
+export const validateUserResetPassword = (data: unknown) => {
+  return userResetPasswordInputSchema.parse(data);
+};
+
+```
+
+---
+
+### <a id="📄-src-modules-workflow-status-controller-ts"></a>📄 `src/modules/workflow-status/controller.ts`
+
+**File Info:**
+- **Size**: 3.19 KB
+- **Extension**: `.ts`
+- **Language**: `typescript`
+- **Location**: `src/modules/workflow-status/controller.ts`
+- **Relative Path**: `src/modules/workflow-status`
+- **Created**: 2026-10-31 13:25:21 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:26:42 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b97ee9c5eab4e718f6a66a8aeedaef70`
+- **SHA256**: `49711575bdac7d4e625bd4f88456dce23091916d61900834024f8dcdd0c95b90`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```typescript
+import { Request, Response } from "express";
+import { ResponseHandler } from "@/utils/response";
+import { ErrorHandler } from "@/utils/error";
+import { queryFilters } from "@/utils/queryFilters";
+import {
+  validateWorkflowStatusCreate,
+  validateWorkflowStatusUpdate,
+} from "./validator";
+import { WorkflowStatusService } from "./service";
+
+export const WorkflowStatusController = {
+  index: async (req: Request, res: Response) => {
+    try {
+      const { page, limit, search } = queryFilters(req);
+      const pageNumber = Number(page) || 1;
+      const limitNumber = Number(limit) || 10;
+      const isActive =
+        req.query.isActive !== undefined
+          ? req.query.isActive === "true"
+          : undefined;
+
+      const result = await WorkflowStatusService.index({
+        page: pageNumber,
+        limit: limitNumber,
+        search,
+        isActive,
+      });
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Workflow statuses fetched successfully!",
+        data: {
+          data: result.data,
+          pagination: result.pagination,
+        },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  create: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateWorkflowStatusCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await WorkflowStatusService.create(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Workflow status created successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  retrieve: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const item = await WorkflowStatusService.getById(id);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Workflow status retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateWorkflowStatusUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await WorkflowStatusService.update(
+        id,
+        validatedData,
         userId,
       );
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Products fetched successfully!",
-        data: {
-          data: result.products,
-          pagination: result.pagination,
-        },
+        message: "Workflow status updated successfully",
+        data: item,
       });
     } catch (error) {
-      // Handle errors
       return ErrorHandler.handleError(res, error);
     }
   },
 
-  create: async (req: Request, res: Response) => {
-    try {
-      // Get the user info from the response locals
-      const context = res.locals.context;
-
-      // Get the user id from the context
-      const userId = context.userId;
-
-      // Validate the data from the User
-      const data = validateProductCreate(req.body);
-
-      // Call the service
-      const product = await ProductService.create(data, userId);
-
-      // Return the response
-      return ResponseHandler.success({
-        res,
-        code: 201,
-        message: "Product created successfully",
-        data: product,
-      });
-    } catch (error) {
-      // If error occurs, handle the error
-      return ErrorHandler.handleError(res, error);
-    }
-  },
-
-  getById: async (req: Request, res: Response) => {
-    try {
-      // Get the parameter from the Url
-      const productId = req.params.id as string;
-
-      // Call the service
-      const product = await ProductService.getById(productId);
-
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Product fetched successfully",
-        data: product,
-      });
-    } catch (error) {
-      // If error occurs, handle the error
-      return ErrorHandler.handleError(res, error);
-    }
-  },
-
-  update: async (req: Request, res: Response) => {
-    try {
-      // Get parameter from the URL
-      const productId = req.params.id as string;
-
-      // Validate the data from the request body
-      const data = validateProductCreate(req.body);
-
-      // Call the service
-      const product = await ProductService.update(productId, data);
-
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Product updated successfully",
-        data: product,
-      });
-    } catch (error) {
-      // If error occurs, handle the error
-      return ErrorHandler.handleError(res, error);
-    }
-  },
-
-  getByCategoryId: async (req: Request, res: Response) => {
-    try {
-      // Get the user info from the response locals
-      const context = res.locals.context;
-
-      // Get the user id from the context
-      const userId = context.userId;
-
-      // Get the category id from params
-      const categoryId = req.params.categoryId as string;
-
-      // Call the service
-      const products = await ProductService.getByCategoryId(categoryId, userId);
-
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Products fetched successfully",
-        data: products,
-      });
-    } catch (error) {
-      // If error occurs, handle the error
-      return ErrorHandler.handleError(res, error);
-    }
-  },
   delete: async (req: Request, res: Response) => {
     try {
-      // Get the parameter from the Url
-      const productId = req.params.id as string;
+      const id = req.params.id as string;
+      const userId = res.locals.context?.userId;
 
-      // Call the service
-      await ProductService.delete(productId);
+      await WorkflowStatusService.delete(id, userId);
 
       return ResponseHandler.success({
         res,
         code: 200,
-        message: "Product deleted successfully",
+        message: "Workflow status deleted successfully",
         data: null,
       });
     } catch (error) {
-      // If error occurs, handle the error
       return ErrorHandler.handleError(res, error);
     }
   },
 };
 
-export default ProductController;
-
 ```
 
 ---
 
-### <a id="📄-src-modules-product-routes-ts"></a>📄 `src/modules/product/routes.ts`
+### <a id="📄-src-modules-workflow-status-routes-ts"></a>📄 `src/modules/workflow-status/routes.ts`
 
 **File Info:**
-- **Size**: 629 B
+- **Size**: 888 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/product/routes.ts`
-- **Relative Path**: `src/modules/product`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `7d01a359968ec8b23326a2feb2a476ff`
-- **SHA256**: `1a499d2ec06ab3d97f7312d1227b37c24125ea13527de5e76f858b6ba0fa85af`
+- **Location**: `src/modules/workflow-status/routes.ts`
+- **Relative Path**: `src/modules/workflow-status`
+- **Created**: 2026-10-31 13:25:38 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:25:39 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `cc84c3b8a54d0ea4bdb53eb0f6356fad`
+- **SHA256**: `87011051137a88cea98845bbbcf9361899d6e35e2ae83b5ad731ffd45282d31f`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
 import { Router } from "express";
-import ProductController from "./controller";
-import { isAdmin, isUser } from "@/middlewares/isUser";
+import { WorkflowStatusController } from "./controller";
+import { isUser } from "@/middlewares/isUser";
+import { isAuthorizedTo } from "@/middlewares/authorized";
 
-const productRouter: Router = Router();
+const router = Router();
 
-productRouter.get("/", isUser, ProductController.index);
-productRouter.post("/", isUser, ProductController.create);
-productRouter.get("/:id", isUser, ProductController.getById);
-productRouter.patch("/:id", isUser, ProductController.update);
-productRouter.get(
-  "/category/:categoryId",
+router.get(
+  "/",
   isUser,
-  ProductController.getByCategoryId,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  WorkflowStatusController.index,
 );
-productRouter.delete("/:id", isAdmin, ProductController.delete);
+router.post(
+  "/",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  WorkflowStatusController.create,
+);
+router.get(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF"),
+  WorkflowStatusController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  WorkflowStatusController.update,
+);
+router.delete(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN"),
+  WorkflowStatusController.delete,
+);
 
-export default productRouter;
+export const workflowStatusRouter = router;
 
 ```
 
 ---
 
-### <a id="📄-src-modules-product-service-ts"></a>📄 `src/modules/product/service.ts`
+### <a id="📄-src-modules-workflow-status-service-ts"></a>📄 `src/modules/workflow-status/service.ts`
 
 **File Info:**
-- **Size**: 5.78 KB
+- **Size**: 4.6 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/product/service.ts`
-- **Relative Path**: `src/modules/product`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `8d9980b12b8c313050c76c65a878057c`
-- **SHA256**: `2460088fd9f65e8ab587ab004764eed252c45211ad0c37932c20a3224523dfda`
+- **Location**: `src/modules/workflow-status/service.ts`
+- **Relative Path**: `src/modules/workflow-status`
+- **Created**: 2026-10-31 13:25:49 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:26:58 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `33ed6032dfed7e39dc3e545bd16d51b1`
+- **SHA256**: `25790907e9cbdde7154412655234d225aaf83a9317f8f011503cc10f71c51c50`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-// product/service.ts
 import { prismaMain } from "@/lib/prismaClient";
-import { CustomError, ValidationError } from "@/errors/CustomError";
-import { T_ProductCreateInput } from "./validator";
+import { CustomError } from "@/errors/CustomError";
+import { calculateSkipAndTake } from "@/utils/queryFilters";
+import {
+  WorkflowStatusCreateInput,
+  WorkflowStatusUpdateInput,
+} from "./validator";
 
-export const ProductService = {
-  index: async (
-    pageNumber: number,
-    limitNumber: number,
-    searchTerm: string,
-    userId: string,
-  ) => {
-    // Calculate skip and take
-    const skip = (pageNumber - 1) * limitNumber;
-    const take = limitNumber;
+export const WorkflowStatusService = {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    isActive?: boolean;
+  }) {
+    const page = query.page && query.page > 0 ? query.page : 1;
+    const limit = query.limit ? query.limit : 10; // limit = -1 returns everything (useful for dropdowns)
+    const { skip, take } = calculateSkipAndTake(page, limit);
 
-    // Fetch products from the database
-    const products = await prismaMain.product.findMany({
-      where: {
-        userId,
-        ...(searchTerm && {
-          OR: [
-            { name: { contains: searchTerm, mode: "insensitive" } },
-            {
-              category: { name: { contains: searchTerm, mode: "insensitive" } },
-            },
-          ],
-        }),
-      },
-      include: {
-        category: true,
-      },
-      skip,
-      take,
-    });
+    const whereClause: any = {
+      deletedAt: null,
+    };
 
-    // Get the total count of products without pagination
-    const totalProducts = await prismaMain.product.count({
-      where: {
-        name: searchTerm ? { contains: searchTerm } : undefined,
-        userId,
-      },
-    });
+    if (query.search) {
+      whereClause.OR = [
+        { code: { contains: query.search, mode: "insensitive" } },
+        { name: { contains: query.search, mode: "insensitive" } },
+      ];
+    }
+
+    if (query.isActive !== undefined) {
+      whereClause.isActive = query.isActive;
+    }
+
+    const [items, total] = await Promise.all([
+      prismaMain.workflowStatus.findMany({
+        where: whereClause,
+        skip,
+        take,
+        orderBy: { name: "asc" },
+      }),
+      prismaMain.workflowStatus.count({ where: whereClause }),
+    ]);
 
     return {
-      products,
-      pagination: {
-        page: pageNumber,
-        limit: limitNumber,
-        total: totalProducts,
-      },
+      data: items,
+      pagination: { page, limit, total },
     };
   },
 
-  create: async (data: T_ProductCreateInput, userId: string) => {
-    const { name, shortName, price, quantity, categoryId } = data;
-
-    // Validating whether the Product Name Exists or Not
-    const existingProductByName = await prismaMain.product.findFirst({
-      where: { name },
-    });
-    if (existingProductByName)
-      throw new ValidationError({
-        name: "Product with the same name already exists",
-      });
-
-    // Validating whether the Product ShortName Exists or Not
-    const existingProductByShortName = await prismaMain.product.findFirst({
-      where: { shortName },
-    });
-    if (existingProductByShortName)
-      throw new ValidationError({
-        shortName: "Product with the same short name already exists",
-      });
-
-    // Validating whether the Category Exists or Not
-    const category = await prismaMain.category.findUnique({
-      where: { id: categoryId },
-    });
-    if (!category) throw new CustomError("Category not found", 404);
-
-    // Create the Product
-    return await prismaMain.product.create({
-      data: {
-        name,
-        shortName,
-        price,
-        quantity,
-        categoryId,
-        userId,
-      },
-      include: {
-        category: true,
-      },
-    });
-  },
-
-  getById: async (productId: string) => {
-    // Validating Where productId exists or not
-    const product = await prismaMain.product.findUnique({
-      where: { id: productId },
-      include: {
-        category: true,
-      },
+  async create(data: WorkflowStatusCreateInput, userId?: string) {
+    // The unique index on code also covers soft-deleted rows, so check without the deletedAt filter
+    const existing = await prismaMain.workflowStatus.findFirst({
+      where: { code: data.code },
     });
 
-    // if product not found, throw error
-    if (!product) throw new CustomError("Product not found", 404);
-
-    return product;
-  },
-
-  update: async (productId: string, data: T_ProductCreateInput) => {
-    // Get the existing Data by using Product Id
-    const existingProduct = await prismaMain.product.findUnique({
-      where: { id: productId },
-    });
-
-    // If Product not found, throw error
-    if (!existingProduct) throw new CustomError("Product not found", 404);
-
-    // Validating whether the Category Exists or Not
-    if (data.categoryId) {
-      const category = await prismaMain.category.findUnique({
-        where: { id: data.categoryId },
-      });
-      if (!category) throw new CustomError("Category not found", 404);
+    if (existing) {
+      throw new CustomError(
+        existing.deletedAt
+          ? "A deleted workflow status already uses this code. Use a different code."
+          : "A workflow status with this code already exists",
+        409,
+      );
     }
 
-    // If name already exists in the db throw error
-    const existingProductByName = await prismaMain.product.findFirst({
-      where: { name: data.name },
+    try {
+      return await prismaMain.workflowStatus.create({
+        data: {
+          ...data,
+          createdBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A workflow status with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async getById(id: string) {
+    const item = await prismaMain.workflowStatus.findFirst({
+      where: { id, deletedAt: null },
     });
-    if (
-      !!existingProductByName &&
-      existingProduct.name !== existingProductByName.name
-    )
-      throw new ValidationError({
-        name: "Product with the same name already exists",
+
+    if (!item) {
+      throw new CustomError("Workflow status not found", 404);
+    }
+
+    return item;
+  },
+
+  async update(id: string, data: WorkflowStatusUpdateInput, userId?: string) {
+    const existing = await prismaMain.workflowStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Workflow status not found", 404);
+    }
+
+    if (data.code && data.code !== existing.code) {
+      const duplicate = await prismaMain.workflowStatus.findFirst({
+        where: { code: data.code, NOT: { id } },
       });
 
-    // If shortName already exists in the db throw error
-    const existingProductByShortName = await prismaMain.product.findFirst({
-      where: { shortName: data.shortName },
-    });
-    if (
-      !!existingProductByShortName &&
-      existingProduct.id !== existingProductByShortName.id
-    )
-      throw new ValidationError({
-        shortName: "Product with the same short name already exists",
-      });
+      if (duplicate) {
+        throw new CustomError(
+          "A workflow status with this code already exists",
+          409,
+        );
+      }
+    }
 
-    // Update the product
-    return await prismaMain.product.update({
-      where: { id: productId },
+    try {
+      return await prismaMain.workflowStatus.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        },
+      });
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "A workflow status with this code already exists",
+          409,
+        );
+      }
+      throw error;
+    }
+  },
+
+  async delete(id: string, userId?: string) {
+    const existing = await prismaMain.workflowStatus.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Workflow status not found", 404);
+    }
+
+    // Block deletion while other records still reference this row
+    const usage = await Promise.all([
+      prismaMain.student.count({
+        where: { approvalStatusId: id, deletedAt: null },
+      }),
+      prismaMain.result.count({
+        where: { workflowStatusId: id, deletedAt: null },
+      }),
+      prismaMain.payroll.count({
+        where: { workflowStatusId: id, deletedAt: null },
+      }),
+    ]);
+
+    if (usage.some((count) => count > 0)) {
+      throw new CustomError(
+        "This workflow status is in use and cannot be deleted. Deactivate it instead.",
+        409,
+      );
+    }
+
+    await prismaMain.workflowStatus.update({
+      where: { id },
       data: {
-        name: data.name,
-        shortName: data.shortName,
-        price: data.price,
-        quantity: data.quantity,
-        categoryId: data.categoryId,
-      },
-      include: {
-        category: true,
+        deletedAt: new Date(),
+        updatedBy: userId,
       },
     });
-  },
 
-  getByName: async (name: string) => {
-    return await prismaMain.product.findFirst({
-      where: { name },
-      include: {
-        category: true,
-      },
-    });
-  },
-
-  getByShortName: async (shortName: string) => {
-    return await prismaMain.product.findFirst({
-      where: { shortName },
-      include: {
-        category: true,
-      },
-    });
-  },
-
-  getByCategoryId: async (categoryId: string, userId: string) => {
-    return await prismaMain.product.findMany({
-      where: {
-        categoryId,
-        userId,
-      },
-      include: {
-        category: true,
-      },
-    });
-  },
-  // product/service.ts
-
-  delete: async (productId: string) => {
-    // Validating where productId exists or not
-    const product = await prismaMain.product.findUnique({
-      where: { id: productId },
-    });
-
-    // if product not found, throw error
-    if (!product) throw new CustomError("Product not found", 404);
-
-    // Delete the product
-    return await prismaMain.product.delete({
-      where: { id: productId },
-    });
+    return null;
   },
 };
 
@@ -128354,51 +149054,56 @@ export const ProductService = {
 
 ---
 
-### <a id="📄-src-modules-product-validator-ts"></a>📄 `src/modules/product/validator.ts`
+### <a id="📄-src-modules-workflow-status-validator-ts"></a>📄 `src/modules/workflow-status/validator.ts`
 
 **File Info:**
-- **Size**: 992 B
+- **Size**: 939 B
 - **Extension**: `.ts`
 - **Language**: `typescript`
-- **Location**: `src/modules/product/validator.ts`
-- **Relative Path**: `src/modules/product`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `f4cc9342919d0ceb5ecebe90c9281b78`
-- **SHA256**: `30b996ed07be8dd040f2e2362f68e06ce572056ac2dc4f4ace2e7fbeb5768d42`
+- **Location**: `src/modules/workflow-status/validator.ts`
+- **Relative Path**: `src/modules/workflow-status`
+- **Created**: 2026-10-31 13:26:04 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:26:05 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `8b2dd5909c7265c502ce8a988c3c1ac5`
+- **SHA256**: `b0c3027f5b1dbac3bed07b782ab62ac0ca632c1eb4bc353582e6725fc5b0f5bf`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```typescript
-import z from "zod";
+import { z } from "zod";
 
-export const productCreateInputSchema = z.object({
+export const workflowStatusCreateInputSchema = z.object({
+  code: z
+    .string()
+    .trim()
+    .min(1, "Code is required")
+    .max(50, "Code is too long")
+    .transform((value) => value.toUpperCase()),
   name: z
-    .string({ message: "Name is required" })
+    .string()
+    .trim()
     .min(1, "Name is required")
-    .max(100, "Name must be at most 100 characters"),
-  shortName: z
-    .string({ message: "Short name is required" })
-    .min(1, "Short name is required")
-    .max(50, "Short name must be at most 50 characters"),
-  price: z
-    .number({ message: "Price is required" })
-    .positive("Price must be a positive number"),
-  quantity: z
-    .number({ message: "Quantity is required" })
-    .int("Quantity must be an integer")
-    .nonnegative("Quantity cannot be negative")
-    .default(0),
-  categoryId: z
-    .string({ message: "Category ID is required" })
-    .min(1, "Category ID is required"),
+    .max(255, "Name is too long"),
+  isActive: z.boolean().default(true),
 });
 
-export type T_ProductCreateInput = z.infer<typeof productCreateInputSchema>;
+export const workflowStatusUpdateInputSchema =
+  workflowStatusCreateInputSchema.partial();
 
-export const validateProductCreate = (data: T_ProductCreateInput) => {
-  return productCreateInputSchema.parse(data);
+export type WorkflowStatusCreateInput = z.infer<
+  typeof workflowStatusCreateInputSchema
+>;
+export type WorkflowStatusUpdateInput = z.infer<
+  typeof workflowStatusUpdateInputSchema
+>;
+
+export const validateWorkflowStatusCreate = (data: unknown) => {
+  return workflowStatusCreateInputSchema.parse(data);
+};
+
+export const validateWorkflowStatusUpdate = (data: unknown) => {
+  return workflowStatusUpdateInputSchema.parse(data);
 };
 
 ```
@@ -128741,15 +149446,15 @@ export const ResponseHandler = {
 ### <a id="📄-src-index-ts"></a>📄 `src/index.ts`
 
 **File Info:**
-- **Size**: 1.14 KB
+- **Size**: 1.22 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/index.ts`
 - **Relative Path**: `src`
 - **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-09 18:18:27 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `d123320086e2ce1b1c8fe7477826c4c9`
-- **SHA256**: `e37946ab28f840868bdb453ab37719a4783a50c5e829ffb07eb121dd17275434`
+- **Modified**: 2026-10-30 18:40:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `f304a792f514877171bfe1953d8de74c`
+- **SHA256**: `0d638d73d857cd4de97fe2dd7e074e8f6a8510ee7026e44de7e4c795d92517a8`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -128763,6 +149468,7 @@ import appRoutes from "./router";
 import cors from "cors";
 import { prismaMain } from "./lib/prismaClient";
 import morgan from "morgan";
+import { seedDefaultAdmin } from "./dev/seedDefaultAdmin";
 
 const app = express();
 // =================================================
@@ -128785,7 +149491,7 @@ async function main() {
   try {
     await prismaMain.$connect();
     console.log("Database connected");
-
+    seedDefaultAdmin()
     app.listen(process.env.PORT || 8000, () => {
       console.log(`Server is running at PORT:${process.env.PORT || 8000}`);
     });
@@ -128804,15 +149510,15 @@ main();
 ### <a id="📄-src-router-ts"></a>📄 `src/router.ts`
 
 **File Info:**
-- **Size**: 478 B
+- **Size**: 6.88 KB
 - **Extension**: `.ts`
 - **Language**: `typescript`
 - **Location**: `src/router.ts`
 - **Relative Path**: `src`
-- **Created**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-09-27 13:32:04 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `60d7554f3655ef0930ec9b1690245e21`
-- **SHA256**: `12daeb4efdcf999c864d79e9cb3c98a2c75c2c9376da28cdf30a54d77c624edb`
+- **Created**: 2026-10-27 04:20:21 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-31 13:27:19 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `b37fb7c7fc751453c33e80262ce919cf`
+- **SHA256**: `9903f3b451cda66a8be536a74a8026f7988cc45001bfc290e5141000b269477d`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -128820,16 +149526,128 @@ main();
 ```typescript
 import express, { Router } from "express";
 import authRouter from "./modules/auth/routes";
-import categoryRouter from "./modules/categories/routes";
-import productRouter from "./modules/product/routes";
-import billRouter from "./modules/bill/routes";
+import { accountRouter } from "./modules/account/routes";
+import { accountTypeRouter } from "./modules/account-type/routes";
+import { accountantRouter } from "./modules/accountant/routes";
+import { attendanceSessionRouter } from "./modules/attendance-session/routes";
+import { attendanceStatusRouter } from "./modules/attendance-status/routes";
+import { batchRouter } from "./modules/batch/routes";
+import { batchTermRouter } from "./modules/batch-term/routes";
+import { batchTermSubjectRouter } from "./modules/batch-term-subject/routes";
+import { courseRouter } from "./modules/course/routes";
+import { courseSystemRouter } from "./modules/course-system/routes";
+import { employeeRouter } from "./modules/employee/routes";
+import { employeeAttendanceRouter } from "./modules/employee-attendance/routes";
+import { examRouter } from "./modules/exam/routes";
+import { examMarkRouter } from "./modules/exam-mark/routes";
+import { examSubjectRouter } from "./modules/exam-subject/routes";
+import { examTypeRouter } from "./modules/exam-type/routes";
+import { feeHeadRouter } from "./modules/fee-head/routes";
+import { feeInstallmentRouter } from "./modules/fee-installment/routes";
+import { feePaymentRouter } from "./modules/fee-payment/routes";
+import { feePaymentAllocationRouter } from "./modules/fee-payment-allocation/routes";
+import { feePaymentMethodLineRouter } from "./modules/fee-payment-method-line/routes";
+import { feeStructureRouter } from "./modules/fee-structure/routes";
+import { feeStructureItemRouter } from "./modules/fee-structure-item/routes";
+import { fiscalYearRouter } from "./modules/fiscal-year/routes";
+import { gradeScaleRouter } from "./modules/grade-scale/routes";
+import { guardianRouter } from "./modules/guardian/routes";
+import { guardianRelationRouter } from "./modules/guardian-relation/routes";
+import { journalEntryRouter } from "./modules/journal-entry/routes";
+import { journalLineRouter } from "./modules/journal-line/routes";
+import { journalSourceRouter } from "./modules/journal-source/routes";
+import { leaveTypeRouter } from "./modules/leave-type/routes";
+import { noticeRouter } from "./modules/notice/routes";
+import { noticeTargetRouter } from "./modules/notice-target/routes";
+import { otpRouter } from "./modules/otp/routes";
+import { paymentMethodRouter } from "./modules/payment-method/routes";
+import { payrollRouter } from "./modules/payroll/routes";
+import { payslipRouter } from "./modules/payslip/routes";
+import { payslipItemRouter } from "./modules/payslip-item/routes";
+import { periodRouter } from "./modules/period/routes";
+import { principalRouter } from "./modules/principal/routes";
+import { resultRouter } from "./modules/result/routes";
+import { resultSubjectRouter } from "./modules/result-subject/routes";
+import { salaryComponentRouter } from "./modules/salary-component/routes";
+import { salaryStructureRouter } from "./modules/salary-structure/routes";
+import { salaryStructureItemRouter } from "./modules/salary-structure-item/routes";
+import { settingRouter } from "./modules/setting/routes";
+import { staffRouter } from "./modules/staff/routes";
+import { studentRouter } from "./modules/student/routes";
+import { studentAttendanceRouter } from "./modules/student-attendance/routes";
+import { studentFeeRouter } from "./modules/student-fee/routes";
+import { studentFeeItemRouter } from "./modules/student-fee-item/routes";
+import { studentStatusRouter } from "./modules/student-status/routes";
+import { subjectRouter } from "./modules/subject/routes";
+import { taxSlabRouter } from "./modules/tax-slab/routes";
+import { teacherRouter } from "./modules/teacher/routes";
+import { teacherBatchPayRouter } from "./modules/teacher-batch-pay/routes";
+import { teachingAssignmentRouter } from "./modules/teaching-assignment/routes";
+import { userRouter } from "./modules/user/routes";
+import { workflowStatusRouter } from "./modules/workflow-status/routes";
 
 const router: Router = express.Router();
 
 router.use("/auth", authRouter);
-router.use("/category", categoryRouter);
-router.use("/product", productRouter);
-router.use("/bill", billRouter);
+router.use("/account", accountRouter);
+router.use("/account-type", accountTypeRouter);
+router.use("/accountant", accountantRouter);
+router.use("/attendance-session", attendanceSessionRouter);
+router.use("/attendance-status", attendanceStatusRouter);
+router.use("/batch", batchRouter);
+router.use("/batch-term", batchTermRouter);
+router.use("/batch-term-subject", batchTermSubjectRouter);
+router.use("/course", courseRouter);
+router.use("/course-system", courseSystemRouter);
+router.use("/employee", employeeRouter);
+router.use("/employee-attendance", employeeAttendanceRouter);
+router.use("/exam", examRouter);
+router.use("/exam-mark", examMarkRouter);
+router.use("/exam-subject", examSubjectRouter);
+router.use("/exam-type", examTypeRouter);
+router.use("/fee-head", feeHeadRouter);
+router.use("/fee-installment", feeInstallmentRouter);
+router.use("/fee-payment", feePaymentRouter);
+router.use("/fee-payment-allocation", feePaymentAllocationRouter);
+router.use("/fee-payment-method-line", feePaymentMethodLineRouter);
+router.use("/fee-structure", feeStructureRouter);
+router.use("/fee-structure-item", feeStructureItemRouter);
+router.use("/fiscal-year", fiscalYearRouter);
+router.use("/grade-scale", gradeScaleRouter);
+router.use("/guardian", guardianRouter);
+router.use("/guardian-relation", guardianRelationRouter);
+router.use("/journal-entry", journalEntryRouter);
+router.use("/journal-line", journalLineRouter);
+router.use("/journal-source", journalSourceRouter);
+router.use("/leave-type", leaveTypeRouter);
+router.use("/notice", noticeRouter);
+router.use("/notice-target", noticeTargetRouter);
+router.use("/otp", otpRouter);
+router.use("/payment-method", paymentMethodRouter);
+router.use("/payroll", payrollRouter);
+router.use("/payslip", payslipRouter);
+router.use("/payslip-item", payslipItemRouter);
+router.use("/period", periodRouter);
+router.use("/principal", principalRouter);
+router.use("/result", resultRouter);
+router.use("/result-subject", resultSubjectRouter);
+router.use("/salary-component", salaryComponentRouter);
+router.use("/salary-structure", salaryStructureRouter);
+router.use("/salary-structure-item", salaryStructureItemRouter);
+router.use("/setting", settingRouter);
+router.use("/staff", staffRouter);
+router.use("/student", studentRouter);
+router.use("/student-attendance", studentAttendanceRouter);
+router.use("/student-fee", studentFeeRouter);
+router.use("/student-fee-item", studentFeeItemRouter);
+router.use("/student-status", studentStatusRouter);
+router.use("/subject", subjectRouter);
+router.use("/tax-slab", taxSlabRouter);
+router.use("/teacher", teacherRouter);
+router.use("/teacher-batch-pay", teacherBatchPayRouter);
+router.use("/teaching-assignment", teachingAssignmentRouter);
+router.use("/user", userRouter);
+router.use("/workflow-status", workflowStatusRouter);
 
 export default router;
 
@@ -128837,18 +149655,51 @@ export default router;
 
 ---
 
+### <a id="📄-list-modules-ps1"></a>📄 `list_modules.ps1`
+
+**File Info:**
+- **Size**: 454 B
+- **Extension**: `.ps1`
+- **Language**: `powershell`
+- **Location**: `list_modules.ps1`
+- **Relative Path**: `root`
+- **Created**: 2026-10-27 04:04:49 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 04:04:49 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `c727a2d7dfa04e1ec9e5dd6f3865150b`
+- **SHA256**: `3c7cd263acf9527b275cba38641809b5830e7770007fcbc893d1cdfc092ceb74`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```powershell
+$root = 'C:\Users\user\OneDrive\Documents\GitHub\COLLIFY\POS-Backend-Node'
+$base = Join-Path $root 'src'
+Get-ChildItem (Join-Path $base 'modules') -Directory | ForEach-Object {
+    $dir = $_.FullName
+    $routes = Join-Path $dir 'routes.ts'
+    if (Test-Path $routes) {
+        $lines = (Get-Content $routes).Count
+        Write-Output ('DIR: OK ' + $_.Name + ' ' + $lines + ' lines')
+    } else {
+        Write-Output ('DIR: MISSING ' + $_.Name)
+    }
+}
+```
+
+---
+
 ### <a id="📄-package-json"></a>📄 `package.json`
 
 **File Info:**
-- **Size**: 1.28 KB
+- **Size**: 1.31 KB
 - **Extension**: `.json`
 - **Language**: `json`
 - **Location**: `package.json`
 - **Relative Path**: `root`
-- **Created**: 2026-10-09 18:06:26 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-09 18:06:26 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `6d42bcd71ec4b67dbf1b80899ca761fd`
-- **SHA256**: `602c2118c78664c84fed3844f5a3f3fe36a095a964a4d91c7d46895640ba2f7e`
+- **Created**: 2026-10-27 13:29:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 13:29:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `1f383c59821f69ece71e1e98b31761fb`
+- **SHA256**: `195541da93c96c3e3ead5f0402ca38eb98b7e5543d4080110b314f56edd5fd17`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -128895,6 +149746,7 @@ export default router;
     "@types/cookie-parser": "^1.4.10",
     "@types/express": "^5.0.6",
     "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
     "@types/node": "^25.7.0",
     "bcrypt": "^6.0.0",
     "nodemon": "^3.1.14",
@@ -128912,15 +149764,15 @@ export default router;
 ### <a id="📄-pnpm-lock-yaml"></a>📄 `pnpm-lock.yaml`
 
 **File Info:**
-- **Size**: 81.14 KB
+- **Size**: 81.44 KB
 - **Extension**: `.yaml`
 - **Language**: `yaml`
 - **Location**: `pnpm-lock.yaml`
 - **Relative Path**: `root`
-- **Created**: 2026-10-09 18:17:30 (Asia/Katmandu / GMT+06:45)
-- **Modified**: 2026-10-09 18:17:30 (Asia/Katmandu / GMT+06:45)
-- **MD5**: `5d6febd78851fd832aa2ba4928cf39e7`
-- **SHA256**: `715ed0ea788b130995850dbe06c82a415bb93960f59b68c0d5d1417e034f5cd0`
+- **Created**: 2026-10-27 13:29:29 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 13:29:29 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `3594692aba826f7269c60ce6329116d2`
+- **SHA256**: `dc00e7c5b7ee1428ac2525fb038a64183ff0c6a3089404a49303f6bf3e12a6b1`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -128991,6 +149843,9 @@ importers:
       '@types/jsonwebtoken':
         specifier: ^9.0.10
         version: 9.0.10
+      '@types/morgan':
+        specifier: ^1.9.10
+        version: 1.9.10
       '@types/node':
         specifier: ^25.7.0
         version: 25.7.0
@@ -129391,6 +150246,9 @@ packages:
 
   '@types/jsonwebtoken@9.0.10':
     resolution: {integrity: sha512-asx5hIG9Qmf/1oStypjanR7iKTv0gXQ1Ov/jfrX6kS/EO0OFni8orbmGCn0672NHR3kXHwpAwR+B368ZGN/2rA==}
+
+  '@types/morgan@1.9.10':
+    resolution: {integrity: sha512-sS4A1zheMvsADRVfT0lYbJ4S9lmsey8Zo2F7cnbYjWHP67Q0AwMYuuzLlkIM2N8gAbb9cubhIVFwcIN2XyYCkA==}
 
   '@types/ms@2.1.0':
     resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
@@ -130621,6 +151479,10 @@ snapshots:
       '@types/ms': 2.1.0
       '@types/node': 25.7.0
 
+  '@types/morgan@1.9.10':
+    dependencies:
+      '@types/node': 25.7.0
+
   '@types/ms@2.1.0': {}
 
   '@types/node@25.7.0':
@@ -131582,6 +152444,39 @@ export default defineConfig({
   },
 });
 
+```
+
+---
+
+### <a id="📄-survey-ps1"></a>📄 `survey.ps1`
+
+**File Info:**
+- **Size**: 474 B
+- **Extension**: `.ps1`
+- **Language**: `powershell`
+- **Location**: `survey.ps1`
+- **Relative Path**: `root`
+- **Created**: 2026-10-27 03:51:11 (Asia/Katmandu / GMT+06:45)
+- **Modified**: 2026-10-27 03:51:11 (Asia/Katmandu / GMT+06:45)
+- **MD5**: `31538868ffadbb514fa60d38fb5fd0cb`
+- **SHA256**: `1d588ec8492d423f78911079eb0e3b09c513ed2517470b1561806a0a4919e2ff`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```powershell
+$root = 'C:\Users\user\OneDrive\Documents\GitHub\COLLIFY\POS-Backend-Node'
+Get-ChildItem "$root\src\modules" | ForEach-Object {
+    $name = $_.Name
+    $routesFile = Join-Path $_.FullName 'routes.ts'
+    if (Test-Path $routesFile) {
+        $content = Get-Content $routesFile -Raw
+        $lines = ($content | Measure-Object -Line).Lines
+        Write-Output ("OK: " + $name + " (" + $lines + " lines)")
+    } else {
+        Write-Output ("MISSING ROUTES: " + $name)
+    }
+}
 ```
 
 ---
