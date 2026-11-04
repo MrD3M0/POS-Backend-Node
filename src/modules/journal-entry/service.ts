@@ -52,8 +52,8 @@ export const JournalEntryService = {
       const entry = await prismaMain.journalEntry.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
         include: {
           lines: true,
           source: true,

@@ -1,5 +1,4 @@
 import { z } from "zod";
-import { Decimal } from "decimal.js";
 
 const creditHourSchema = z.number().positive("Credit hour must be a positive number").max(999.9, "Credit hour is too large");
 

@@ -41,8 +41,8 @@ export const ExamSubjectService = {
       const item = await prismaMain.examSubject.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
       });
       return item;
     } catch (error: any) {

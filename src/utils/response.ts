@@ -7,6 +7,7 @@ export const ResponseHandler = {
     code: number;
     message: string;
     data: unknown;
+    pagination?: unknown;
   }) => {
     const { res, code, message, data } = args;
     return res.status(code).json({

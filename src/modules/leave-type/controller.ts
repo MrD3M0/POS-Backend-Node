@@ -3,8 +3,8 @@ import { LeaveTypeService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateLeaveTypeCreate } from "./validator";
-import { validateLeaveTypeUpdate } from "./validator";
+
+import { validateLeaveTypeCreate, validateLeaveTypeUpdate } from "./validator";
 
 export const LeaveTypeController = {
   index: async (req: Request, res: Response) => {

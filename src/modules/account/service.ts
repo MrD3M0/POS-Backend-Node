@@ -44,8 +44,8 @@ export const AccountService = {
       const account = await prismaMain.account.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
         include: {
           children: true,
           journalLines: true,

@@ -24,7 +24,7 @@ export const ExamService = {
         skip,
         take: limit,
         include: {
-          examSubjects: true,
+          subjects: true,
           examMarks: true,
         },
         orderBy: { createdAt: "desc" },
@@ -43,12 +43,12 @@ export const ExamService = {
       const exam = await prismaMain.exam.create({
         data: {
           ...data,
-          createdBy: userId,
+          ...(userId && { createdBy: userId }),
         },
         include: {
-          examSubjects: true,
+          subjects: true,
           examMarks: true,
-        },
+        } as any,
       });
       return exam;
     } catch (error: any) {
@@ -63,7 +63,7 @@ export const ExamService = {
     const exam = await prismaMain.exam.findFirst({
       where: { id, deletedAt: null },
       include: {
-        examSubjects: true,
+        subjects: true,
         examMarks: true,
       },
     });

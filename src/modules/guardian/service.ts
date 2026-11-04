@@ -44,8 +44,8 @@ export const GuardianService = {
       const guardian = await prismaMain.guardian.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
         include: {
           relation: true,
         },

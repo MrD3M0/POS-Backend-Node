@@ -11,7 +11,7 @@ export const resultCreateInputSchema = z.object({
   cgpa: z.number().min(0).max(4).optional().nullable(),
   isPassed: z.boolean(),
   status: z.enum(["PENDING", "SUBMITTED", "APPROVED", "PUBLISHED"], {
-    errorMap: () => ({ message: "Status must be PENDING, SUBMITTED, APPROVED, or PUBLISHED" }),
+    message: "Status must be PENDING, SUBMITTED, APPROVED, or PUBLISHED",
   }).default("PENDING"),
   submittedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
   approvedBy: z.string().uuid("Invalid User ID format").optional().nullable(),

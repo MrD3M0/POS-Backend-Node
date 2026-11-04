@@ -6,9 +6,7 @@ export const employeeCreateInputSchema = z.object({
   firstName: z.string().min(1, "First name is required").max(100, "First name is too long"),
   middleName: z.string().max(100, "Middle name is too long").optional().nullable(),
   lastName: z.string().min(1, "Last name is required").max(100, "Last name is too long"),
-  gender: z.enum(["MALE", "FEMALE", "OTHERS"], {
-    errorMap: () => ({ message: "Gender must be MALE, FEMALE, or OTHERS" }),
-  }),
+  gender: z.enum(["MALE", "FEMALE", "OTHERS"], { message: "Gender must be MALE, FEMALE, or OTHERS" }),
   dobBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
   phone: z.string().max(20, "Phone number is too long").optional().nullable(),
   email: z.string().email("Invalid email format").max(255, "Email is too long").optional().nullable(),

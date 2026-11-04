@@ -7,7 +7,7 @@ export const studentCreateInputSchema = z.object({
   middleName: z.string().max(100, "Middle name is too long").optional().nullable(),
   lastName: z.string().min(1, "Last name is required").max(100, "Last name is too long"),
   gender: z.enum(["MALE", "FEMALE", "OTHERS"], {
-    errorMap: () => ({ message: "Gender must be MALE, FEMALE, or OTHERS" }),
+    message: "Gender must be MALE, FEMALE, or OTHERS",
   }),
   dobBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
   phone: z.string().max(20, "Phone number is too long").optional().nullable(),
@@ -18,10 +18,10 @@ export const studentCreateInputSchema = z.object({
   batchId: z.string().uuid("Invalid Batch ID format"),
   admissionDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
   status: z.enum(["ACTIVE", "GRADUATED", "DROPPED", "SUSPENDED"], {
-    errorMap: () => ({ message: "Status must be ACTIVE, GRADUATED, DROPPED, or SUSPENDED" }),
+    message: "Status must be ACTIVE, GRADUATED, DROPPED, or SUSPENDED",
   }).default("ACTIVE"),
   approvalStatus: z.enum(["PENDING", "APPROVED", "REJECTED"], {
-    errorMap: () => ({ message: "Approval status must be PENDING, APPROVED, or REJECTED" }),
+    message: "Approval status must be PENDING, APPROVED, or REJECTED",
   }).default("PENDING"),
   rejectionReason: z.string().max(1000, "Rejection reason is too long").optional().nullable(),
   createdBy: z.string().uuid("Invalid Creator User ID format").optional().nullable(),

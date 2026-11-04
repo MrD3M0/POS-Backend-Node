@@ -37,8 +37,8 @@ export const ExamTypeService = {
       const examType = await prismaMain.examType.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
       });
       return examType;
     } catch (error: any) {

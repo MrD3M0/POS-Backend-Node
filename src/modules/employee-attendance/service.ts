@@ -52,8 +52,8 @@ export const EmployeeAttendanceService = {
       const record = await prismaMain.employeeAttendance.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
         include: {
           leaveType: true,
         },

@@ -56,8 +56,8 @@ export const CourseService = {
       const course = await prismaMain.course.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
       });
       return course;
     } catch (error: any) {

@@ -44,8 +44,8 @@ export const FeePaymentAllocationService = {
       const allocation = await prismaMain.feePaymentAllocation.create({
         data: {
           ...data,
-          createdBy: userId,
-        },
+          ...(userId && { createdBy: userId }),
+        } as any,
         include: {
           studentFee: true,
           installment: true,

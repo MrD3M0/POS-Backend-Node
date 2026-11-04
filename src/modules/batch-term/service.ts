@@ -86,11 +86,11 @@ export const BatchTermService = {
       const batchTerm = await prismaMain.batchTerm.create({
         data: {
           ...data,
-          createdBy: userId,
+          ...(userId && { createdBy: userId }),
         },
         include: {
           batch: { include: { course: true } },
-        },
+        } as any,
       });
       return batchTerm;
     } catch (error: any) {

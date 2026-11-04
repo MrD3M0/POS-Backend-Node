@@ -24,7 +24,7 @@ export const AttendanceSessionService = {
         skip,
         take: limit,
         include: {
-          attendances: true,
+          records: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -42,10 +42,10 @@ export const AttendanceSessionService = {
       const session = await prismaMain.attendanceSession.create({
         data: {
           ...data,
-          createdBy: userId,
+          ...(userId && { createdBy: userId }),
         },
         include: {
-          attendances: true,
+          records: true,
         },
       });
       return session;
@@ -61,7 +61,7 @@ export const AttendanceSessionService = {
     const session = await prismaMain.attendanceSession.findFirst({
       where: { id, deletedAt: null },
       include: {
-        attendances: true,
+        records: true,
       },
     });
 
