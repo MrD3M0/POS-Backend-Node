@@ -2,8 +2,8 @@ import { z } from "zod";
 
 export const payrollCreateInputSchema = z.object({
   fiscalYearId: z.string().uuid("Invalid Fiscal Year ID format"),
-  yearBs: z.string().min(1, "Year is required"),
-  monthBs: z.string().min(1, "Month is required"),
+  yearBs: z.coerce.number().int().min(2000, "Invalid BS year").max(2100, "Invalid BS year"),
+  monthBs: z.coerce.number().int().min(1, "Month must be 1-12").max(12, "Month must be 1-12"),
   totalDays: z.number().int().min(0),
 });
 

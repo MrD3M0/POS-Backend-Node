@@ -13,10 +13,7 @@ export const PayrollService = {
     };
 
     if (query.search) {
-      whereClause.OR = [
-        { fiscalYearId: { contains: query.search, mode: "insensitive" } },
-        { yearBs: { contains: query.search, mode: "insensitive" } },
-      ];
+      whereClause.fiscalYearId = query.search;
     }
 
     const [records, total] = await Promise.all([

@@ -5,8 +5,7 @@ export const salaryStructureCreateInputSchema = z.object({
   basicSalary: z.number().min(0, "Basic salary must be >= 0"),
   effectiveFromBs: z
     .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")
-    .optional(),
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
   effectiveToBs: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format")

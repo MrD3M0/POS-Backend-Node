@@ -9,12 +9,16 @@ export const ResponseHandler = {
     data: unknown;
     pagination?: unknown;
   }) => {
-    const { res, code, message, data } = args;
+    const { res, code, message, data, pagination } = args;
+    const normalizedData =
+      pagination !== undefined && Array.isArray(data)
+        ? { data, pagination }
+        : data;
     return res.status(code).json({
       success: true,
       code,
       message,
-      data,
+      data: normalizedData,
       meta: ResponseHandler.meta({ res }),
     });
   },

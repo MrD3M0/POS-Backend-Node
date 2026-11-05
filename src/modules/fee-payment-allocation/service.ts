@@ -8,9 +8,7 @@ export const FeePaymentAllocationService = {
     const limit = query.limit && query.limit > 0 ? query.limit : 10;
     const skip = (page - 1) * limit;
 
-    const whereClause: any = {
-      deletedAt: null,
-    };
+    const whereClause: any = {};
 
     if (query.search) {
       whereClause.OR = [
@@ -25,8 +23,8 @@ export const FeePaymentAllocationService = {
         skip,
         take: limit,
         include: {
-          studentFee: true,
-          installment: true,
+          studentFeeItem: true,
+          feeInstallment: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -47,8 +45,8 @@ export const FeePaymentAllocationService = {
           ...(userId && { createdBy: userId }),
         } as any,
         include: {
-          studentFee: true,
-          installment: true,
+          studentFeeItem: true,
+          feeInstallment: true,
         },
       });
       return allocation;
@@ -62,10 +60,10 @@ export const FeePaymentAllocationService = {
 
   async getById(id: string) {
     const allocation = await prismaMain.feePaymentAllocation.findFirst({
-      where: { id, deletedAt: null },
+      where: { id },
       include: {
-        studentFee: true,
-        installment: true,
+        studentFeeItem: true,
+        feeInstallment: true,
       },
     });
 
@@ -78,19 +76,15 @@ export const FeePaymentAllocationService = {
 
   async delete(id: string, userId?: string) {
     const existing = await prismaMain.feePaymentAllocation.findFirst({
-      where: { id, deletedAt: null },
+      where: { id },
     });
 
     if (!existing) {
       throw new CustomError("Fee payment allocation not found", 404);
     }
 
-    await prismaMain.feePaymentAllocation.update({
+    await prismaMain.feePaymentAllocation.delete({
       where: { id },
-      data: {
-        deletedAt: new Date(),
-        updatedBy: userId,
-      },
     });
 
     return null;

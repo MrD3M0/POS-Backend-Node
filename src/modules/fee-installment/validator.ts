@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const feeInstallmentCreateInputSchema = z.object({
   studentFeeItemId: z.string().uuid("Invalid Student Fee Item ID format"),
+  installmentNo: z.coerce.number().int().min(1, "Installment number is required"),
   dueDateBs: z.string().min(1, "Due date is required"),
   amount: z.string().min(1, "Amount is required"),
 });

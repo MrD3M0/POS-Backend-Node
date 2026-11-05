@@ -25,7 +25,7 @@ export const FeeInstallmentService = {
         skip,
         take: limit,
         include: {
-          studentFee: true,
+          studentFeeItem: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -46,7 +46,7 @@ export const FeeInstallmentService = {
           createdBy: userId,
         },
         include: {
-          studentFee: true,
+          studentFeeItem: true,
         },
       });
       return installment;
@@ -62,7 +62,7 @@ export const FeeInstallmentService = {
     const installment = await prismaMain.feeInstallment.findFirst({
       where: { id, deletedAt: null },
       include: {
-        studentFee: true,
+        studentFeeItem: true,
       },
     });
 

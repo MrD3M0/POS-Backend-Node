@@ -32,7 +32,7 @@ export const StudentAttendanceController = {
           search,
           sessionId: asString(req.query.sessionId),
           studentId: asString(req.query.studentId),
-          statusId: asString(req.query.statusId),
+          status: asString(req.query.status),
           batchId: asString(req.query.batchId),
           dateBs: asString(req.query.dateBs),
         },

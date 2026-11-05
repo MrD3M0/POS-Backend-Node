@@ -1,7 +1,9 @@
 import { z } from "zod";
 
 export const resultSubjectCreateInputSchema = z.object({
+  resultId: z.string().uuid("Invalid Result ID format"),
   examSubjectId: z.string().uuid("Invalid Exam Subject ID format"),
+  gradeScaleId: z.string().uuid("Invalid Grade Scale ID format"),
   marksObtained: z.number().min(0, "Marks obtained must be >= 0"),
   fullMarks: z.number().min(1, "Full marks must be > 0"),
   creditHour: z.number().min(0, "Credit hour must be >= 0"),

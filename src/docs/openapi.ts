@@ -17,40 +17,6 @@ export const openApiSpec = {
         responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "acc_123", code: "1001", name: "Cash in Hand", accountTypeId: "at_123", isGroup: false, isActive: true }, message: "account created successfully" } } } } }
       },
     },
-    "/api/account-type": {
-      get: {
-        tags: ["account-type"],
-        summary: "List account-type",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "at_123", code: "ASSET", name: "Asset", isDebitNormal: true, sortOrder: 1 }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["account-type"],
-        summary: "Create account-type",
-        requestBody: { required: true, content: { "application/json": { example: { code: "ASSET", name: "Asset", isDebitNormal: true, sortOrder: 1 }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "at_123", code: "ASSET", name: "Asset", isDebitNormal: true, sortOrder: 1 }, message: "account-type created successfully" } } } } }
-      },
-    },
-    "/api/account-type/{id}": {
-      get: {
-        tags: ["account-type"],
-        summary: "Get account-type by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "at_123", code: "ASSET", name: "Asset", isDebitNormal: true, sortOrder: 1 }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["account-type"],
-        summary: "Update account-type",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "ASSET", name: "Asset", isDebitNormal: true, sortOrder: 1 }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "at_123", code: "ASSET", name: "Asset", isDebitNormal: true, sortOrder: 1 }, message: "account-type updated" } } } } }
-      },
-      delete: {
-        tags: ["account-type"],
-        summary: "Delete account-type",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
-      },
-    },
     "/api/account/{id}": {
       get: {
         tags: ["account"],
@@ -115,40 +81,6 @@ export const openApiSpec = {
       delete: {
         tags: ["attendance-session"],
         summary: "Delete attendance-session",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
-      },
-    },
-    "/api/attendance-status": {
-      get: {
-        tags: ["attendance-status"],
-        summary: "List attendance-status",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "as_123", code: "PRESENT", name: "Present", salaryFactor: 1, isActive: true }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["attendance-status"],
-        summary: "Create attendance-status",
-        requestBody: { required: true, content: { "application/json": { example: { code: "PRESENT", name: "Present", salaryFactor: 1 }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "as_123", code: "PRESENT", name: "Present", salaryFactor: 1, isActive: true }, message: "attendance-status created successfully" } } } } }
-      },
-    },
-    "/api/attendance-status/{id}": {
-      get: {
-        tags: ["attendance-status"],
-        summary: "Get attendance-status by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "as_123", code: "PRESENT", name: "Present", salaryFactor: 1, isActive: true }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["attendance-status"],
-        summary: "Update attendance-status",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "PRESENT", name: "Present", salaryFactor: 1 }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "as_123", code: "PRESENT", name: "Present", salaryFactor: 1, isActive: true }, message: "attendance-status updated" } } } } }
-      },
-      delete: {
-        tags: ["attendance-status"],
-        summary: "Delete attendance-status",
         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
         responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
@@ -297,40 +229,6 @@ export const openApiSpec = {
         summary: "Create course",
         requestBody: { required: true, content: { "application/json": { example: { code: "COURSE", name: "Sample Course" }, schema: { type: "object" } } } },
         responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "course_123", code: "COURSE", name: "Sample Course", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "course created successfully" } } } } }
-      },
-    },
-    "/api/course-system": {
-      get: {
-        tags: ["course-system"],
-        summary: "List course-system",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "course-system_123", code: "COURSE_SYSTEM", name: "Sample Course-System", isActive: true, createdAt: "2024-01-15T00:00:00Z" }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["course-system"],
-        summary: "Create course-system",
-        requestBody: { required: true, content: { "application/json": { example: { code: "COURSE_SYSTEM", name: "Sample Course-System" }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "course-system_123", code: "COURSE_SYSTEM", name: "Sample Course-System", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "course-system created successfully" } } } } }
-      },
-    },
-    "/api/course-system/{id}": {
-      get: {
-        tags: ["course-system"],
-        summary: "Get course-system by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "course-system_123", code: "COURSE_SYSTEM", name: "Sample Course-System", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["course-system"],
-        summary: "Update course-system",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "COURSE_SYSTEM", name: "Sample Course-System" }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "course-system_123", code: "COURSE_SYSTEM", name: "Sample Course-System", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "course-system updated" } } } } }
-      },
-      delete: {
-        tags: ["course-system"],
-        summary: "Delete course-system",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
     },
     "/api/course/{id}": {
@@ -779,40 +677,6 @@ export const openApiSpec = {
         responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "guardian_123", code: "GUARDIAN", name: "Sample Guardian", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "guardian created successfully" } } } } }
       },
     },
-    "/api/guardian-relation": {
-      get: {
-        tags: ["guardian-relation"],
-        summary: "List guardian-relation",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "guardian-relation_123", code: "GUARDIAN_RELATION", name: "Sample Guardian-Relation", isActive: true, createdAt: "2024-01-15T00:00:00Z" }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["guardian-relation"],
-        summary: "Create guardian-relation",
-        requestBody: { required: true, content: { "application/json": { example: { code: "GUARDIAN_RELATION", name: "Sample Guardian-Relation" }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "guardian-relation_123", code: "GUARDIAN_RELATION", name: "Sample Guardian-Relation", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "guardian-relation created successfully" } } } } }
-      },
-    },
-    "/api/guardian-relation/{id}": {
-      get: {
-        tags: ["guardian-relation"],
-        summary: "Get guardian-relation by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "guardian-relation_123", code: "GUARDIAN_RELATION", name: "Sample Guardian-Relation", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["guardian-relation"],
-        summary: "Update guardian-relation",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "GUARDIAN_RELATION", name: "Sample Guardian-Relation" }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "guardian-relation_123", code: "GUARDIAN_RELATION", name: "Sample Guardian-Relation", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "guardian-relation updated" } } } } }
-      },
-      delete: {
-        tags: ["guardian-relation"],
-        summary: "Delete guardian-relation",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
-      },
-    },
     "/api/guardian/{id}": {
       get: {
         tags: ["guardian"],
@@ -877,40 +741,6 @@ export const openApiSpec = {
       delete: {
         tags: ["journal-line"],
         summary: "Delete journal-line",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
-      },
-    },
-    "/api/journal-source": {
-      get: {
-        tags: ["journal-source"],
-        summary: "List journal-source",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "journal-source_123", code: "JOURNAL_SOURCE", name: "Sample Journal-Source", isActive: true, createdAt: "2024-01-15T00:00:00Z" }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["journal-source"],
-        summary: "Create journal-source",
-        requestBody: { required: true, content: { "application/json": { example: { code: "JOURNAL_SOURCE", name: "Sample Journal-Source" }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "journal-source_123", code: "JOURNAL_SOURCE", name: "Sample Journal-Source", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "journal-source created successfully" } } } } }
-      },
-    },
-    "/api/journal-source/{id}": {
-      get: {
-        tags: ["journal-source"],
-        summary: "Get journal-source by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "journal-source_123", code: "JOURNAL_SOURCE", name: "Sample Journal-Source", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["journal-source"],
-        summary: "Update journal-source",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "JOURNAL_SOURCE", name: "Sample Journal-Source" }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "journal-source_123", code: "JOURNAL_SOURCE", name: "Sample Journal-Source", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "journal-source updated" } } } } }
-      },
-      delete: {
-        tags: ["journal-source"],
-        summary: "Delete journal-source",
         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
         responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
@@ -1546,40 +1376,6 @@ export const openApiSpec = {
         responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
     },
-    "/api/student-status": {
-      get: {
-        tags: ["student-status"],
-        summary: "List student-status",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "student-status_123", code: "STUDENT_STATUS", name: "Sample Student-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["student-status"],
-        summary: "Create student-status",
-        requestBody: { required: true, content: { "application/json": { example: { code: "STUDENT_STATUS", name: "Sample Student-Status" }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "student-status_123", code: "STUDENT_STATUS", name: "Sample Student-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "student-status created successfully" } } } } }
-      },
-    },
-    "/api/student-status/{id}": {
-      get: {
-        tags: ["student-status"],
-        summary: "Get student-status by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "student-status_123", code: "STUDENT_STATUS", name: "Sample Student-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["student-status"],
-        summary: "Update student-status",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "STUDENT_STATUS", name: "Sample Student-Status" }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "student-status_123", code: "STUDENT_STATUS", name: "Sample Student-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "student-status updated" } } } } }
-      },
-      delete: {
-        tags: ["student-status"],
-        summary: "Delete student-status",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
-      },
-    },
     "/api/student/{id}": {
       get: {
         tags: ["student"],
@@ -1807,40 +1603,6 @@ export const openApiSpec = {
         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
         requestBody: { required: true, content: { "application/json": { example: { code: "USER", name: "Sample User" }, schema: { type: "object" } } } },
         responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "user_123", code: "USER", name: "Sample User", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "user updated" } } } } }
-      },
-    },
-    "/api/workflow-status": {
-      get: {
-        tags: ["workflow-status"],
-        summary: "List workflow-status",
-        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "workflow-status_123", code: "WORKFLOW_STATUS", name: "Sample Workflow-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
-      },
-      post: {
-        tags: ["workflow-status"],
-        summary: "Create workflow-status",
-        requestBody: { required: true, content: { "application/json": { example: { code: "WORKFLOW_STATUS", name: "Sample Workflow-Status" }, schema: { type: "object" } } } },
-        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "workflow-status_123", code: "WORKFLOW_STATUS", name: "Sample Workflow-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "workflow-status created successfully" } } } } }
-      },
-    },
-    "/api/workflow-status/{id}": {
-      get: {
-        tags: ["workflow-status"],
-        summary: "Get workflow-status by ID",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "workflow-status_123", code: "WORKFLOW_STATUS", name: "Sample Workflow-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "Retrieved" } } } } }
-      },
-      patch: {
-        tags: ["workflow-status"],
-        summary: "Update workflow-status",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        requestBody: { required: true, content: { "application/json": { example: { code: "WORKFLOW_STATUS", name: "Sample Workflow-Status" }, schema: { type: "object" } } } },
-        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "workflow-status_123", code: "WORKFLOW_STATUS", name: "Sample Workflow-Status", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "workflow-status updated" } } } } }
-      },
-      delete: {
-        tags: ["workflow-status"],
-        summary: "Delete workflow-status",
-        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
-        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
     },
   }

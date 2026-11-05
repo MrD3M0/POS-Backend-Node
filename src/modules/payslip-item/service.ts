@@ -8,9 +8,7 @@ export const PayslipItemService = {
     const limit = query.limit && query.limit > 0 ? query.limit : 10;
     const skip = (page - 1) * limit;
 
-    const whereClause: any = {
-      deletedAt: null,
-    };
+    const whereClause: any = {};
 
     if (query.search) {
       whereClause.OR = [
@@ -25,7 +23,7 @@ export const PayslipItemService = {
         skip,
         take: limit,
         include: {
-          salaryComponent: true,
+          component: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -47,7 +45,7 @@ export const PayslipItemService = {
           createdBy: userId,
         },
         include: {
-          salaryComponent: true,
+          component: true,
         },
       });
       return item;
@@ -61,9 +59,9 @@ export const PayslipItemService = {
 
   async getById(id: string) {
     const item = await prismaMain.payslipItem.findFirst({
-      where: { id, deletedAt: null },
+      where: { id },
       include: {
-        salaryComponent: true,
+        component: true,
       },
     });
 
@@ -76,19 +74,15 @@ export const PayslipItemService = {
 
   async delete(id: string, userId?: string) {
     const existing = await prismaMain.payslipItem.findFirst({
-      where: { id, deletedAt: null },
+      where: { id },
     });
 
     if (!existing) {
       throw new CustomError("Payslip item not found", 404);
     }
 
-    await prismaMain.payslipItem.update({
+    await prismaMain.payslipItem.delete({
       where: { id },
-      data: {
-        deletedAt: new Date(),
-        updatedBy: userId,
-      },
     });
 
     return null;

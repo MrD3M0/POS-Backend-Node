@@ -33,9 +33,8 @@ export const OtpController = {
   create: async (req: Request, res: Response) => {
     try {
       const validatedData = validateOtpCreate(req.body);
-      const userId = res.locals.context?.userId;
 
-      const otp = await OtpService.create(validatedData, userId);
+      const otp = await OtpService.create(validatedData);
 
       return ResponseHandler.success({
         res,

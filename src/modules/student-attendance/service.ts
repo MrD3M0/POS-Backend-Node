@@ -18,7 +18,6 @@ const studentSelect = {
 const defaultInclude = {
   session: true,
   student: { select: studentSelect },
-  status: true,
 };
 
 // A teacher may only touch sessions that belong to them
@@ -71,17 +70,6 @@ async function assertSessionWritable(sessionId: string, actor: Actor) {
   return session;
 }
 
-async function assertStatusExists(statusId: string) {
-  const status = await prismaMain.attendanceStatus.findFirst({
-    where: { id: statusId, isActive: true, deletedAt: null },
-    select: { id: true },
-  });
-
-  if (!status) {
-    throw new CustomError("Attendance status not found or inactive", 404);
-  }
-}
-
 async function assertStudentsExist(studentIds: string[]) {
   const unique = [...new Set(studentIds)];
   const count = await prismaMain.student.count({
@@ -101,7 +89,7 @@ export const StudentAttendanceService = {
       search?: string;
       sessionId?: string;
       studentId?: string;
-      statusId?: string;
+      status?: string;
       batchId?: string;
       dateBs?: string;
     },
@@ -114,7 +102,7 @@ export const StudentAttendanceService = {
     const whereClause: any = { deletedAt: null };
 
     if (query.sessionId) whereClause.sessionId = query.sessionId;
-    if (query.statusId) whereClause.statusId = query.statusId;
+    if (query.status) whereClause.status = query.status;
     if (query.dateBs)
       whereClause.session = { dateBs: query.dateBs, deletedAt: null };
 
@@ -157,7 +145,6 @@ export const StudentAttendanceService = {
 
   async create(data: StudentAttendanceCreateInput, actor: Actor) {
     await assertSessionWritable(data.sessionId, actor);
-    await assertStatusExists(data.statusId);
     await assertStudentsExist([data.studentId]);
 
     const existing = await prismaMain.studentAttendance.findFirst({
@@ -198,17 +185,6 @@ export const StudentAttendanceService = {
 
     await assertStudentsExist(studentIds);
 
-    const statusIds = [...new Set(data.records.map((r) => r.statusId))];
-    const validStatuses = await prismaMain.attendanceStatus.count({
-      where: { id: { in: statusIds }, isActive: true, deletedAt: null },
-    });
-    if (validStatuses !== statusIds.length) {
-      throw new CustomError(
-        "One or more attendance statuses were not found or are inactive",
-        404,
-      );
-    }
-
     await prismaMain.$transaction(
       data.records.map((record) =>
         prismaMain.studentAttendance.upsert({
@@ -221,12 +197,12 @@ export const StudentAttendanceService = {
           create: {
             sessionId: data.sessionId,
             studentId: record.studentId,
-            statusId: record.statusId,
+            status: record.status,
             remarks: record.remarks ?? null,
             createdBy: actor.userId,
           },
           update: {
-            statusId: record.statusId,
+            status: record.status,
             remarks: record.remarks ?? null,
             deletedAt: null,
             updatedBy: actor.userId,
@@ -294,24 +270,16 @@ export const StudentAttendanceService = {
       };
     }
 
-    const [grouped, statuses] = await Promise.all([
-      prismaMain.studentAttendance.groupBy({
-        by: ["statusId"],
-        where,
-        _count: { _all: true },
-      }),
-      prismaMain.attendanceStatus.findMany({ where: { deletedAt: null } }),
-    ]);
-
-    const byStatus = grouped.map((g) => {
-      const status = statuses.find((s) => s.id === g.statusId);
-      return {
-        statusId: g.statusId,
-        code: status?.code ?? null,
-        name: status?.name ?? null,
-        count: g._count._all,
-      };
+    const grouped = await prismaMain.studentAttendance.groupBy({
+      by: ["status"],
+      where,
+      _count: { _all: true },
     });
+
+    const byStatus = grouped.map((g) => ({
+      status: g.status,
+      count: g._count._all,
+    }));
 
     const totalSessions = byStatus.reduce((sum, s) => sum + s.count, 0);
 
@@ -328,10 +296,6 @@ export const StudentAttendanceService = {
     }
 
     await assertSessionWritable(record.sessionId, actor);
-
-    if (data.statusId) {
-      await assertStatusExists(data.statusId);
-    }
 
     return prismaMain.studentAttendance.update({
       where: { id },

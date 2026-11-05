@@ -23,7 +23,7 @@ export const PaymentMethodService = {
         skip,
         take: limit,
         include: {
-          feePaymentMethodLines: true,
+          paymentLines: true,
         },
         orderBy: { createdAt: "desc" },
       }),

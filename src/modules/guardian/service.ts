@@ -26,7 +26,7 @@ export const GuardianService = {
         skip,
         take: limit,
         include: {
-          relation: true,
+          student: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -47,7 +47,7 @@ export const GuardianService = {
           ...(userId && { createdBy: userId }),
         } as any,
         include: {
-          relation: true,
+          student: true,
         },
       });
       return guardian;
@@ -63,7 +63,7 @@ export const GuardianService = {
     const guardian = await prismaMain.guardian.findFirst({
       where: { id, deletedAt: null },
       include: {
-        relation: true,
+        student: true,
       },
     });
 

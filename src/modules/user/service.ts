@@ -2,8 +2,7 @@ import bcrypt from "bcrypt";
 import { prismaMain } from "@/lib/prismaClient";
 import { CustomError } from "@/errors/CustomError";
 import { calculateSkipAndTake } from "@/utils/queryFilters";
-import { UserCreateInput, UserUpdateInput } from "@/generated/prisma/models";
-import { UserResetPasswordInput } from "./validator";
+import { UserCreateInput, UserUpdateInput, UserResetPasswordInput } from "./validator";
 
 
 const SALT_ROUNDS = 10;
@@ -14,7 +13,6 @@ const userSelect = {
   email: true,
   username: true,
   role: true,
-  isAdmin: true,
   isActive: true,
   isEmailVerified: true,
   lastLoginAt: true,
@@ -99,7 +97,6 @@ export const UserService = {
         data: {
           ...rest,
           passwordHash,
-          isAdmin: rest.role === "ADMIN",
           createdBy: userId,
         },
         select: userSelect,
@@ -167,7 +164,6 @@ export const UserService = {
         where: { id },
         data: {
           ...data,
-          ...(data.role ? { isAdmin: data.role === "ADMIN" } : {}),
           updatedBy: actingUserId,
         },
         select: userSelect,

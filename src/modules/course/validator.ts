@@ -4,7 +4,6 @@ export const courseCreateInputSchema = z.object({
   code: z.string().min(1, "Course code is required").max(50, "Course code is too long"),
   name: z.string().min(1, "Course name is required").max(255, "Course name is too long"),
   system: z.enum(["SEMESTER", "YEARLY"], { message: "System must be SEMESTER or YEARLY" }),
-  courseSystemId: z.string().uuid("Invalid Course System ID format").optional(),
   totalTerms: z.number().int().positive("Total terms must be a positive integer"),
   description: z.string().optional().nullable(),
   isActive: z.boolean().default(true),

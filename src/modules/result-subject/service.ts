@@ -51,6 +51,24 @@ export const ResultSubjectService = {
       throw new CustomError("Exam subject not found or has been deleted", 404);
     }
 
+    // Validate result exists
+    const result = await prismaMain.result.findFirst({
+      where: { id: data.resultId, deletedAt: null },
+    });
+
+    if (!result) {
+      throw new CustomError("Result not found or has been deleted", 404);
+    }
+
+    // Validate grade scale exists
+    const gradeScale = await prismaMain.gradeScale.findFirst({
+      where: { id: data.gradeScaleId, deletedAt: null },
+    });
+
+    if (!gradeScale) {
+      throw new CustomError("Grade scale not found or inactive", 404);
+    }
+
     try {
       const resultSubject = await prismaMain.resultSubject.create({
         data: {

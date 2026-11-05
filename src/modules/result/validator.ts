@@ -10,8 +10,8 @@ export const resultCreateInputSchema = z.object({
   gpa: z.number().min(0).max(4, "GPA must be between 0 and 4"),
   cgpa: z.number().min(0).max(4).optional().nullable(),
   isPassed: z.boolean(),
-  status: z.enum(["PENDING", "SUBMITTED", "APPROVED", "PUBLISHED"], {
-    message: "Status must be PENDING, SUBMITTED, APPROVED, or PUBLISHED",
+  status: z.enum(["DRAFT", "PENDING", "APPROVED", "REJECTED", "PUBLISHED"], {
+    message: "Status must be DRAFT, PENDING, APPROVED, REJECTED, or PUBLISHED",
   }).default("PENDING"),
   submittedAt: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
   approvedBy: z.string().uuid("Invalid User ID format").optional().nullable(),

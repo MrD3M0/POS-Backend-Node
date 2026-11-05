@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const studentFeeItemCreateInputSchema = z.object({
   studentFeeId: z.string().uuid("Invalid Student Fee ID format"),
-  feeHeadId: z.string().uuid("Invalid Fee Head ID format").optional(),
+  feeHeadId: z.string().uuid("Invalid Fee Head ID format"),
   feeStructureItemId: z.string().uuid("Invalid Fee Structure Item ID format").optional(),
   termNumber: z.number().int().min(1),
   description: z.string().optional(),

@@ -24,7 +24,7 @@ export const TeachingAssignmentService = {
         skip,
         take: limit,
         include: {
-          attendances: true,
+          sessions: true,
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -45,7 +45,7 @@ export const TeachingAssignmentService = {
           createdBy: userId,
         },
         include: {
-          attendances: true,
+          sessions: true,
         },
       });
       return assignment;
@@ -61,7 +61,7 @@ export const TeachingAssignmentService = {
     const assignment = await prismaMain.teachingAssignment.findFirst({
       where: { id, deletedAt: null },
       include: {
-        attendances: true,
+        sessions: true,
       },
     });
 

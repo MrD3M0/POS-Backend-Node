@@ -20,13 +20,13 @@ export const GradeScaleService = {
     }
 
     const [items, total] = await Promise.all([
-      prismaMain.gradeScaleItem.findMany({
+      prismaMain.gradeScale.findMany({
         where: whereClause,
         skip,
         take: limit,
         orderBy: { createdAt: "desc" },
       }),
-      prismaMain.gradeScaleItem.count({ where: whereClause }),
+      prismaMain.gradeScale.count({ where: whereClause }),
     ]);
 
     return {
@@ -37,7 +37,7 @@ export const GradeScaleService = {
 
   async create(data: GradeScaleItemCreateInput, userId?: string) {
     try {
-      const item = await prismaMain.gradeScaleItem.create({
+      const item = await prismaMain.gradeScale.create({
         data: {
           ...data,
           createdBy: userId,
@@ -53,7 +53,7 @@ export const GradeScaleService = {
   },
 
   async getById(id: string) {
-    const item = await prismaMain.gradeScaleItem.findFirst({
+    const item = await prismaMain.gradeScale.findFirst({
       where: { id, deletedAt: null },
     });
 
@@ -65,7 +65,7 @@ export const GradeScaleService = {
   },
 
   async delete(id: string, userId?: string) {
-    const existing = await prismaMain.gradeScaleItem.findFirst({
+    const existing = await prismaMain.gradeScale.findFirst({
       where: { id, deletedAt: null },
     });
 
@@ -73,7 +73,7 @@ export const GradeScaleService = {
       throw new CustomError("Grade scale item not found", 404);
     }
 
-    await prismaMain.gradeScaleItem.update({
+    await prismaMain.gradeScale.update({
       where: { id },
       data: {
         deletedAt: new Date(),

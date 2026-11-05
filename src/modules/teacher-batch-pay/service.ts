@@ -3,7 +3,7 @@ import { CustomError } from "@/errors/CustomError";
 import { TeacherBatchPayCreateInput, TeacherBatchPayUpdateInput } from "./validator";
 
 export const TeacherBatchPayService = {
-  async index(query: { page?: number; limit?: number; teachingAssignmentId?: string; isActive?: boolean }) {
+  async index(query: { page?: number; limit?: number; search?: string; teachingAssignmentId?: string; isActive?: boolean }) {
     const page = query.page && query.page > 0 ? query.page : 1;
     const limit = query.limit && query.limit > 0 ? query.limit : 10;
     const skip = (page - 1) * limit;
@@ -11,10 +11,10 @@ export const TeacherBatchPayService = {
     const whereClause: any = {};
 
     if (query.search) {
-      whereClause.OR = [
-        { ratePerCreditHour: { contains: query.search, mode: "insensitive" } },
-        { fixedMonthlyAmount: { contains: query.search, mode: "insensitive" } },
-      ];
+      whereClause.teachingAssignmentId = {
+        contains: query.search,
+        mode: "insensitive",
+      };
     }
 
     if (query.teachingAssignmentId) {

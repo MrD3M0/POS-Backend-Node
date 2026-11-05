@@ -1,22 +1,29 @@
+import bcrypt from "bcrypt";
 import { prismaMain } from "@/lib/prismaClient";
 import { CustomError } from "@/errors/CustomError";
 import { OtpCreateInput } from "./validator";
 
+// Never leak the code hash to API consumers
+const otpSelect = {
+  id: true,
+  userId: true,
+  purpose: true,
+  attempts: true,
+  expiresAt: true,
+  consumedAt: true,
+  createdAt: true,
+};
+
 export const OtpService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
+    const limit = query.limit ? query.limit : 10;
     const skip = (page - 1) * limit;
 
-    const whereClause: any = {
-      deletedAt: null,
-    };
+    const whereClause: any = {};
 
     if (query.search) {
-      whereClause.OR = [
-        { userId: { contains: query.search, mode: "insensitive" } },
-        { code: { contains: query.search, mode: "insensitive" } },
-      ];
+      whereClause.userId = query.search;
     }
 
     const [otps, total] = await Promise.all([
@@ -24,6 +31,7 @@ export const OtpService = {
         where: whereClause,
         skip,
         take: limit,
+        select: otpSelect,
         orderBy: { createdAt: "desc" },
       }),
       prismaMain.otp.count({ where: whereClause }),
@@ -35,27 +43,34 @@ export const OtpService = {
     };
   },
 
-  async create(data: OtpCreateInput, userId?: string) {
-    try {
-      const otp = await prismaMain.otp.create({
-        data: {
-          ...data,
-          userId,
-          createdBy: userId,
-        },
-      });
-      return otp;
-    } catch (error: any) {
-      if (error.code === "P2002") {
-        throw new CustomError("An OTP already exists for this user and expiry time", 409);
-      }
-      throw error;
+  async create(data: OtpCreateInput) {
+    const user = await prismaMain.user.findFirst({
+      where: { id: data.userId, deletedAt: null },
+      select: { id: true },
+    });
+
+    if (!user) {
+      throw new CustomError("User not found", 404);
     }
+
+    const codeHash = await bcrypt.hash(data.code, 10);
+
+    const otp = await prismaMain.otp.create({
+      data: {
+        userId: data.userId,
+        purpose: data.purpose,
+        codeHash,
+        expiresAt: data.expiresAt,
+      },
+      select: otpSelect,
+    });
+    return otp;
   },
 
   async getById(id: string) {
     const otp = await prismaMain.otp.findFirst({
-      where: { id, deletedAt: null },
+      where: { id },
+      select: otpSelect,
     });
 
     if (!otp) {
@@ -65,20 +80,18 @@ export const OtpService = {
     return otp;
   },
 
-  async delete(id: string, userId?: string) {
+  async delete(id: string) {
     const existing = await prismaMain.otp.findFirst({
-      where: { id, deletedAt: null },
+      where: { id },
     });
 
     if (!existing) {
       throw new CustomError("OTP not found", 404);
     }
 
-    await prismaMain.otp.update({
+    // OTPs are ephemeral; remove them instead of soft-deleting
+    await prismaMain.otp.delete({
       where: { id },
-      data: {
-        deletedAt: new Date(),
-      },
     });
 
     return null;

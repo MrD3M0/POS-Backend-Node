@@ -1,9 +1,17 @@
 import { z } from "zod";
 
+// Native Postgres enum in the current schema (AttendanceStatus)
+export const attendanceStatusEnum = z.enum([
+  "PRESENT",
+  "ABSENT",
+  "LEAVE",
+  "HALF_DAY",
+]);
+
 export const studentAttendanceCreateInputSchema = z.object({
   sessionId: z.string().uuid("Invalid Session ID format"),
   studentId: z.string().uuid("Invalid Student ID format"),
-  statusId: z.string().uuid("Invalid Attendance Status ID format"),
+  status: attendanceStatusEnum,
   remarks: z
     .string()
     .trim()
@@ -14,7 +22,7 @@ export const studentAttendanceCreateInputSchema = z.object({
 
 // Only the status and remarks can change after the record is created
 export const studentAttendanceUpdateInputSchema = z.object({
-  statusId: z.string().uuid("Invalid Attendance Status ID format").optional(),
+  status: attendanceStatusEnum.optional(),
   remarks: z
     .string()
     .trim()
@@ -30,7 +38,7 @@ export const studentAttendanceBulkInputSchema = z.object({
     .array(
       z.object({
         studentId: z.string().uuid("Invalid Student ID format"),
-        statusId: z.string().uuid("Invalid Attendance Status ID format"),
+        status: attendanceStatusEnum,
         remarks: z
           .string()
           .trim()

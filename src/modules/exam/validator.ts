@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 export const examCreateInputSchema = z.object({
-  batchTermId: z.string().uuid("Invalid Batch Term ID format").optional(),
-  examTypeId: z.string().uuid("Invalid Exam Type ID format").optional(),
+  batchTermId: z.string().uuid("Invalid Batch Term ID format"),
+  examTypeId: z.string().uuid("Invalid Exam Type ID format"),
   name: z.string().min(1, "Exam name is required"),
   startDateBs: z.string().min(1, "Start date is required"),
   endDateBs: z.string().min(1, "End date is required"),

@@ -23,10 +23,6 @@ export const FiscalYearService = {
         where: whereClause,
         skip,
         take: limit,
-        include: {
-          periods: true,
-          batches: true,
-        },
         orderBy: { createdAt: "desc" },
       }),
       prismaMain.fiscalYear.count({ where: whereClause }),
@@ -45,10 +41,6 @@ export const FiscalYearService = {
           ...data,
           createdBy: userId,
         },
-        include: {
-          periods: true,
-          batches: true,
-        },
       });
       return year;
     } catch (error: any) {
@@ -62,10 +54,6 @@ export const FiscalYearService = {
   async getById(id: string) {
     const year = await prismaMain.fiscalYear.findFirst({
       where: { id, deletedAt: null },
-      include: {
-        periods: true,
-        batches: true,
-      },
     });
 
     if (!year) {

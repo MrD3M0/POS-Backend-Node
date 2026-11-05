@@ -75,6 +75,10 @@ export const BatchTermService = {
       where: { id: batch.courseId, deletedAt: null },
     });
 
+    if (!course) {
+      throw new CustomError("Course not found for this batch", 404);
+    }
+
     if (data.termNumber > course.totalTerms) {
       throw new CustomError(
         `Term number (${data.termNumber}) cannot exceed course total terms (${course.totalTerms})`,

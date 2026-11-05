@@ -137,7 +137,7 @@ export const ResultService = {
         data: {
           ...data,
           updatedBy: userId,
-        },
+        } as any,
         include: {
           student: true,
           exam: true,
