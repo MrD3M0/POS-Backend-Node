@@ -1,53 +1,14 @@
 import { Router } from "express";
-import { CourseController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { CourseController } from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo(
-    "ADMIN",
-    "PRINCIPAL",
-    "ACCOUNTANT",
-    "TEACHER",
-    "STAFF",
-    "STUDENT",
-  ),
-  CourseController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  CourseController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo(
-    "ADMIN",
-    "PRINCIPAL",
-    "ACCOUNTANT",
-    "TEACHER",
-    "STAFF",
-    "STUDENT",
-  ),
-  CourseController.retrieve,
-);
-router.patch(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  CourseController.update,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  CourseController.delete,
-);
+router.get("/", isUser, requirePermission("academic", "read"), CourseController.index);
+router.post("/", isUser, requirePermission("academic", "create"), CourseController.create);
+router.get("/:id", isUser, requirePermission("academic", "read"), CourseController.retrieve);
+router.patch("/:id", isUser, requirePermission("academic", "update"), CourseController.update);
+router.delete("/:id", isUser, requirePermission("academic", "delete"), CourseController.delete);
 
 export const courseRouter = router;

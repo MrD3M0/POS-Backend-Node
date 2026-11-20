@@ -1,0 +1,22 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.studentRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("students", "read"), controller_1.StudentController.index);
+// Bulk actions must be registered before /:id routes.
+router.post("/bulk-import", isUser_1.isUser, (0, permission_1.requirePermission)("students", "create"), controller_1.StudentController.bulkImport);
+router.post("/bulk-approve", isUser_1.isUser, (0, permission_1.requirePermission)("students", "approve"), controller_1.StudentController.bulkApprove);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("students", "create"), controller_1.StudentController.create);
+router.get("/:id/dues", isUser_1.isUser, (0, permission_1.requirePermission)("students", "read"), controller_1.StudentController.dues);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("students", "read"), controller_1.StudentController.retrieve);
+router.post("/:id/approve", isUser_1.isUser, (0, permission_1.requirePermission)("students", "approve"), controller_1.StudentController.approve);
+router.post("/:id/reject", isUser_1.isUser, (0, permission_1.requirePermission)("students", "approve"), controller_1.StudentController.reject);
+router.post("/:id/resubmit", isUser_1.isUser, (0, permission_1.requirePermission)("students", "update"), controller_1.StudentController.resubmit);
+router.post("/:id/change-status", isUser_1.isUser, (0, permission_1.requirePermission)("students", "approve"), controller_1.StudentController.changeStatus);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("students", "update"), controller_1.StudentController.update);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("students", "delete"), controller_1.StudentController.delete);
+exports.studentRouter = router;

@@ -1,0 +1,16 @@
+meta {
+  name: Teacher Week
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/api/class-schedule/teacher/{{teacherId}}/week
+  body: none
+  auth: inherit
+}
+
+params:query {
+  fromBs: 2082-04-01
+  toBs: 2082-04-07
+}

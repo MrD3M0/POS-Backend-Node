@@ -1,12 +1,13 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
-import { LeaveTypeCreateInput } from "./validator";
+import { LeaveTypeCreateInput, LeaveTypeUpdateInput } from "./validator";
 
 export const LeaveTypeService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {};
 
@@ -20,7 +21,7 @@ export const LeaveTypeService = {
       prismaMain.leaveType.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         orderBy: { createdAt: "desc" },
       }),
       prismaMain.leaveType.count({ where: whereClause }),
@@ -59,6 +60,29 @@ export const LeaveTypeService = {
     }
 
     return leaveType;
+  },
+
+  async update(id: string, data: LeaveTypeUpdateInput, userId?: string) {
+    const existing = await prismaMain.leaveType.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Leave type not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.leaveType.update({
+        where: { id },
+        data: { ...data, updatedBy: userId },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("A leave type with this code already exists", 409);
+      }
+      throw error;
+    }
   },
 
   async delete(id: string, userId?: string) {

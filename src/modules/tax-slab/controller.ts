@@ -89,6 +89,17 @@ export const TaxSlabController = {
     }
   },
 
+  copy: async (req: Request, res: Response) => {
+    try {
+      const fromFiscalYearId = typeof req.body?.fromFiscalYearId === "string" ? req.body.fromFiscalYearId : "";
+      const toFiscalYearId = typeof req.body?.toFiscalYearId === "string" ? req.body.toFiscalYearId : "";
+      const result = await TaxSlabService.copy(fromFiscalYearId, toFiscalYearId, res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Tax slabs copied", data: result });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   delete: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;

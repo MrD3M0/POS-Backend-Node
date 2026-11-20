@@ -5,7 +5,7 @@ export const attendanceStatusEnum = z.enum([
   "PRESENT",
   "ABSENT",
   "LEAVE",
-  "HALF_DAY",
+  "LATE",
 ]);
 
 export const studentAttendanceCreateInputSchema = z.object({

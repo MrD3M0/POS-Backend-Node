@@ -3,7 +3,7 @@ import { SettingService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateSettingCreate, validateSettingUpdate } from "./validator";
+import { validateSettingCreate, validateSettingUpdate, validateSettingValueBody } from "./validator";
 
 export const SettingController = {
   index: async (req: Request, res: Response) => {
@@ -82,13 +82,68 @@ export const SettingController = {
     }
   },
 
+  effective: async (_req: Request, res: Response) => {
+    try {
+      const settings = await SettingService.effective();
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Effective settings fetched successfully",
+        data: settings,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  institution: async (_req: Request, res: Response) => {
+    try {
+      const institution = await SettingService.institution();
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Institution details fetched successfully",
+        data: institution,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  upsertByKey: async (req: Request, res: Response) => {
+    try {
+      const key = req.params.key as string;
+      const { value } = validateSettingValueBody(req.body);
+      const setting = await SettingService.upsertByKey(
+        key,
+        value,
+        res.locals.context?.userId,
+        res.locals.context?.role,
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Setting saved successfully",
+        data: setting,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   update: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;
       const validatedData = validateSettingUpdate(req.body);
       const userId = res.locals.context?.userId;
 
-      const setting = await SettingService.update(id, validatedData, userId);
+      const setting = await SettingService.update(
+        id,
+        validatedData,
+        userId,
+        res.locals.context?.role,
+      );
 
       return ResponseHandler.success({
         res,

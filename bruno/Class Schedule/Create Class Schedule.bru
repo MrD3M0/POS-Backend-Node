@@ -1,0 +1,23 @@
+meta {
+  name: Create Class Schedule
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/class-schedule
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+    "teachingAssignmentId": "{{teachingAssignmentId}}",
+    "periodId": "{{periodId}}",
+    "dayOfWeek": "SUNDAY",
+    "room": "Room 101",
+    "effectiveFromBs": "2082-04-15",
+    "effectiveToBs": null,
+    "isActive": true
+  }
+}

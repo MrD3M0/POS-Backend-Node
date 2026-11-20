@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.principalRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const authorized_1 = require("@/middlewares/authorized");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "PRINCIPAL"), controller_1.PrincipalController.index);
+router.post("/", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN"), controller_1.PrincipalController.create);
+router.get("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "PRINCIPAL"), controller_1.PrincipalController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "PRINCIPAL"), controller_1.PrincipalController.update);
+router.delete("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN"), controller_1.PrincipalController.delete);
+exports.principalRouter = router;

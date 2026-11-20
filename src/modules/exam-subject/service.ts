@@ -1,12 +1,41 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
-import { ExamSubjectCreateInput } from "./validator";
+import { ExamSubjectCreateInput, ExamSubjectUpdateInput } from "./validator";
+
+const EXAM_SUBJECT_INCLUDE = {
+  exam: true,
+  batchTermSubject: {
+    include: {
+      subject: true,
+      batchTerm: { include: { batch: true } },
+      assignments: {
+        where: { deletedAt: null },
+        include: {
+          teacher: {
+            include: {
+              employee: {
+                select: {
+                  id: true,
+                  firstName: true,
+                  middleName: true,
+                  lastName: true,
+                  employeeCode: true,
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+} as const;
 
 export const ExamSubjectService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -24,7 +53,8 @@ export const ExamSubjectService = {
       prismaMain.examSubject.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
+        include: EXAM_SUBJECT_INCLUDE,
         orderBy: { createdAt: "desc" },
       }),
       prismaMain.examSubject.count({ where: whereClause }),
@@ -43,11 +73,15 @@ export const ExamSubjectService = {
           ...data,
           ...(userId && { createdBy: userId }),
         } as any,
+        include: EXAM_SUBJECT_INCLUDE,
       });
       return item;
     } catch (error: any) {
       if (error.code === "P2002") {
-        throw new CustomError("An exam subject with this exam already exists", 409);
+        throw new CustomError(
+          "An exam subject with this exam already exists",
+          409,
+        );
       }
       throw error;
     }
@@ -56,6 +90,7 @@ export const ExamSubjectService = {
   async getById(id: string) {
     const item = await prismaMain.examSubject.findFirst({
       where: { id, deletedAt: null },
+      include: EXAM_SUBJECT_INCLUDE,
     });
 
     if (!item) {
@@ -63,6 +98,36 @@ export const ExamSubjectService = {
     }
 
     return item;
+  },
+
+  async update(id: string, data: ExamSubjectUpdateInput, userId?: string) {
+    const existing = await prismaMain.examSubject.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Exam subject not found", 404);
+    }
+
+    try {
+      const updated = await prismaMain.examSubject.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        } as any,
+        include: EXAM_SUBJECT_INCLUDE,
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError(
+          "An exam subject with this exam already exists",
+          409,
+        );
+      }
+      throw error;
+    }
   },
 
   async delete(id: string, userId?: string) {

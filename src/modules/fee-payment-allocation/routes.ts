@@ -1,33 +1,12 @@
 import { Router } from "express";
 import { FeePaymentAllocationController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  FeePaymentAllocationController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  FeePaymentAllocationController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  FeePaymentAllocationController.retrieve,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN"),
-  FeePaymentAllocationController.delete,
-);
+router.get("/", isUser, requirePermission("fees", "read"), FeePaymentAllocationController.index);
+router.get("/:id", isUser, requirePermission("fees", "read"), FeePaymentAllocationController.retrieve);
+router.use((_, res) => res.status(405).json({ success: false, message: "Fee payment allocations cannot be edited or deleted" }));
 
 export const feePaymentAllocationRouter = router;

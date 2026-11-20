@@ -3,7 +3,7 @@ import { TeachingAssignmentService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateTeachingAssignmentCreate } from "./validator";
+import { validateTeachingAssignmentCreate, validateTeachingAssignmentUpdate } from "./validator";
 
 export const TeachingAssignmentController = {
   index: async (req: Request, res: Response) => {
@@ -12,11 +12,17 @@ export const TeachingAssignmentController = {
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
-      const result = await TeachingAssignmentService.index({
-        page: pageNumber,
-        limit: limitNumber,
-        search,
-      });
+      const result = await TeachingAssignmentService.index(
+        {
+          page: pageNumber,
+          limit: limitNumber,
+          search,
+        },
+        {
+          userId: res.locals.context?.userId,
+          role: res.locals.context?.role,
+        },
+      );
 
       return ResponseHandler.success({
         res,
@@ -58,6 +64,53 @@ export const TeachingAssignmentController = {
         code: 200,
         message: "Teaching assignment retrieved successfully",
         data: assignment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateTeachingAssignmentUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      // Optional UI flag: when an endDateBs is set, also close the weekly
+      // schedules of this assignment that run beyond it.
+      const closeSchedules = req.body?.closeSchedules === true;
+
+      const assignment = await TeachingAssignmentService.update(id, validatedData, userId);
+      let closedSchedules = 0;
+      if (closeSchedules && assignment.endDateBs) {
+        closedSchedules = await TeachingAssignmentService.closeSchedules(
+          id,
+          assignment.endDateBs,
+          userId,
+        );
+      }
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teaching assignment updated successfully",
+        data: { ...assignment, closedSchedules },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  /** GET /teaching-assignment/workload/:teacherId */
+  workload: async (req: Request, res: Response) => {
+    try {
+      const teacherId = req.params.teacherId as string;
+      const result = await TeachingAssignmentService.workload(teacherId);
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher workload fetched successfully",
+        data: result,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);

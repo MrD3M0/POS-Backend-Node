@@ -176,6 +176,14 @@ export const openApiSpec = {
         responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
     },
+    "/api/batch-term-subject/bulk": {
+      post: {
+        tags: ["batch-term-subject"],
+        summary: "Bulk assign subjects to a term (all-or-nothing)",
+        requestBody: { required: true, content: { "application/json": { example: { batchTermId: "batch-term_123", subjects: [{ subjectId: "subject_123", creditHour: 3, isElective: false }] }, schema: { type: "object" } } } },
+        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: [{ id: "batch-term-subject_123", batchTermId: "batch-term_123", subjectId: "subject_123", creditHour: 3, isElective: false }], message: "batch-term-subject created successfully" } } } } }
+      },
+    },
     "/api/batch-term/{id}": {
       get: {
         tags: ["batch-term"],
@@ -1553,6 +1561,28 @@ export const openApiSpec = {
         responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
       },
     },
+    "/api/teaching-assignment/workload/{teacherId}": {
+      get: {
+        tags: ["teaching-assignment"],
+        summary: "Teacher workload (assigned subjects + weekly scheduled periods)",
+        parameters: [{ name: "teacherId", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
+        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { teacherId: "uuid-123", assignedSubjects: 3, weeklyScheduledPeriods: 6 }, message: "Teacher workload fetched successfully" } } } } }
+      },
+    },
+    "/api/teacher/dashboard/today-schedule": {
+      get: {
+        tags: ["teacher-dashboard"],
+        summary: "Today's classes from the weekly routine (holiday + status aware)",
+        responses: { "200": { description: "Card payload", content: { "application/json": { example: { success: true, code: 200, data: { todaySchedule: [{ scheduleId: "class-schedule_123", sessionId: null, assignmentId: "uuid-1", periodId: "period_1", label: "Math - BCS 1st", subjectName: "Math", subjectCode: "MTH101", classLabel: "BCS 1st", periodName: "Period 1", startTime: "07:00", endTime: "07:45", room: "Room 101", attendanceTaken: false, status: "UPCOMING", isNext: true }], pendingAttendance: 1, holiday: null, dateBs: "2082-04-20", dayOfWeek: "SUNDAY" }, message: "Today's schedule fetched successfully!" } } } } }
+      },
+    },
+    "/api/teacher/dashboard/week-schedule": {
+      get: {
+        tags: ["teacher-dashboard"],
+        summary: "This week's routine (Sunday–Friday) including holidays",
+        responses: { "200": { description: "Week payload", content: { "application/json": { example: { success: true, code: 200, data: { days: [{ date: "2082-04-20", dayOfWeek: "SUNDAY", holidayName: null, items: [] }] }, message: "Week schedule fetched successfully!" } } } } }
+      },
+    },
     "/api/user": {
       get: {
         tags: ["user"],
@@ -1603,6 +1633,63 @@ export const openApiSpec = {
         parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "uuid-123" } }],
         requestBody: { required: true, content: { "application/json": { example: { code: "USER", name: "Sample User" }, schema: { type: "object" } } } },
         responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "user_123", code: "USER", name: "Sample User", isActive: true, createdAt: "2024-01-15T00:00:00Z" }, message: "user updated" } } } } }
+      },
+    },
+    "/api/class-schedule": {
+      get: {
+        tags: ["class-schedule"],
+        summary: "List class schedules",
+        responses: { "200": { description: "List response", content: { "application/json": { example: { success: true, code: 200, data: { data: [{ id: "sch_123", teachingAssignmentId: "ta_456", periodId: "p_789", dayOfWeek: "MONDAY", room: "Room A", effectiveFromBs: "2081-05-15", effectiveToBs: "2081-11-30", isActive: true, createdAt: "2024-01-15T00:00:00Z", updatedAt: "2024-01-15T00:00:00Z" }], pagination: { page: 1, limit: 10, total: 2 } }, message: "Fetched successfully" } } } } }
+      },
+      post: {
+        tags: ["class-schedule"],
+        summary: "Create class schedule",
+        requestBody: { required: true, content: { "application/json": { example: { teachingAssignmentId: "ta_456", periodId: "p_789", dayOfWeek: "MONDAY", room: "Room A", effectiveFromBs: "2081-05-15", effectiveToBs: "2081-11-30", isActive: true }, schema: { type: "object" } } } },
+        responses: { "201": { description: "Created", content: { "application/json": { example: { success: true, code: 201, data: { id: "sch_123", teachingAssignmentId: "ta_456", periodId: "p_789", dayOfWeek: "MONDAY", room: "Room A", effectiveFromBs: "2081-05-15", effectiveToBs: "2081-11-30", isActive: true, createdAt: "2024-01-15T00:00:00Z", updatedAt: "2024-01-15T00:00:00Z" }, message: "Class schedule created successfully" } } } } }
+      },
+    },
+    "/api/class-schedule/:id": {
+      get: {
+        tags: ["class-schedule"],
+        summary: "Get class schedule by ID",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "sch_123" } }],
+        responses: { "200": { description: "Single item", content: { "application/json": { example: { success: true, code: 200, data: { id: "sch_123", teachingAssignmentId: "ta_456", periodId: "p_789", dayOfWeek: "MONDAY", room: "Room A", effectiveFromBs: "2081-05-15", effectiveToBs: "2081-11-30", isActive: true, createdAt: "2024-01-15T00:00:00Z", updatedAt: "2024-01-15T00:00:00Z" }, message: "Retrieved" } } } } }
+      },
+      patch: {
+        tags: ["class-schedule"],
+        summary: "Update class schedule",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "sch_123" } }],
+        requestBody: { required: true, content: { "application/json": { example: { effectiveToBs: "2081-12-15" }, schema: { type: "object" } } } },
+        responses: { "200": { description: "Updated", content: { "application/json": { example: { success: true, code: 200, data: { id: "sch_123", teachingAssignmentId: "ta_456", periodId: "p_789", dayOfWeek: "MONDAY", room: "Room A", effectiveFromBs: "2081-05-15", effectiveToBs: "2081-12-15", isActive: true, createdAt: "2024-01-15T00:00:00Z", updatedAt: "2024-01-15T00:00:00Z" }, message: "Class schedule updated successfully" } } } } }
+      },
+      delete: {
+        tags: ["class-schedule"],
+        summary: "Delete class schedule",
+        parameters: [{ name: "id", in: "path", required: true, schema: { type: "string", example: "sch_123" } }],
+        responses: { "200": { description: "Deleted", content: { "application/json": { example: { success: true, code: 200, data: null, message: "Deleted successfully" } } } } }
+      },
+    },
+    "/api/class-schedule/calendar": {
+      get: {
+        tags: ["class-schedule"],
+        summary: "Class schedule calendar with BS dates expanded",
+        responses: { "200": { description: "Calendar response", content: { "application/json": { example: { success: true, code: 200, data: { events: [{ id: "sch_123", dateBs: "2081-05-16", dayOfWeek: "MONDAY", periodId: "p_789", periodName: "Period 1", periodNumber: 1, startTime: "09:00", endTime: "10:00", room: "Room A", teachingAssignmentId: "ta_456", teacherId: "ta_456", teacherName: "Teacher Name", subjectId: "sub_111", subjectName: "Mathematics", subjectCode: "MATH101", batchTermId: "bt_222", batchTermName: "BCA Term 1", batchId: "batch_333", batchName: "BCA 2024 Batch", classLabel: "BCA 2024 Batch Term 1", isElective: false }], holidays: [{ dateBs: "2081-05-16", name: "Vishwa Bhasha Diwas" }] }, message: "Class schedule calendar fetched successfully!" } } } } }
+      },
+    },
+    "/api/class-schedule/teacher/:teacherId/week": {
+      get: {
+        tags: ["class-schedule"],
+        summary: "Teacher weekly routine expanded to BS dates",
+        parameters: [{ name: "teacherId", in: "path", required: true, schema: { type: "string", example: "ta_456" } }, { name: "fromBs", in: "query", required: true, schema: { type: "string", example: "2081-05-01" } }, { name: "toBs", in: "query", required: true, schema: { type: "string", example: "2081-05-31" } }],
+        responses: { "200": { description: "Weekly schedule response", content: { "application/json": { example: { success: true, code: 200, data: [{ id: "sch_123", dateBs: "2081-05-16", dayOfWeek: "MONDAY", periodName: "Period 1", periodNumber: 1, startTime: "09:00", endTime: "10:00", room: "Room A", teacherName: "Teacher Name", subjectName: "Mathematics", subjectCode: "MATH101", classLabel: "BCA 2024 Batch Term 1", isElective: false }], message: "Teacher week schedule fetched successfully!" } } } } }
+      },
+    },
+    "/api/class-schedule/batch-term/:batchTermId/week": {
+      get: {
+        tags: ["class-schedule"],
+        summary: "Batch-term weekly routine expanded to BS dates (class view)",
+        parameters: [{ name: "batchTermId", in: "path", required: true, schema: { type: "string", example: "bt_222" } }, { name: "fromBs", in: "query", required: true, schema: { type: "string", example: "2081-05-01" } }, { name: "toBs", in: "query", required: true, schema: { type: "string", example: "2081-05-31" } }],
+        responses: { "200": { description: "Batch-term week response", content: { "application/json": { example: { success: true, code: 200, data: [{ id: "sch_123", dateBs: "2081-05-16", dayOfWeek: "MONDAY", periodName: "Period 1", periodNumber: 1, startTime: "09:00", endTime: "10:00", room: "Room A", teacherName: "Teacher Name", subjectName: "Mathematics", subjectCode: "MATH101", classLabel: "BCA 2024 Batch Term 1", isElective: false }], message: "Batch term week schedule fetched successfully!" } } } } }
       },
     },
   }

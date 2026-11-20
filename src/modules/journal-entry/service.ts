@@ -1,16 +1,28 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
+import { ACCOUNT_SAFE_SELECT } from "@/utils/safe-select";
 import { CustomError } from "@/errors/CustomError";
-import { JournalEntryCreateInput } from "./validator";
+import {
+  createJournalEntry,
+  reverseJournalEntry,
+  withSequentialRetry,
+  type JournalEntryCreateInput,
+} from "@/lib/accounting";
+
+const ENTRY_INCLUDE = {
+  fiscalYear: true,
+  lines: { include: { account: { select: ACCOUNT_SAFE_SELECT } } },
+  reversalOf: true,
+  reversedBy: true,
+} as const;
 
 export const JournalEntryService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
-    const whereClause: any = {
-      deletedAt: null,
-    };
+    const whereClause: Record<string, unknown> = {};
 
     if (query.search) {
       whereClause.OR = [
@@ -23,11 +35,8 @@ export const JournalEntryService = {
       prismaMain.journalEntry.findMany({
         where: whereClause,
         skip,
-        take: limit,
-        include: {
-          lines: true,
-          source: true,
-        },
+        take: toPrismaTake(limit),
+        include: ENTRY_INCLUDE,
         orderBy: { createdAt: "desc" },
       }),
       prismaMain.journalEntry.count({ where: whereClause }),
@@ -38,43 +47,32 @@ export const JournalEntryService = {
       pagination: { page, limit, total },
     };
   },
-
+  /**
+   * Creates a balanced double-entry posting. Entry validation (>= 2 lines,
+   * debit XOR credit, balanced, active non-group accounts, FY open, date
+   * inside FY) and JV-<FY>-<seq> numbering all happen in createJournalEntry,
+   * inside this transaction; a P2002 seq collision retries once then 409s.
+   */
   async create(data: JournalEntryCreateInput, userId?: string) {
-    // Validate fiscal year exists
-    const year = await prismaMain.fiscalYear.findFirst({
-      where: { id: data.fiscalYearId, deletedAt: null },
-    });
-    if (!year) {
-      throw new CustomError("Fiscal year not found", 404);
-    }
-
-    try {
-      const entry = await prismaMain.journalEntry.create({
-        data: {
-          ...data,
-          ...(userId && { createdBy: userId }),
-        } as any,
-        include: {
-          lines: true,
-          source: true,
-        },
-      });
-      return entry;
-    } catch (error: any) {
-      if (error.code === "P2002") {
-        throw new CustomError("A journal entry with this number already exists", 409);
-      }
-      throw error;
-    }
+    return withSequentialRetry(() =>
+      prismaMain.$transaction(async (tx) =>
+        createJournalEntry(tx, {
+          fiscalYearId: data.fiscalYearId,
+          dateBs: data.dateBs,
+          description: data.description,
+          source: data.source,
+          isManual: data.source === "MANUAL",
+          lines: data.lines,
+          createdBy: userId,
+        }),
+      ),
+    );
   },
 
   async getById(id: string) {
-    const entry = await prismaMain.journalEntry.findFirst({
-      where: { id, deletedAt: null },
-      include: {
-        lines: true,
-        source: true,
-      },
+    const entry = await prismaMain.journalEntry.findUnique({
+      where: { id },
+      include: ENTRY_INCLUDE,
     });
 
     if (!entry) {
@@ -84,23 +82,33 @@ export const JournalEntryService = {
     return entry;
   },
 
-  async delete(id: string, userId?: string) {
-    const existing = await prismaMain.journalEntry.findFirst({
-      where: { id, deletedAt: null },
-    });
+  /**
+   * The only supported correction: posting a mirror reversal (debit/credit
+   * swapped, reversalOfId set, original flagged isReversed). Reversing an
+   * already-reversed entry — or a reversal itself — is rejected.
+   */
+  async reverse(
+    id: string,
+    input: { description?: string; dateBs?: string },
+    userId?: string,
+  ) {
+    return withSequentialRetry(() =>
+      prismaMain.$transaction(async (tx) =>
+        reverseJournalEntry(tx, id, {
+          source: "REVERSAL",
+          description: input.description,
+          dateBs: input.dateBs,
+          createdBy: userId,
+        }),
+      ),
+    );
+  },
 
-    if (!existing) {
-      throw new CustomError("Journal entry not found", 404);
-    }
-
-    await prismaMain.journalEntry.update({
-      where: { id },
-      data: {
-        deletedAt: new Date(),
-        updatedBy: userId,
-      },
-    });
-
-    return null;
+  /** Journal entries are append-only; deletion is never allowed. */
+  async delete(_id: string, _userId?: string) {
+    throw new CustomError(
+      "Journal entries are append-only and cannot be deleted; use POST /journal-entry/:id/reverse to correct them",
+      409,
+    );
   },
 };

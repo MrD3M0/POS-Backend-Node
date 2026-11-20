@@ -3,12 +3,13 @@ import { FeeInstallmentService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateFeeInstallmentCreate } from "./validator";
+import { validateFeeInstallmentCreate, validateFeeInstallmentBulk } from "./validator";
 
 export const FeeInstallmentController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
+      const studentFeeItemId = req.query.studentFeeItemId as string | undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
@@ -16,6 +17,7 @@ export const FeeInstallmentController = {
         page: pageNumber,
         limit: limitNumber,
         search,
+        studentFeeItemId,
       });
 
       return ResponseHandler.success({
@@ -58,6 +60,24 @@ export const FeeInstallmentController = {
         code: 200,
         message: "Fee installment retrieved successfully",
         data: installment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  bulk: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeeInstallmentBulk(req.body);
+      const userId = res.locals.context?.userId;
+
+      const created = await FeeInstallmentService.bulk(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Fee installments created successfully",
+        data: created,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);

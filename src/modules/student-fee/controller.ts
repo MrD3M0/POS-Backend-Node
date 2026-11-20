@@ -3,12 +3,13 @@ import { StudentFeeService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateStudentFeeCreate } from "./validator";
+import { validateStudentFeeBulk, validateStudentFeeCreate } from "./validator";
 
 export const StudentFeeController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
+      const studentId = req.query.studentId as string | undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
@@ -16,6 +17,7 @@ export const StudentFeeController = {
         page: pageNumber,
         limit: limitNumber,
         search,
+        studentId,
       });
 
       return ResponseHandler.success({
@@ -42,6 +44,24 @@ export const StudentFeeController = {
         code: 201,
         message: "Student fee created successfully",
         data: fee,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  bulk: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateStudentFeeBulk(req.body);
+      const userId = res.locals.context?.userId;
+
+      const result = await StudentFeeService.assignToMany(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Student fees assigned successfully",
+        data: result,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);

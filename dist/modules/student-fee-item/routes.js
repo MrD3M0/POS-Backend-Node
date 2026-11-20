@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.studentFeeItemRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const authorized_1 = require("@/middlewares/authorized");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), controller_1.StudentFeeItemController.index);
+router.post("/", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "ACCOUNTANT"), controller_1.StudentFeeItemController.create);
+router.get("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), controller_1.StudentFeeItemController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "ACCOUNTANT"), controller_1.StudentFeeItemController.update);
+router.delete("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN", "ACCOUNTANT"), controller_1.StudentFeeItemController.delete);
+exports.studentFeeItemRouter = router;

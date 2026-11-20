@@ -1,14 +1,14 @@
 import { Router } from "express";
-import { SalaryComponentController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { SalaryComponentController } from "./controller";
 
 const router = Router();
 
-router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryComponentController.index);
-router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryComponentController.create);
-router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"), SalaryComponentController.retrieve);
-router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryComponentController.update);
-router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), SalaryComponentController.delete);
+router.get("/", isUser, requirePermission("lookups", "read"), SalaryComponentController.index);
+router.post("/", isUser, requirePermission("lookups", "create"), SalaryComponentController.create);
+router.get("/:id", isUser, requirePermission("lookups", "read"), SalaryComponentController.retrieve);
+router.patch("/:id", isUser, requirePermission("lookups", "update"), SalaryComponentController.update);
+router.delete("/:id", isUser, requirePermission("lookups", "delete"), SalaryComponentController.delete);
 
 export const salaryComponentRouter = router;

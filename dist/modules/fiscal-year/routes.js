@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.fiscalYearRouter = void 0;
+const express_1 = require("express");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const controller_1 = require("./controller");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "read"), controller_1.FiscalYearController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "create"), controller_1.FiscalYearController.create);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "read"), controller_1.FiscalYearController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "update"), controller_1.FiscalYearController.update);
+router.post("/:id/set-current", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "update"), controller_1.FiscalYearController.setCurrent);
+router.get("/:id/close-preview", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "update"), controller_1.FiscalYearController.closePreview);
+router.post("/:id/close", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "update"), controller_1.FiscalYearController.close);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("calendar", "delete"), controller_1.FiscalYearController.delete);
+exports.fiscalYearRouter = router;

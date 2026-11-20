@@ -3,7 +3,10 @@ import { FeeStructureService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateFeeStructureCreate } from "./validator";
+import {
+  validateFeeStructureCreate,
+  validateFeeStructureUpdate,
+} from "./validator";
 
 export const FeeStructureController = {
   index: async (req: Request, res: Response) => {
@@ -43,6 +46,28 @@ export const FeeStructureController = {
         res,
         code: 201,
         message: "Fee structure created successfully",
+        data: structure,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateFeeStructureUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const structure = await FeeStructureService.update(
+        req.params.id as string,
+        validatedData,
+        userId,
+      );
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee structure updated successfully",
         data: structure,
       });
     } catch (error) {

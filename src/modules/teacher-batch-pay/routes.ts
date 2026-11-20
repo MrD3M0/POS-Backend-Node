@@ -8,9 +8,11 @@ const router = Router();
 router.get(
   "/",
   isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER"),
   TeacherBatchPayController.index,
 );
+// Only ADMIN and ACCOUNTANT may set up a batch pay. A teacher may only READ
+// their own rows (the index/retrieve handlers scope them to their records).
 router.post(
   "/",
   isUser,
@@ -20,7 +22,7 @@ router.post(
 router.get(
   "/:id",
   isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER"),
   TeacherBatchPayController.retrieve,
 );
 router.patch(

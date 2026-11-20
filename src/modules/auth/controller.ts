@@ -1,15 +1,30 @@
 import { prismaMain } from "../../lib/prismaClient";
 import { ResponseHandler } from "../../utils/response";
-import { ValidateLogin, ValidateRegister } from "./validator";
+import {
+  ValidateLogin,
+  ValidateRegister,
+  ValidateRequestOtp,
+  ValidateVerifyOtp,
+} from "./validator";
 import type { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { ErrorHandler } from "@/utils/error";
-import { AuthService } from "./service";
+import {
+  AuthService,
+  generateOtpCode,
+  hashOtpCode,
+  verifyOtpCodeHash,
+} from "./service";
 import { CookieManager } from "@/utils/cookies";
+import { CustomError } from "@/errors/CustomError";
 
 const SALT_ROUNDS = 10;
 const MAX_FAILED_LOGINS = 5;
 const LOCK_MINUTES = 15;
+// OTP sums used by AuthService constants
+const OTP_TTL_MS = AuthService.constants.OTP_TTL_MS;
+const OTP_MAX_ATTEMPTS = AuthService.constants.OTP_MAX_ATTEMPTS;
+const OTP_RESEND_COOLDOWN_MS = AuthService.constants.OTP_RESEND_COOLDOWN_MS;
 
 // Public registration must never decide its own role (privilege escalation).
 // Change this to whatever role self-registered users should get.
@@ -57,15 +72,24 @@ export const AuthController = {
   },
   login: async (req: Request, res: Response) => {
     try {
-      // Validate the Login Input
-      const { email, password } = ValidateLogin(req.body);
+      // Validate the Login Input (email OR username)
+      const { identifier, password } = ValidateLogin(req.body);
 
-      // Find user in the DataBase (ignore soft deleted users)
+      // Find user in the DataBase (active, not soft-deleted).
+      // Inactive/deleted/unknown all fall through to the same generic error
+      // so the endpoint does not reveal which case it was.
+      const normalizedIdentifier = identifier.trim();
       const user = await prismaMain.user.findFirst({
-        where: { email, deletedAt: null },
+        where: {
+          deletedAt: null,
+          isActive: true,
+          OR: normalizedIdentifier.includes("@")
+            ? [{ email: normalizedIdentifier.toLowerCase() }]
+            : [{ username: normalizedIdentifier }],
+        },
       });
 
-      // If User is not found , Throw Error
+      // If User is not found, Throw Error
       if (!user)
         return ResponseHandler.error({
           res,
@@ -86,7 +110,8 @@ export const AuthController = {
       // Verify Password
       const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
-      // If Password doesn't match, count the failure and lock after too many
+      // If Password doesn't match, count the failure and lock after too many.
+      // Count is kept at the threshold (not reset) until a success resets it.
       if (!isPasswordValid) {
         const failedLoginCount = user.failedLoginCount + 1;
         const shouldLock = failedLoginCount >= MAX_FAILED_LOGINS;
@@ -94,7 +119,7 @@ export const AuthController = {
         await prismaMain.user.update({
           where: { id: user.id },
           data: {
-            failedLoginCount: shouldLock ? 0 : failedLoginCount,
+            failedLoginCount,
             lockedUntil: shouldLock
               ? new Date(Date.now() + LOCK_MINUTES * 60 * 1000)
               : null,
@@ -108,15 +133,6 @@ export const AuthController = {
           error: null,
         });
       }
-
-      // Password is correct, but the account may be deactivated by admin
-      if (!user.isActive)
-        return ResponseHandler.error({
-          res,
-          code: 403,
-          message: "Your account is deactivated. Please contact the admin.",
-          error: null,
-        });
 
       // Reset the failed attempts and save the last login time
       await prismaMain.user.update({
@@ -145,6 +161,7 @@ export const AuthController = {
           username: user.username,
           email: user.email,
           role: user.role,
+          isEmailVerified: user.isEmailVerified,
         },
         token: token,
         refreshToken: refreshToken,
@@ -263,7 +280,36 @@ export const AuthController = {
       // Get the user by id
       const user = await prismaMain.user.findFirst({
         where: { id: context.userId, deletedAt: null },
-        select: { id: true, email: true, username: true, role: true },
+        select: {
+          id: true,
+          email: true,
+          username: true,
+          role: true,
+          isEmailVerified: true,
+          // Identity details for the profile dialog (employee or student).
+          employee: {
+            select: {
+              id: true,
+              employeeCode: true,
+              firstName: true,
+              middleName: true,
+              lastName: true,
+              designation: true,
+              phone: true,
+              photoUrl: true,
+            },
+          },
+          student: {
+            select: {
+              id: true,
+              universityRegNo: true,
+              firstName: true,
+              middleName: true,
+              lastName: true,
+              phone: true,
+            },
+          },
+        },
       });
 
       // If user no longer exists
@@ -286,6 +332,143 @@ export const AuthController = {
       return ErrorHandler.handleError(res, error);
     }
   },
+  // POST /auth/request-otp — issues a 6-digit OTP (HMAC-SHA256 hash only).
+  // Same generic response for unknown/inactive/deleted email (no enumeration).
+  // Non-production only: plain `code` is returned for dev/test curl flows;
+  // in production it is only logged server-side (delivery integration pending).
+  requestOtp: async (req: Request, res: Response) => {
+    try {
+      const { email, purpose } = ValidateRequestOtp(req.body);
+
+      const generic = () =>
+        ResponseHandler.success({
+          res,
+          code: 200,
+          message:
+            "If an account exists for this email, a one-time code has been sent.",
+          data: null,
+        });
+
+      const user = await prismaMain.user.findFirst({
+        where: { email, deletedAt: null, isActive: true },
+        select: { id: true },
+      });
+      if (!user) return generic();
+
+      // 60s resend cooldown (per user + purpose)
+      const recent = await prismaMain.otp.findFirst({
+        where: { userId: user.id, purpose },
+        orderBy: { createdAt: "desc" },
+      });
+      if (
+        recent &&
+        Date.now() - recent.createdAt.getTime() < OTP_RESEND_COOLDOWN_MS
+      ) {
+        return ResponseHandler.error({
+          res,
+          code: 429,
+          message: "Please wait 60 seconds before requesting a new code.",
+          error: null,
+        });
+      }
+
+      const code = generateOtpCode();
+      const now = new Date();
+      // Only the latest unconsumed OTP may be valid: expire all previous ones.
+      await prismaMain.otp.updateMany({
+        where: { userId: user.id, purpose, consumedAt: null },
+        data: { expiresAt: now },
+      });
+      await prismaMain.otp.create({
+        data: {
+          userId: user.id,
+          purpose,
+          codeHash: hashOtpCode(code),
+          expiresAt: new Date(now.getTime() + OTP_TTL_MS),
+        },
+      });
+
+      if (process.env.NODE_ENV === "production") {
+        // eslint-disable-next-line no-console
+        console.log(`[OTP] ${purpose} for ${email}: ${code}`);
+        return generic();
+      }
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "One-time code generated (dev only — do not ship this).",
+        data: { code },
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  // POST /auth/verify-otp — checks the latest unconsumed, unexpired OTP.
+  // Wrong: attempts++ (locks at 5). Right: consumedAt set; EMAIL_VERIFY also
+  // flips User.isEmailVerified = true. Never returns passwordHash/codeHash.
+  verifyOtp: async (req: Request, res: Response) => {
+    try {
+      const { email, purpose, code } = ValidateVerifyOtp(req.body);
+
+      const invalid = () =>
+        ResponseHandler.error({
+          res,
+          code: 400,
+          message: "Invalid or expired code.",
+          error: null,
+        });
+
+      const user = await prismaMain.user.findFirst({
+        where: { email, deletedAt: null },
+        select: { id: true },
+      });
+      if (!user) return invalid();
+
+      const otp = await prismaMain.otp.findFirst({
+        where: { userId: user.id, purpose, consumedAt: null },
+        orderBy: { createdAt: "desc" },
+      });
+      if (!otp) return invalid();
+      if (otp.expiresAt.getTime() <= Date.now()) return invalid();
+      if (otp.attempts >= OTP_MAX_ATTEMPTS) return invalid();
+
+      if (!verifyOtpCodeHash(code, otp.codeHash)) {
+        await prismaMain.otp.update({
+          where: { id: otp.id },
+          data: { attempts: otp.attempts + 1 },
+        });
+        return invalid();
+      }
+
+      const now = new Date();
+      await prismaMain.otp.update({
+        where: { id: otp.id },
+        data: { consumedAt: now },
+      });
+      if (purpose === "EMAIL_VERIFY") {
+        await prismaMain.user.update({
+          where: { id: user.id },
+          data: { isEmailVerified: true },
+        });
+      }
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Code verified successfully.",
+        data: {
+          verified: true,
+          emailVerified: purpose === "EMAIL_VERIFY",
+        },
+      });
+    } catch (error) {
+      if (error instanceof CustomError)
+        return ErrorHandler.handleError(res, error);
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   logout: async (req: Request, res: Response) => {
     try {
       // Clear the cookies

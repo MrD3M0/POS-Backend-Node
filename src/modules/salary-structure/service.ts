@@ -1,12 +1,14 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
+import { EMPLOYEE_SAFE_SELECT } from "@/utils/employee";
 import { CustomError } from "@/errors/CustomError";
 import { SalaryStructureCreateInput, SalaryStructureUpdateInput } from "./validator";
 
 export const SalaryStructureService = {
   async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {};
 
@@ -20,9 +22,9 @@ export const SalaryStructureService = {
       prismaMain.salaryStructure.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
           items: true,
         },
         orderBy: { createdAt: "desc" },
@@ -57,7 +59,7 @@ export const SalaryStructureService = {
           createdBy: userId,
         },
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
           items: true,
         },
       });
@@ -74,7 +76,7 @@ export const SalaryStructureService = {
     const structure = await prismaMain.salaryStructure.findFirst({
       where: { id, deletedAt: null },
       include: {
-        employee: true,
+        employee: { select: EMPLOYEE_SAFE_SELECT },
         items: true,
       },
     });
@@ -103,7 +105,7 @@ export const SalaryStructureService = {
           updatedBy: userId,
         },
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
           items: true,
         },
       });

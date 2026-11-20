@@ -3,3 +3,12 @@ node_modules
 .env
 
 /src/generated/prisma
+
+# Dev/test seed credentials (contains demo passwords)
+../SEED_CREDENTIALS.md
+SEED_CREDENTIALS.md
+
+POS-Backend-Node-output.md
+POS-Backend-Node-output.txt
+POS-Backend-Node-output.md
+POS-Backend-Node-output.txt

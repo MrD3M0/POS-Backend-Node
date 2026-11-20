@@ -1,29 +1,38 @@
 import { z } from "zod";
 
+const decimalLike = z
+  .union([z.string().min(1), z.number()])
+  .transform((v) => String(v));
+
 export const payslipCreateInputSchema = z.object({
   payslipNo: z.string().min(1, "Payslip number is required"),
   payrollId: z.string().uuid("Invalid Payroll ID format"),
   employeeId: z.string().uuid("Invalid Employee ID format"),
-  paymentMethodId: z.string().uuid("Invalid Payment Method ID format").optional(),
-  presentDays: z.string().min(1, "Present days are required"),
-  halfDays: z.number().int().min(0),
-  paidLeaveDays: z.number().int().min(0),
-  unpaidLeaveDays: z.number().int().min(0),
-  absentDays: z.number().int().min(0),
-  basicSalary: z.string().min(1, "Basic salary is required"),
-  attendanceDeduction: z.string().optional(),
-  totalAllowance: z.string().optional(),
-  teachingPay: z.string().optional(),
-  grossPay: z.string().min(1, "Gross pay is required"),
-  totalDeduction: z.string().min(1, "Total deduction is required"),
-  taxAmount: z.string().min(1, "Tax amount is required"),
-  netPay: z.string().min(1, "Net pay is required"),
-  paidDateBs: z.string().min(1, "Paid date is required"),
+  paymentMethodId: z.string().uuid("Invalid Payment Method ID format").optional().nullable(),
+  presentDays: decimalLike,
+  halfDays: z.coerce.number().int().min(0),
+  paidLeaveDays: z.coerce.number().int().min(0),
+  unpaidLeaveDays: z.coerce.number().int().min(0),
+  absentDays: z.coerce.number().int().min(0),
+  basicSalary: decimalLike,
+  attendanceDeduction: decimalLike.optional().default("0"),
+  totalAllowance: decimalLike.optional().default("0"),
+  teachingPay: decimalLike.optional().default("0"),
+  grossPay: decimalLike,
+  totalDeduction: decimalLike,
+  taxAmount: decimalLike.optional().default("0"),
+  netPay: decimalLike,
+  paidDateBs: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, "Paid date must be YYYY-MM-DD (BS)")
+    .optional()
+    .nullable(),
 });
 
-export type PayslipCreateInput = z.infer<typeof payslipCreateInputSchema>;
-export type PayslipUpdateInput = z.infer<typeof payslipCreateInputSchema>;
+export const payslipUpdateInputSchema = payslipCreateInputSchema.partial();
 
-export const validatePayslipCreate = (data: unknown) => {
-  return payslipCreateInputSchema.parse(data);
-};
+export type PayslipCreateInput = z.infer<typeof payslipCreateInputSchema>;
+export type PayslipUpdateInput = z.infer<typeof payslipUpdateInputSchema>;
+
+export const validatePayslipCreate = (data: unknown) => payslipCreateInputSchema.parse(data);
+export const validatePayslipUpdate = (data: unknown) => payslipUpdateInputSchema.parse(data);

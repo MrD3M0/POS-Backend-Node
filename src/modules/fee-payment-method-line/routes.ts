@@ -1,33 +1,12 @@
 import { Router } from "express";
 import { FeePaymentMethodLineController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  FeePaymentMethodLineController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  FeePaymentMethodLineController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  FeePaymentMethodLineController.retrieve,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN"),
-  FeePaymentMethodLineController.delete,
-);
+router.get("/", isUser, requirePermission("fees", "read"), FeePaymentMethodLineController.index);
+router.get("/:id", isUser, requirePermission("fees", "read"), FeePaymentMethodLineController.retrieve);
+router.use((_, res) => res.status(405).json({ success: false, message: "Fee payment method lines cannot be edited or deleted" }));
 
 export const feePaymentMethodLineRouter = router;

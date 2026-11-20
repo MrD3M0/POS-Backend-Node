@@ -1,12 +1,13 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { TaxSlabCreateInput, TaxSlabUpdateInput } from "./validator";
 
 export const TaxSlabService = {
   async index(query: { page?: number; limit?: number; search?: string; fiscalYearId?: string; isCouple?: boolean }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {};
 
@@ -30,7 +31,7 @@ export const TaxSlabService = {
       prismaMain.taxSlab.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
           fiscalYear: true,
         },
@@ -140,5 +141,45 @@ export const TaxSlabService = {
     });
 
     return null;
+  },
+
+  async copy(fromFiscalYearId: string, toFiscalYearId: string, userId?: string) {
+    if (!fromFiscalYearId || !toFiscalYearId) throw new CustomError("fromFiscalYearId and toFiscalYearId are required", 400);
+    if (fromFiscalYearId === toFiscalYearId) throw new CustomError("Source and target fiscal year must be different", 400);
+
+    const [fromYear, toYear] = await Promise.all([
+      prismaMain.fiscalYear.findFirst({ where: { id: fromFiscalYearId, deletedAt: null } }),
+      prismaMain.fiscalYear.findFirst({ where: { id: toFiscalYearId, deletedAt: null } }),
+    ]);
+    if (!fromYear) throw new CustomError("Source fiscal year not found", 404);
+    if (!toYear) throw new CustomError("Target fiscal year not found", 404);
+
+    const source = await prismaMain.taxSlab.findMany({ where: { fiscalYearId: fromFiscalYearId, deletedAt: null } });
+    if (source.length === 0) throw new CustomError("Source fiscal year has no tax slabs", 409);
+
+    let created = 0;
+    let skipped = 0;
+    for (const slab of source) {
+      const exists = await prismaMain.taxSlab.findFirst({
+        where: { fiscalYearId: toFiscalYearId, isCouple: slab.isCouple, fromAmount: slab.fromAmount, deletedAt: null },
+      });
+      if (exists) {
+        skipped += 1;
+        continue;
+      }
+      await prismaMain.taxSlab.create({
+        data: {
+          fiscalYearId: toFiscalYearId,
+          isCouple: slab.isCouple,
+          fromAmount: slab.fromAmount,
+          toAmount: slab.toAmount,
+          ratePercent: slab.ratePercent,
+          createdBy: userId,
+        },
+      });
+      created += 1;
+    }
+
+    return { fromFiscalYearId, toFiscalYearId, created, skipped };
   },
 };

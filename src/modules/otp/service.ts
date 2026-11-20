@@ -1,7 +1,8 @@
-import bcrypt from "bcrypt";
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { OtpCreateInput } from "./validator";
+import { hashOtpCode } from "@/modules/auth/service";
 
 // Never leak the code hash to API consumers
 const otpSelect = {
@@ -17,8 +18,8 @@ const otpSelect = {
 export const OtpService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {};
 
@@ -30,7 +31,7 @@ export const OtpService = {
       prismaMain.otp.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         select: otpSelect,
         orderBy: { createdAt: "desc" },
       }),
@@ -53,7 +54,7 @@ export const OtpService = {
       throw new CustomError("User not found", 404);
     }
 
-    const codeHash = await bcrypt.hash(data.code, 10);
+    const codeHash = hashOtpCode(data.code);
 
     const otp = await prismaMain.otp.create({
       data: {

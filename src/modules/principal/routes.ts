@@ -8,6 +8,7 @@ const router = Router();
 router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PrincipalController.index);
 router.post("/", isUser, isAuthorizedTo("ADMIN"), PrincipalController.create);
 router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PrincipalController.retrieve);
+router.patch("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL"), PrincipalController.update);
 router.delete("/:id", isUser, isAuthorizedTo("ADMIN"), PrincipalController.delete);
 
 export const principalRouter = router;

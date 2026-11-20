@@ -1,0 +1,23 @@
+meta {
+  name: List Class Schedules
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/class-schedule?page=1&limit=10
+  body: none
+  auth: inherit
+}
+
+params:query {
+  page: 1
+  limit: 10
+  search: 
+  batchId: 
+  batchTermId: 
+  teacherId: 
+  dayOfWeek: 
+  periodId: 
+  isActive: true
+}

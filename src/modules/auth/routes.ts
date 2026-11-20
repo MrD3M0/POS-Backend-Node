@@ -13,6 +13,8 @@ authRouter.post(
   AuthController.register,
 );
 authRouter.post("/refresh", AuthController.refresh);
+authRouter.post("/request-otp", AuthController.requestOtp);
+authRouter.post("/verify-otp", AuthController.verifyOtp);
 authRouter.get("/me", isUser, AuthController.me);
 authRouter.get("/logout", isUser, AuthController.logout);
 authRouter.get("/test", AuthController.test);

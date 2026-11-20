@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.accountRouter = void 0;
+const express_1 = require("express");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const controller_1 = require("./controller");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "read"), controller_1.AccountController.index);
+router.get("/tree", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "read"), controller_1.AccountController.tree);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "create"), controller_1.AccountController.create);
+router.post("/seed-default", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "create"), controller_1.AccountController.seedDefault);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "read"), controller_1.AccountController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "update"), controller_1.AccountController.update);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("accounts", "delete"), controller_1.AccountController.delete);
+exports.accountRouter = router;

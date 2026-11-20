@@ -1,16 +1,38 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
-import { TeachingAssignmentCreateInput } from "./validator";
+import { TeachingAssignmentCreateInput, TeachingAssignmentUpdateInput } from "./validator";
 
 export const TeachingAssignmentService = {
-  async index(query: { page?: number; limit?: number; search?: string }) {
+  async index(
+    query: { page?: number; limit?: number; search?: string },
+    context?: { userId?: string; role?: string },
+  ) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
     };
+
+    // A teacher only ever sees their own assignments ("My Classes").
+    if (context?.role === "TEACHER") {
+      const teacher = await prismaMain.teacher.findFirst({
+        where: {
+          deletedAt: null,
+          employee: { userId: context.userId ?? "", deletedAt: null },
+        },
+        select: { id: true },
+      });
+      if (!teacher) {
+        return {
+          data: [],
+          pagination: { page, limit, total: 0 },
+        };
+      }
+      whereClause.teacherId = teacher.id;
+    }
 
     if (query.search) {
       whereClause.OR = [
@@ -22,8 +44,30 @@ export const TeachingAssignmentService = {
       prismaMain.teachingAssignment.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
+          teacher: {
+            select: {
+              id: true,
+              employee: {
+                select: { firstName: true, middleName: true, lastName: true, employeeCode: true },
+              },
+            },
+          },
+          batchTermSubject: {
+            select: {
+              id: true,
+              subject: { select: { code: true, name: true } },
+              batchTerm: {
+                select: {
+                  termNumber: true,
+                  name: true,
+                  // `id` is needed by the teacher notice audience picker
+                  batch: { select: { id: true, name: true } },
+                },
+              },
+            },
+          },
           sessions: true,
         },
         orderBy: { createdAt: "desc" },
@@ -38,6 +82,22 @@ export const TeachingAssignmentService = {
   },
 
   async create(data: TeachingAssignmentCreateInput, userId?: string) {
+    const [teacher, batchTermSubject] = await Promise.all([
+      prismaMain.teacher.findFirst({ where: { id: data.teacherId, deletedAt: null } }),
+      prismaMain.batchTermSubject.findFirst({ where: { id: data.batchTermSubjectId, deletedAt: null } }),
+    ]);
+    if (!teacher) throw new CustomError("Teacher not found or has been deleted", 404);
+    if (!batchTermSubject) throw new CustomError("Batch term subject not found or has been deleted", 404);
+    if (data.endDateBs && data.endDateBs < data.assignedDateBs) {
+      throw new CustomError("endDateBs must be on or after assignedDateBs", 400);
+    }
+    const duplicate = await prismaMain.teachingAssignment.findFirst({
+      where: { teacherId: data.teacherId, batchTermSubjectId: data.batchTermSubjectId },
+    });
+    if (duplicate) {
+      throw new CustomError("This teacher is already assigned to this batch term subject", 409);
+    }
+
     try {
       const assignment = await prismaMain.teachingAssignment.create({
         data: {
@@ -51,7 +111,7 @@ export const TeachingAssignmentService = {
       return assignment;
     } catch (error: any) {
       if (error.code === "P2002") {
-        throw new CustomError("A teaching assignment with this subject already exists", 409);
+        throw new CustomError("This teacher is already assigned to this batch term subject", 409);
       }
       throw error;
     }
@@ -72,6 +132,59 @@ export const TeachingAssignmentService = {
     return assignment;
   },
 
+  async update(id: string, data: TeachingAssignmentUpdateInput, userId?: string) {
+    const existing = await prismaMain.teachingAssignment.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Teaching assignment not found", 404);
+    }
+
+    const teacherId = data.teacherId ?? existing.teacherId;
+    const batchTermSubjectId = data.batchTermSubjectId ?? existing.batchTermSubjectId;
+    const assignedDateBs = data.assignedDateBs ?? existing.assignedDateBs;
+    const endDateBs = data.endDateBs !== undefined ? data.endDateBs : existing.endDateBs;
+    if (endDateBs && endDateBs < assignedDateBs) {
+      throw new CustomError("endDateBs must be on or after assignedDateBs", 400);
+    }
+    if (data.teacherId) {
+      const teacher = await prismaMain.teacher.findFirst({ where: { id: data.teacherId, deletedAt: null } });
+      if (!teacher) throw new CustomError("Teacher not found or has been deleted", 404);
+    }
+    if (data.batchTermSubjectId) {
+      const bts = await prismaMain.batchTermSubject.findFirst({
+        where: { id: data.batchTermSubjectId, deletedAt: null },
+      });
+      if (!bts) throw new CustomError("Batch term subject not found or has been deleted", 404);
+    }
+    const duplicate = await prismaMain.teachingAssignment.findFirst({
+      where: { teacherId, batchTermSubjectId, NOT: { id } },
+    });
+    if (duplicate) {
+      throw new CustomError("This teacher is already assigned to this batch term subject", 409);
+    }
+
+    try {
+      const updated = await prismaMain.teachingAssignment.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        } as any,
+        include: {
+          sessions: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("This teacher is already assigned to this batch term subject", 409);
+      }
+      throw error;
+    }
+  },
+
   async delete(id: string, userId?: string) {
     const existing = await prismaMain.teachingAssignment.findFirst({
       where: { id, deletedAt: null },
@@ -90,5 +203,55 @@ export const TeachingAssignmentService = {
     });
 
     return null;
+  },
+
+  /**
+   * Teacher workload for the assignment form: how many subjects are assigned
+   * and how many periods are on the weekly schedule.
+   */
+  async workload(teacherId: string) {
+    const teacher = await prismaMain.teacher.findFirst({
+      where: { id: teacherId, deletedAt: null },
+      select: { id: true },
+    });
+    if (!teacher) throw new CustomError("Teacher not found or has been deleted", 404);
+
+    const [assignedSubjects, weeklyScheduledPeriods] = await Promise.all([
+      prismaMain.teachingAssignment.count({
+        where: { teacherId, deletedAt: null, isActive: true },
+      }),
+      prismaMain.classSchedule.count({
+        where: {
+          deletedAt: null,
+          isActive: true,
+          teachingAssignment: { teacherId, deletedAt: null },
+        },
+      }),
+    ]);
+
+    return { teacherId, assignedSubjects, weeklyScheduledPeriods };
+  },
+
+  /**
+   * When an assignment ends, optionally close its still-open weekly schedules:
+   * effectiveToBs = endDateBs for schedules that reach beyond it. Rows already
+   * closing on or before endDateBs are left untouched.
+   */
+  async closeSchedules(assignmentId: string, endDateBs: string, userId?: string): Promise<number> {
+    const open = await prismaMain.classSchedule.findMany({
+      where: {
+        deletedAt: null,
+        teachingAssignmentId: assignmentId,
+        OR: [{ effectiveToBs: null }, { effectiveToBs: { gt: endDateBs } }],
+      },
+      select: { id: true },
+    });
+    if (open.length === 0) return 0;
+
+    await prismaMain.classSchedule.updateMany({
+      where: { id: { in: open.map((row) => row.id) } },
+      data: { effectiveToBs: endDateBs, updatedBy: userId },
+    });
+    return open.length;
   },
 };

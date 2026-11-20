@@ -17,11 +17,23 @@ router.post(
   isAuthorizedTo("ADMIN", "TEACHER"),
   ExamMarkController.create,
 );
+router.post(
+  "/bulk",
+  isUser,
+  isAuthorizedTo("ADMIN", "TEACHER"),
+  ExamMarkController.bulkCreate,
+);
 router.get(
   "/:id",
   isUser,
   isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
   ExamMarkController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "TEACHER"),
+  ExamMarkController.update,
 );
 router.delete(
   "/:id",

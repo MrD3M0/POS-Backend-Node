@@ -1,12 +1,14 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
+import { EMPLOYEE_SAFE_SELECT, assertSingleRoleProfile } from "@/utils/employee";
 import { CustomError } from "@/errors/CustomError";
-import { PrincipalCreateInput } from "./validator";
+import { PrincipalCreateInput, PrincipalUpdateInput } from "./validator";
 
 export const PrincipalService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -24,9 +26,9 @@ export const PrincipalService = {
       prismaMain.principal.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -53,6 +55,8 @@ export const PrincipalService = {
       throw new CustomError("Employee not found or has been deleted", 404);
     }
 
+    await assertSingleRoleProfile(prismaMain, data.employeeId, "PRINCIPAL");
+
     try {
       const principal = await prismaMain.principal.create({
         data: {
@@ -61,7 +65,7 @@ export const PrincipalService = {
           createdBy: userId,
         },
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
       });
       return principal;
@@ -77,7 +81,7 @@ export const PrincipalService = {
     const principal = await prismaMain.principal.findFirst({
       where: { id, deletedAt: null },
       include: {
-        employee: true,
+        employee: { select: EMPLOYEE_SAFE_SELECT },
       },
     });
 
@@ -86,6 +90,47 @@ export const PrincipalService = {
     }
 
     return principal;
+  },
+
+  async update(id: string, data: PrincipalUpdateInput, userId?: string) {
+    const existing = await prismaMain.principal.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Principal not found", 404);
+    }
+
+    if (data.employeeId) {
+      const employee = await prismaMain.employee.findFirst({
+        where: { id: data.employeeId, deletedAt: null },
+      });
+
+      if (!employee) {
+        throw new CustomError("Employee not found or has been deleted", 404);
+      }
+    }
+
+    if (data.employeeId) await assertSingleRoleProfile(prismaMain, data.employeeId, "PRINCIPAL");
+
+    try {
+      const updated = await prismaMain.principal.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        } as any,
+        include: {
+          employee: { select: EMPLOYEE_SAFE_SELECT },
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee with this ID is already assigned as Principal", 409);
+      }
+      throw error;
+    }
   },
 
   async delete(id: string, userId?: string) {

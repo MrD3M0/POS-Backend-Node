@@ -1,8 +1,16 @@
 import { prismaMain } from "@/lib/prismaClient";
 import { CustomError } from "@/errors/CustomError";
-import { calculateSkipAndTake } from "@/utils/queryFilters";
-import { StudentAttendanceBulkInput, StudentAttendanceCreateInput, StudentAttendanceUpdateInput } from "./validator";
-
+import { calculateSkipAndTake, resolvePageLimit } from "@/utils/queryFilters";
+import {
+  AttendanceStatus,
+  type Prisma,
+} from "@/generated/prisma/client";
+import {
+  StudentAttendanceBulkInput,
+  StudentAttendanceCreateInput,
+  StudentAttendanceUpdateInput,
+} from "./validator";
+import { studentHolidayDateBs } from "@/modules/holiday/service";
 
 type Actor = { userId?: string; role?: string };
 
@@ -13,15 +21,22 @@ const studentSelect = {
   middleName: true,
   lastName: true,
   batchId: true,
-};
+} as const;
 
 const defaultInclude = {
   session: true,
   student: { select: studentSelect },
+} as const;
+
+// Salary factor per status: PRESENT/LATE = 1, LEAVE/ABSENT = 0.
+export const ATTENDANCE_FACTOR: Record<string, number> = {
+  PRESENT: 1,
+  LATE: 1,
+  LEAVE: 0,
+  ABSENT: 0,
 };
 
-// A teacher may only touch sessions that belong to them
-async function getTeacherIdForUser(userId?: string) {
+async function getTeacherIdForUser(userId?: string): Promise<string | null> {
   if (!userId) return null;
   const teacher = await prismaMain.teacher.findFirst({
     where: { deletedAt: null, employee: { userId, deletedAt: null } },
@@ -30,8 +45,7 @@ async function getTeacherIdForUser(userId?: string) {
   return teacher?.id ?? null;
 }
 
-// A student may only read their own records
-async function getStudentIdForUser(userId?: string) {
+async function getStudentIdForUser(userId?: string): Promise<string | null> {
   if (!userId) return null;
   const student = await prismaMain.student.findFirst({
     where: { userId, deletedAt: null },
@@ -40,28 +54,45 @@ async function getStudentIdForUser(userId?: string) {
   return student?.id ?? null;
 }
 
-// Loads the session, checks it is open and (for teachers) owned by the caller
 async function assertSessionWritable(sessionId: string, actor: Actor) {
   const session = await prismaMain.attendanceSession.findFirst({
     where: { id: sessionId, deletedAt: null },
   });
+  if (!session) throw new CustomError("Attendance session not found", 404);
 
-  if (!session) {
-    throw new CustomError("Attendance session not found", 404);
-  }
-
-  if (session.isLocked) {
-    throw new CustomError(
-      "This attendance session is locked and cannot be changed",
-      423,
-    );
+  if (actor.role !== "ADMIN" && actor.role !== "PRINCIPAL") {
+    const editHours = await (
+      await import("@/lib/settings")
+    )
+      .getAttendanceEditHours()
+      .catch(() => 24);
+    const ageHours =
+      (Date.now() - new Date(session.createdAt).getTime()) / 3_600_000;
+    if (session.isLocked || ageHours > editHours) {
+      if (!session.isLocked) {
+        await prismaMain.attendanceSession
+          .update({
+            where: { id: sessionId },
+            data: { isLocked: true, lockedAt: new Date() },
+          })
+          .catch(() => {});
+      }
+      throw new CustomError(
+        "This attendance session is locked (edit window passed). Only PRINCIPAL/ADMIN can unlock.",
+        423,
+      );
+    }
   }
 
   if (actor.role === "TEACHER") {
     const teacherId = await getTeacherIdForUser(actor.userId);
-    if (!teacherId || teacherId !== session.teacherId) {
+    const assignment = await prismaMain.teachingAssignment.findFirst({
+      where: { id: session.teachingAssignmentId, deletedAt: null },
+      select: { teacherId: true },
+    });
+    if (!teacherId || !assignment || assignment.teacherId !== teacherId) {
       throw new CustomError(
-        "You can only manage attendance for your own sessions",
+        "You can only manage attendance for sessions of your own teaching assignment",
         403,
       );
     }
@@ -70,15 +101,48 @@ async function assertSessionWritable(sessionId: string, actor: Actor) {
   return session;
 }
 
-async function assertStudentsExist(studentIds: string[]) {
-  const unique = [...new Set(studentIds)];
-  const count = await prismaMain.student.count({
-    where: { id: { in: unique }, deletedAt: null },
+async function getRoster(
+  sessionId: string,
+): Promise<{ session: any; rosterIds: Set<string> }> {
+  const session = await prismaMain.attendanceSession.findFirst({
+    where: { id: sessionId, deletedAt: null },
+    include: {
+      teachingAssignment: {
+        include: { batchTermSubject: { include: { batchTerm: true } } },
+      },
+    },
   });
+  if (!session) throw new CustomError("Attendance session not found", 404);
 
-  if (count !== unique.length) {
-    throw new CustomError("One or more students were not found", 404);
+  const batchId = session.teachingAssignment.batchTermSubject.batchTerm.batchId;
+  const students = await prismaMain.student.findMany({
+    where: {
+      batchId,
+      approvalStatus: "APPROVED",
+      status: "ACTIVE",
+      deletedAt: null,
+    },
+    select: { id: true },
+  });
+  return { session, rosterIds: new Set(students.map((s) => s.id)) };
+}
+
+function assertInRoster(studentIds: string[], rosterIds: Set<string>) {
+  const notInRoster = studentIds.filter((id) => !rosterIds.has(id));
+  if (notInRoster.length > 0) {
+    throw new CustomError(
+      `Students not in the session roster (APPROVED+ACTIVE batch students): ${notInRoster.join(", ")}`,
+      422,
+    );
   }
+}
+
+function fetchSessionRecords(sessionId: string) {
+  return prismaMain.studentAttendance.findMany({
+    where: { sessionId, deletedAt: null },
+    include: defaultInclude,
+    orderBy: { student: { universityRegNo: "asc" } },
+  });
 }
 
 export const StudentAttendanceService = {
@@ -96,17 +160,16 @@ export const StudentAttendanceService = {
     actor: Actor,
   ) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit ? query.limit : 10;
+    const limit = resolvePageLimit(query.limit, 10);
     const { skip, take } = calculateSkipAndTake(page, limit);
 
-    const whereClause: any = { deletedAt: null };
-
+    const whereClause: Prisma.StudentAttendanceWhereInput = { deletedAt: null };
     if (query.sessionId) whereClause.sessionId = query.sessionId;
-    if (query.status) whereClause.status = query.status;
-    if (query.dateBs)
-      whereClause.session = { dateBs: query.dateBs, deletedAt: null };
+    if (query.status) whereClause.status = query.status as AttendanceStatus;
+    if (query.dateBs) {
+      whereClause.session = { is: { dateBs: query.dateBs, deletedAt: null } };
+    }
 
-    // Students are always limited to their own attendance
     if (actor.role === "STUDENT") {
       const ownStudentId = await getStudentIdForUser(actor.userId);
       if (!ownStudentId)
@@ -116,17 +179,8 @@ export const StudentAttendanceService = {
       whereClause.studentId = query.studentId;
     }
 
-    const studentWhere: any = {};
-    if (query.batchId) studentWhere.batchId = query.batchId;
-    if (query.search) {
-      studentWhere.OR = [
-        { firstName: { contains: query.search, mode: "insensitive" } },
-        { lastName: { contains: query.search, mode: "insensitive" } },
-        { universityRegNo: { contains: query.search, mode: "insensitive" } },
-      ];
-    }
-    if (Object.keys(studentWhere).length > 0) {
-      whereClause.student = studentWhere;
+    if (query.batchId) {
+      whereClause.student = { is: { batchId: query.batchId } };
     }
 
     const [records, total] = await Promise.all([
@@ -135,7 +189,9 @@ export const StudentAttendanceService = {
         skip,
         take,
         include: defaultInclude,
-        orderBy: { createdAt: "desc" },
+        orderBy: query.sessionId
+          ? { student: { universityRegNo: "asc" } }
+          : { createdAt: "desc" },
       }),
       prismaMain.studentAttendance.count({ where: whereClause }),
     ]);
@@ -145,36 +201,34 @@ export const StudentAttendanceService = {
 
   async create(data: StudentAttendanceCreateInput, actor: Actor) {
     await assertSessionWritable(data.sessionId, actor);
-    await assertStudentsExist([data.studentId]);
+    const { rosterIds } = await getRoster(data.sessionId);
+    assertInRoster([data.studentId], rosterIds);
 
     const existing = await prismaMain.studentAttendance.findFirst({
-      where: { sessionId: data.sessionId, studentId: data.studentId },
+      where: {
+        sessionId: data.sessionId,
+        studentId: data.studentId,
+        deletedAt: null,
+      },
     });
-
-    if (existing) {
+    if (existing)
       throw new CustomError(
         "Attendance is already marked for this student in this session",
         409,
       );
-    }
 
-    try {
-      return await prismaMain.studentAttendance.create({
-        data: { ...data, createdBy: actor.userId },
-        include: defaultInclude,
-      });
-    } catch (error: any) {
-      if (error.code === "P2002") {
-        throw new CustomError(
-          "Attendance is already marked for this student in this session",
-          409,
-        );
-      }
-      throw error;
-    }
+    return prismaMain.studentAttendance.create({
+      data: {
+        sessionId: data.sessionId,
+        studentId: data.studentId,
+        status: data.status,
+        remarks: data.remarks ?? null,
+        createdBy: actor.userId,
+      },
+      include: defaultInclude,
+    });
   },
 
-  // Creates or updates every record for the session in one transaction
   async bulkMark(data: StudentAttendanceBulkInput, actor: Actor) {
     await assertSessionWritable(data.sessionId, actor);
 
@@ -183,11 +237,30 @@ export const StudentAttendanceService = {
       throw new CustomError("Duplicate students found in the request", 400);
     }
 
-    await assertStudentsExist(studentIds);
+    const { rosterIds } = await getRoster(data.sessionId);
+    assertInRoster(studentIds, rosterIds);
 
-    await prismaMain.$transaction(
-      data.records.map((record) =>
-        prismaMain.studentAttendance.upsert({
+    const explicitIds = new Set(studentIds);
+    const defaulted = [...rosterIds]
+      .filter((id) => !explicitIds.has(id))
+      .map((studentId) => ({
+        studentId,
+        status: AttendanceStatus.PRESENT,
+        remarks: null as string | null,
+      }));
+
+    const allRecords = [
+      ...data.records.map((r) => ({
+        studentId: r.studentId,
+        status: r.status as AttendanceStatus,
+        remarks: r.remarks ?? null,
+      })),
+      ...defaulted,
+    ];
+
+    await prismaMain.$transaction(async (tx) => {
+      for (const record of allRecords) {
+        await tx.studentAttendance.upsert({
           where: {
             sessionId_studentId: {
               sessionId: data.sessionId,
@@ -198,24 +271,20 @@ export const StudentAttendanceService = {
             sessionId: data.sessionId,
             studentId: record.studentId,
             status: record.status,
-            remarks: record.remarks ?? null,
+            remarks: record.remarks,
             createdBy: actor.userId,
           },
           update: {
             status: record.status,
-            remarks: record.remarks ?? null,
+            remarks: record.remarks,
             deletedAt: null,
             updatedBy: actor.userId,
           },
-        }),
-      ),
-    );
-
-    return prismaMain.studentAttendance.findMany({
-      where: { sessionId: data.sessionId, deletedAt: null },
-      include: defaultInclude,
-      orderBy: { createdAt: "asc" },
+        });
+      }
     });
+
+    return fetchSessionRecords(data.sessionId);
   },
 
   async getById(id: string, actor: Actor) {
@@ -223,22 +292,15 @@ export const StudentAttendanceService = {
       where: { id, deletedAt: null },
       include: defaultInclude,
     });
-
-    if (!record) {
-      throw new CustomError("Student attendance not found", 404);
-    }
-
+    if (!record) throw new CustomError("Student attendance not found", 404);
     if (actor.role === "STUDENT") {
       const ownStudentId = await getStudentIdForUser(actor.userId);
-      if (record.studentId !== ownStudentId) {
+      if (record.studentId !== ownStudentId)
         throw new CustomError("Student attendance not found", 404);
-      }
     }
-
     return record;
   },
 
-  // Totals per status for one student (optionally limited to a date range in BS, YYYY-MM-DD)
   async summary(
     studentId: string,
     range: { fromBs?: string; toBs?: string },
@@ -246,28 +308,33 @@ export const StudentAttendanceService = {
   ) {
     if (actor.role === "STUDENT") {
       const ownStudentId = await getStudentIdForUser(actor.userId);
-      if (studentId !== ownStudentId) {
+      if (studentId !== ownStudentId)
         throw new CustomError("Student not found", 404);
-      }
     }
 
     const student = await prismaMain.student.findFirst({
       where: { id: studentId, deletedAt: null },
       select: studentSelect,
     });
+    if (!student) throw new CustomError("Student not found", 404);
 
-    if (!student) {
-      throw new CustomError("Student not found", 404);
-    }
+    const where: Prisma.StudentAttendanceWhereInput = {
+      studentId,
+      deletedAt: null,
+    };
 
-    const where: any = { studentId, deletedAt: null };
-    if (range.fromBs || range.toBs) {
-      where.session = {
-        dateBs: {
-          ...(range.fromBs ? { gte: range.fromBs } : {}),
-          ...(range.toBs ? { lte: range.toBs } : {}),
-        },
-      };
+    // Sessions held on student holidays are not working days: they count
+    // toward neither the numerator nor the denominator of attendance %.
+    const holidayDateBs = [
+      ...(await studentHolidayDateBs(range.fromBs || range.toBs ? range : undefined)),
+    ];
+
+    const sessionDateBs: Prisma.StringFilter = {};
+    if (range.fromBs) sessionDateBs.gte = range.fromBs;
+    if (range.toBs) sessionDateBs.lte = range.toBs;
+    if (holidayDateBs.length > 0) sessionDateBs.notIn = holidayDateBs;
+    if (Object.keys(sessionDateBs).length > 0) {
+      where.session = { is: { dateBs: sessionDateBs } };
     }
 
     const grouped = await prismaMain.studentAttendance.groupBy({
@@ -279,27 +346,35 @@ export const StudentAttendanceService = {
     const byStatus = grouped.map((g) => ({
       status: g.status,
       count: g._count._all,
+      factor: ATTENDANCE_FACTOR[g.status] ?? 0,
     }));
-
     const totalSessions = byStatus.reduce((sum, s) => sum + s.count, 0);
+    const presentDays = byStatus.reduce(
+      (sum, s) => sum + s.count * s.factor,
+      0,
+    );
+    const attendancePercent =
+      totalSessions === 0
+        ? 0
+        : Math.round((presentDays / totalSessions) * 10000) / 100;
 
-    return { student, totalSessions, byStatus };
+    return { student, totalSessions, byStatus, presentDays, attendancePercent };
   },
 
   async update(id: string, data: StudentAttendanceUpdateInput, actor: Actor) {
     const record = await prismaMain.studentAttendance.findFirst({
       where: { id, deletedAt: null },
     });
-
-    if (!record) {
-      throw new CustomError("Student attendance not found", 404);
-    }
-
+    if (!record) throw new CustomError("Student attendance not found", 404);
     await assertSessionWritable(record.sessionId, actor);
 
     return prismaMain.studentAttendance.update({
       where: { id },
-      data: { ...data, updatedBy: actor.userId },
+      data: {
+        ...(data.status ? { status: data.status } : {}),
+        ...(data.remarks !== undefined ? { remarks: data.remarks } : {}),
+        updatedBy: actor.userId,
+      },
       include: defaultInclude,
     });
   },
@@ -308,18 +383,12 @@ export const StudentAttendanceService = {
     const record = await prismaMain.studentAttendance.findFirst({
       where: { id, deletedAt: null },
     });
-
-    if (!record) {
-      throw new CustomError("Student attendance not found", 404);
-    }
-
+    if (!record) throw new CustomError("Student attendance not found", 404);
     await assertSessionWritable(record.sessionId, actor);
-
     await prismaMain.studentAttendance.update({
       where: { id },
       data: { deletedAt: new Date(), updatedBy: actor.userId },
     });
-
     return null;
   },
 };

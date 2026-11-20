@@ -3,7 +3,10 @@ import { JournalEntryService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateJournalEntryCreate } from "./validator";
+import {
+  validateJournalEntryCreate,
+  validateJournalEntryReverse,
+} from "./validator";
 
 export const JournalEntryController = {
   index: async (req: Request, res: Response) => {
@@ -58,6 +61,25 @@ export const JournalEntryController = {
         code: 200,
         message: "Journal entry retrieved successfully",
         data: entry,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  reverse: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateJournalEntryReverse(req.body);
+      const userId = res.locals.context?.userId;
+
+      const reversal = await JournalEntryService.reverse(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: "Journal entry reversed successfully",
+        data: reversal,
       });
     } catch (error) {
       return ErrorHandler.handleError(res, error);

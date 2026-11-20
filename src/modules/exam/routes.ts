@@ -21,7 +21,7 @@ router.get(
 router.post(
   "/",
   isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
   ExamController.create,
 );
 router.get(
@@ -36,6 +36,12 @@ router.get(
     "STUDENT",
   ),
   ExamController.retrieve,
+);
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "PRINCIPAL", "TEACHER"),
+  ExamController.update,
 );
 router.delete(
   "/:id",

@@ -3,7 +3,7 @@ import { StaffService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateStaffCreate } from "./validator";
+import { validateStaffCreate, validateStaffUpdate } from "./validator";
 
 export const StaffController = {
   index: async (req: Request, res: Response) => {
@@ -50,6 +50,22 @@ export const StaffController = {
     }
   },
 
+  me: async (req: Request, res: Response) => {
+    try {
+      const userId = res.locals.context?.userId as string;
+      const staff = await StaffService.getMe(userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Staff retrieved successfully",
+        data: staff,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   retrieve: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;
@@ -59,6 +75,25 @@ export const StaffController = {
         res,
         code: 200,
         message: "Staff retrieved successfully",
+        data: staff,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateStaffUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const staff = await StaffService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Staff updated successfully",
         data: staff,
       });
     } catch (error) {

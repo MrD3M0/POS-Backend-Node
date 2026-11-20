@@ -2,11 +2,13 @@ import { z } from "zod";
 
 export const payslipItemCreateInputSchema = z.object({
   payslipId: z.string().uuid("Invalid Payslip ID format"),
-  componentId: z.string().uuid("Invalid Salary Component ID format").optional(),
+  componentId: z.string().uuid("Invalid Salary Component ID format").optional().nullable(),
   description: z.string().min(1, "Description is required"),
-  amount: z.string().min(1, "Amount is required"),
-  isDeduction: z.boolean().optional(),
-  isEmployerContribution: z.boolean().optional(),
+  amount: z
+    .union([z.string().min(1), z.number()])
+    .transform((v) => String(v)),
+  isDeduction: z.boolean().optional().default(false),
+  isEmployerContribution: z.boolean().optional().default(false),
 });
 
 export type PayslipItemCreateInput = z.infer<typeof payslipItemCreateInputSchema>;

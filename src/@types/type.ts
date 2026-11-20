@@ -1,4 +1,4 @@
 export type T_Context = {
   userId: string;
-  role: "USER" | "ADMIN" | "PRINCIPAL" | "ACCOUNTANT" | "TEACHER" | "STAFF";
+  role: "ADMIN" | "PRINCIPAL" | "ACCOUNTANT" | "TEACHER" | "STAFF" | "STUDENT";
 };

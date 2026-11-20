@@ -1,12 +1,14 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
+import { EMPLOYEE_SAFE_SELECT, assertSingleRoleProfile } from "@/utils/employee";
 import { CustomError } from "@/errors/CustomError";
-import { StaffCreateInput } from "./validator";
+import { StaffCreateInput, StaffUpdateInput } from "./validator";
 
 export const StaffService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -24,9 +26,9 @@ export const StaffService = {
       prismaMain.staff.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -53,6 +55,8 @@ export const StaffService = {
       throw new CustomError("Employee not found or has been deleted", 404);
     }
 
+    await assertSingleRoleProfile(prismaMain, data.employeeId, "STAFF");
+
     try {
       const staff = await prismaMain.staff.create({
         data: {
@@ -61,7 +65,7 @@ export const StaffService = {
           createdBy: userId,
         },
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
       });
       return staff;
@@ -77,7 +81,7 @@ export const StaffService = {
     const staff = await prismaMain.staff.findFirst({
       where: { id, deletedAt: null },
       include: {
-        employee: true,
+        employee: { select: EMPLOYEE_SAFE_SELECT },
       },
     });
 
@@ -86,6 +90,92 @@ export const StaffService = {
     }
 
     return staff;
+  },
+
+  async getMe(userId: string) {
+    const employee = await prismaMain.employee.findFirst({
+      where: { userId, deletedAt: null },
+    });
+
+    if (!employee) {
+      throw new CustomError("Employee profile not found for this user", 404);
+    }
+
+    const staff = await prismaMain.staff.findFirst({
+      where: { employeeId: employee.id, deletedAt: null },
+      include: {
+        employee: { select: EMPLOYEE_SAFE_SELECT },
+      },
+    });
+
+    if (!staff) {
+      throw new CustomError("Staff profile not found for this user", 404);
+    }
+
+    return staff;
+  },
+
+  async update(id: string, data: StaffUpdateInput, userId?: string) {
+    const existing = await prismaMain.staff.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Staff not found", 404);
+    }
+
+    if (data.employeeId) {
+      const employee = await prismaMain.employee.findFirst({
+        where: { id: data.employeeId, deletedAt: null },
+      });
+
+      if (!employee) {
+        throw new CustomError("Employee not found or has been deleted", 404);
+      }
+    }
+
+    if (data.employeeId) await assertSingleRoleProfile(prismaMain, data.employeeId, "STAFF");
+
+    try {
+      const { firstName, lastName, phone, permanentAddress, temporaryAddress, address, ...staffData } = data as any;
+
+      const employeeUpdate: Record<string, unknown> = {};
+      if (firstName !== undefined) employeeUpdate.firstName = firstName;
+      if (lastName !== undefined) employeeUpdate.lastName = lastName;
+      if (phone !== undefined) employeeUpdate.phone = phone;
+      if (permanentAddress !== undefined) employeeUpdate.permanentAddress = permanentAddress;
+      if (temporaryAddress !== undefined) employeeUpdate.temporaryAddress = temporaryAddress;
+      if (address !== undefined) {
+        employeeUpdate.permanentAddress = address;
+        employeeUpdate.temporaryAddress = address;
+      }
+
+      const updated = await prismaMain.$transaction(async (tx) => {
+        if (Object.keys(employeeUpdate).length > 0) {
+          await tx.employee.update({
+            where: { id: existing.employeeId },
+            data: { ...employeeUpdate, updatedBy: userId },
+          });
+        }
+
+        return tx.staff.update({
+          where: { id },
+          data: {
+            ...staffData,
+            updatedBy: userId,
+          } as any,
+          include: {
+            employee: { select: EMPLOYEE_SAFE_SELECT },
+          },
+        });
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee with this ID is already assigned as Staff", 409);
+      }
+      throw error;
+    }
   },
 
   async delete(id: string, userId?: string) {

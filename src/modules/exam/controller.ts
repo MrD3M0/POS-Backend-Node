@@ -3,7 +3,7 @@ import { ExamService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateExamCreate } from "./validator";
+import { validateExamCreate, validateExamUpdate } from "./validator";
 
 export const ExamController = {
   index: async (req: Request, res: Response) => {
@@ -57,6 +57,25 @@ export const ExamController = {
         res,
         code: 200,
         message: "Exam retrieved successfully",
+        data: exam,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateExamUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const exam = await ExamService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Exam updated successfully",
         data: exam,
       });
     } catch (error) {

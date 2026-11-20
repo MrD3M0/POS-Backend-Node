@@ -1,19 +1,22 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { SalaryStructureItemCreateInput, SalaryStructureItemUpdateInput } from "./validator";
 
 export const SalaryStructureItemService = {
-  async index(query: { page?: number; limit?: number; search?: string }) {
+  async index(query: { page?: number; limit?: number; search?: string; salaryStructureId?: string; componentId?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {};
+    if (query.salaryStructureId) whereClause.salaryStructureId = query.salaryStructureId;
+    if (query.componentId) whereClause.componentId = query.componentId;
 
     if (query.search) {
       whereClause.OR = [
         { component: { name: { contains: query.search, mode: "insensitive" } } },
-        { amount: { contains: query.search, mode: "insensitive" } },
+        { component: { code: { contains: query.search, mode: "insensitive" } } },
       ];
     }
 
@@ -21,7 +24,7 @@ export const SalaryStructureItemService = {
       prismaMain.salaryStructureItem.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
           component: true,
         },
@@ -50,9 +53,10 @@ export const SalaryStructureItemService = {
       throw new CustomError("Salary component not found or has been deleted", 404);
     }
 
-    // Check duplicate [salaryStructureId, componentId] — find via parent structure
+    // Validate parent structure exists and is not soft-deleted
+    // (previously this wrongly looked up `data.componentId` as the structure id)
     const structure = await prismaMain.salaryStructure.findFirst({
-      where: { id: data.componentId, deletedAt: null },
+      where: { id: data.salaryStructureId, deletedAt: null },
     });
 
     if (!structure) {

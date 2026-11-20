@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.otpRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const authorized_1 = require("@/middlewares/authorized");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN"), controller_1.OtpController.index);
+router.post("/", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN"), controller_1.OtpController.create);
+router.get("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN"), controller_1.OtpController.retrieve);
+router.delete("/:id", isUser_1.isUser, (0, authorized_1.isAuthorizedTo)("ADMIN"), controller_1.OtpController.delete);
+exports.otpRouter = router;

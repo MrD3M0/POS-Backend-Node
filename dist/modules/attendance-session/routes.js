@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.attendanceSessionRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "read"), controller_1.AttendanceSessionController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "create"), controller_1.AttendanceSessionController.create);
+router.get("/:id/roster", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "read"), controller_1.AttendanceSessionController.roster);
+router.post("/:id/unlock", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "unlock"), controller_1.AttendanceSessionController.unlock);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "read"), controller_1.AttendanceSessionController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "update"), controller_1.AttendanceSessionController.update);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("studentAttendance", "delete"), controller_1.AttendanceSessionController.delete);
+exports.attendanceSessionRouter = router;

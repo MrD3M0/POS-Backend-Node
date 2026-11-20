@@ -3,7 +3,7 @@ import { PrincipalService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validatePrincipalCreate } from "./validator";
+import { validatePrincipalCreate, validatePrincipalUpdate } from "./validator";
 
 export const PrincipalController = {
   index: async (req: Request, res: Response) => {
@@ -59,6 +59,25 @@ export const PrincipalController = {
         res,
         code: 200,
         message: "Principal retrieved successfully",
+        data: principal,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validatePrincipalUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const principal = await PrincipalService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Principal updated successfully",
         data: principal,
       });
     } catch (error) {

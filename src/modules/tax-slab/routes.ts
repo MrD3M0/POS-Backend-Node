@@ -1,39 +1,15 @@
 import { Router } from "express";
-import { TaxSlabController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { TaxSlabController } from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  TaxSlabController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  TaxSlabController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  TaxSlabController.retrieve,
-);
-router.patch(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  TaxSlabController.update,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  TaxSlabController.delete,
-);
+router.get("/", isUser, requirePermission("taxSlabs", "read"), TaxSlabController.index);
+router.post("/", isUser, requirePermission("taxSlabs", "create"), TaxSlabController.create);
+router.post("/copy", isUser, requirePermission("taxSlabs", "create"), TaxSlabController.copy);
+router.get("/:id", isUser, requirePermission("taxSlabs", "read"), TaxSlabController.retrieve);
+router.patch("/:id", isUser, requirePermission("taxSlabs", "update"), TaxSlabController.update);
+router.delete("/:id", isUser, requirePermission("taxSlabs", "delete"), TaxSlabController.delete);
 
 export const taxSlabRouter = router;

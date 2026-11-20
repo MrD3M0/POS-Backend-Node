@@ -1,19 +1,42 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
-import { ResultSubjectCreateInput, ResultSubjectUpdateInput } from "./validator";
+import {
+  ResultSubjectCreateInput,
+  ResultSubjectUpdateInput,
+} from "./validator";
 
 export const ResultSubjectService = {
-  async index(query: { page?: number; limit?: number; search?: string }) {
+  async index(query: {
+    page?: number;
+    limit?: number;
+    search?: string;
+    resultId?: string;
+  }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {};
 
+    if (query.resultId) {
+      whereClause.resultId = query.resultId;
+    }
+
     if (query.search) {
       whereClause.OR = [
-        { examSubject: { name: { contains: query.search, mode: "insensitive" } } },
-        { result: { remarks: { contains: query.search, mode: "insensitive" } } },
+        {
+          examSubject: {
+            batchTermSubject: {
+              subject: {
+                name: { contains: query.search, mode: "insensitive" },
+              },
+            },
+          },
+        },
+        {
+          result: { remarks: { contains: query.search, mode: "insensitive" } },
+        },
       ];
     }
 
@@ -21,9 +44,11 @@ export const ResultSubjectService = {
       prismaMain.resultSubject.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          examSubject: true,
+          examSubject: {
+            include: { batchTermSubject: { include: { subject: true } } },
+          },
           gradeScale: true,
         },
         orderBy: { createdAt: "desc" },
@@ -76,14 +101,19 @@ export const ResultSubjectService = {
           createdBy: userId,
         },
         include: {
-          examSubject: true,
+          examSubject: {
+            include: { batchTermSubject: { include: { subject: true } } },
+          },
           gradeScale: true,
         },
       });
       return resultSubject;
     } catch (error: any) {
       if (error.code === "P2002") {
-        throw new CustomError("A result subject already exists for this exam subject", 409);
+        throw new CustomError(
+          "A result subject already exists for this exam subject",
+          409,
+        );
       }
       throw error;
     }
@@ -93,7 +123,9 @@ export const ResultSubjectService = {
     const resultSubject = await prismaMain.resultSubject.findFirst({
       where: { id, deletedAt: null },
       include: {
-        examSubject: true,
+        examSubject: {
+          include: { batchTermSubject: { include: { subject: true } } },
+        },
         gradeScale: true,
       },
     });
@@ -122,14 +154,19 @@ export const ResultSubjectService = {
           updatedBy: userId,
         },
         include: {
-          examSubject: true,
+          examSubject: {
+            include: { batchTermSubject: { include: { subject: true } } },
+          },
           gradeScale: true,
         },
       });
       return updated;
     } catch (error: any) {
       if (error.code === "P2002") {
-        throw new CustomError("A result subject already exists for this exam subject", 409);
+        throw new CustomError(
+          "A result subject already exists for this exam subject",
+          409,
+        );
       }
       throw error;
     }

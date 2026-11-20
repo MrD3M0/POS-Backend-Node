@@ -1,12 +1,14 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
+import { EMPLOYEE_SAFE_SELECT, assertSingleRoleProfile } from "@/utils/employee";
 import { CustomError } from "@/errors/CustomError";
 import { AccountantCreateInput } from "./validator";
 
 export const AccountantService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -24,9 +26,9 @@ export const AccountantService = {
       prismaMain.accountant.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -49,6 +51,8 @@ export const AccountantService = {
       throw new CustomError("Employee not found or has been deleted", 404);
     }
 
+    await assertSingleRoleProfile(prismaMain, data.employeeId, "ACCOUNTANT");
+
     try {
       const accountant = await prismaMain.accountant.create({
         data: {
@@ -57,7 +61,7 @@ export const AccountantService = {
           createdBy: userId,
         },
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
       });
       return accountant;
@@ -73,7 +77,7 @@ export const AccountantService = {
     const accountant = await prismaMain.accountant.findFirst({
       where: { id, deletedAt: null },
       include: {
-        employee: true,
+        employee: { select: EMPLOYEE_SAFE_SELECT },
       },
     });
 

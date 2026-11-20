@@ -9,6 +9,7 @@ export const ResultSubjectController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
+      const resultId = req.query.resultId as string | undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
@@ -16,6 +17,7 @@ export const ResultSubjectController = {
         page: pageNumber,
         limit: limitNumber,
         search,
+        resultId,
       });
 
       return ResponseHandler.success({

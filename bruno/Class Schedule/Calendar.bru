@@ -1,0 +1,16 @@
+meta {
+  name: Calendar
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{baseUrl}}/api/class-schedule/calendar
+  body: none
+  auth: inherit
+}
+
+params:query {
+  fromBs: 2082-04-01
+  toBs: 2082-04-32
+}

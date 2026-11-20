@@ -17,6 +17,12 @@ router.post(
   isAuthorizedTo("ADMIN", "ACCOUNTANT"),
   FeeStructureController.create,
 );
+router.patch(
+  "/:id",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeStructureController.update,
+);
 router.get(
   "/:id",
   isUser,

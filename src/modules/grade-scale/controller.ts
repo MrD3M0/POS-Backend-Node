@@ -3,21 +3,18 @@ import { GradeScaleService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateGradeScaleItemCreate } from "./validator";
+import { validateGradeScaleItemCreate, validateGradeScaleItemUpdate } from "./validator";
 
 export const GradeScaleController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
-      const pageNumber = Number(page) || 1;
-      const limitNumber = Number(limit) || 10;
-
       const result = await GradeScaleService.index({
-        page: pageNumber,
-        limit: limitNumber,
+        page: Number(page) || 1,
+        limit: Number(limit) || 10,
         search,
+        includeDeleted: req.query.includeDeleted === "true",
       });
-
       return ResponseHandler.success({
         res,
         code: 200,
@@ -32,17 +29,29 @@ export const GradeScaleController = {
 
   create: async (req: Request, res: Response) => {
     try {
-      const validatedData = validateGradeScaleItemCreate(req.body);
-      const userId = res.locals.context?.userId;
+      const item = await GradeScaleService.create(
+        validateGradeScaleItemCreate(req.body),
+        res.locals.context?.userId,
+      );
+      return ResponseHandler.success({ res, code: 201, message: "Grade scale item created successfully", data: item });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
 
-      const item = await GradeScaleService.create(validatedData, userId);
+  seedDefault: async (req: Request, res: Response) => {
+    try {
+      const result = await GradeScaleService.seedDefault(res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Default grade scale seeded", data: result });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
 
-      return ResponseHandler.success({
-        res,
-        code: 201,
-        message: "Grade scale item created successfully",
-        data: item,
-      });
+  coverage: async (_req: Request, res: Response) => {
+    try {
+      const result = await GradeScaleService.coverage();
+      return ResponseHandler.success({ res, code: 200, message: "Grade scale coverage", data: result });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
@@ -50,15 +59,21 @@ export const GradeScaleController = {
 
   retrieve: async (req: Request, res: Response) => {
     try {
-      const id = req.params.id as string;
-      const item = await GradeScaleService.getById(id);
+      const item = await GradeScaleService.getById(req.params.id as string);
+      return ResponseHandler.success({ res, code: 200, message: "Grade scale item retrieved successfully", data: item });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
 
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Grade scale item retrieved successfully",
-        data: item,
-      });
+  update: async (req: Request, res: Response) => {
+    try {
+      const item = await GradeScaleService.update(
+        req.params.id as string,
+        validateGradeScaleItemUpdate(req.body),
+        res.locals.context?.userId,
+      );
+      return ResponseHandler.success({ res, code: 200, message: "Grade scale item updated successfully", data: item });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
@@ -66,17 +81,8 @@ export const GradeScaleController = {
 
   delete: async (req: Request, res: Response) => {
     try {
-      const id = req.params.id as string;
-      const userId = res.locals.context?.userId;
-
-      await GradeScaleService.delete(id, userId);
-
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Grade scale item deleted successfully",
-        data: null,
-      });
+      await GradeScaleService.delete(req.params.id as string, res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Grade scale item deleted successfully", data: null });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }

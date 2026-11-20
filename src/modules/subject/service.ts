@@ -1,12 +1,13 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { SubjectCreateInput, SubjectUpdateInput } from "./validator";
 
 export const SubjectService = {
   async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -27,7 +28,7 @@ export const SubjectService = {
       prismaMain.subject.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         orderBy: { createdAt: "desc" },
       }),
       prismaMain.subject.count({ where: whereClause }),
@@ -127,6 +128,19 @@ export const SubjectService = {
 
     if (!subject) {
       throw new CustomError("Subject not found", 404);
+    }
+
+    // Subject removal guard: a subject referenced by any batch term
+    // syllabus cannot be removed (deactivate it instead).
+    const referenced = await prismaMain.batchTermSubject.findFirst({
+      where: { subjectId: id, deletedAt: null },
+      select: { id: true },
+    });
+    if (referenced) {
+      throw new CustomError(
+        "This subject is referenced by a batch term subject and cannot be removed",
+        409,
+      );
     }
 
     await prismaMain.subject.update({

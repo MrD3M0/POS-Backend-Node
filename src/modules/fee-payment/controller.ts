@@ -3,12 +3,14 @@ import { FeePaymentService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateFeePaymentCreate } from "./validator";
+import { validateFeePaymentCreate, validateFeePaymentCancel } from "./validator";
 
 export const FeePaymentController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
+      const studentId = req.query.studentId as string | undefined;
+      const fiscalYearId = req.query.fiscalYearId as string | undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
@@ -16,6 +18,8 @@ export const FeePaymentController = {
         page: pageNumber,
         limit: limitNumber,
         search,
+        studentId,
+        fiscalYearId,
       });
 
       return ResponseHandler.success({
@@ -57,6 +61,26 @@ export const FeePaymentController = {
         res,
         code: 200,
         message: "Fee payment retrieved successfully",
+        data: payment,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  cancel: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateFeePaymentCancel(req.body);
+      const reason = validatedData.reason ?? validatedData.cancelReason ?? "Cancelled";
+      const userId = res.locals.context?.userId;
+
+      const payment = await FeePaymentService.cancel(id, userId, reason);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Fee payment cancelled successfully",
         data: payment,
       });
     } catch (error) {

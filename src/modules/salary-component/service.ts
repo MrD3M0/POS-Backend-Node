@@ -1,12 +1,13 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { SalaryComponentCreateInput, SalaryComponentUpdateInput } from "./validator";
 
 export const SalaryComponentService = {
   async index(query: { page?: number; limit?: number; search?: string; isActive?: boolean }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -27,7 +28,7 @@ export const SalaryComponentService = {
       prismaMain.salaryComponent.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
           structureItems: true,
         },

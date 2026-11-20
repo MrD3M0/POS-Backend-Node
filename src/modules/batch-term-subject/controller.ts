@@ -3,7 +3,7 @@ import { BatchTermSubjectService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateBatchTermSubjectCreate, validateBatchTermSubjectUpdate } from "./validator";
+import { validateBatchTermSubjectBulkCreate, validateBatchTermSubjectCreate, validateBatchTermSubjectUpdate } from "./validator";
 
 export const BatchTermSubjectController = {
   index: async (req: Request, res: Response) => {
@@ -56,6 +56,24 @@ export const BatchTermSubjectController = {
     }
   },
 
+  bulkCreate: async (req: Request, res: Response) => {
+    try {
+      const validatedData = validateBatchTermSubjectBulkCreate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const result = await BatchTermSubjectService.bulkCreate(validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 201,
+        message: `${result.created} subject${result.created > 1 ? "s" : ""} assigned successfully`,
+        data: result,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   retrieve: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;
@@ -86,6 +104,17 @@ export const BatchTermSubjectController = {
         message: "BatchTermSubject updated successfully",
         data: batchTermSubject,
       });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  copy: async (req: Request, res: Response) => {
+    try {
+      const fromBatchTermId = typeof req.body?.fromBatchTermId === "string" ? req.body.fromBatchTermId : "";
+      const toBatchTermId = typeof req.body?.toBatchTermId === "string" ? req.body.toBatchTermId : "";
+      const result = await BatchTermSubjectService.copy(fromBatchTermId, toBatchTermId, res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Syllabus copied", data: result });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }

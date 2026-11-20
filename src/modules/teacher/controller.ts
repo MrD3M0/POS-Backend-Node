@@ -3,7 +3,7 @@ import { TeacherService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateTeacherCreate } from "./validator";
+import { validateTeacherCreate, validateTeacherUpdate } from "./validator";
 
 export const TeacherController = {
   index: async (req: Request, res: Response) => {
@@ -59,6 +59,25 @@ export const TeacherController = {
         res,
         code: 200,
         message: "Teacher retrieved successfully",
+        data: teacher,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateTeacherUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const teacher = await TeacherService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Teacher updated successfully",
         data: teacher,
       });
     } catch (error) {

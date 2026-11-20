@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.batchRouter = void 0;
+const express_1 = require("express");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const controller_1 = require("./controller");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "read"), controller_1.BatchController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "create"), controller_1.BatchController.create);
+router.post("/:id/promote", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "update"), controller_1.BatchController.promote);
+router.post("/:id/graduate", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "update"), controller_1.BatchController.graduate);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "read"), controller_1.BatchController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "update"), controller_1.BatchController.update);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("academic", "delete"), controller_1.BatchController.delete);
+exports.batchRouter = router;

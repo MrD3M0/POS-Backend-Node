@@ -3,12 +3,13 @@ import { StudentFeeItemService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateStudentFeeItemCreate } from "./validator";
+import { validateStudentFeeItemCreate, validateStudentFeeItemUpdate } from "./validator";
 
 export const StudentFeeItemController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
+      const studentFeeId = req.query.studentFeeId as string | undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
@@ -16,6 +17,7 @@ export const StudentFeeItemController = {
         page: pageNumber,
         limit: limitNumber,
         search,
+        studentFeeId,
       });
 
       return ResponseHandler.success({
@@ -57,6 +59,25 @@ export const StudentFeeItemController = {
         res,
         code: 200,
         message: "Student fee item retrieved successfully",
+        data: item,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const validatedData = validateStudentFeeItemUpdate(req.body);
+      const userId = res.locals.context?.userId;
+
+      const item = await StudentFeeItemService.update(id, validatedData, userId);
+
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Student fee item updated successfully",
         data: item,
       });
     } catch (error) {

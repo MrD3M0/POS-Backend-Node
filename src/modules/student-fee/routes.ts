@@ -7,6 +7,8 @@ const router = Router();
 
 router.get("/", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), StudentFeeController.index);
 router.post("/", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeController.create);
+// Assign a structure to many students at once (a whole batch of new students).
+router.post("/bulk", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeController.bulk);
 router.get("/:id", isUser, isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"), StudentFeeController.retrieve);
 router.delete("/:id", isUser, isAuthorizedTo("ADMIN", "ACCOUNTANT"), StudentFeeController.delete);
 

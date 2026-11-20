@@ -1,33 +1,16 @@
 import { Router } from "express";
-import { AccountController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { AccountController } from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  AccountController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  AccountController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT"),
-  AccountController.retrieve,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  AccountController.delete,
-);
+router.get("/", isUser, requirePermission("accounts", "read"), AccountController.index);
+router.get("/tree", isUser, requirePermission("accounts", "read"), AccountController.tree);
+router.post("/", isUser, requirePermission("accounts", "create"), AccountController.create);
+router.post("/seed-default", isUser, requirePermission("accounts", "create"), AccountController.seedDefault);
+router.get("/:id", isUser, requirePermission("accounts", "read"), AccountController.retrieve);
+router.patch("/:id", isUser, requirePermission("accounts", "update"), AccountController.update);
+router.delete("/:id", isUser, requirePermission("accounts", "delete"), AccountController.delete);
 
 export const accountRouter = router;

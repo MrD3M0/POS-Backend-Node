@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.leaveTypeRouter = void 0;
+const express_1 = require("express");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const controller_1 = require("./controller");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("lookups", "read"), controller_1.LeaveTypeController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("lookups", "create"), controller_1.LeaveTypeController.create);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("lookups", "read"), controller_1.LeaveTypeController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("lookups", "update"), controller_1.LeaveTypeController.update);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("lookups", "delete"), controller_1.LeaveTypeController.delete);
+exports.leaveTypeRouter = router;

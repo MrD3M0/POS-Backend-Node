@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.payrollRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const router = (0, express_1.Router)();
+// Admin may VIEW payroll only. Accountant prepares/submits/pays; Principal approves/rejects.
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "read"), controller_1.PayrollController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "create"), controller_1.PayrollController.create);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "read"), controller_1.PayrollController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "update"), controller_1.PayrollController.update);
+router.post("/:id/regenerate", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "prepare"), controller_1.PayrollController.regenerate);
+router.post("/:id/submit", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "prepare"), controller_1.PayrollController.submit);
+router.post("/:id/approve", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "approve"), controller_1.PayrollController.approve);
+router.post("/:id/reject", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "approve"), controller_1.PayrollController.reject);
+router.post("/:id/back-to-draft", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "prepare"), controller_1.PayrollController.backToDraft);
+router.post("/:id/pay", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "pay"), controller_1.PayrollController.pay);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "delete"), controller_1.PayrollController.delete);
+exports.payrollRouter = router;

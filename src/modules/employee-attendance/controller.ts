@@ -3,21 +3,26 @@ import { EmployeeAttendanceService } from "./service";
 import { ResponseHandler } from "@/utils/response";
 import { ErrorHandler } from "@/utils/error";
 import { queryFilters } from "@/utils/queryFilters";
-import { validateEmployeeAttendanceCreate } from "./validator";
+import {
+  validateEmployeeAttendanceBulk,
+  validateEmployeeAttendanceCreate,
+  validateEmployeeAttendanceUpdate,
+} from "./validator";
 
 export const EmployeeAttendanceController = {
   index: async (req: Request, res: Response) => {
     try {
       const { page, limit, search } = queryFilters(req);
-      const pageNumber = Number(page) || 1;
-      const limitNumber = Number(limit) || 10;
-
       const result = await EmployeeAttendanceService.index({
-        page: pageNumber,
-        limit: limitNumber,
+        page: Number(page) || 1,
+        limit: Number(limit) || 10,
         search,
+        status: req.query.status as string | undefined,
+        employeeId: req.query.employeeId as string | undefined,
+        dateBs: req.query.dateBs as string | undefined,
+        yearBs: req.query.yearBs ? Number(req.query.yearBs) : undefined,
+        monthBs: req.query.monthBs ? Number(req.query.monthBs) : undefined,
       });
-
       return ResponseHandler.success({
         res,
         code: 200,
@@ -32,17 +37,25 @@ export const EmployeeAttendanceController = {
 
   create: async (req: Request, res: Response) => {
     try {
-      const validatedData = validateEmployeeAttendanceCreate(req.body);
-      const userId = res.locals.context?.userId;
+      const record = await EmployeeAttendanceService.create(
+        validateEmployeeAttendanceCreate(req.body),
+        res.locals.context?.userId,
+        res.locals.context?.role,
+      );
+      return ResponseHandler.success({ res, code: 201, message: "Employee attendance created", data: record });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
 
-      const record = await EmployeeAttendanceService.create(validatedData, userId);
-
-      return ResponseHandler.success({
-        res,
-        code: 201,
-        message: "Employee attendance record created successfully",
-        data: record,
-      });
+  bulkMark: async (req: Request, res: Response) => {
+    try {
+      const result = await EmployeeAttendanceService.bulkMark(
+        validateEmployeeAttendanceBulk(req.body),
+        res.locals.context?.userId,
+        res.locals.context?.role,
+      );
+      return ResponseHandler.success({ res, code: 200, message: "Bulk attendance marked", data: result });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
@@ -50,15 +63,22 @@ export const EmployeeAttendanceController = {
 
   retrieve: async (req: Request, res: Response) => {
     try {
-      const id = req.params.id as string;
-      const record = await EmployeeAttendanceService.getById(id);
+      const record = await EmployeeAttendanceService.getById(req.params.id as string);
+      return ResponseHandler.success({ res, code: 200, message: "Employee attendance retrieved", data: record });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
 
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Employee attendance record retrieved successfully",
-        data: record,
-      });
+  update: async (req: Request, res: Response) => {
+    try {
+      const record = await EmployeeAttendanceService.update(
+        req.params.id as string,
+        validateEmployeeAttendanceUpdate(req.body),
+        res.locals.context?.userId,
+        res.locals.context?.role,
+      );
+      return ResponseHandler.success({ res, code: 200, message: "Employee attendance updated", data: record });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }
@@ -66,17 +86,12 @@ export const EmployeeAttendanceController = {
 
   delete: async (req: Request, res: Response) => {
     try {
-      const id = req.params.id as string;
-      const userId = res.locals.context?.userId;
-
-      await EmployeeAttendanceService.delete(id, userId);
-
-      return ResponseHandler.success({
-        res,
-        code: 200,
-        message: "Employee attendance record deleted successfully",
-        data: null,
-      });
+      await EmployeeAttendanceService.delete(
+        req.params.id as string,
+        res.locals.context?.userId,
+        res.locals.context?.role,
+      );
+      return ResponseHandler.success({ res, code: 200, message: "Employee attendance deleted", data: null });
     } catch (error) {
       return ErrorHandler.handleError(res, error);
     }

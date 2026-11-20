@@ -10,17 +10,25 @@ export const TeacherBatchPayController = {
     try {
       const { page, limit, search } = queryFilters(req);
       const teachingAssignmentId = req.query.teachingAssignmentId as string | undefined;
-      const isActive = req.query.isActive !== undefined ? req.query.isActive === "true" : undefined;
+      const yearBs = req.query.yearBs ? Number(req.query.yearBs) : undefined;
+      const monthBs = req.query.monthBs ? Number(req.query.monthBs) : undefined;
       const pageNumber = Number(page) || 1;
       const limitNumber = Number(limit) || 10;
 
-      const result = await TeacherBatchPayService.index({
-        page: pageNumber,
-        limit: limitNumber,
-        search,
-        teachingAssignmentId,
-        isActive,
-      });
+      const result = await TeacherBatchPayService.index(
+        {
+          page: pageNumber,
+          limit: limitNumber,
+          search,
+          teachingAssignmentId,
+          yearBs,
+          monthBs,
+        },
+        {
+          userId: res.locals.context?.userId,
+          role: res.locals.context?.role,
+        },
+      );
 
       return ResponseHandler.success({
         res,
@@ -41,7 +49,11 @@ export const TeacherBatchPayController = {
       const validatedData = validateTeacherBatchPayCreate(req.body);
       const userId = res.locals.context?.userId;
 
-      const pay = await TeacherBatchPayService.create(validatedData, userId);
+      const pay = await TeacherBatchPayService.create(
+        validatedData,
+        userId,
+        res.locals.context?.role,
+      );
 
       return ResponseHandler.success({
         res,
@@ -57,7 +69,10 @@ export const TeacherBatchPayController = {
   retrieve: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;
-      const pay = await TeacherBatchPayService.getById(id);
+      const pay = await TeacherBatchPayService.getById(id, {
+        userId: res.locals.context?.userId,
+        role: res.locals.context?.role,
+      });
 
       return ResponseHandler.success({
         res,
@@ -76,7 +91,12 @@ export const TeacherBatchPayController = {
       const validatedData = validateTeacherBatchPayUpdate(req.body);
       const userId = res.locals.context?.userId;
 
-      const pay = await TeacherBatchPayService.update(id, validatedData, userId);
+      const pay = await TeacherBatchPayService.update(
+        id,
+        validatedData,
+        userId,
+        res.locals.context?.role,
+      );
 
       return ResponseHandler.success({
         res,
@@ -94,7 +114,11 @@ export const TeacherBatchPayController = {
       const id = req.params.id as string;
       const userId = res.locals.context?.userId;
 
-      await TeacherBatchPayService.delete(id, userId);
+      await TeacherBatchPayService.delete(
+        id,
+        userId,
+        res.locals.context?.role,
+      );
 
       return ResponseHandler.success({
         res,

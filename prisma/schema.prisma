@@ -72,13 +72,13 @@ enum PayrollStatus {
   PAID
 }
 
-// Salary factor lives in code, not DB: PRESENT = 1, HALF_DAY = 0.5, ABSENT = 0,
+// Salary factor lives in code, not DB: PRESENT = 1, LATE = 1, ABSENT = 0,
 // LEAVE = 1 if LeaveType.isPaid else 0
 enum AttendanceStatus {
   PRESENT
   ABSENT
   LEAVE
-  HALF_DAY
+  LATE
 }
 
 // Normal balance lives in code: ASSET and EXPENSE = debit, the rest = credit
@@ -290,6 +290,7 @@ model Student {
   fees         StudentFee[]
   payments     FeePayment[]
   journalLines JournalLine[]
+  scholarshipGrants ScholarshipGrant[]
 
   @@index([batchId])
   @@index([approvalStatus])
@@ -355,6 +356,7 @@ model Period {
   deletedAt    DateTime?
 
   sessions AttendanceSession[]
+  classSchedules ClassSchedule[]
 
   @@map("periods")
 }
@@ -552,6 +554,9 @@ model BatchTermSubject {
   subjectId   String    @db.Uuid
   creditHour  Decimal   @db.Decimal(4, 1)
   isElective  Boolean   @default(false)
+  // Elective seats: how many students may pick this elective in this term.
+  // Null/empty = unlimited (only meaningful when isElective = true).
+  maxStudents Int?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   createdBy   String?   @db.Uuid
@@ -585,6 +590,7 @@ model TeachingAssignment {
   teacher          Teacher             @relation(fields: [teacherId], references: [id], onDelete: Restrict)
   batchTermSubject BatchTermSubject    @relation(fields: [batchTermSubjectId], references: [id], onDelete: Restrict)
   sessions         AttendanceSession[]
+  classSchedules   ClassSchedule[]
   pays             TeacherBatchPay[]
 
   @@unique([teacherId, batchTermSubjectId])
@@ -614,7 +620,46 @@ model TeacherBatchPay {
 }
 
 // =====================================================================
-// 4. ATTENDANCE
+// 4. CLASS SCHEDULING (new)
+// =====================================================================
+
+// A single class occurrence: which teacher, which subject, which period, which day, which room.
+model ClassSchedule {
+  id                   String    @id @default(uuid()) @db.Uuid
+  teachingAssignmentId String    @db.Uuid
+  periodId             String    @db.Uuid
+  dayOfWeek            DayOfWeek
+  room                 String?   // nullable: some subjects have no room (e.g. labs in open areas)
+  effectiveFromBs      String    @db.VarChar(10) // inclusive start BS date
+  effectiveToBs        String?   @db.VarChar(10) // inclusive end BS date; null = open-ended
+  isActive             Boolean   @default(true)
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  createdBy            String?   @db.Uuid
+  updatedBy            String?   @db.Uuid
+  deletedAt            DateTime?
+
+  teachingAssignment TeachingAssignment @relation(fields: [teachingAssignmentId], references: [id], onDelete: Restrict)
+  period             Period              @relation(fields: [periodId], references: [id], onDelete: Restrict)
+
+  @@unique([teachingAssignmentId, periodId, dayOfWeek, effectiveFromBs])
+  @@index([dayOfWeek, periodId])
+
+  @@map("class_schedules")
+}
+
+enum DayOfWeek {
+  SUNDAY
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+}
+
+// =====================================================================
+// 5. ATTENDANCE
 // =====================================================================
 
 // One class of one period on one day, taken by a teacher.
@@ -718,6 +763,10 @@ model Exam {
   @@map("exams")
 }
 
+// Approval state of one subject of one exam.
+// DRAFT -> PENDING (teacher submitted marks) -> APPROVED | REJECTED (principal)
+// REJECTED -> PENDING (teacher re-submits). Publishing happens at exam level
+// once every subject is APPROVED; it flips the Result rows to PUBLISHED.
 model ExamSubject {
   id                 String    @id @default(uuid()) @db.Uuid
   examId             String    @db.Uuid
@@ -725,6 +774,12 @@ model ExamSubject {
   fullMarks          Decimal   @default(100) @db.Decimal(6, 2)
   passMarks          Decimal   @default(40) @db.Decimal(6, 2)
   examDateBs         String?   @db.VarChar(10)
+  status             String    @default("DRAFT") @db.VarChar(20)
+  submittedAt        DateTime?
+  submittedBy        String?   @db.Uuid
+  approvedBy         String?   @db.Uuid
+  approvedAt         DateTime?
+  rejectionReason    String?
   createdAt          DateTime  @default(now())
   updatedAt          DateTime  @updatedAt
   createdBy          String?   @db.Uuid
@@ -738,6 +793,7 @@ model ExamSubject {
 
   @@unique([examId, batchTermSubjectId])
   @@index([batchTermSubjectId])
+  @@index([status])
   @@map("exam_subjects")
 }
 
@@ -827,6 +883,65 @@ model ResultSubject {
 // 6. FEE MANAGEMENT
 // =====================================================================
 
+// Scholarship scheme the accountant can grant to a student.
+// `type` is "PERCENT" (share of the fee item) or "FIXED" (amount in NPR).
+// Stored as text on purpose: the dev database normalises enums into lookup
+// tables, so a plain string column works in every layout.
+model Scholarship {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  code        String?   @unique
+  type        String    @default("PERCENT") @db.VarChar(20)
+  value       Decimal   @db.Decimal(14, 2)
+  description String?
+  isActive    Boolean   @default(true)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  createdBy   String?   @db.Uuid
+  updatedBy   String?   @db.Uuid
+  deletedAt   DateTime?
+
+  grants ScholarshipGrant[]
+
+  @@index([isActive])
+  @@map("scholarships")
+}
+
+// One scholarship granted to one student. The grant is the audit trail of the
+// money given; the actual discount lives on the student fee item.
+model ScholarshipGrant {
+  id               String    @id @default(uuid()) @db.Uuid
+  scholarshipId    String    @db.Uuid
+  studentId        String    @db.Uuid
+  studentFeeId     String?   @db.Uuid
+  studentFeeItemId String?   @db.Uuid
+  // All rows created by one "grant" action share this id, so the scholarship
+  // can be taken back as a whole.
+  grantGroupId     String    @db.Uuid
+  amount           Decimal   @db.Decimal(14, 2)
+  note             String?
+  grantedBy        String?   @db.Uuid
+  grantedAt        DateTime  @default(now())
+  revokedAt        DateTime?
+  revokedBy        String?   @db.Uuid
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+  createdBy        String?   @db.Uuid
+  updatedBy        String?   @db.Uuid
+  deletedAt        DateTime?
+
+  scholarship    Scholarship     @relation(fields: [scholarshipId], references: [id], onDelete: Restrict)
+  student        Student         @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  studentFee     StudentFee?     @relation(fields: [studentFeeId], references: [id], onDelete: SetNull)
+  studentFeeItem StudentFeeItem? @relation(fields: [studentFeeItemId], references: [id], onDelete: SetNull)
+
+  @@index([studentId])
+  @@index([scholarshipId])
+  @@index([studentFeeItemId])
+  @@index([grantGroupId])
+  @@map("scholarship_grants")
+}
+
 // Accountant creates per course (optionally per batch, null batch = default for course)
 model FeeStructure {
   id        String    @id @default(uuid()) @db.Uuid
@@ -886,6 +1001,7 @@ model StudentFee {
   student      Student          @relation(fields: [studentId], references: [id], onDelete: Restrict)
   feeStructure FeeStructure?    @relation(fields: [feeStructureId], references: [id], onDelete: SetNull)
   items        StudentFeeItem[]
+  scholarshipGrants ScholarshipGrant[]
 
   @@index([studentId])
   @@index([feeStructureId])
@@ -917,6 +1033,7 @@ model StudentFeeItem {
   feeStructureItem FeeStructureItem?      @relation(fields: [feeStructureItemId], references: [id], onDelete: SetNull)
   installments     FeeInstallment[]
   allocations      FeePaymentAllocation[]
+  scholarshipGrants ScholarshipGrant[]
 
   @@unique([studentFeeId, feeStructureItemId]) // same structure item cannot be copied twice (custom items = NULL, allowed)
   @@index([feeHeadId])
@@ -1345,3 +1462,39 @@ model Setting {
   @@map("settings")
 }
 
+// Append-only security/audit trail for sensitive admin actions.
+// No deletedAt: audit rows are never edited or removed through the API.
+model AuditLog {
+  id        String   @id @default(uuid()) @db.Uuid
+  entity    String   @db.VarChar(80)
+  entityId  String?  @db.VarChar(80)
+  action    String   @db.VarChar(80)
+  oldValues Json?
+  newValues Json?
+  userId    String?  @db.Uuid
+  ipAddress String?  @db.VarChar(64)
+  userAgent String?  @db.VarChar(255)
+  createdAt DateTime @default(now())
+
+  @@index([entity, entityId])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model Holiday {
+  id                  String    @id @default(uuid()) @db.Uuid
+  dateBs              String    @unique @db.VarChar(10)
+  name                String
+  type                String?
+  description         String?
+  appliesToEmployees  Boolean   @default(true)
+  appliesToStudents   Boolean   @default(true)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  createdBy           String?   @db.Uuid
+  updatedBy           String?   @db.Uuid
+  deletedAt           DateTime?
+
+  @@map("holidays")
+}

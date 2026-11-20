@@ -1,0 +1,12 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.payslipItemRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "read"), controller_1.PayslipItemController.index);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("payroll", "read"), controller_1.PayslipItemController.retrieve);
+router.use((_, res) => res.status(405).json({ success: false, message: "Payslip items cannot be edited or deleted" }));
+exports.payslipItemRouter = router;

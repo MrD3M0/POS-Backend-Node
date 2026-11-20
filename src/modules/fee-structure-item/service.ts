@@ -1,21 +1,22 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { FeeStructureItemCreateInput } from "./validator";
+import { dec } from "@/lib/money";
 
 export const FeeStructureItemService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
-    const whereClause: any = {
+    const whereClause: Record<string, unknown> = {
       deletedAt: null,
     };
 
     if (query.search) {
       whereClause.OR = [
         { feeHeadId: { contains: query.search, mode: "insensitive" } },
-        { description: { contains: query.search, mode: "insensitive" } },
       ];
     }
 
@@ -23,7 +24,7 @@ export const FeeStructureItemService = {
       prismaMain.feeStructureItem.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
           feeHead: true,
         },
@@ -39,29 +40,62 @@ export const FeeStructureItemService = {
   },
 
   async create(data: FeeStructureItemCreateInput, userId?: string) {
-    // Validate parent fee structure exists and not soft-deleted
-    const [structure] = await Promise.all([
-      prismaMain.feeStructure.findFirst({ where: { id: data.feeStructureId, deletedAt: null } }),
-    ]);
+    const structure = await prismaMain.feeStructure.findFirst({
+      where: { id: data.feeStructureId, deletedAt: null },
+    });
     if (!structure) {
       throw new CustomError("Fee structure not found", 404);
+    }
+
+    const feeHead = await prismaMain.feeHead.findFirst({
+      where: { id: data.feeHeadId, deletedAt: null },
+    });
+    if (!feeHead) {
+      throw new CustomError("Fee head not found", 404);
+    }
+    if (!feeHead.isActive) {
+      throw new CustomError("Fee head is inactive", 400);
+    }
+
+    const termNumber = data.termNumber ?? null;
+    // One (head, term) row per structure — checked here because Postgres
+    // treats NULLs as distinct and the schema's unique cannot cover
+    // one-time (NULL term) rows; see docs/constraints.sql.
+    const duplicate = await prismaMain.feeStructureItem.findFirst({
+      where: {
+        feeStructureId: data.feeStructureId,
+        feeHeadId: data.feeHeadId,
+        termNumber,
+        deletedAt: null,
+      },
+    });
+    if (duplicate) {
+      throw new CustomError(
+        "A fee structure item for this head and term already exists",
+        409,
+      );
     }
 
     try {
       const item = await prismaMain.feeStructureItem.create({
         data: {
-          ...data,
           feeStructureId: data.feeStructureId,
-          createdBy: userId,
+          feeHeadId: data.feeHeadId,
+          termNumber,
+          amount: dec(data.amount, "amount"),
+          ...(userId && { createdBy: userId }),
         },
         include: {
           feeHead: true,
         },
       });
       return item;
-    } catch (error: any) {
-      if (error.code === "P2002") {
-        throw new CustomError("A fee structure item for this head and term already exists", 409);
+    } catch (error: unknown) {
+      if ((error as { code?: string } | null)?.code === "P2002") {
+        throw new CustomError(
+          "A fee structure item for this head and term already exists",
+          409,
+        );
       }
       throw error;
     }
@@ -85,10 +119,19 @@ export const FeeStructureItemService = {
   async delete(id: string, userId?: string) {
     const existing = await prismaMain.feeStructureItem.findFirst({
       where: { id, deletedAt: null },
+      include: {
+        _count: { select: { studentItems: true } },
+      },
     });
 
     if (!existing) {
       throw new CustomError("Fee structure item not found", 404);
+    }
+    if (existing._count.studentItems > 0) {
+      throw new CustomError(
+        "Fee structure item is copied to student fees and cannot be deleted",
+        409,
+      );
     }
 
     await prismaMain.feeStructureItem.update({

@@ -12,6 +12,12 @@ router.get(
   FeeInstallmentController.index,
 );
 router.post(
+  "/bulk",
+  isUser,
+  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
+  FeeInstallmentController.bulk,
+);
+router.post(
   "/",
   isUser,
   isAuthorizedTo("ADMIN", "ACCOUNTANT"),

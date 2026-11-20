@@ -1,12 +1,14 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
+import { EMPLOYEE_SAFE_SELECT, assertSingleRoleProfile } from "@/utils/employee";
 import { CustomError } from "@/errors/CustomError";
-import { TeacherCreateInput } from "./validator";
+import { TeacherCreateInput, TeacherUpdateInput } from "./validator";
 
 export const TeacherService = {
   async index(query: { page?: number; limit?: number; search?: string }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -24,9 +26,9 @@ export const TeacherService = {
       prismaMain.teacher.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -53,6 +55,8 @@ export const TeacherService = {
       throw new CustomError("Employee not found or has been deleted", 404);
     }
 
+    await assertSingleRoleProfile(prismaMain, data.employeeId, "TEACHER");
+
     try {
       const teacher = await prismaMain.teacher.create({
         data: {
@@ -61,7 +65,7 @@ export const TeacherService = {
           createdBy: userId,
         },
         include: {
-          employee: true,
+          employee: { select: EMPLOYEE_SAFE_SELECT },
         },
       });
       return teacher;
@@ -77,7 +81,7 @@ export const TeacherService = {
     const teacher = await prismaMain.teacher.findFirst({
       where: { id, deletedAt: null },
       include: {
-        employee: true,
+        employee: { select: EMPLOYEE_SAFE_SELECT },
         assignments: { include: { batchTermSubject: true } },
         sessions: true,
       },
@@ -88,6 +92,49 @@ export const TeacherService = {
     }
 
     return teacher;
+  },
+
+  async update(id: string, data: TeacherUpdateInput, userId?: string) {
+    const existing = await prismaMain.teacher.findFirst({
+      where: { id, deletedAt: null },
+    });
+
+    if (!existing) {
+      throw new CustomError("Teacher not found", 404);
+    }
+
+    if (data.employeeId) {
+      const employee = await prismaMain.employee.findFirst({
+        where: { id: data.employeeId, deletedAt: null },
+      });
+
+      if (!employee) {
+        throw new CustomError("Employee not found or has been deleted", 404);
+      }
+    }
+
+    if (data.employeeId) await assertSingleRoleProfile(prismaMain, data.employeeId, "TEACHER");
+
+    try {
+      const updated = await prismaMain.teacher.update({
+        where: { id },
+        data: {
+          ...data,
+          updatedBy: userId,
+        } as any,
+        include: {
+          employee: { select: EMPLOYEE_SAFE_SELECT },
+          assignments: { include: { batchTermSubject: true } },
+          sessions: true,
+        },
+      });
+      return updated;
+    } catch (error: any) {
+      if (error.code === "P2002") {
+        throw new CustomError("An employee with this ID is already assigned as Teacher", 409);
+      }
+      throw error;
+    }
   },
 
   async delete(id: string, userId?: string) {

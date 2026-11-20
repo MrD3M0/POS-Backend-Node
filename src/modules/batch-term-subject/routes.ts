@@ -1,53 +1,16 @@
 import { Router } from "express";
-import { BatchTermSubjectController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { BatchTermSubjectController } from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo(
-    "ADMIN",
-    "PRINCIPAL",
-    "ACCOUNTANT",
-    "TEACHER",
-    "STAFF",
-    "STUDENT",
-  ),
-  BatchTermSubjectController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  BatchTermSubjectController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo(
-    "ADMIN",
-    "PRINCIPAL",
-    "ACCOUNTANT",
-    "TEACHER",
-    "STAFF",
-    "STUDENT",
-  ),
-  BatchTermSubjectController.retrieve,
-);
-router.patch(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  BatchTermSubjectController.update,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  BatchTermSubjectController.delete,
-);
+router.get("/", isUser, requirePermission("academic", "read"), BatchTermSubjectController.index);
+router.post("/", isUser, requirePermission("academic", "create"), BatchTermSubjectController.create);
+router.post("/bulk", isUser, requirePermission("academic", "create"), BatchTermSubjectController.bulkCreate);
+router.post("/copy", isUser, requirePermission("academic", "create"), BatchTermSubjectController.copy);
+router.get("/:id", isUser, requirePermission("academic", "read"), BatchTermSubjectController.retrieve);
+router.patch("/:id", isUser, requirePermission("academic", "update"), BatchTermSubjectController.update);
+router.delete("/:id", isUser, requirePermission("academic", "delete"), BatchTermSubjectController.delete);
 
 export const batchTermSubjectRouter = router;

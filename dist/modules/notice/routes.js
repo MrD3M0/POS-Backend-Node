@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.noticeRouter = void 0;
+const express_1 = require("express");
+const controller_1 = require("./controller");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "read"), controller_1.NoticeController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "create"), controller_1.NoticeController.create);
+router.get("/:id/preview-audience", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "read"), controller_1.NoticeController.previewAudience);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "read"), controller_1.NoticeController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "update"), controller_1.NoticeController.update);
+router.post("/:id/publish", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "publish"), controller_1.NoticeController.publish);
+router.post("/:id/unpublish", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "publish"), controller_1.NoticeController.unpublish);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("notices", "delete"), controller_1.NoticeController.delete);
+exports.noticeRouter = router;

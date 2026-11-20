@@ -1,0 +1,15 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.taxSlabRouter = void 0;
+const express_1 = require("express");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const controller_1 = require("./controller");
+const router = (0, express_1.Router)();
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("taxSlabs", "read"), controller_1.TaxSlabController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("taxSlabs", "create"), controller_1.TaxSlabController.create);
+router.post("/copy", isUser_1.isUser, (0, permission_1.requirePermission)("taxSlabs", "create"), controller_1.TaxSlabController.copy);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("taxSlabs", "read"), controller_1.TaxSlabController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("taxSlabs", "update"), controller_1.TaxSlabController.update);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("taxSlabs", "delete"), controller_1.TaxSlabController.delete);
+exports.taxSlabRouter = router;

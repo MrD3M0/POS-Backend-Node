@@ -1,33 +1,14 @@
 import { Router } from "express";
-import { PaymentMethodController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { PaymentMethodController } from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
-  PaymentMethodController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  PaymentMethodController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL", "ACCOUNTANT", "STAFF"),
-  PaymentMethodController.retrieve,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "ACCOUNTANT"),
-  PaymentMethodController.delete,
-);
+router.get("/", isUser, requirePermission("lookups", "read"), PaymentMethodController.index);
+router.post("/", isUser, requirePermission("lookups", "create"), PaymentMethodController.create);
+router.get("/:id", isUser, requirePermission("lookups", "read"), PaymentMethodController.retrieve);
+router.patch("/:id", isUser, requirePermission("lookups", "update"), PaymentMethodController.update);
+router.delete("/:id", isUser, requirePermission("lookups", "delete"), PaymentMethodController.delete);
 
 export const paymentMethodRouter = router;

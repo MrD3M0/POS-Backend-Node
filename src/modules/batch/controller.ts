@@ -89,6 +89,25 @@ export const BatchController = {
     }
   },
 
+  promote: async (req: Request, res: Response) => {
+    try {
+      const batch = await BatchService.promote(req.params.id as string, res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Batch promoted to the next term", data: batch });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
+  graduate: async (req: Request, res: Response) => {
+    try {
+      const reason = typeof req.body?.reason === "string" ? req.body.reason.trim() : "";
+      const batch = await BatchService.graduate(req.params.id as string, reason, res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Batch graduated", data: batch });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   delete: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;

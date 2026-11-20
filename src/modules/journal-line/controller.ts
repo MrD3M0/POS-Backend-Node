@@ -30,6 +30,20 @@ export const JournalLineController = {
     }
   },
 
+  totals: async (_req: Request, res: Response) => {
+    try {
+      const data = await JournalLineService.totalsByAccount();
+      return ResponseHandler.success({
+        res,
+        code: 200,
+        message: "Journal line totals fetched successfully!",
+        data,
+      });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   create: async (req: Request, res: Response) => {
     try {
       const validatedData = validateJournalLineCreate(req.body);

@@ -1,47 +1,16 @@
 import { Router } from "express";
-import { GradeScaleController } from "./controller";
 import { isUser } from "@/middlewares/isUser";
-import { isAuthorizedTo } from "@/middlewares/authorized";
+import { requirePermission } from "@/middlewares/permission";
+import { GradeScaleController } from "./controller";
 
 const router = Router();
 
-router.get(
-  "/",
-  isUser,
-  isAuthorizedTo(
-    "ADMIN",
-    "PRINCIPAL",
-    "ACCOUNTANT",
-    "TEACHER",
-    "STAFF",
-    "STUDENT",
-  ),
-  GradeScaleController.index,
-);
-router.post(
-  "/",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  GradeScaleController.create,
-);
-router.get(
-  "/:id",
-  isUser,
-  isAuthorizedTo(
-    "ADMIN",
-    "PRINCIPAL",
-    "ACCOUNTANT",
-    "TEACHER",
-    "STAFF",
-    "STUDENT",
-  ),
-  GradeScaleController.retrieve,
-);
-router.delete(
-  "/:id",
-  isUser,
-  isAuthorizedTo("ADMIN", "PRINCIPAL"),
-  GradeScaleController.delete,
-);
+router.get("/", isUser, requirePermission("lookups", "read"), GradeScaleController.index);
+router.post("/", isUser, requirePermission("lookups", "create"), GradeScaleController.create);
+router.post("/seed-default", isUser, requirePermission("lookups", "create"), GradeScaleController.seedDefault);
+router.get("/coverage", isUser, requirePermission("lookups", "read"), GradeScaleController.coverage);
+router.get("/:id", isUser, requirePermission("lookups", "read"), GradeScaleController.retrieve);
+router.patch("/:id", isUser, requirePermission("lookups", "update"), GradeScaleController.update);
+router.delete("/:id", isUser, requirePermission("lookups", "delete"), GradeScaleController.delete);
 
 export const gradeScaleRouter = router;

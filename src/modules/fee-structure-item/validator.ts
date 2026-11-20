@@ -1,10 +1,12 @@
 import { z } from "zod";
+import { positiveMoneySchema } from "@/lib/money";
 
 export const feeStructureItemCreateInputSchema = z.object({
   feeStructureId: z.string().uuid("Invalid Fee Structure ID format"),
   feeHeadId: z.string().uuid("Invalid Fee Head ID format"),
-  termNumber: z.number().int().min(1),
-  amount: z.string().min(1, "Amount is required"),
+  // null = one-time fee (e.g. admission); a number = per-term fee.
+  termNumber: z.number().int().min(1).optional().nullable(),
+  amount: positiveMoneySchema,
 });
 
 export type FeeStructureItemCreateInput = z.infer<typeof feeStructureItemCreateInputSchema>;

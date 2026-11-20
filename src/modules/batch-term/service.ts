@@ -1,12 +1,13 @@
 import { prismaMain } from "@/lib/prismaClient";
+import { resolvePageLimit, toPrismaTake } from "@/utils/queryFilters";
 import { CustomError } from "@/errors/CustomError";
 import { BatchTermCreateInput, BatchTermUpdateInput } from "./validator";
 
 export const BatchTermService = {
   async index(query: { page?: number; limit?: number; search?: string; batchId?: string; isActive?: boolean }) {
     const page = query.page && query.page > 0 ? query.page : 1;
-    const limit = query.limit && query.limit > 0 ? query.limit : 10;
-    const skip = (page - 1) * limit;
+    const limit = resolvePageLimit(query.limit, 10);
+    const skip = limit === -1 ? 0 : (page - 1) * limit;
 
     const whereClause: any = {
       deletedAt: null,
@@ -28,9 +29,9 @@ export const BatchTermService = {
       prismaMain.batchTerm.findMany({
         where: whereClause,
         skip,
-        take: limit,
+        take: toPrismaTake(limit),
         include: {
-          batch: { include: { course: true } },
+          batch: { select: { id: true, name: true, courseId: true, currentTermNumber: true, course: { select: { id: true, code: true, name: true, totalTerms: true, system: true } } } },
         },
         orderBy: { createdAt: "desc" },
       }),
@@ -93,7 +94,7 @@ export const BatchTermService = {
           ...(userId && { createdBy: userId }),
         },
         include: {
-          batch: { include: { course: true } },
+          batch: { select: { id: true, name: true, courseId: true, currentTermNumber: true, course: { select: { id: true, code: true, name: true, totalTerms: true, system: true } } } },
         } as any,
       });
       return batchTerm;
@@ -109,7 +110,7 @@ export const BatchTermService = {
     const batchTerm = await prismaMain.batchTerm.findFirst({
       where: { id, deletedAt: null },
       include: {
-        batch: { include: { course: true } },
+        batch: { select: { id: true, name: true, courseId: true, currentTermNumber: true, course: { select: { id: true, code: true, name: true, totalTerms: true, system: true } } } },
         subjects: true,
         exams: true,
       },
@@ -166,7 +167,7 @@ export const BatchTermService = {
           updatedBy: userId,
         },
         include: {
-          batch: { include: { course: true } },
+          batch: { select: { id: true, name: true, courseId: true, currentTermNumber: true, course: { select: { id: true, code: true, name: true, totalTerms: true, system: true } } } },
         },
       });
       return updated;

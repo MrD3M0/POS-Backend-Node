@@ -7,9 +7,15 @@ export const teacherCreateInputSchema = z.object({
   createdBy: z.string().uuid("Invalid Creator User ID format").optional().nullable(),
 });
 
+export const teacherUpdateInputSchema = teacherCreateInputSchema.partial();
+
 export type TeacherCreateInput = z.infer<typeof teacherCreateInputSchema>;
-export type TeacherUpdateInput = z.infer<typeof teacherCreateInputSchema>;
+export type TeacherUpdateInput = z.infer<typeof teacherUpdateInputSchema>;
 
 export const validateTeacherCreate = (data: unknown) => {
   return teacherCreateInputSchema.parse(data);
+};
+
+export const validateTeacherUpdate = (data: unknown) => {
+  return teacherUpdateInputSchema.parse(data);
 };

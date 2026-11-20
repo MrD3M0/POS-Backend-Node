@@ -1,0 +1,21 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.userRouter = void 0;
+const express_1 = require("express");
+const isUser_1 = require("@/middlewares/isUser");
+const permission_1 = require("@/middlewares/permission");
+const controller_1 = require("./controller");
+const router = (0, express_1.Router)();
+// User and access management is admin-only (module B).
+router.get("/", isUser_1.isUser, (0, permission_1.requirePermission)("users", "read"), controller_1.UserController.index);
+router.post("/", isUser_1.isUser, (0, permission_1.requirePermission)("users", "create"), controller_1.UserController.create);
+router.get("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("users", "read"), controller_1.UserController.retrieve);
+router.patch("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.update);
+router.patch("/:id/password", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.resetPassword);
+router.patch("/:id/unlock", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.unlock);
+router.post("/:id/link-person", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.linkPerson);
+router.post("/:id/unlink-person", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.unlinkPerson);
+router.post("/:id/verify-email", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.verifyEmail);
+router.patch("/:id/restore", isUser_1.isUser, (0, permission_1.requirePermission)("users", "update"), controller_1.UserController.restore);
+router.delete("/:id", isUser_1.isUser, (0, permission_1.requirePermission)("users", "delete"), controller_1.UserController.delete);
+exports.userRouter = router;

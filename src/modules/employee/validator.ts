@@ -1,8 +1,18 @@
 import { z } from "zod";
+import { strongPasswordSchema } from "@/utils/password";
+
+const roleSchema = z.enum(["ADMIN", "PRINCIPAL", "ACCOUNTANT", "TEACHER", "STAFF", "STUDENT"]);
+
+// Empty strings normalize to null so they never collide on @unique columns.
+const nullIfEmpty = (v: unknown) => (typeof v === "string" && v.trim() === "" ? null : v);
 
 export const employeeCreateInputSchema = z.object({
   userId: z.string().uuid("Invalid User ID format").optional().nullable(),
-  employeeCode: z.string().min(1, "Employee code is required").max(50, "Employee code is too long"),
+  role: roleSchema.optional(),
+  password: strongPasswordSchema.optional(),
+  username: z.string().trim().min(3).max(50).optional().nullable(),
+  // Optional: server auto-generates EMP-XXXX sequentially within a transaction.
+  employeeCode: z.string().min(1, "Employee code is required").max(50, "Employee code is too long").optional(),
   firstName: z.string().min(1, "First name is required").max(100, "First name is too long"),
   middleName: z.string().max(100, "Middle name is too long").optional().nullable(),
   lastName: z.string().min(1, "Last name is required").max(100, "Last name is too long"),
@@ -16,8 +26,8 @@ export const employeeCreateInputSchema = z.object({
   designation: z.string().min(1, "Designation is required").max(100, "Designation is too long"),
   joinDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format"),
   leaveDateBs: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be in YYYY-MM-DD format").optional().nullable(),
-  panNo: z.string().max(20, "PAN number is too long").optional().nullable(),
-  ssfNo: z.string().max(20, "SSF number is too long").optional().nullable(),
+  panNo: z.preprocess(nullIfEmpty, z.string().max(20, "PAN number is too long").optional().nullable()),
+  ssfNo: z.preprocess(nullIfEmpty, z.string().max(20, "SSF number is too long").optional().nullable()),
   bankName: z.string().max(100, "Bank name is too long").optional().nullable(),
   bankAccountNo: z.string().max(50, "Bank account number is too long").optional().nullable(),
   isActive: z.boolean().default(true),

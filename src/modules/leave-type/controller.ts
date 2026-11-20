@@ -65,6 +65,16 @@ export const LeaveTypeController = {
     }
   },
 
+  update: async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id as string;
+      const leaveType = await LeaveTypeService.update(id, validateLeaveTypeUpdate(req.body), res.locals.context?.userId);
+      return ResponseHandler.success({ res, code: 200, message: "Leave type updated successfully", data: leaveType });
+    } catch (error) {
+      return ErrorHandler.handleError(res, error);
+    }
+  },
+
   delete: async (req: Request, res: Response) => {
     try {
       const id = req.params.id as string;
